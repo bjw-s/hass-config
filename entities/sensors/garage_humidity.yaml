@@ -1,0 +1,11 @@
+---
+platform: mqtt
+name: Garage - Humidity
+
+availability_topic: "zigbee2mqtt/bridge/state"
+device_class: "humidity"
+json_attributes_topic: "zigbee2mqtt/Garage - Multisensor"
+state_topic: "zigbee2mqtt/Garage - Multisensor"
+unique_id: "0x00158d000234d3ad_humidity_zigbee2mqtt"
+unit_of_measurement: "%"
+value_template: "{{ value_json.humidity }}"

@@ -1,0 +1,6 @@
+---
+wlanthermo_channel_3_range:
+  min: 0
+  max: 20
+  step: 1
+  unit_of_measurement: "°C"

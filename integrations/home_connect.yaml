@@ -1,0 +1,9 @@
+---
+# Custom component for Home Assistant to connect appliances supporting the Home Connect standard
+#
+# https://github.com/DavidMStraub/homeassistant-homeconnect
+#
+
+home_connect:
+  client_id: "383E36DF868413C6B31C8E2C97C17C53034E15A3D0D54C913173B41FE82F6010"
+  client_secret: "5C2BBD0CDAAA1E8768BE2456B4B92D71CDBF62906608D6A0389023212EA174BB"

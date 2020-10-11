@@ -1,0 +1,11 @@
+---
+platform: mqtt
+name: Hallway Upstairs - Siren Battery Level
+
+availability_topic: zigbee2mqtt/bridge/state
+device_class: battery
+json_attributes_topic: zigbee2mqtt/Hallway Upstairs - Siren
+state_topic: zigbee2mqtt/Hallway Upstairs - Siren
+unique_id: 0x000d6f00110885df_battery_zigbee2mqtt
+unit_of_measurement: "%"
+value_template: "{{ value_json.battery }}"

@@ -1,0 +1,7 @@
+---
+# The System Health integration provides an API to offer information on the system and its components. 
+# It also allows to run diagnostic tools to diagnose problems.
+#
+# https://www.home-assistant.io/integrations/system_health/
+#
+system_health:

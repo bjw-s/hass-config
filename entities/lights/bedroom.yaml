@@ -1,0 +1,7 @@
+---
+platform: group
+name: Bedroom
+entities:
+  - light.bedroom_ceiling_light
+  - light.bedroom_nightstand_manyie
+  - light.bedroom_nightstand_bernd

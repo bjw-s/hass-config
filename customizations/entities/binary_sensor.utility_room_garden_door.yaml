@@ -1,0 +1,5 @@
+binary_sensor.utility_room_garden_door:
+  alarm_modes:
+    - armed_away
+    - armed_night
+    - armed_home

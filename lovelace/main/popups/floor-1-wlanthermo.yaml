@@ -1,0 +1,76 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: WLANThermo
+  deviceID: this
+  large: true
+  card:
+    type: 'custom:layout-card'
+    column_width: 100%
+    cards:
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.wlanthermo_on_off
+            state: 'on'
+        card:
+          type: history-graph
+          title: Temps
+          hours_to_show: 8
+          entities:
+            - entity: sensor.wlanthermo_channel_1
+              name: Channel 1
+            - entity: sensor.wlanthermo_channel_2
+              name: Channel 2
+            - entity: sensor.wlanthermo_channel_3
+              name: Channel 3
+
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - type: custom:fold-entity-row
+            head:
+              label: Channel 1
+              type: section
+            entities:
+              - entity: input_number.wlanthermo_channel_1_target
+                name: Target temperature
+                type: 'custom:slider-entity-row'
+                hide_state: false
+              - entity: input_number.wlanthermo_channel_1_range
+                name: Allowed deviation
+                type: 'custom:slider-entity-row'
+                hide_state: false
+              - entity: input_boolean.wlanthermo_channel_1_notify
+                name: Notification
+
+          - type: custom:fold-entity-row
+            head:
+              label: Channel 2
+              type: section
+            entities:
+              - entity: input_number.wlanthermo_channel_2_target
+                name: Target temperature
+                type: 'custom:slider-entity-row'
+                hide_state: false
+              - entity: input_number.wlanthermo_channel_2_range
+                name: Allowed deviation
+                type: 'custom:slider-entity-row'
+                hide_state: false
+              - entity: input_boolean.wlanthermo_channel_2_notify
+                name: Notification
+
+          - type: custom:fold-entity-row
+            head:
+              label: Channel 3
+              type: section
+            entities:
+              - entity: input_number.wlanthermo_channel_3_target
+                name: Target temperature
+                type: 'custom:slider-entity-row'
+                hide_state: false
+              - entity: input_number.wlanthermo_channel_3_range
+                name: Allowed deviation
+                type: 'custom:slider-entity-row'
+                hide_state: false
+              - entity: input_boolean.wlanthermo_channel_3_notify
+                name: Notification

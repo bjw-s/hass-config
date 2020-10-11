@@ -1,0 +1,236 @@
+# Theme based on Google app light theme
+# Original Creator: Juan - @juanmtech
+# Repository: https://github.com/JuanMTech/google_light_theme
+
+Google Light Theme:
+  card-mod-theme: Google Light Theme
+  card-mod-root-yaml: |
+    paper-tabs$: |
+      .not-visible {
+        display: none;
+      }
+      /*Uncomment this if you want the header on the bottom
+      #selectionBar {
+        bottom: unset !important;
+      }
+      */
+    ha-app-layout$: |
+      /* This corrects top padding for the view. */
+      #contentContainer {
+        /* Change this to 0px if you want the header on the bottom */
+        padding-top: 48px !important;
+      }
+    ha-button-menu$mwc-menu$mwc-menu-surface$: |
+      .mdc-menu-surface {
+        margin: 10px;
+        box-shadow: var(--ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12));
+      }
+    .: |
+      /* This sets the theme background. */
+      ha-app-layout {
+        background-image: url("/local/images/lowpoly-light.svg");
+        background-size: cover;
+      }
+      /* This hides the unused portion of the header. */
+      app-toolbar {
+        height: 0;
+      }
+      /* This forces background-color and text-color. */
+      .edit-mode, app-header, app-toolbar {
+        background-color: var(--primary-background-color) !important;
+        color: var(--primary-text-color) !important;
+      }
+      /* Uncomment this if you want the header on the bottom
+      app-header {
+        top: calc(100vh - 60px) !important;
+        transform: unset !important;
+      }
+      */
+      /* This gives the header in edit mode a different look from the standard header. */
+      app-header.edit-mode {
+        border-bottom: 2px var(--primary-color) solid;
+        padding-bottom: 10px;
+      }
+      /* Make the color of the plus white instead of black. */
+      #add-view ha-svg-icon {
+        color: #EEE !important;
+      }
+      /* Bring voice button back down */
+      app-toolbar:not([class="edit-mode"]) mwc-icon-button[label] {
+        top: 0;
+        right: calc(48px * 1);
+        z-index: 2;
+        position: absolute;
+      }
+      /* Bring help button back in */
+      a[href="https://www.home-assistant.io/lovelace/"] > mwc-icon-button {
+        right: calc(48px * 2);
+        position: absolute;
+        z-index: 2;
+      }
+      /* Bring close button back in */
+      mwc-icon-button[title="Close"] {
+        top: 0;
+        left: 0;
+        position: absolute;
+        z-index: 2;
+      }
+      /* Bring add view button back in */
+      mwc-icon-button#add-view {
+        position: fixed;
+        right: 48px;
+      }
+      /* Bring edit UI overflow menu back in */
+      ha-button-menu {
+        {% if user == "Tablet Hallway" or user == "Tablet Garage" %}
+        display: none !important;
+        {% else %}
+        top: 0;
+        right: 0;
+        z-index: 2;
+        position: absolute;
+        {% endif %}
+      }
+      /* Hide the title */
+      app-toolbar > [main-title] {
+        display: none;
+      }
+      /* Hide buttons that are taking up space, but invisible */
+      menu-button[style="visibility: hidden;"] {
+        display: none;
+      }
+      /* Bring sidebar button back in */
+      ha-menu-button {
+        z-index: 2;
+        top: 24px;
+      }
+      /* Set margin on left to be smaller,
+      and set the bar color to be the primary color
+      instead of white */
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--primary-color) !important;
+        margin-left: 48px !important;
+      }
+      /* When not in edit mode, shrink the left margin */
+      app-toolbar:not(.edit-mode) > div > paper-tabs {
+        margin-left: 6px !important;
+      }
+      /* Color selected tabs */
+      paper-tab[aria-selected="true"] > ha-icon {
+        color: var(--primary-color) !important;
+      }
+      paper-tab[aria-selected="true"] {
+        color: var(--primary-color) !important;
+      }
+      /* Styles for mobile */
+      @media (orientation: portrait) {
+        /* Hide sidebar button and keep room for the overflow menu button */
+        paper-tabs {
+          margin-left: 5px !important;
+          margin-right: 48px !important;
+        }
+        /* Hide voice button */
+        mwc-icon-button[label="Start conversation"] {
+          display: none !important;
+        }
+        /* Hide sidebar button */
+        ha-menu-button {
+          display: none !important;
+        }
+      }
+      /* Make help button have contrast */
+      app-toolbar a {
+        color: var(--primary-text-color) !important;
+      }
+
+  # Header:
+  app-header-background-color: rgb(248, 248, 248)
+  app-header-text-color: rgb(95, 99, 104)
+  # Main Interface Colors
+  primary-color: rgb(26, 115, 232)
+  light-primary-color: var(--primary-color)
+  primary-background-color: rgb(248, 248, 248)
+  secondary-background-color: rgb(230, 230, 230)
+  divider-color: var(--primary-background-color)
+  accent-color: rgb(26, 115, 232)
+  # Text
+  primary-text-color: rgb(32, 33, 36)
+  secondary-text-color: rgb(95, 99, 104)
+  text-primary-color: rgb(255, 255, 255)
+  disabled-text-color: rgba(95, 99, 104, 0.4)
+  # Sidebar Menu
+  sidebar-icon-color: rgb(95, 99, 104)
+  sidebar-text-color: var(--sidebar-icon-color)
+  sidebar-background-color: rgb(255, 255, 255)
+  sidebar-selected-background-color: var(--primary-background-color)
+  sidebar-selected-icon-color: rgb(26, 115, 232)
+  sidebar-selected-text-color: var(--sidebar-selected-icon-color)
+  # Buttons
+  paper-item-icon-color: rgb(95, 99, 104)
+  paper-item-icon-active-color: rgb(26, 115, 232)
+  # States and Badges
+  state-icon-color: rgb(26, 115, 232)
+  state-icon-active-color: rgb(95, 99, 104)
+  state-icon-unavailable-color: var(--disabled-text-color)
+  # Sliders
+  paper-slider-knob-color: rgb(26, 115, 232)
+  paper-slider-knob-start-color: var(--paper-slider-knob-color)
+  paper-slider-pin-color: var(--paper-slider-knob-color)
+  paper-slider-active-color: var(--paper-slider-knob-color)
+  paper-slider-secondary-color: var(--light-primary-color)
+  # Labels
+  label-badge-background-color: rgb(248, 250, 249)
+  label-badge-text-color: rgb(77, 85, 117)
+  label-badge-red: rgb(199, 72, 76)
+  label-badge-green: rgb(109, 192, 113)
+  label-badge-blue: rgb(26, 115, 232)
+  label-badge-yellow: rgb(217, 183, 87)
+  label-badge-gray: rgb(95, 98, 103)
+  # Cards
+  card-background-color: rgb(255, 255, 255)
+  ha-card-border-radius: "10px"
+  ha-card-box-shadow: 1px 1px 5px 0px rgb(230, 230, 230)
+  paper-dialog-background-color: var(--card-background-color)
+  paper-listbox-background-color: var(--card-background-color)
+  paper-card-background-color: var(--card-background-color)
+  # Switches
+  switch-checked-button-color: rgb(26, 115, 232)
+  switch-checked-track-color: rgb(26, 115, 232)
+  switch-unchecked-button-color: rgb(189, 193, 198)
+  switch-unchecked-track-color: rgb(189, 193, 198)
+  # Toggles
+  paper-toggle-button-checked-button-color: var(--switch-checked-button-color)
+  paper-toggle-button-checked-bar-color: var(--switch-checked-track-color)
+  paper-toggle-button-unchecked-button-color: var(--switch-unchecked-button-color)
+  paper-toggle-button-unchecked-bar-color: var(--switch-unchecked-track-color)
+  # Table
+  table-row-background-color: var(--card-background-color)
+  table-row-alternative-background-color: var(--primary-background-color)
+  data-table-background-color: var(--primary-background-color)
+  # Dropdowns
+  material-background-color: var(--card-background-color)
+  material-secondary-background-color: var(--primary-background-color)
+  mdc-theme-surface: var(--paper-card-background-color)
+  # Pre/Code
+  markdown-code-background-color: rgb(242, 242, 242)
+
+  # # Card-Mod stuff
+  # card-mod-theme: Google Light Theme
+  # card-mod-root: |
+  #   ha-app-layout {
+  #     background-image: url("/local/images/lowpoly-light.svg");
+  #     background-size: cover;
+  #   }
+  #   app-toolbar {
+  #     display: none;
+  #   }
+
+  #   # Kiosk mode for Tablets
+  #   {% if user == "Tablet Hallway" or user == "Tablet Garage" %}
+  #   app-header {
+  #     display: none;
+  #   }
+  #   app-drawer {
+  #     display: none;
+  #   }
+  #   {% endif %}

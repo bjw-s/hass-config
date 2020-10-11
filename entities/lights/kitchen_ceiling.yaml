@@ -1,0 +1,15 @@
+---
+platform: mqtt
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: true
+brightness_scale: 254
+color_temp: true
+command_topic: "zigbee2mqtt/Kitchen - Ceiling Light/set"
+
+json_attributes_topic: "zigbee2mqtt/Kitchen - Ceiling Light"
+name: "Kitchen - Ceiling"
+schema: json
+
+state_topic: "zigbee2mqtt/Kitchen - Ceiling Light"
+unique_id: "0x00178801068f8e61_0x0017880106ba99e0_0x00178801068f9620_0x00178801068f72e7_zigbee2mqtt"

@@ -1,0 +1,6 @@
+{
+  "domain": "my_alarm",
+  "name": "Customized alarm control panel with support for personal codes",
+  "documentation": "",
+  "codeowners": ["@Juggels"]
+}

@@ -1,0 +1,6 @@
+---
+platform: xiaomi_miio
+name: air_purifier
+model: zhimi.airpurifier.mc1
+host: !env_var SECRET_XIAOMI_AIR_PURIFIER_HOST
+token: !env_var SECRET_XIAOMI_AIR_PURIFIER_TOKEN

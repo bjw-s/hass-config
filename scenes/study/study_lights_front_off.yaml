@@ -1,0 +1,5 @@
+---
+  name: Study - Lights - Front - Off
+  entities:
+    light.study_front_ceiling:
+      state: 'off'

@@ -1,0 +1,65 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: 'Kitchen'
+  deviceID: this
+  large: false
+  card:
+    type: 'vertical-stack'
+    cards:
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+              box-shadow: none;
+            }
+        entities:
+          - type: custom:text-divider-row
+            text: Settings
+
+          - entity: binary_sensor.automatic_lights_kitchen
+            name: Automatic?
+
+          - type: conditional
+            conditions:
+              - entity: timer.automatic_lights_kitchen
+                state_not: idle
+            row:
+              entity: timer.automatic_lights_kitchen
+              name: Automatic duration
+
+          - entity: input_boolean.kitchen_lights_manual_mode
+            name: Manual mode
+
+          - type: conditional
+            conditions:
+              - entity: timer.kitchen_lights_manual_mode
+                state_not: idle
+            row:
+              entity: timer.kitchen_lights_manual_mode
+              name: Manual mode duration
+
+          - type: custom:text-divider-row
+            text: Brightness
+
+          - entity: light.kitchen_ceiling_front
+            type: custom:slider-entity-row
+            name: Ceiling front
+            hide_when_off: true
+
+          - entity: light.kitchen_ceiling_rear
+            type: custom:slider-entity-row
+            name: Ceiling rear
+            hide_when_off: true
+
+          - type: custom:text-divider-row
+            text: Scenes
+
+          - entity: scene.kitchen_lights_full_brightness
+            name: Full brightness
+
+          - entity: scene.kitchen_lights_relaxed
+            name: Dimmed
+
+          - entity: scene.kitchen_lights_off
+            name: 'Off'

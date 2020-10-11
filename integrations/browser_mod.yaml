@@ -1,0 +1,10 @@
+---
+# A Home Assistant integration to turn your browser into a controllable entity
+#
+# https://github.com/thomasloven/hass-browser_mod/blob/master/README.md
+#
+
+browser_mod:
+  prefix: "browser_"
+  disable:
+    - all

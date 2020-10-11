@@ -1,0 +1,14 @@
+---
+platform: mqtt
+name: "Hallway Upstairs - Ceiling"
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: true
+brightness_scale: 254
+command_topic: "zigbee2mqtt/Hallway Upstairs - Ceiling Light/set"
+
+json_attributes_topic: "zigbee2mqtt/Hallway Upstairs - Ceiling Light"
+schema: json
+
+state_topic: "zigbee2mqtt/Hallway Upstairs - Ceiling Light"
+unique_id: "0x0017880108ecb7f6_light_zigbee2mqtt"

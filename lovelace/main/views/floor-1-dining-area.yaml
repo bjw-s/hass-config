@@ -1,0 +1,65 @@
+title: Dining area
+icon: 'mdi:silverware-fork-knife'
+id: dining-area
+path: dining-area
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 2
+    column_width: 50%
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Status
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Dark?
+                entity: binary_sensor.is_dark_dining_area
+                tap_action: !include ../popups/light_levels.yaml
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Light level
+                icon: 'mdi:theme-light-dark'
+                entity: sensor.dining_area_light_level
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Motion
+                entity: binary_sensor.dining_area_motion
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Lights
+            tap_action: !include ../popups/floor-1-dining_area_lights.yaml
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Ceiling
+                icon: 'mdi:globe-light'
+                entity: light.dining_area_ceiling
+                hold_action: !include ../popups/floor-1-dining_area_lights.yaml

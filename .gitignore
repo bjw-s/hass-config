@@ -1,0 +1,29 @@
+# Ignore OS files and folders
+/.Trash*/
+
+# Generic ignores
+*.log
+*.db
+*.db-shm
+*.db-wal
+*.pyc
+._*
+__pycache__
+
+# Directory (contents) ignores
+/*.conf
+/deps
+/.storage
+/tts
+/.vscode
+
+# Specific file ignores
+/.uuid
+/ip_bans.yaml
+/known_devices.yaml
+/secrets.yaml
+/google_service_account.json
+
+# Specific keeps
+!.gitkeep
+

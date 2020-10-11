@@ -1,0 +1,92 @@
+title: Hallway
+icon: 'mdi:floor-plan'
+id: hallway
+path: hallway
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 3
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Status
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Dark?
+                entity: binary_sensor.is_dark_hallway
+                tap_action: !include ../popups/light_levels.yaml
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Light level
+                icon: 'mdi:theme-light-dark'
+                entity: sensor.hallway_light_level
+
+              - type: 'custom:button-card'
+                entity: binary_sensor.hallway_motion
+                template: default_button
+                name: Motion
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Devices
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                entity: switch.home_doorbell_sound_enabled
+                template: default_button
+                name: Doorbell
+                icon: 'mdi:bell'
+                show_state: false
+                state:
+                  - color: var(--disabled-text-color)
+                    icon: 'mdi:volume-off'
+                    label: Silent
+                    value: 'off'
+                  - icon: 'mdi:volume-high'
+                    label: 'On'
+                    value: 'on'
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Lights
+            tap_action: !include ../popups/floor-1-hallway_lights.yaml
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Ceiling
+                entity: light.hallway_ceiling
+                icon: 'mdi:ceiling-light'
+                hold_action: !include ../popups/floor-1-hallway_lights.yaml

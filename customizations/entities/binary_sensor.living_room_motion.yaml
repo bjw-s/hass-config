@@ -1,0 +1,5 @@
+---
+binary_sensor.living_room_motion:
+  alarm_tripwire: true
+  alarm_modes:
+    - armed_away

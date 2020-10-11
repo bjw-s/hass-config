@@ -1,0 +1,6 @@
+---
+alarm_manyie_snoozecount:
+  initial: 0
+  min: 0
+  max: 5
+  step: 1

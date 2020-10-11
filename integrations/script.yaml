@@ -1,0 +1,7 @@
+---
+# The script component allows users to specify a sequence of actions to be
+# executed by Home Assistant when turned on.
+#
+# https://www.home-assistant.io/components/script/
+#
+script: !include_dir_merge_named ../scripts

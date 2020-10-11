@@ -1,0 +1,55 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: Light levels
+  deviceID: this
+  large: false
+  card:
+    type: entities
+    show_header_toggle: false
+    entities:
+      - label: Hallway
+        type: section
+      - entity: input_number.is_dark_lux_hallway
+        name: Is dark lux
+        type: custom:slider-entity-row
+        hide_state: false
+
+      - label: Living room
+        type: section
+      - entity: input_number.is_dark_lux_living_room
+        name: Is dark lux
+        type: custom:slider-entity-row
+        hide_state: false
+
+      - label: Dining area
+        type: section
+      - entity: input_number.is_dark_lux_dining_area
+        name: Is dark lux
+        type: custom:slider-entity-row
+        hide_state: false
+
+      - label: Kitchen
+        type: section
+      - entity: input_number.is_dark_lux_kitchen
+        name: Is dark lux
+        type: custom:slider-entity-row
+        hide_state: false
+
+      - label: Study
+        type: section
+      - entity: input_number.is_dark_lux_study
+        name: Is dark lux
+        type: custom:slider-entity-row
+        hide_state: false
+
+      - label: Driveway
+        type: section
+      - entity: input_number.is_dusk_lux_driveway
+        name: Is dusk lux
+        type: custom:slider-entity-row
+        hide_state: false
+      - entity: input_number.is_dark_lux_driveway
+        name: Is dark lux
+        type: custom:slider-entity-row
+        hide_state: false

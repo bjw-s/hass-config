@@ -1,0 +1,22 @@
+---
+platform: template
+lights:
+  hallway_tablet:
+    friendly_name: Hallway Tablet
+    value_template: |
+      {{ is_state('sensor.hallway_tablet_device_info', 'on') }}
+    level_template: '{{ states.sensor.hallway_tablet_device_info.attributes["screenBrightness"] }}'
+    turn_on:
+      service: rest_command.hallway_tablet_command
+      data:
+        cmd: stopScreensaver
+    turn_off:
+      service: rest_command.hallway_tablet_command
+      data:
+        cmd: startScreensaver
+    set_level:
+      service: rest_command.hallway_tablet_command
+      data_template:
+        cmd: setStringSetting
+        key: screenBrightness
+        value: '{{ brightness }}'

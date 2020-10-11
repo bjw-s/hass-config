@@ -1,0 +1,24 @@
+---
+vacuum_all_zones:
+  alias: Vacuum all downstairs rooms
+  mode: single
+  sequence:
+    choose:
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.utility_room_door
+            state: "on"
+        sequence:
+          - service: vacuum.send_command
+            entity_id: vacuum.living_area_vacuum
+            data:
+              command: segmented_cleanup
+              params:
+                segment_ids: [ "Woonkamer", "Eethoek", "Keuken", "Bijkeuken" ]
+    default:
+      - service: vacuum.send_command
+        entity_id: vacuum.living_area_vacuum
+        data:
+          command: segmented_cleanup
+          params:
+            segment_ids: [ "Woonkamer", "Eethoek", "Keuken" ]

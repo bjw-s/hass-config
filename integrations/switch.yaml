@@ -1,0 +1,9 @@
+---
+# Keeps track which switches are in your environment, 
+# their state and allows you to control them
+#
+# This loads up my switch configurations
+#
+# https://www.home-assistant.io/components/switch/
+#
+switch: !include_dir_list ../entities/switches

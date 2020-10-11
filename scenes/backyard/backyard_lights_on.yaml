@@ -1,0 +1,5 @@
+---
+name: Backyard - Lights - On
+entities:
+  light.backyard:
+    state: 'on'

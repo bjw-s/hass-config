@@ -1,0 +1,154 @@
+title: Lights
+icon: 'mdi:lightbulb'
+id: lights
+path: lights
+panel: false
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Living area
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.automatic_lights_living_room
+            name: Automatic lights?
+
+          - entity: input_boolean.living_room_lights_manual_mode
+            name: Manual mode
+
+          - entity: input_number.living_room_lights_manual_mode_duration
+            name: Manual mode duration
+
+          - type: conditional
+            conditions:
+              - entity: timer.living_room_lights_manual_mode
+                state_not: idle
+            row:
+              entity: timer.living_room_lights_manual_mode
+              name: Manual mode duration
+
+      - type: entities
+        title: Dining area
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.automatic_lights_dining_area
+            name: Automatic lights?
+
+          - entity: input_boolean.dining_area_lights_manual_mode
+            name: Manual mode
+
+          - entity: input_number.dining_area_lights_manual_mode_duration
+            name: Manual mode duration
+
+          - type: conditional
+            conditions:
+              - entity: timer.dining_area_lights_manual_mode
+                state_not: idle
+            row:
+              entity: timer.dining_area_lights_manual_mode
+              name: Manual mode duration
+
+      - type: entities
+        title: Kitchen
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.automatic_lights_kitchen
+            name: Automatic lights?
+
+          - entity: input_number.automatic_lights_duration_kitchen
+            name: Duration
+
+          - type: conditional
+            conditions:
+              - entity: timer.automatic_lights_kitchen
+                state_not: idle
+            row:
+              entity: timer.automatic_lights_kitchen
+              name: Automatic duration
+
+          - entity: input_boolean.kitchen_lights_manual_mode
+            name: Manual mode
+
+          - entity: input_number.kitchen_lights_manual_mode_duration
+            name: Manual mode duration
+
+          - type: conditional
+            conditions:
+              - entity: timer.kitchen_lights_manual_mode
+                state_not: idle
+            row:
+              entity: timer.kitchen_lights_manual_mode
+              name: Manual mode duration
+
+  - type: entities
+    title: Hallway downstairs
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.automatic_lights_hallway
+        name: Automatic lights?
+
+      - entity: input_number.automatic_lights_duration_hallway
+        name: Duration
+
+      - type: conditional
+        conditions:
+          - entity: timer.automatic_lights_hallway
+            state_not: idle
+        row:
+          entity: timer.automatic_lights_hallway
+          name: Automatic duration
+
+      - entity: input_boolean.hallway_lights_manual_mode
+        name: Manual mode
+
+  - type: entities
+    title: Hallway upstairs
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.automatic_lights_hallway_upstairs
+        name: Automatic lights?
+
+      - entity: input_number.automatic_lights_duration_hallway_upstairs
+        name: Duration
+
+      - type: conditional
+        conditions:
+          - entity: timer.automatic_lights_hallway_upstairs
+            state_not: idle
+        row:
+          entity: timer.automatic_lights_hallway_upstairs
+          name: Automatic duration
+
+      - entity: input_boolean.hallway_upstairs_lights_manual_mode
+        name: Manual mode
+
+  - type: entities
+    title: Hallway study
+    show_header_toggle: false
+    entities:
+      - entity: input_boolean.automatic_lights_hallway_study
+        name: Automatic lights?
+      - entity: input_number.automatic_lights_duration_hallway_study
+        name: Duration
+      - entity: timer.automatic_lights_hallway_study
+        name: Timer
+
+  - type: entities
+    title: Study
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.automatic_lights_study
+        name: Automatic lights?
+
+      - entity: input_boolean.study_lights_manual_mode
+        name: Manual mode
+
+  - type: entities
+    title: Other
+    show_header_toggle: false
+    entities:
+      - entity: input_boolean.automatic_lights_backyard
+        name: Backyard
+      - entity: input_boolean.automatic_lights_driveway
+        name: Driveway

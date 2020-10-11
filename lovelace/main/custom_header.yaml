@@ -1,0 +1,8 @@
+active_tab_color: var(--state-icon-active-color)
+background: transparent #var(--app-header-background-color)
+compact_mode: true
+editor_warnings: false
+elements_color: var(--app-header-text-color)
+hide_help: true
+hide_unused: true
+tab_indicator_color: var(--state-icon-active-color)

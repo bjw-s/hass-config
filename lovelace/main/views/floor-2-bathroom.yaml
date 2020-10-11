@@ -1,0 +1,34 @@
+title: Bathroom
+icon: 'mdi:shower'
+id: bathroom
+path: bathroom
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 3
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Status
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Temperature
+                entity: sensor.bathroom_temperature
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Humidity
+                entity: sensor.bathroom_humidity

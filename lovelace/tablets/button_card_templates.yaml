@@ -1,0 +1,42 @@
+header:
+  styles:
+    card:
+      - width: 100%
+      - background: none
+      - box-shadow: none
+    name:
+      - justify-self: start
+      - margin-left: 10px
+      - font-weight: lighter
+      - font-size: x-large
+
+trash_button:
+  aspect_ratio: 1 / 1
+  lock:
+    enabled: true
+  show_state: true
+  state:
+    - operator: template
+      styles:
+        icon:
+          - color: red
+      value: >-
+        [[[ if (states['input_boolean.trash_outside'].state === 'off' &&
+        entity.attributes.days_until_collection_date <= variables.days_red) return
+        true; else return false ]]]
+    - operator: template
+      styles:
+        icon:
+          - color: orange
+      value: >-
+        [[[ if (states['input_boolean.trash_outside'].state === 'off' &&
+        entity.attributes.days_until_collection_date <= variables.days_orange) return
+        true; else return false ]]]
+  tap_action:
+    action: call-service
+    service: input_boolean.toggle
+    service_data:
+      entity_id: input_boolean.trash_outside
+  variables:
+    days_orange: 1
+    days_red: 0

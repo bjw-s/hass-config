@@ -1,0 +1,12 @@
+---
+platform: mqtt
+name: Utility Room - Door
+
+availability_topic: "zigbee2mqtt/bridge/state"
+device_class: "door"
+json_attributes_topic: "zigbee2mqtt/Utility Room - Door"
+payload_off: true
+payload_on: false
+state_topic: "zigbee2mqtt/Utility Room - Door"
+unique_id: "0x00158d000579dc35_contact_zigbee2mqtt"
+value_template: "{{ value_json.contact }}"

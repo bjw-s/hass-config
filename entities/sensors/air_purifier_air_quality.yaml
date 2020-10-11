@@ -1,0 +1,7 @@
+---
+platform: template
+sensors:
+  air_purifier_air_quality:
+    friendly_name: 'Air Purifier Air Quality'
+    value_template: '{{ states.fan.air_purifier.attributes.aqi }}'
+    unit_of_measurement: 'μ g/m³'

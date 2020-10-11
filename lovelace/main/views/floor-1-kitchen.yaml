@@ -1,0 +1,119 @@
+title: Kitchen
+icon: 'mdi:pot-mix'
+id: kitchen
+path: kitchen
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 3
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Status
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Dark?
+                entity: binary_sensor.is_dark_kitchen
+                tap_action: !include ../popups/light_levels.yaml
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Light level
+                icon: 'mdi:theme-light-dark'
+                entity: sensor.kitchen_light_level
+
+              - type: 'custom:button-card'
+                entity: binary_sensor.kitchen_motion
+                template: default_button
+                name: Motion
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Audio / Video
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Sonos
+                icon: 'mdi:speaker'
+                entity: media_player.keuken
+                show_state: true
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Appliances
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Coffee maker
+                icon: 'mdi:coffee'
+                entity: switch.kitchen_coffee_maker_power
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Oven
+                icon: 'mdi:microwave'
+                entity: switch.kitchen_oven_power
+
+      - break
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Lights
+            tap_action: !include ../popups/floor-1-kitchen_lights.yaml
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Front
+                entity: light.kitchen_ceiling_front
+                hold_action: !include ../popups/floor-1-kitchen_lights.yaml
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Rear
+                entity: light.kitchen_ceiling_rear
+                hold_action: !include ../popups/floor-1-kitchen_lights.yaml

@@ -1,0 +1,65 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: 'Living Room'
+  deviceID: this
+  large: false
+  card:
+    type: 'vertical-stack'
+    cards:
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+              box-shadow: none;
+            }
+        entities:
+          - type: custom:text-divider-row
+            text: Settings
+
+          - entity: binary_sensor.automatic_lights_living_room
+            name: Automatic?
+
+          - entity: input_boolean.living_room_lights_manual_mode
+            name: Manual mode
+
+          - type: conditional
+            conditions:
+              - entity: timer.living_room_lights_manual_mode
+                state_not: idle
+            row:
+              entity: timer.living_room_lights_manual_mode
+              name: Manual mode duration
+
+          - type: custom:text-divider-row
+            text: Brightness
+
+          - entity: light.living_room_floor_lamp
+            type: custom:slider-entity-row
+            name: Floor lamp
+            hide_when_off: true
+
+          - entity: light.living_room_hue_go_tv
+            type: custom:slider-entity-row
+            name: Hue Go TV
+            hide_when_off: true
+
+          - entity: light.living_room_hue_go
+            type: custom:slider-entity-row
+            name: Hue Go corner
+            hide_when_off: true
+
+          - type: custom:text-divider-row
+            text: Scenes
+
+          - entity: scene.living_room_lights_full_brightness
+            name: Full brightness
+
+          - entity: scene.living_room_lights_relaxed
+            name: Dimmed
+
+          - entity: scene.living_room_lights_movie_mode
+            name: Movie mode
+
+          - entity: scene.living_room_lights_off
+            name: 'Off'

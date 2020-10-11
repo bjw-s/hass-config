@@ -1,0 +1,6 @@
+---
+platform: mqtt
+name: driveway_person
+state_topic: "frigate/frontdoor/person"
+device_class: motion
+availability_topic: "frigate/available"

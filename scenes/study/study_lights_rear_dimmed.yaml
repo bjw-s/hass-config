@@ -1,0 +1,6 @@
+---
+  name: Study - Lights - Rear - Dimmed
+  entities:
+    light.study_rear_ceiling:
+      state: 'on'
+      brightness: 128

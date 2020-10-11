@@ -1,0 +1,8 @@
+---
+platform: "mqtt"
+name: "Bedroom - Nightstand ManYie Remote"
+state_topic: "zigbee2mqtt/Bedroom - Nightstand ManYie Remote"
+availability_topic: "zigbee2mqtt/bridge/state"
+icon: "mdi:gesture-double-tap"
+value_template: "{{ value_json.action }}"
+unique_id: "0x90fd9ffffe9096ea_action_zigbee2mqtt"

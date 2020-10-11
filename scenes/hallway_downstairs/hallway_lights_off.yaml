@@ -1,0 +1,5 @@
+---
+name: Hallway - Lights - Off
+entities:
+  light.hallway_ceiling:
+    state: 'off'

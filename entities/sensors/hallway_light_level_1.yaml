@@ -1,0 +1,11 @@
+---
+platform: mqtt
+name: Hallway - Light Level 1
+
+availability_topic: "zigbee2mqtt/bridge/state"
+device_class: "illuminance"
+json_attributes_topic: "zigbee2mqtt/Hallway - Motion Sensor 1"
+state_topic: "zigbee2mqtt/Hallway - Motion Sensor 1"
+unique_id: "0x0017880104b4e14d_illuminance_zigbee2mqtt"
+unit_of_measurement: "lx"
+value_template: "{{ value_json.illuminance_lux }}"

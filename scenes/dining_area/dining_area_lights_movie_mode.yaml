@@ -1,0 +1,7 @@
+---
+name: Dining Area - Lights - Movie Mode
+entities:
+  light.dining_area_ceiling:
+    state: 'on'
+    brightness: 77
+    color_temp: 443

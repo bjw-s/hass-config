@@ -1,0 +1,3 @@
+binary_sensor.utility_room_door:
+  alarm_modes:
+    - armed_away

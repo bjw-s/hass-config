@@ -1,0 +1,19 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: Alarm
+  deviceID: this
+  large: false
+  card:
+    type: alarm-panel
+    entity: alarm_control_panel.alarm
+    name: ' '
+    states:
+      - arm_home
+      - arm_night
+      - arm_away
+    style:
+      .: |
+        .card-header {
+          height: 50px;
+        }

@@ -1,0 +1,44 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: 'Hallway'
+  deviceID: this
+  large: false
+  card:
+    type: 'vertical-stack'
+    cards:
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+              box-shadow: none;
+            }
+        entities:
+          - type: custom:text-divider-row
+            text: Settings
+
+          - entity: binary_sensor.automatic_lights_hallway
+            name: Automatic?
+
+          - entity: input_boolean.hallway_lights_manual_mode
+            name: Manual mode
+
+          - type: custom:text-divider-row
+            text: Brightness
+
+          - entity: light.hallway_ceiling
+            type: custom:slider-entity-row
+            name: Ceiling
+            hide_when_off: true
+
+          - type: custom:text-divider-row
+            text: Scenes
+
+          - entity: scene.hallway_lights_on
+            name: Full brightness
+
+          - entity: scene.hallway_lights_dimmed
+            name: Dimmed
+
+          - entity: scene.hallway_lights_off
+            name: 'Off'

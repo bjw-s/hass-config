@@ -1,0 +1,8 @@
+background: !include ../background.yaml
+button_card_templates: !include ../button_card_templates.yaml
+
+views:
+  - !include ../views/floor-2-hallway.yaml
+  - !include ../views/floor-2-bathroom.yaml
+  - !include ../views/floor-2-bedroom.yaml
+  - !include ../views/floor-2-bedroom-eva.yaml

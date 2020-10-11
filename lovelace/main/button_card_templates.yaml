@@ -1,0 +1,165 @@
+base_button:
+  styles:
+    card:
+      - height: 120px
+      - width: 120px
+
+default_button:
+  template: base_button
+  show_label: true
+  show_state: true
+  size: 30%
+  styles:
+    grid:
+      - grid-template-areas: '"i" "n" "s" "l"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: 1fr min-content min-content min-content
+    img_cell:
+      - margin-top: 10%
+      - margin-bottom: 10%
+      - margin-left: 10%
+      - margin-right: 50%
+    label:
+      - justify-self: start
+      - margin-left: 10%
+      - font-size: 80%
+      - font-weight: lighter
+    name:
+      - justify-self: start
+      - margin-left: 10%
+      - font-size: 90%
+    state:
+      - justify-self: start
+      - margin-left: 10%
+      - font-size: 80%
+      - font-weight: lighter
+
+default_locked:
+  template: default_button
+  lock:
+    enabled: true
+
+header:
+  styles:
+    card:
+      - width: 100%
+      - background: none
+      - box-shadow: none
+    name:
+      - justify-self: start
+      - margin-left: 10px
+      - font-weight: lighter
+      - font-size: x-large
+
+header_label:
+  template: header
+  styles:
+    name:
+      - white-space: normal
+      - text-align: left
+      - font-size: normal
+
+person:
+  template: default_button
+  show_entity_picture: true
+  show_state: true
+  size: 60%
+  state:
+    - operator: '!='
+      styles:
+        card:
+          - filter: opacity(50%)
+        icon:
+          - filter: grayscale(100%)
+      value: home
+  styles:
+    card:
+      - text-transform: capitalize
+    icon:
+      - border-radius: 50%
+    img_cell:
+      - margin-top: 20%
+      - margin-left: 20%
+  variables:
+    name: ''
+
+temperature:
+  template: base_button
+  label: Temperature
+  show_label: true
+  show_state: true
+  size: 80%
+  state:
+    - operator: '!='
+      styles:
+        icon:
+          - filter: grayscale(100%)
+        state:
+          - filter: opacity(50%)
+      value: 'Off'
+  styles:
+    grid:
+      - grid-template-areas: '"i s" "n n" "l l"'
+      - grid-template-columns: 1fr 2fr
+      - grid-template-rows: 1fr min-content
+    img_cell:
+      - margin-bottom: 30%
+      - margin-left: 0%
+    label:
+      - justify-self: start
+      - margin-left: 10%
+      - font-weight: lighter
+    name:
+      - justify-self: start
+      - margin-left: 10%
+    state:
+      - margin-top: 10%
+      - margin-bottom: 30%
+      - margin-left: 0%
+      - margin-right: 40%
+      - font-size: x-large
+
+trash_button:
+  template: default_locked
+  state:
+    - operator: template
+      styles:
+        icon:
+          - color: red
+      value: >-
+        [[[ if (states['input_boolean.trash_outside'].state === 'off' &&
+        entity.attributes.days_until_collection_date <= variables.days_red) return
+        true; else return false ]]]
+    - operator: template
+      styles:
+        icon:
+          - color: orange
+      value: >-
+        [[[ if (states['input_boolean.trash_outside'].state === 'off' &&
+        entity.attributes.days_until_collection_date <= variables.days_orange) return
+        true; else return false ]]]
+  tap_action:
+    action: call-service
+    service: input_boolean.toggle
+    service_data:
+      entity_id: input_boolean.trash_outside
+  variables:
+    days_orange: 1
+    days_red: 0
+
+scene_button:
+  template: default_button
+  entity: '[[[ return variables.script ]]]'
+  icon: 'mdi:spotlight'
+  label: Activate
+  show_state: false
+  tap_action:
+    action: call-service
+    service: >-
+      [[[ if (variables.script) return 'script.turn_on'; else return 'scene.turn_on' ]]]
+    service_data:
+      entity_id: >-
+        [[[ if (variables.script) return variables.script; else return variables.scene ]]]
+  variables:
+    script: ''
+    scene: ''

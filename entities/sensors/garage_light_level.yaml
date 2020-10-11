@@ -1,0 +1,11 @@
+---
+platform: mqtt
+name: Garage - Light Level
+
+availability_topic: "zigbee2mqtt/bridge/state"
+device_class: "illuminance"
+json_attributes_topic: "zigbee2mqtt/Kitchen - Motion Sensor"
+state_topic: "zigbee2mqtt/Kitchen - Motion Sensor"
+unique_id: "0x00158d0002b49016_illuminance_zigbee2mqtt"
+unit_of_measurement: "lx"
+value_template: "{{ value_json.illuminance }}"

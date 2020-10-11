@@ -1,0 +1,13 @@
+---
+platform: nut
+host: !secret study_ups_host
+name: study_ups
+alias: ups
+username: !secret study_ups_user
+password: !secret study_ups_password
+resources:
+  - ups.load
+  - ups.status.display
+  - input.voltage
+  - battery.charge
+  - battery.runtime

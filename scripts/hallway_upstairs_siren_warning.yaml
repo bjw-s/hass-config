@@ -1,0 +1,28 @@
+---
+hallway_upstairs_siren_warn:
+  alias: 'Hallway Upstairs - Siren - Warn'
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: "zigbee2mqtt/Hallway Upstairs - Siren/set"
+        payload: '{"warning": {"duration": 1, "mode": "stop", "strobe": true}}'
+    - delay: 3
+    - service: mqtt.publish
+      data_template:
+        topic: "zigbee2mqtt/Hallway Upstairs - Siren/set"
+        payload: '{"warning": {"duration": 1, "mode": "stop", "strobe": true}}'
+    - delay: 3
+    - service: mqtt.publish
+      data_template:
+        topic: "zigbee2mqtt/Hallway Upstairs - Siren/set"
+        payload: '{"warning": {"duration": 1, "mode": "stop", "strobe": true}}'
+    - delay: 3
+    - service: mqtt.publish
+      data_template:
+        topic: "zigbee2mqtt/Hallway Upstairs - Siren/set"
+        payload: '{"warning": {"duration": 1, "mode": "stop", "strobe": true}}'
+    - delay: 3
+    - service: mqtt.publish
+      data_template:
+        topic: "zigbee2mqtt/Hallway Upstairs - Siren/set"
+        payload: '{"warning": {"duration": 1, "mode": "stop", "strobe": true}}'

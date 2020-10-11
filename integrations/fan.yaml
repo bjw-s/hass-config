@@ -1,0 +1,6 @@
+---
+# The fan integration is built for the controlling of fan devices.
+#
+# https://www.home-assistant.io/components/fan/
+#
+fan: !include_dir_list ../entities/fans

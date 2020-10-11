@@ -1,0 +1,18 @@
+---
+platform: template
+sensors:
+  frigate_frontdoor_fps: 
+    value_template: '{{ states.sensor.frigate_debug.attributes["frontdoor"]["fps"] }}'
+    unit_of_measurement: 'FPS'
+  frigate_frontdoor_skipped_fps: 
+    value_template: '{{ states.sensor.frigate_debug.attributes["frontdoor"]["skipped_fps"] }}'
+    unit_of_measurement: 'FPS'
+  frigate_frontdoor_detection_fps: 
+    value_template: '{{ states.sensor.frigate_debug.attributes["frontdoor"]["detection_fps"] }}'
+    unit_of_measurement: 'FPS'
+  frigate_coral_fps: 
+    value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["fps"] }}'
+    unit_of_measurement: 'FPS'
+  frigate_coral_inference:
+    value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["inference_speed"] }}' 
+    unit_of_measurement: 'ms'

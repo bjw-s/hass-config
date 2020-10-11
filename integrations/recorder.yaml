@@ -1,0 +1,23 @@
+---
+# The recorder component is storing details in a database which
+# then are handled by the history component.
+#
+# https://www.home-assistant.io/components/recorder/
+#
+recorder:
+
+  # The URL that points to your database.
+  db_url: !env_var SECRET_RECORDER_DB_URL
+
+  # The number of days of history to keep in the recorder database
+  purge_keep_days: 32
+
+  # Exclude the following items from recordings
+  exclude:
+    # The list of entity ids to be excluded from recordings.
+    entities:
+      - sensor.date
+      - sensor.date_time
+      - sensor.time
+      - sensor.time_utc
+      - sensor.living_area_vacuum_map

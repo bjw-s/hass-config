@@ -1,0 +1,15 @@
+---
+# The sonos integration allows you to control your Sonos wireless speakers from Home Assistant. 
+# It also works with IKEA Symfonisk speakers.
+#
+# https://www.home-assistant.io/integrations/sonos/
+#
+
+sonos:
+  media_player:
+    # advertise_addr: !env_var SECRET_ADVERTISE_HOST
+    advertise_addr: 192.168.26.5
+    hosts: 
+      - !env_var SECRET_SONOS_PLAYER_1
+      - !env_var SECRET_SONOS_PLAYER_2
+      - !env_var SECRET_SONOS_PLAYER_3

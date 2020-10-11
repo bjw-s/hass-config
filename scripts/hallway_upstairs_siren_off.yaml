@@ -1,0 +1,10 @@
+---
+hallway_upstairs_siren_off:
+  alias: 'Hallway Upstairs - Siren - Off'
+  sequence:
+    - service: script.turn_off
+      entity_id: script.hallway_upstairs_siren_warn
+    - service: mqtt.publish
+      data_template:
+        topic: "zigbee2mqtt/Hallway Upstairs - Siren/set"
+        payload: '{"warning": {"duration": 0, "mode": "stop", "strobe": false}}'

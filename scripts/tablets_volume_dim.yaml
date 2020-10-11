@@ -1,0 +1,18 @@
+---
+tablets_volume_dim:
+  fields:
+      level:
+        description: 'The volume level that should be set (0-100)'
+        example: 100
+      stream:
+        description: 'The stream for which the volume should be set (1-10)'
+        example: 1
+  sequence:
+    - service: rest_command.hallway_tablet_setvolume
+      data_template:
+        level: "{{ level }}"
+        stream: "{{ stream }}"
+    - service: rest_command.garage_tablet_setvolume
+      data_template:
+        level: "{{ level }}"
+        stream: "{{ stream }}"

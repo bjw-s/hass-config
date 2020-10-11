@@ -1,0 +1,162 @@
+title: Temperatures
+icon: 'mdi:thermometer'
+id: temperatures
+path: temperatures
+panel: false
+badges: []
+cards:
+  - type: horizontal-stack
+    title: Living room
+    cards:
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.living_room_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
+
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.living_room_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
+
+  - type: horizontal-stack
+    title: Bedroom
+    cards:
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bedroom_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
+
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bedroom_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
+
+  - type: horizontal-stack
+    title: Bedroom Eva
+    cards:
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bedroom_eva_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
+
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bedroom_eva_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
+
+  - type: horizontal-stack
+    title: Bathroom
+    cards:
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bathroom_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
+
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bathroom_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
+
+  - type: horizontal-stack
+    title: Study
+    cards:
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.study_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
+
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.study_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
+
+  - type: horizontal-stack
+    title: Garage
+    cards:
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.garage_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
+
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.garage_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
+
+  - type: horizontal-stack
+    title: Other
+    cards:
+      - type: 'custom:mini-graph-card'
+        icon: mdi:thermometer
+        entities:
+          - entity: sensor.hallway_temperature
+            name: Hallway temperature
+        font_size: 75
+        line_color: '#3498db'
+
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.driveway_temperature
+            name: Outside temperature
+        font_size: 75
+        line_color: '#3498db'

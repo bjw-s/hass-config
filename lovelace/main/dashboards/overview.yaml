@@ -1,0 +1,10 @@
+background: !include ../background.yaml
+button_card_templates: !include ../button_card_templates.yaml
+
+views:
+  - !include ../views/overview-home.yaml
+  - !include ../views/overview-security.yaml
+  - !include ../views/overview-lights.yaml
+  - !include ../views/overview-temperatures.yaml
+  - !include ../views/overview-other.yaml
+  - !include ../views/overview-configuration.yaml

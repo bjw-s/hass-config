@@ -1,0 +1,15 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: MiMi
+  deviceID: this
+  large: false
+  card:
+    type: 'custom:layout-card'
+    column_width: 100%
+    cards:
+      - type: picture-entity
+        entity: vacuum.living_area_vacuum
+        camera_image: camera.living_area_vacuum_map
+        camera_view: live
+        show_name: false

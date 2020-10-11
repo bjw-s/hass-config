@@ -1,0 +1,4 @@
+---
+binary_sensor.living_room_door:
+  alarm_modes:
+    - armed_away

@@ -1,0 +1,8 @@
+---
+platform: "mqtt"
+name: "Bedroom - Nightstand Bernd Remote"
+state_topic: "zigbee2mqtt/Bedroom - Nightstand Bernd Remote"
+availability_topic: "zigbee2mqtt/bridge/state"
+icon: "mdi:gesture-double-tap"
+value_template: "{{ value_json.action }}"
+unique_id: "0x90fd9ffffed252a4_action_zigbee2mqtt"

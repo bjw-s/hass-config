@@ -1,0 +1,5 @@
+binary_sensor.study_balcony_door:
+  alarm_modes:
+    - armed_away
+    - armed_night
+    - armed_home

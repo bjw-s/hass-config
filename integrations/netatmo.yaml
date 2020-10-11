@@ -1,0 +1,10 @@
+---
+# The netatmo integration platform is the main integration to integrate all Netatmo 
+# related platforms.
+#
+# https://www.home-assistant.io/integrations/netatmo/
+#
+
+netatmo:
+  client_id: 5f74531196d696374d223f77
+  client_secret: TMlCT1QSTq52eyaXS1qiJGmhaX2HawZCTlGjDlVW5JLUw

@@ -1,0 +1,145 @@
+title: Outside
+icon: 'mdi:flower-tulip'
+id: outside
+path: outside
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 3
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Status
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Dusk?
+                entity: binary_sensor.is_dusk_driveway
+                tap_action: !include ../popups/light_levels.yaml
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Dark?
+                entity: binary_sensor.is_dark_driveway
+                tap_action: !include ../popups/light_levels.yaml
+
+              - type: 'custom:button-card'
+                entity: sensor.driveway_light_level
+                template: default_button
+                name: Light level
+                icon: 'mdi:theme-light-dark'
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Devices
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Sunscreen
+                entity: cover.backyard_sunscreen
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Pool pump
+                entity: switch.backyard_shed
+                state:
+                  - icon: 'mdi:water-pump'
+                    value: 'on'
+                  - icon: 'mdi:water-pump-off'
+                    value: 'off'
+
+              - type: 'custom:button-card'
+                template: default_locked
+                name: Automatic?
+                icon: 'mdi:check'
+                entity: input_boolean.backyard_automatic_pool_pump
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: WLANThermo
+                icon: 'mdi:grill'
+                entity: binary_sensor.wlanthermo_on_off
+                tap_action: !include ../popups/floor-1-wlanthermo.yaml
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Scenes
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: scene_button
+                name: Backyard on
+                variables:
+                  script: script.scene_backyard_lights_on
+
+              - type: 'custom:button-card'
+                template: scene_button
+                name: Backyard off
+                variables:
+                  script: script.scene_backyard_lights_off
+
+      - break
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Lights
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_locked
+                name: Automatic?
+                icon: 'mdi:check'
+                entity: input_boolean.automatic_lights_backyard
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Wall
+                icon: 'mdi:coach-lamp'
+                entity: light.backyard_wall
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Other
+                icon: 'mdi:patio-heater'
+                entity: light.backyard_other

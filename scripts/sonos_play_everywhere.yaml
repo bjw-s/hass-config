@@ -1,0 +1,46 @@
+---
+sonos_play_everywhere:
+  alias: Sonos Play Everywhere
+  sequence:
+  - service: sonos.snapshot
+    data_template:
+      entity_id:
+      - media_player.keuken
+      - media_player.woonkamer
+      - media_player.studeerkamer
+
+  - service: sonos.unjoin
+    data_template:
+      entity_id:
+      - media_player.keuken
+      - media_player.woonkamer
+      - media_player.studeerkamer
+
+  - service: sonos.join
+    entity_id: all    
+    data:
+      master: media_player.keuken
+
+  - service: media_player.volume_set
+    data_template:
+      entity_id:
+      - media_player.keuken
+      - media_player.woonkamer
+      - media_player.studeerkamer
+      volume_level: '{{ volume }}'
+    
+  - service: media_player.play_media
+    data_template:
+      entity_id: media_player.keuken
+      media_content_id: '{{ sonos_source }}'
+      media_content_type: music
+
+  - delay: '{{ delay }}'
+
+  - service: sonos.restore
+    data_template:
+      entity_id:
+      - media_player.keuken
+      - media_player.woonkamer
+      - media_player.studeerkamer
+    

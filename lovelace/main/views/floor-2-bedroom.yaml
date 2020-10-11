@@ -1,0 +1,95 @@
+title: Bedroom
+icon: 'mdi:bed-king'
+id: bedroom
+path: bedroom
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 3
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Status
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Temperature
+                entity: sensor.bedroom_temperature
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Humidity
+                entity: sensor.bedroom_humidity
+
+      - break
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Scenes
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: scene_button
+                name: Ceiling full
+                variables:
+                  script: scene.bedroom_lights_ceiling_light_on
+
+              - type: 'custom:button-card'
+                template: scene_button
+                name: Ceiling dimmed
+                variables:
+                  script: scene.bedroom_lights_ceiling_light_dimmed
+
+      - break
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Lights
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Ceiling
+                entity: light.bedroom_ceiling
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Man-Yie
+                entity: light.bedroom_nightstand_manyie
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Bernd
+                entity: light.bedroom_nightstand_bernd

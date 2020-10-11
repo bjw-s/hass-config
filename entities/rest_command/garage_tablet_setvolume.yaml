@@ -1,0 +1,3 @@
+---
+garage_tablet_setvolume:
+  url: !secret garage_tablet_setvolume_url

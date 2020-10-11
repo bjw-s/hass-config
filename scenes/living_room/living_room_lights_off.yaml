@@ -1,0 +1,9 @@
+---
+name: Living Room - Lights - Off
+entities:
+  light.living_room_floor_lamp:
+    state: 'off'
+  light.living_room_hue_go:
+    state: 'off'
+  light.living_room_hue_go_tv:
+    state: 'off'

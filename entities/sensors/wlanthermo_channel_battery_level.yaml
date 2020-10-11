@@ -1,0 +1,8 @@
+---
+platform: mqtt
+name : WlanThermo Battery Level
+device_class: battery
+unit_of_measurement: "%"
+state_topic: "WLanThermo/NANO-c1cec8/status/data"
+value_template: "{{ value_json.system.soc | float }}"
+expire_after: 60

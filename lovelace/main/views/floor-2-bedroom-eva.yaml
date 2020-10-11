@@ -1,0 +1,65 @@
+title: Bedroom Eva
+icon: 'mdi:bed-single'
+id: bedroom-eva
+path: bedroom-eva
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 3
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Status
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Temperature
+                entity: sensor.bedroom_eva_temperature
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Humidity
+                entity: sensor.bedroom_eva_humidity
+
+      - break
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Lights
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                gridrow: 2
+                gridcol: 1
+                template: default_button
+                name: Ceiling
+                entity: light.bedroom_eva_ceiling
+
+              - type: 'custom:button-card'
+                gridrow: 2
+                gridcol: 2
+                template: default_button
+                name: Night light
+                entity: light.bedroom_eva_nightlight

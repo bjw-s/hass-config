@@ -1,0 +1,6 @@
+---
+platform: template
+sensors:
+  air_purifier_motor_speed:
+    friendly_name: 'Air Purifier Motor Speed'
+    value_template: '{{ states.fan.air_purifier.attributes.motor_speed }}'

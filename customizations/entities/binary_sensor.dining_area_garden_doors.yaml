@@ -1,0 +1,5 @@
+binary_sensor.dining_area_garden_doors:
+  alarm_modes:
+    - armed_away
+    - armed_night
+    - armed_home

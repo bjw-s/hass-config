@@ -1,0 +1,61 @@
+title: Hallway
+icon: 'mdi:floor-plan'
+id: hallway
+path: hallway
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 3
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+        - type: 'custom:button-card'
+          template: header
+          name: Lights
+
+        - type: 'custom:layout-card'
+          layout: horizontal
+          column_width: 121px
+          justify_content: start
+          cards:
+            - type: 'custom:button-card'
+              template: default_locked
+              name: Automatic?
+              icon: 'mdi:check'
+              entity: input_boolean.automatic_lights_hallway_upstairs
+
+            - type: 'custom:button-card'
+              template: default_button
+              name: Ceiling
+              entity: light.hallway_upstairs_ceiling
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Devices
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: MiMi 🕶️
+                icon: 'mdi:robot-vacuum'
+                entity: vacuum.upstairs_vacuum
+                show_label: true
+                show_state: true
+                state:
+                  - color: var(--disabled-text-color)
+                    value: docked
+                  - spin: true
+                    value: cleaning

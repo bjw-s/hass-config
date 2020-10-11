@@ -1,0 +1,15 @@
+---
+name: Living Room - Lights - Full Brightness
+entities:
+  light.living_room_floor_lamp:
+    state: 'on'
+    brightness: 254
+    color_temp: 285
+  light.living_room_hue_go:
+    state: 'on'
+    brightness: 254
+    color_temp: 285
+  light.living_room_hue_go_tv:
+    state: 'on'
+    brightness: 254
+    color_temp: 285

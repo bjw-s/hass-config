@@ -1,0 +1,23 @@
+title: Configuration
+icon: 'mdi:cog'
+id: configuration
+path: configuration
+panel: false
+badges: []
+cards:
+  - type: 'custom:auto-entities'
+    card:
+      show_header_toggle: false
+      title: Low batteries
+      type: entities
+    filter:
+      exclude:
+        - attributes:
+            battery_report: false
+      include:
+        - entity_id: '*battery_level'
+          options:
+            icon: 'mdi:battery-alert'
+            secondary_info: last-changed
+          state: <= 30
+    show_empty: true

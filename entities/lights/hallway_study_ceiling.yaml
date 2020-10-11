@@ -1,0 +1,14 @@
+---
+platform: mqtt
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: true
+brightness_scale: 254
+command_topic: "zigbee2mqtt/Hallway Study - Ceiling Light/set"
+
+json_attributes_topic: "zigbee2mqtt/Hallway Study - Ceiling Light"
+name: "Hallway Study - Ceiling"
+schema: json
+
+state_topic: "zigbee2mqtt/Hallway Study - Ceiling Light"
+unique_id: "0x00178801026ccb9a_light_zigbee2mqtt"

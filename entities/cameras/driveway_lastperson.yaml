@@ -1,0 +1,4 @@
+---
+platform: mqtt
+name: driveway_last_person
+topic: frigate/frontdoor/person/snapshot

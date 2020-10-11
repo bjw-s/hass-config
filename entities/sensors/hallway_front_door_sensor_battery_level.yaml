@@ -1,0 +1,11 @@
+---
+platform: mqtt
+name: Hallway - Front Door Sensor Battery Level
+
+availability_topic: "zigbee2mqtt/bridge/state"
+device_class: "battery"
+json_attributes_topic: "zigbee2mqtt/Hallway - Front Door"
+state_topic: "zigbee2mqtt/Hallway - Front Door"
+unique_id: "0x00158d0002bf9641_battery_zigbee2mqtt"
+unit_of_measurement: "%"
+value_template: "{{ value_json.battery }}"

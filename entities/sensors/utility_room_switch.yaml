@@ -1,0 +1,8 @@
+---
+platform: "mqtt"
+name: "Utility Room - Switch"
+state_topic: "zigbee2mqtt/Utility Room - Switch"
+availability_topic: "zigbee2mqtt/bridge/state"
+icon: "mdi:gesture-double-tap"
+value_template: "{{ value_json.action }}"
+unique_id: "0x000000000171680f_greenpower_zigbee2mqtt"

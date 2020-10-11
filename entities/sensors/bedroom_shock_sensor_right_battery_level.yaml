@@ -1,0 +1,10 @@
+---
+platform: mqtt
+name: Bedroom - Shock Sensor Right Battery Level
+
+availability_topic: zigbee2mqtt/bridge/state
+device_class: battery
+json_attributes_topic: zigbee2mqtt/Bedroom - Shock Sensor Right
+state_topic: zigbee2mqtt/Bedroom - Shock Sensor Right
+unique_id: 0x00158d0002a23964_battery_zigbee2mqtt
+value_template: "{{ value_json.battery }}"

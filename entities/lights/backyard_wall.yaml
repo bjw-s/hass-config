@@ -1,0 +1,14 @@
+---
+platform: mqtt
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: true
+brightness_scale: 254
+command_topic: "zigbee2mqtt/Backyard - Wall Light/set"
+
+json_attributes_topic: "zigbee2mqtt/Backyard - Wall Light"
+name: "Backyard - Wall"
+schema: json
+
+state_topic: "zigbee2mqtt/Backyard - Wall Light"
+unique_id: "0x000b57fffeeacfcf_0x90fd9ffffe084643_zigbee2mqtt"

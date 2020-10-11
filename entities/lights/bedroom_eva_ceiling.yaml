@@ -1,0 +1,22 @@
+---
+platform: mqtt
+name: Bedroom Eva - Ceiling
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: true
+brightness_scale: 254
+color_temp: true
+command_topic: zigbee2mqtt/Bedroom Eva - Ceiling Light/set
+device:
+  identifiers:
+  - zigbee2mqtt_0x90fd9ffffe1fc20f
+  manufacturer: IKEA
+  model: TRADFRI LED bulb E12/E14 400 lumen, dimmable, white spectrum, opal white
+    (LED1536G5)
+  name: Bedroom Eva - Ceiling Light
+  sw_version: Zigbee2MQTT 1.14.4
+json_attributes_topic: zigbee2mqtt/Bedroom Eva - Ceiling Light
+schema: json
+state_topic: zigbee2mqtt/Bedroom Eva - Ceiling Light
+unique_id: 0x90fd9ffffe1fc20f_light_zigbee2mqtt
+

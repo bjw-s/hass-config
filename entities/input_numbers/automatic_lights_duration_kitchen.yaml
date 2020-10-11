@@ -1,0 +1,11 @@
+---
+# Determines how long the kitchen automatic lights
+# will be active
+#
+# https://www.home-assistant.io/components/input_number/
+#
+automatic_lights_duration_kitchen:
+  min: 0
+  max: 30
+  step: 1
+  unit_of_measurement: min

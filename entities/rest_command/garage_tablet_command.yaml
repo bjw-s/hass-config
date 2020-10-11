@@ -1,0 +1,3 @@
+---
+garage_tablet_command:
+  url: !secret garage_tablet_command_url

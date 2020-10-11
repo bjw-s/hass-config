@@ -1,0 +1,18 @@
+---
+platform: template
+sensors:
+  is_dark_hallway:
+    icon_template: >
+      {% set current_lux = (states('sensor.hallway_light_level') | float) %}
+      {% set is_dark_lux = (states('input_number.is_dark_lux_hallway') | float) %}
+      {%- if current_lux < is_dark_lux -%}
+        mdi:brightness-4
+      {%- else -%}
+        mdi:brightness-5
+      {%- endif -%}
+    value_template: >
+      {% set current_lux = (states('sensor.hallway_light_level') | float) %} 
+      {% set is_dark_lux = (states('input_number.is_dark_lux_hallway') | float) %}
+      {{
+        current_lux < is_dark_lux
+      }}

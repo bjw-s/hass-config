@@ -1,0 +1,21 @@
+---
+platform: mqtt
+name: Living Room - Hue Go TV
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: true
+brightness_scale: 254
+color_temp: true
+xy: true
+command_topic: zigbee2mqtt/Living Room - Hue Go TV/set
+device:
+  identifiers:
+  - zigbee2mqtt_0x0017880106f9935f
+  manufacturer: Philips
+  model: Hue Go with Bluetooth (7602031P7)
+  name: Living Room - Hue Go TV
+  sw_version: Zigbee2MQTT 1.14.4
+json_attributes_topic: zigbee2mqtt/Living Room - Hue Go TV
+schema: json
+state_topic: zigbee2mqtt/Living Room - Hue Go TV
+unique_id: 0x0017880106f9935f_light_zigbee2mqtt

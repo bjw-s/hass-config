@@ -1,0 +1,15 @@
+---
+platform: rest
+name: Hallway Tablet Device Info
+resource: !secret hallway_tablet_deviceinfo_url
+scan_interval: 15
+json_attributes:
+- screenBrightness
+- isScreenOn
+- isInScreensaver
+value_template: |
+  {% if (value_json.screenBrightness | int) > 0 -%}
+    on
+  {%- else -%}
+    off
+  {%- endif %}

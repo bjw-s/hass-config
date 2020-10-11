@@ -1,0 +1,9 @@
+---
+name: Kitchen - Lights - Relaxed
+entities:
+  light.kitchen_ceiling_front:
+    state: 'on'
+    brightness: 100
+    color_temp: 366
+  light.kitchen_ceiling_rear:
+    state: 'off'

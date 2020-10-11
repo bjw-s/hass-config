@@ -1,0 +1,11 @@
+---
+platform: mqtt
+name: Hallway - Temperature 1
+
+availability_topic: "zigbee2mqtt/bridge/state"
+device_class: "temperature"
+json_attributes_topic: "zigbee2mqtt/Hallway - Motion Sensor 1"
+state_topic: "zigbee2mqtt/Hallway - Motion Sensor 1"
+unique_id: "0x0017880104b4e14d_temperature_zigbee2mqtt"
+unit_of_measurement: "°C"
+value_template: "{{ value_json.temperature }}"

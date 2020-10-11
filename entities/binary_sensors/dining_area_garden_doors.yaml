@@ -1,0 +1,12 @@
+---
+platform: mqtt
+name: Dining Area - Garden Doors
+
+availability_topic: "zigbee2mqtt/bridge/state"
+device_class: "door"
+json_attributes_topic: "zigbee2mqtt/Dining Area - Garden Doors"
+payload_off: true
+payload_on: false
+state_topic: "zigbee2mqtt/Dining Area - Garden Doors"
+unique_id: "0x00158d0002e69271_contact_zigbee2mqtt"
+value_template: "{{ value_json.contact }}"

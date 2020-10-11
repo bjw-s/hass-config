@@ -1,0 +1,47 @@
+---
+# Lovelace component for confuring the UI.
+#
+# https://www.home-assistant.io/lovelace/
+# https://www.home-assistant.io/lovelace/yaml-mode/
+#
+lovelace:
+  mode: yaml
+  resources: !include ../lovelace/resources.yaml
+  dashboards:
+    1st-floor: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: ui-lovelace-floor-1.yaml
+      title: 1st Floor
+      icon: mdi:numeric-1-box-multiple-outline
+      show_in_sidebar: true
+      require_admin: false
+
+    2nd-floor: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: ui-lovelace-floor-2.yaml
+      title: 2nd Floor
+      icon: mdi:numeric-2-box-multiple-outline
+      show_in_sidebar: true
+      require_admin: false
+
+    3rd-floor: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: ui-lovelace-floor-3.yaml
+      title: 3rd Floor
+      icon: mdi:numeric-3-box-multiple-outline
+      show_in_sidebar: true
+      require_admin: false
+
+    tablet-garage: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: ui-lovelace-tablet-garage.yaml
+      title: Tablet Garage
+      show_in_sidebar: false
+      require_admin: false
+
+    tablet-hallway: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: ui-lovelace-tablet-hallway.yaml
+      title: Tablet Hallway
+      show_in_sidebar: false
+      require_admin: false

@@ -1,0 +1,9 @@
+---
+# This is an input boolean to use with automations
+# that determines if somebody is at home or not.
+#
+# https://www.home-assistant.io/components/input_boolean/
+#
+home_modes_away_mode:
+  name: Away mode
+  icon: mdi:home-account

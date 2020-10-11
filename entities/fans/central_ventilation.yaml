@@ -1,0 +1,18 @@
+platform: mqtt
+command_topic: "ITHO/Fan/cmd"
+state_topic : "ITHO/Fan/State"
+speed_command_topic: "ITHO/Fan/cmd"
+speed_state_topic: "ITHO/Fan/State"
+state_value_template: "{% if value|float==0 %}State 0{% endif %}{% if value|float >0 %}State 1{% endif %}"
+speed_value_template: "{% if value|float==0 %}State 0{% endif %}{% if value|float >0 and value|float <=4 %}State {{value}}{% endif %}{% if value|float >=11 %}State 3{% endif %}"
+payload_on: "State 1"
+payload_off: "State 0"
+payload_low_speed: "State 1"
+payload_medium_speed: "State 2"
+payload_high_speed: "State 3"
+optimistic: "true"
+name: Central Ventilation
+speeds:
+  - low
+  - medium
+  - high

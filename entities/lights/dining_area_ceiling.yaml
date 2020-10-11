@@ -1,0 +1,15 @@
+---
+platform: mqtt
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: true
+brightness_scale: 254
+color_temp: true
+command_topic: "zigbee2mqtt/Dining Area - Ceiling Light/set"
+
+json_attributes_topic: "zigbee2mqtt/Dining Area - Ceiling Light"
+name: "Dining Area - Ceiling"
+schema: json
+
+state_topic: "zigbee2mqtt/Dining Area - Ceiling Light"
+unique_id: "0x00178801027c283f_0x00178801027c29d8_zigbee2mqtt"

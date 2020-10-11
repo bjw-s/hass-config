@@ -1,0 +1,251 @@
+title: Home
+icon: 'mdi:home'
+id: home
+path: home
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    column_width: 98%
+    cards:
+      - type: 'custom:button-card'
+        name: >-
+          [[[ var d = new Date(); var n = d.getHours(); if (0 <= n && n <
+          12) return "Good morning."; else if (12 <= n && n < 18) return
+          "Good afternoon."; else if (18 <= n && n < 24) return "Good
+          evening."; else return "ERROR";]]]
+        styles:
+          card:
+            - width: 300px
+            - height: 60px
+            - background: none
+            - box-shadow: none
+          name:
+            - justify-self: start
+            - margin-left: 10px
+            - font-weight: normal
+            - font-size: xx-large
+
+      - type: 'custom:layout-card'
+        layout: horizontal
+        max_columns: 3
+        justify_content: start
+        cards:
+          - type: 'custom:layout-card'
+            layout: vertical
+            column_width: 98%
+            cards:
+              - type: 'custom:button-card'
+                template: header
+                name: At a glance
+
+              - type: 'custom:layout-card'
+                layout: horizontal
+                column_width: 121px
+                justify_content: start
+                cards:
+                  - type: 'custom:button-card'
+                    entity: climate.living_room_thermostat
+                    label: '[[[ return `${entity.attributes.temperature} °C` ]]]'
+                    name: Thermostat
+                    template: temperature
+                    triggers_update:
+                      - climate.living_room_thermostat
+
+                  - type: 'custom:button-card'
+                    template: base_button
+                    entity: fan.central_ventilation
+                    label: '[[[ return `${entity.attributes.speed}` ]]]'
+                    name: Ventilation
+                    show_label: true
+                    show_state: true
+                    size: 80%
+                    state:
+                      - operator: '!='
+                        styles:
+                          icon:
+                            - filter: grayscale(100%)
+                          state:
+                            - filter: opacity(50%)
+                        value: 'on'
+                    styles:
+                      grid:
+                        - grid-template-areas: '"i s" "n n" "l l"'
+                        - grid-template-columns: 1fr 2fr
+                        - grid-template-rows: 1fr min-content
+                      img_cell:
+                        - margin-bottom: 30%
+                        - margin-left: 0%
+                      label:
+                        - justify-self: start
+                        - margin-left: 10%
+                        - font-weight: lighter
+                        - text-transform: capitalize
+                      name:
+                        - justify-self: start
+                        - margin-left: 10%
+                      state:
+                        - margin-top: 10%
+                        - margin-bottom: 30%
+                        - margin-left: 0%
+                        - margin-right: 40%
+                        - font-size: x-large
+                    tap_action:
+                      action: more-info
+                    triggers_update:
+                      - fan.central_ventilation
+
+                  - type: 'custom:button-card'
+                    template: base_button
+                    entity: alarm_control_panel.alarm
+                    name: Alarm
+                    show_label: true
+                    show_state: true
+                    size: 80%
+                    state:
+                      - icon: 'mdi:shield-check'
+                        styles:
+                          icon:
+                            - color: var(--label-badge-green)
+                        value: disarmed
+                      - icon: 'mdi:shield-lock'
+                        styles:
+                          icon:
+                            - color: var(--label-badge-red)
+                        operator: regex
+                        value: armed_.*
+                      - icon: 'mdi:shield-lock'
+                        styles:
+                          icon:
+                            - color: var(--label-badge-yellow)
+                        value: pending
+                      - icon: 'mdi:shield-lock'
+                        styles:
+                          icon:
+                            - color: var(--label-badge-yellow)
+                        value: arming
+                    styles:
+                      grid:
+                        - grid-template-areas: '"i l" "n n" "s s"'
+                        - grid-template-columns: 1fr 2fr
+                        - grid-template-rows: 1fr min-content
+                      img_cell:
+                        - margin-bottom: 30%
+                        - margin-left: 0%
+                      name:
+                        - justify-self: start
+                        - margin-left: 10%
+                      state:
+                        - justify-self: start
+                        - margin-left: 10%
+                        - font-weight: lighter
+                        - text-transform: capitalize
+                        - white-space: nowrap
+                        - overflow: visible
+                    tap_action: !include ../popups/alarm.yaml
+
+          - type: 'custom:layout-card'
+            layout: vertical
+            column_width: 98%
+            cards:
+              - type: 'custom:button-card'
+                template: header
+                name: Presence
+
+              - type: 'custom:layout-card'
+                layout: horizontal
+                column_width: 121px
+                justify_content: start
+                cards:
+                  - type: 'custom:button-card'
+                    entity: person.bernd
+                    template: person
+
+                  - type: 'custom:button-card'
+                    entity: person.man_yie
+                    template: person
+          - break
+
+          - type: 'custom:layout-card'
+            layout: vertical
+            column_width: 98%
+            cards:
+              - type: 'custom:button-card'
+                template: header
+                name: Modes
+
+              - type: 'custom:layout-card'
+                layout: horizontal
+                column_width: 121px
+                justify_content: start
+                cards:
+                  - type: 'custom:button-card'
+                    entity: input_boolean.home_modes_guest_mode
+                    name: Guest
+                    show_state: true
+                    template: default_locked
+
+                  - type: 'custom:button-card'
+                    entity: input_boolean.home_modes_bedtime_mode
+                    name: Bedtime
+                    show_state: true
+                    template: default_locked
+
+                  - type: 'custom:button-card'
+                    entity: input_boolean.home_modes_holiday_mode
+                    name: Holiday
+                    show_state: true
+                    template: default_locked
+
+          - break
+
+          - break
+
+          - type: 'custom:layout-card'
+            layout: vertical
+            column_width: 98%
+            cards:
+              - type: 'custom:button-card'
+                template: header
+                name: Trash
+
+              - type: 'custom:layout-card'
+                layout: horizontal
+                column_width: 121px
+                justify_content: start
+                cards:
+                  - type: 'custom:button-card'
+                    entity:  sensor.afvalwijzer_restafval
+                    icon: 'mdi:trash-can'
+                    name: Restafval
+                    template: trash_button
+                    triggers_update:
+                      - sensor.afvalwijzer_restafval
+                      - input_boolean.trash_outside
+
+                  - type: 'custom:button-card'
+                    entity: sensor.afvalwijzer_gft
+                    icon: 'mdi:leaf'
+                    name: GFT
+                    template: trash_button
+                    triggers_update:
+                      - sensor.afvalwijzer_gft
+                      - input_boolean.trash_outside
+
+                  - type: 'custom:button-card'
+                    entity: sensor.afvalwijzer_pmd
+                    icon: 'mdi:recycle'
+                    name: PMD
+                    template: trash_button
+                    triggers_update:
+                      - sensor.afvalwijzer_pmd
+                      - input_boolean.trash_outside
+
+                  - type: 'custom:button-card'
+                    entity: sensor.afvalwijzer_papier
+                    icon: 'mdi:package-variant'
+                    name: Papier
+                    template: trash_button
+                    triggers_update:
+                      - sensor.afvalwijzer_papier
+                      - input_boolean.trash_outside

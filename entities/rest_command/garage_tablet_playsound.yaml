@@ -1,0 +1,3 @@
+---
+garage_tablet_playsound:
+  url: !secret garage_tablet_playsound_url

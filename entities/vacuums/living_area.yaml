@@ -1,0 +1,26 @@
+---
+platform: mqtt
+name: living_area_vacuum
+schema: state
+supported_features:
+  - start
+  - pause
+  - stop
+  - return_home
+  - battery
+  - status
+  - locate
+  - clean_spot
+  - fan_speed
+  - send_command
+command_topic: "valetudo/livingroom/command"
+state_topic: "valetudo/livingroom/state"
+set_fan_speed_topic: "valetudo/livingroom/set_fan_speed"
+fan_speed_list:
+  - min
+  - medium
+  - high
+  - max
+  - mop
+send_command_topic: "valetudo/livingroom/custom_command"
+json_attributes_topic: "valetudo/livingroom/attributes"

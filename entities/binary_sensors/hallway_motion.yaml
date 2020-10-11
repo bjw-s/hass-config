@@ -1,0 +1,12 @@
+---
+platform: template
+sensors:
+  hallway_motion:
+    friendly_name: "Hallway - Motion"
+    value_template:  >
+      {{- 
+        states('binary_sensor.hallway_motion_1')  == 'on'
+        or 
+        states('binary_sensor.hallway_motion_2')  == 'on'
+      -}}
+    device_class: motion

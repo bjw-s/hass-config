@@ -1,0 +1,10 @@
+---
+platform: template
+sensors:
+  living_room_media_playing:
+    value_template: >
+      {{- 
+        states('media_player.living_room_nvidia_shield') == 'playing'
+        or
+        states('sensor.living_room_current_harmony_activity') == 'Play Switch'
+      -}}

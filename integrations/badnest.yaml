@@ -1,0 +1,13 @@
+---
+# A bad Nest integration that uses the web api to work after Works with Nest was shut down
+#
+# https://github.com/mattsch/badnest
+#
+
+badnest:
+  issue_token: !secret nest_issue_token
+  cookie: !secret nest_cookie
+
+climate:
+  - platform: badnest
+    scan_interval: 10

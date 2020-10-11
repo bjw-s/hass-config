@@ -1,0 +1,6 @@
+---
+platform: group
+name: Study
+entities:
+  - light.study_front_ceiling
+  - light.study_rear_ceiling

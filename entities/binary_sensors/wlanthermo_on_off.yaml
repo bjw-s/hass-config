@@ -1,0 +1,12 @@
+---
+platform: template
+sensors:
+  wlanthermo_on_off:
+    friendly_name: 'WLANThermo On/Off'
+    device_class: power
+    value_template: >
+      {{-
+        states.sensor.wlanthermo_battery_level.state != "unknown"
+        and
+        states.sensor.wlanthermo_battery_level.state != "unavailable"
+      -}}

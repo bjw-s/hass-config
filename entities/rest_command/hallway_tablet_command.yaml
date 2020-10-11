@@ -1,0 +1,3 @@
+---
+hallway_tablet_command:
+  url: !secret hallway_tablet_command_url

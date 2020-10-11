@@ -1,0 +1,3 @@
+---
+hallway_tablet_setvolume:
+  url: !secret hallway_tablet_setvolume_url

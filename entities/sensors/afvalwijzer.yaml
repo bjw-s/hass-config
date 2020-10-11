@@ -1,0 +1,6 @@
+---
+platform: afvalwijzer # Required
+provider: mijnafvalwijzer # Optional - mijnafvalwijzer (default) or afvalstoffendienstkalender
+api_token: !secret afvalwijzer_token
+postal_code: !env_var SECRET_HOME_POSTALCODE
+street_number: !env_var SECRET_HOME_HOUSENUMBER

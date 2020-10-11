@@ -1,0 +1,22 @@
+---
+platform: template
+sensors:
+  is_dark_living_room:
+    icon_template: >
+      {% set is_dark_lux = (states('input_number.is_dark_lux_living_room') | float) %}
+      {%- if states('light.living_room_floor_lamp') == "on" -%}
+        {% set is_dark_lux = is_dark_lux + 10 %}
+      {%- endif -%}
+      {%- if (states('sensor.living_room_light_level') | float) < is_dark_lux -%}
+        mdi:brightness-4
+      {%- else -%}
+        mdi:brightness-5
+      {%- endif -%}
+    value_template: >
+      {% set is_dark_lux = (states('input_number.is_dark_lux_living_room') | float) %}
+      {%- if states('light.living_room_floor_lamp') == "on" -%}
+        {% set is_dark_lux = is_dark_lux + 10 %}
+      {%- endif -%}
+      {{
+        (states('sensor.living_room_light_level') | float) < is_dark_lux
+      }}

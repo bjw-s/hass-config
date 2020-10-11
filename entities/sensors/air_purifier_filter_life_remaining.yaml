@@ -1,0 +1,7 @@
+---
+platform: template
+sensors:
+  air_purifier_filter_life_remaining:
+    friendly_name: 'Air Purifier Filter Life Remaining'
+    value_template: '{{ states.fan.air_purifier.attributes.filter_life_remaining }}'
+    unit_of_measurement: '%'

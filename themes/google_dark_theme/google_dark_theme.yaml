@@ -1,0 +1,216 @@
+# Theme based on Google app dark theme
+# Original Creator: Juan - @juanmtech
+# Repository: https://github.com/JuanMTech/google_dark_theme
+
+Google Dark Theme:
+  card-mod-theme: Google Dark Theme
+  card-mod-root-yaml: |
+    paper-tabs$: |
+      .not-visible {
+        display: none;
+      }
+      /*Uncomment this if you want the header on the bottom
+      #selectionBar {
+        bottom: unset !important;
+      }
+      */
+    ha-app-layout$: |
+      /* This corrects top padding for the view. */
+      #contentContainer {
+        /* Change this to 0px if you want the header on the bottom */
+        padding-top: 48px !important;
+      }
+    ha-button-menu$mwc-menu$mwc-menu-surface$: |
+      .mdc-menu-surface {
+        margin: 10px;
+        box-shadow: var(--ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12));
+      }
+    .: |
+      /* This sets the theme background. */
+      ha-app-layout {
+        background-image: url("/local/images/lowpoly-dark.svg");
+        background-size: cover;
+      }
+      /* This hides the unused portion of the header. */
+      app-toolbar {
+        height: 0;
+      }
+      /* This forces background-color and text-color. */
+      .edit-mode, app-header, app-toolbar {
+        background-color: var(--primary-background-color) !important;
+        color: var(--primary-text-color) !important;
+      }
+      /* Uncomment this if you want the header on the bottom
+      app-header {
+        top: calc(100vh - 60px) !important;
+        transform: unset !important;
+      }
+      */
+      /* This gives the header in edit mode a different look from the standard header. */
+      app-header.edit-mode {
+        border-bottom: 2px var(--primary-color) solid;
+        padding-bottom: 10px;
+      }
+      /* Make the color of the plus white instead of black. */
+      #add-view ha-svg-icon {
+        color: #EEE !important;
+      }
+      /* Bring voice button back down */
+      app-toolbar:not([class="edit-mode"]) mwc-icon-button[label] {
+        top: 0;
+        right: calc(48px * 1);
+        z-index: 2;
+        position: absolute;
+      }
+      /* Bring help button back in */
+      a[href="https://www.home-assistant.io/lovelace/"] > mwc-icon-button {
+        right: calc(48px * 2);
+        position: absolute;
+        z-index: 2;
+      }
+      /* Bring close button back in */
+      mwc-icon-button[title="Close"] {
+        top: 0;
+        left: 0;
+        position: absolute;
+        z-index: 2;
+      }
+      /* Bring add view button back in */
+      mwc-icon-button#add-view {
+        position: fixed;
+        right: 48px;
+      }
+      /* Bring edit UI overflow menu back in */
+      ha-button-menu {
+        {% if user == "Tablet Hallway" or user == "Tablet Garage" %}
+        display: none !important;
+        {% else %}
+        top: 0;
+        right: 0;
+        z-index: 2;
+        position: absolute;
+        {% endif %}
+      }
+      /* Hide the title */
+      app-toolbar > [main-title] {
+        display: none;
+      }
+      /* Hide buttons that are taking up space, but invisible */
+      menu-button[style="visibility: hidden;"] {
+        display: none;
+      }
+      /* Bring sidebar button back in */
+      ha-menu-button {
+        z-index: 2;
+        top: 24px;
+      }
+      /* Set margin on left to be smaller,
+      and set the bar color to be the primary color
+      instead of white */
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--primary-color) !important;
+        margin-left: 48px !important;
+      }
+      /* When not in edit mode, shrink the left margin */
+      app-toolbar:not(.edit-mode) > div > paper-tabs {
+        margin-left: 6px !important;
+      }
+      /* Color selected tabs */
+      paper-tab[aria-selected="true"] > ha-icon {
+        color: var(--primary-color) !important;
+      }
+      paper-tab[aria-selected="true"] {
+        color: var(--primary-color) !important;
+      }
+      /* Styles for mobile */
+      @media (orientation: portrait) {
+        /* Hide sidebar button and keep room for the overflow menu button */
+        paper-tabs {
+          margin-left: 5px !important;
+          margin-right: 48px !important;
+        }
+        /* Hide voice button */
+        mwc-icon-button[label="Start conversation"] {
+          display: none !important;
+        }
+        /* Hide sidebar button */
+        ha-menu-button {
+          display: none !important;
+        }
+      }
+      /* Make help button have contrast */
+      app-toolbar a {
+        color: var(--primary-text-color) !important;
+      }
+  
+  # Header:
+  app-header-background-color: rgb(23, 23, 23)
+  app-header-text-color: rgb(198, 203, 210)
+  # Main Interface Colors
+  primary-color: rgb(138, 180, 248)
+  light-primary-color: var(--primary-color)
+  primary-background-color: rgb(23, 23, 23)
+  secondary-background-color: rgb(32, 33, 36)
+  divider-color: var(--primary-background-color)
+  accent-color: rgb(138, 180, 248)
+  # Text
+  primary-text-color: rgb(242, 242, 242)
+  secondary-text-color: rgb(166, 166, 166)
+  text-primary-color: var(--primary-text-color)
+  disabled-text-color: rgba(184, 190, 199, 0.4)
+  # Sidebar Menu
+  sidebar-icon-color: rgb(169, 177, 188)
+  sidebar-text-color: rgb(198, 203, 210)
+  sidebar-background-color: rgb(32, 33, 36)
+  sidebar-selected-background-color: var(--primary-background-color)
+  sidebar-selected-icon-color: rgb(138, 180, 248)
+  sidebar-selected-text-color: var(--sidebar-selected-icon-color)
+  # Buttons
+  paper-item-icon-color: rgb(169, 177, 188)
+  paper-item-icon-active-color: rgb(138, 180, 248)
+  # States and Badges
+  state-icon-color: rgb(138, 180, 248)
+  state-icon-active-color: rgb(169, 177, 188)
+  state-icon-unavailable-color: var(--disabled-text-color)
+  # Sliders
+  paper-slider-knob-color: rgb(138, 180, 248)
+  paper-slider-knob-start-color: var(--paper-slider-knob-color)
+  paper-slider-pin-color: var(--paper-slider-knob-color)
+  paper-slider-active-color: var(--paper-slider-knob-color)
+  paper-slider-secondary-color: var(--light-primary-color)
+  # Labels
+  label-badge-background-color: rgb(32, 33, 36)
+  label-badge-text-color: rgb(198, 203, 210)
+  label-badge-red: rgb(208, 101, 104)
+  label-badge-green: rgb(128, 200, 132)
+  label-badge-blue: rgb(138, 180, 248)
+  label-badge-yellow: rgb(223, 194, 113)
+  label-badge-gray: rgb(95, 98, 103)
+  # Cards
+  card-background-color: rgb(32, 33, 36)
+  ha-card-border-radius: "10px"
+  ha-card-box-shadow: 1px 1px 5px 0px rgb(12, 12, 14)
+  paper-dialog-background-color: var(--card-background-color)
+  paper-listbox-background-color: var(--card-background-color)
+  paper-card-background-color: var(--card-background-color)
+  # Switches
+  switch-checked-button-color: rgb(138, 180, 248)
+  switch-checked-track-color: rgb(138, 180, 248)
+  switch-unchecked-button-color: rgb(172, 176, 185)
+  switch-unchecked-track-color: rgb(154, 160, 166)
+  # Toggles
+  paper-toggle-button-checked-button-color: var(--switch-checked-button-color)
+  paper-toggle-button-checked-bar-color: var(--switch-checked-track-color)
+  paper-toggle-button-unchecked-button-color: var(--switch-unchecked-button-color)
+  paper-toggle-button-unchecked-bar-color: var(--switch-unchecked-track-color)
+  # Table
+  table-row-background-color: var(--primary-background-color)
+  table-row-alternative-background-color: var(--secondary-background-color)
+  data-table-background-color: var(--primary-background-color)
+  mdc-checkbox-unchecked-color: rgb(169, 177, 188)
+  # Dropdowns
+  material-background-color: var(--secondary-background-color)
+  material-secondary-background-color: var(--primary-background-color)
+  mdc-theme-surface: var(--primary-background-color)
+  # Pre/Code
+  markdown-code-background-color: rgb(23, 23, 23)

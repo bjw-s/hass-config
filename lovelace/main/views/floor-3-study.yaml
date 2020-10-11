@@ -1,0 +1,120 @@
+title: Study
+icon: 'mdi:laptop'
+id: study
+path: study
+panel: true
+badges: []
+cards:
+  - type: 'custom:layout-card'
+    layout: horizontal
+    max_columns: 3
+    justify_content: start
+    cards:
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Status
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Dark?
+                entity: binary_sensor.is_dark_study
+                tap_action: !include ../popups/light_levels.yaml
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Light level
+                icon: 'mdi:theme-light-dark'
+                entity: sensor.study_light_level
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Motion
+                entity: binary_sensor.study_motion
+              
+              - type: 'custom:button-card'
+                template: default_button
+                name: Temperature
+                entity: sensor.study_temperature
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Humidity
+                entity: sensor.study_humidity
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Audio / Video
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                entity: media_player.studeerkamer
+                name: Sonos
+                icon: 'mdi:speaker'
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Devices
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                entity: switch.multi_purpose
+                name: Tower fan
+                icon: 'mdi:fan'
+
+      - break
+
+      - break
+
+      - type: 'custom:layout-card'
+        layout: vertical
+        column_width: 98%
+        cards:
+          - type: 'custom:button-card'
+            template: header
+            name: Lights
+
+          - type: 'custom:layout-card'
+            layout: horizontal
+            column_width: 121px
+            justify_content: start
+            cards:
+              - type: 'custom:button-card'
+                template: default_button
+                name: Front ceiling
+                entity: light.study_front_ceiling
+                hold_action: !include ../popups/floor-3-study_light_front.yaml
+
+              - type: 'custom:button-card'
+                template: default_button
+                name: Rear ceiling
+                entity: light.study_rear_ceiling
+                hold_action: !include ../popups/floor-3-study_light_rear.yaml

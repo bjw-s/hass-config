@@ -1,0 +1,10 @@
+---
+platform: "mqtt"
+name: "Living Room - Remote"
+
+availability_topic: zigbee2mqtt/bridge/state
+icon: mdi:gesture-double-tap
+json_attributes_topic: zigbee2mqtt/Living Room - Remote
+state_topic: zigbee2mqtt/Living Room - Remote
+unique_id: 0x0017880110493f0b_action_zigbee2mqtt
+value_template: "{{ value_json.action }}"

@@ -1,0 +1,41 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: 'Front ceiling'
+  deviceID: this
+  large: false
+  card:
+    type: 'vertical-stack'
+    cards:
+      - type: 'custom:button-card'
+        template: header
+        name: Brightness
+
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+            box-shadow: none;
+          }
+        entities:
+          - entity: light.study_ceiling_front
+            type: custom:slider-entity-row
+            name: Ceiling front
+            hide_when_off: true
+
+      - type: 'custom:button-card'
+        template: header
+        name: Scenes
+
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+            box-shadow: none;
+          }
+        entities:
+          - entity: scene.study_lights_front_full_brightness
+            name: Full brightness
+
+          - entity: scene.study_lights_front_dimmed
+            name: Dimmed

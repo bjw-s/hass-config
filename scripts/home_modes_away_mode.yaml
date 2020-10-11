@@ -1,0 +1,43 @@
+---
+home_modes_away_mode:
+  sequence:
+    # Turn off lights
+    - service: scene.turn_on
+      entity_id: scene.kitchen_lights_off
+
+    - service: light.turn_off
+      entity_id: light.living_room
+
+    - service: light.turn_off
+      entity_id: light.dining_area
+
+    - service: light.turn_off
+      entity_id: light.hallway
+
+    - service: light.turn_off
+      entity_id: light.bedroom
+
+    - service: light.turn_off
+      entity_id: light.hallway_upstairs
+
+    - service: light.turn_off
+      entity_id: light.hallway_study
+
+    - service: light.turn_off
+      entity_id: light.study
+
+    # A/V
+    - service: switch.turn_off
+      entity_id: switch.living_room_subwoofer
+
+    - service: media_player.media_stop
+      entity_id: media_player.keuken
+
+    - service: media_player.media_stop
+      entity_id: media_player.studeerkamer
+
+    - service: media_player.media_stop
+      entity_id: media_player.woonkamer
+
+    - service: script.turn_on
+      entity_id: script.living_room_harmony_poweroff

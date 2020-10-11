@@ -1,0 +1,8 @@
+---
+platform: group
+name: Living Area
+entities:
+  - light.dining_area_ceiling
+  - light.living_room_standing_lamp
+  - light.living_room_hue_go
+  - light.living_room_hue_go_tv

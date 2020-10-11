@@ -1,0 +1,6 @@
+---
+name: Hallway - Lights - Dimmed
+entities:
+  light.hallway_ceiling:
+    state: 'on'
+    brightness: 75

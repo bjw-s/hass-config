@@ -1,0 +1,8 @@
+---
+kitchen_automatic_coffee_schedule:
+  name: Automatic coffee schedule
+  options:
+    - 'Off'
+    - Weekend
+    - Always
+  icon: mdi:coffee-maker

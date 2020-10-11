@@ -1,0 +1,18 @@
+---
+platform: template
+sensors:
+  bedroom_shock_sensor_right_motion:
+    friendly_name: "name: Bedroom - Shock Sensor Right Motion"
+    value_template:  >
+      {% set value = states('sensor.bedroom_shock_sensor_right_strength') %}
+      {{-
+        states('sensor.bedroom_shock_sensor_right')  == 'tilt'
+        or
+        states('sensor.bedroom_shock_sensor_right')  == 'vibration'
+        or
+        (
+          states('sensor.bedroom_shock_sensor_right')  == ''
+          and
+          ((as_timestamp(now()) - as_timestamp(states.sensor.bedroom_shock_sensor_right.last_changed)) | round(0)) < 300
+        )
+      -}}

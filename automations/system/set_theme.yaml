@@ -1,0 +1,13 @@
+---
+id: set_theme
+alias: set theme
+trigger:
+  - platform: state
+    entity_id: input_boolean.maintenance_enabled
+  - platform: state
+    entity_id: binary_sensor.is_dark_driveway
+action:
+  - service: script.turn_on
+    data:
+      entity_id:
+        script.set_theme

@@ -1,0 +1,9 @@
+---
+# The webostv platform allows you to control a LG webOS Smart TV.
+#
+# https://www.home-assistant.io/integrations/webostv/
+#
+
+webostv:
+    name: Living Room - LG TV
+    host: !env_var SECRET_LG_TV_HOST
