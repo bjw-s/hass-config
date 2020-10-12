@@ -7,6 +7,9 @@
 - url: /hacsfiles/button-card/button-card.js
   type: module
 
+- url: /hacsfiles/kiosk-mode/kiosk-mode.js
+  type: js
+
 - url: /hacsfiles/lovelace-layout-card/layout-card.js
   type: module
 

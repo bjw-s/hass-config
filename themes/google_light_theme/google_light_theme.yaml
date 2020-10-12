@@ -82,14 +82,10 @@ Google Light Theme:
       }
       /* Bring edit UI overflow menu back in */
       ha-button-menu {
-        {% if user == "Tablet Hallway" or user == "Tablet Garage" %}
-        display: none !important;
-        {% else %}
         top: 0;
         right: 0;
         z-index: 2;
         position: absolute;
-        {% endif %}
       }
       /* Hide the title */
       app-toolbar > [main-title] {
