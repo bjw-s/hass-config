@@ -1,7 +1,7 @@
 ---
 platform: rest
 name: Hallway Tablet Device Info
-resource: !secret hallway_tablet_deviceinfo_url
+resource: !env_var SECRET_HALLWAY_TABLET_URL_DEVICEINFO
 scan_interval: 15
 json_attributes:
 - screenBrightness

@@ -1,3 +1,3 @@
 ---
 hallway_tablet_setvolume:
-  url: !secret hallway_tablet_setvolume_url
+  url: !env_var SECRET_HALLWAY_TABLET_URL_SETVOLUME

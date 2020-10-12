@@ -5,8 +5,8 @@
 #
 
 badnest:
-  issue_token: !secret nest_issue_token
-  cookie: !secret nest_cookie
+  issue_token: !env_var SECRET_NEST_ISSUE_TOKEN
+  cookie: !env_var SECRET_NEST_COOKIE
 
 climate:
   - platform: badnest

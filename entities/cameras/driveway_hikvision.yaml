@@ -1,7 +1,7 @@
 ---
 platform: generic
 name: driveway_front_door
-still_image_url: !env_var SECRET_DRIVEWAY_FRONT_DOOR_CAMERA_IMAGE_URL
-stream_source: !env_var SECRET_DRIVEWAY_FRONT_DOOR_CAMERA_STREAM_URL
-username: !env_var SECRET_DRIVEWAY_FRONT_DOOR_CAMERA_USERNAME
-password: !env_var SECRET_DRIVEWAY_FRONT_DOOR_CAMERA_PASSWORD
+still_image_url: !env_var SECRET_CAMERA_FRONT_DOOR_IMAGE_URL
+stream_source: !env_var SECRET_CAMERA_FRONT_DOOR_STREAM_URL
+username: !env_var SECRET_CAMERA_FRONT_DOOR_USERNAME
+password: !env_var SECRET_CAMERA_FRONT_DOOR_PASSWORD

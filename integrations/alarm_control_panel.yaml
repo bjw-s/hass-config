@@ -14,7 +14,7 @@ alarm_control_panel:
       - name: Man-Yie
         code: !env_var SECRET_ALARM_CODE_MY
       - name: Ouders Man-Yie
-        code: !env_var SECRET_ALARM_CODE_OUDERS_MY
+        code: !env_var SECRET_ALARM_CODE_MY_PARENTS
       - name: Automation
         code: !env_var SECRET_ALARM_CODE_AUTOMATION
     disarmed:
