@@ -1,0 +1,27 @@
+---
+  id: bedroom_nightstand_bernd_toggle
+  alias: Bedroom - Nightstand Bernd toggle
+  trigger:
+    - platform: state
+      entity_id: sensor.bedroom_nightstand_manyie_remote
+      to: arrow_right_click
+    - platform: state
+      entity_id: sensor.bedroom_nightstand_bernd_remote
+      to: toggle
+  action:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: light.bedroom_nightstand_bernd
+          state: 'off'
+        sequence:
+          - scene: scene.bedroom_lights_nightstand_bernd_dimmed
+      - conditions:
+        - condition: state
+          entity_id: light.bedroom_nightstand_bernd
+          state: 'on'
+        sequence:
+          - scene: scene.bedroom_lights_nightstand_bernd_off
+  
+      # Default
+      default: []
