@@ -1,3 +1,0 @@
----
-garage_tablet_command:
-  url: !env_var SECRET_GARAGE_TABLET_URL_COMMAND

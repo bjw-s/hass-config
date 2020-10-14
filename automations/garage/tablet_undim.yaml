@@ -3,7 +3,7 @@ id: garage_tablet_undim
 alias: Garage - Tablet undim
 trigger:
   - platform: time
-    at: "06:00"
+    at: "06:00:00"
 action:
   - service: light.turn_on
     data:

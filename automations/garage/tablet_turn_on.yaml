@@ -1,6 +1,7 @@
 ---
 id: garage_tablet_turn_on
 alias: Garage - Tablet turn on
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: binary_sensor.garage_door

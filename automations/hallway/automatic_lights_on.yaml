@@ -1,0 +1,39 @@
+---
+id: hallway_automatic_lights_on
+alias: Hallway - Automatic lights on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.hallway_motion
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.hallway_front_door
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.living_room_door
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_hallway
+      state: 'on'
+action:
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: light.hallway_ceiling
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.is_dark_hallway
+          state: 'on'
+      sequence:
+        - service: automation.trigger
+          data:
+            entity_id: automation.hallway_ceiling_light_toggle
+
+    default: []
+
+  - service: timer.start
+    data:
+      entity_id: timer.automatic_lights_hallway
+      duration: "{{ (states('input_number.automatic_lights_duration_hallway') | float) * 60 }}"

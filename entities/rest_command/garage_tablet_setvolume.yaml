@@ -1,3 +1,0 @@
----
-garage_tablet_setvolume:
-  url: !env_var SECRET_GARAGE_TABLET_URL_SETVOLUME

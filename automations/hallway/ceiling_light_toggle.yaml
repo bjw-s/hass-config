@@ -1,0 +1,37 @@
+---
+id: hallway_ceiling_light_toggle
+alias: Hallway - Ceiling light toggle
+trigger:
+  - platform: state
+    entity_id: sensor.hallway_switch
+    to: single
+action:
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: light.hallway_ceiling
+          state: 'off'
+        - condition: time
+          after: "20:00:00"
+          before: "08:00:00"
+      sequence:
+        - scene: scene.hallway_lights_dimmed
+    - conditions:
+        - condition: state
+          entity_id: light.hallway_ceiling
+          state: 'off'
+      sequence:
+        - scene: scene.hallway_lights_on
+    - conditions:
+        - condition: state
+          entity_id: light.hallway_ceiling
+          state: 'on'
+      sequence:
+        - scene: scene.hallway_lights_off
+
+    # Default
+    default: []
+
+  - service: timer.cancel
+    data:
+      entity_id: timer.automatic_lights_hallway

@@ -3,7 +3,7 @@ id: garage_tablet_dim
 alias: Garage - Tablet dim
 trigger:
   - platform: time
-    at: "20:00"
+    at: "20:00:00"
 action:
   - service: light.turn_on
     data:

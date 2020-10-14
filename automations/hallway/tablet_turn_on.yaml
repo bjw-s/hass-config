@@ -1,6 +1,7 @@
 ---
 id: hallway_tablet_turn_on
 alias: Hallway - Tablet turn on
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: binary_sensor.living_room_door
