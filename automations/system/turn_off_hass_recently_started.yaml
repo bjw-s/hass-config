@@ -1,6 +1,6 @@
 ---
-id: turn_off_hass_recently_started
-alias: turn off hass recently started
+id: system_turn_off_hass_recently_started
+alias: System - Turn off hass recently started
 trigger:
   platform: homeassistant
   event: start

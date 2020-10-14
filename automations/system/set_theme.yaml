@@ -1,6 +1,6 @@
 ---
-id: set_theme
-alias: set theme
+id: system_set_theme
+alias: System - Set theme
 trigger:
   - platform: state
     entity_id: input_boolean.maintenance_enabled
