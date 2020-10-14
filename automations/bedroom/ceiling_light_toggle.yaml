@@ -1,30 +1,30 @@
 ---
-  id: bedroom_ceiling_light_toggle
-  alias: Bedroom - Ceiling light toggle
-  trigger:
-    - platform: state
-      entity_id: sensor.bedroom_switch
-      to: single
-    - platform: state
-      entity_id: sensor.bedroom_nightstand_manyie_remote
-      to: arrow_left_click
-    - platform: state
-      entity_id: sensor.bedroom_nightstand_bernd_remote
-      to: arrow_right_click
-  action:
-    - choose:
-      - conditions:
-        - condition: state
-          entity_id: light.bedroom_ceiling
-          state: 'off'
-        sequence:
-          - scene: scene.bedroom_lights_ceiling_on
-      - conditions:
-        - condition: state
-          entity_id: light.bedroom_ceiling
-          state: 'on'
-        sequence:
-          - scene: scene.bedroom_lights_ceiling_off
-  
-      # Default
-      default: []
+id: bedroom_ceiling_light_toggle
+alias: Bedroom - Ceiling light toggle
+trigger:
+  - platform: state
+    entity_id: sensor.bedroom_switch
+    to: single
+  - platform: state
+    entity_id: sensor.bedroom_nightstand_manyie_remote
+    to: arrow_left_click
+  - platform: state
+    entity_id: sensor.bedroom_nightstand_bernd_remote
+    to: arrow_right_click
+action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.bedroom_ceiling
+        state: 'off'
+      sequence:
+        - scene: scene.bedroom_lights_ceiling_on
+    - conditions:
+      - condition: state
+        entity_id: light.bedroom_ceiling
+        state: 'on'
+      sequence:
+        - scene: scene.bedroom_lights_ceiling_off
+
+    # Default
+    default: []
