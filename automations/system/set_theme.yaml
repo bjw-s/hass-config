@@ -1,13 +1,30 @@
 ---
 id: system_set_theme
 alias: System - Set theme
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: input_boolean.maintenance_enabled
   - platform: state
     entity_id: binary_sensor.is_dark_driveway
 action:
-  - service: script.turn_on
+  - service: frontend.set_theme
     data:
-      entity_id:
-        script.set_theme
+      name: |
+        {%- if is_state("input_boolean.maintenance_enabled", "on") -%}
+          darkorange
+        {%- elif is_state("binary_sensor.is_dark_driveway", "on") -%}
+          Google Dark Theme
+        {%- else -%}
+          Google Light Theme
+        {%- endif -%}
+      mode: light
+  - service: frontend.set_theme
+    data:
+      name: |
+        {%- if is_state("input_boolean.maintenance_enabled", "on") -%}
+          darkorange
+        {%- else -%}
+          Google Dark Theme
+        {%- endif -%}
+      mode: dark
