@@ -209,24 +209,3 @@ Google Light Theme:
   mdc-theme-surface: var(--paper-card-background-color)
   # Pre/Code
   markdown-code-background-color: rgb(242, 242, 242)
-
-  # # Card-Mod stuff
-  # card-mod-theme: Google Light Theme
-  # card-mod-root: |
-  #   ha-app-layout {
-  #     background-image: url("/local/images/lowpoly-light.svg");
-  #     background-size: cover;
-  #   }
-  #   app-toolbar {
-  #     display: none;
-  #   }
-
-  #   # Kiosk mode for Tablets
-  #   {% if user == "Tablet Hallway" or user == "Tablet Garage" %}
-  #   app-header {
-  #     display: none;
-  #   }
-  #   app-drawer {
-  #     display: none;
-  #   }
-  #   {% endif %}
