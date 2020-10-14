@@ -1,0 +1,24 @@
+---
+id: hallway_tablet_turn_on
+alias: Hallway - Tablet turn on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_door
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.hallway_front_door
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.hallway_motion
+    to: 'on'
+  - platform: state
+    entity_id: input_boolean.home_modes_away_mode
+    from: 'on'
+    to: 'off'
+action:
+  - service: light.turn_on
+    data:
+      entity_id: light.hallway_tablet
+  - service: switch.turn_on
+    data:
+      entity_id: switch.hallway_tablet_screensaver

@@ -1,0 +1,11 @@
+---
+id: hallway_tablet_undim
+alias: Hallway - Tablet undim
+trigger:
+  - platform: time
+    at: "06:00"
+action:
+  - service: light.turn_on
+    data:
+      entity_id: light.hallway_tablet
+      brightness_pct: 80

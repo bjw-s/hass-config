@@ -1,0 +1,11 @@
+---
+id: garage_tablet_dim
+alias: Garage - Tablet dim
+trigger:
+  - platform: time
+    at: "20:00"
+action:
+  - service: light.turn_on
+    data:
+      entity_id: light.garage_tablet
+      brightness_pct: 50

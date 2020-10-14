@@ -1,0 +1,24 @@
+---
+id: garage_tablet_turn_on
+alias: Garage - Tablet turn on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.garage_door
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.garage_entry_door
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.garage_motion
+    to: 'on'
+  - platform: state
+    entity_id: input_boolean.home_modes_away_mode
+    from: 'on'
+    to: 'off'
+action:
+  - service: light.turn_on
+    data:
+      entity_id: light.garage_tablet
+  - service: switch.turn_on
+    data:
+      entity_id: switch.garage_tablet_screensaver
