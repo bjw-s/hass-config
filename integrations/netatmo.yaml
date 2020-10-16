@@ -6,5 +6,5 @@
 #
 
 netatmo:
-  client_id: 5f74531196d696374d223f77
-  client_secret: TMlCT1QSTq52eyaXS1qiJGmhaX2HawZCTlGjDlVW5JLUw
+  client_id: !env_var SECRET_NETATMO_CLIENT_ID
+  client_secret: !env_var SECRET_NETATMO_CLIENT_SECRET
