@@ -1,0 +1,19 @@
+---
+id: backyard_automatic_lights_off
+alias: Backyard - Automatic lights off
+trigger:
+  - platform: time
+    at: "23:00"
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_backyard
+      state: 'on'
+    - condition: state
+      entity_id: light.backyard
+      state: 'on'
+action:
+  - service: automation.trigger
+    data:
+      entity_id: automation.backyard_lights_off

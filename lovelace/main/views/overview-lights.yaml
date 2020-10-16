@@ -155,10 +155,18 @@ cards:
         name: Manual mode
 
   - type: entities
+    title: Backyard
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.automatic_lights_backyard
+        name: Automatic lights?
+
+      - entity: input_boolean.backyard_lights_manual_mode
+        name: Manual mode
+
+  - type: entities
     title: Other
     show_header_toggle: false
     entities:
-      - entity: input_boolean.automatic_lights_backyard
-        name: Backyard
       - entity: input_boolean.automatic_lights_driveway
         name: Driveway

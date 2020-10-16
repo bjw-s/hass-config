@@ -61,22 +61,6 @@ cards:
 
               - type: 'custom:button-card'
                 template: default_button
-                name: Pool pump
-                entity: switch.backyard_shed
-                state:
-                  - icon: 'mdi:water-pump'
-                    value: 'on'
-                  - icon: 'mdi:water-pump-off'
-                    value: 'off'
-
-              - type: 'custom:button-card'
-                template: default_locked
-                name: Automatic?
-                icon: 'mdi:check'
-                entity: input_boolean.backyard_automatic_pool_pump
-
-              - type: 'custom:button-card'
-                template: default_button
                 name: WLANThermo
                 icon: 'mdi:grill'
                 entity: binary_sensor.wlanthermo_on_off
@@ -90,56 +74,24 @@ cards:
         cards:
           - type: 'custom:button-card'
             template: header
-            name: Scenes
-
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: scene_button
-                name: Backyard on
-                variables:
-                  script: script.scene_backyard_lights_on
-
-              - type: 'custom:button-card'
-                template: scene_button
-                name: Backyard off
-                variables:
-                  script: script.scene_backyard_lights_off
-
-      - break
-
-      - break
-
-      - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
-        cards:
-          - type: 'custom:button-card'
-            template: header
             name: Lights
+            tap_action: !include ../popups/floor-1-backyard_lights.yaml
 
           - type: 'custom:layout-card'
             layout: horizontal
             column_width: 121px
             justify_content: start
             cards:
-              - type: 'custom:button-card'
-                template: default_locked
-                name: Automatic?
-                icon: 'mdi:check'
-                entity: input_boolean.automatic_lights_backyard
-
               - type: 'custom:button-card'
                 template: default_button
                 name: Wall
                 icon: 'mdi:coach-lamp'
                 entity: light.backyard_wall
+                hold_action: !include ../popups/floor-1-backyard_lights.yaml
 
               - type: 'custom:button-card'
                 template: default_button
                 name: Other
                 icon: 'mdi:patio-heater'
                 entity: light.backyard_other
+                hold_action: !include ../popups/floor-1-backyard_lights.yaml

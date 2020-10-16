@@ -1,0 +1,46 @@
+action: call-service
+service: browser_mod.popup
+service_data:
+  title: 'Backyard'
+  deviceID: this
+  large: false
+  card:
+    type: 'vertical-stack'
+    cards:
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+              box-shadow: none;
+            }
+        entities:
+          - type: custom:text-divider-row
+            text: Settings
+
+          - entity: binary_sensor.automatic_lights_backyard
+            name: Automatic?
+
+          - entity: input_boolean.backyard_lights_manual_mode
+            name: Manual mode
+
+          - type: custom:text-divider-row
+            text: Brightness
+
+          - entity: light.backyard_wall
+            type: custom:slider-entity-row
+            name: Wall
+            hide_when_off: true
+
+          - entity: light.backyard_wall
+            type: custom:slider-entity-row
+            name: Other
+            hide_when_off: true
+
+          - type: custom:text-divider-row
+            text: Scenes
+
+          - entity: scene.backyard_lights_on
+            name: 'On'
+
+          - entity: scene.backyard_lights_off
+            name: 'Off'

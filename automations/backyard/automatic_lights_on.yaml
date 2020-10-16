@@ -1,0 +1,21 @@
+---
+id: backyard_automatic_lights_on
+alias: Backyard - Automatic lights on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.is_dusk_driveway
+    from: 'off'
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_backyard
+      state: 'on'
+    - condition: state
+      entity_id: light.backyard
+      state: 'off'
+action:
+  - service: automation.trigger
+    data:
+      entity_id: automation.backyard_lights_on

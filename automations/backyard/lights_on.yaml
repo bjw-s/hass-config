@@ -1,0 +1,10 @@
+---
+id: backyard_lights_on
+alias: Backyard - Lights on
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: sensor.utility_room_switch
+    to: recall_scene_3
+action:
+  - scene: scene.backyard_lights_on
