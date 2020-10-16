@@ -18,7 +18,7 @@ service_data:
             box-shadow: none;
           }
         entities:
-          - entity: light.study_ceiling_rear
+          - entity: light.study_rear_ceiling
             type: custom:slider-entity-row
             name: Ceiling rear
             hide_when_off: true

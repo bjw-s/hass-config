@@ -151,6 +151,17 @@ cards:
       - entity: binary_sensor.automatic_lights_study
         name: Automatic lights?
 
+      - entity: input_number.automatic_lights_duration_study
+        name: Duration
+
+      - type: conditional
+        conditions:
+          - entity: timer.automatic_lights_study
+            state_not: idle
+        row:
+          entity: timer.automatic_lights_study
+          name: Automatic duration
+
       - entity: input_boolean.study_lights_manual_mode
         name: Manual mode
 

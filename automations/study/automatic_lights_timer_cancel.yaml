@@ -1,0 +1,14 @@
+---
+id: study_automatic_lights_timer_cancel
+alias: Study - Automatic lights timer cancel
+trigger:
+  - platform: state
+    entity_id: light.hallway_study
+    to: 'off'
+  - platform: state
+    entity_id: binary_sensor.automatic_lights_study
+    to: 'off'
+action:
+  - service: timer.cancel
+    data:
+      entity_id: timer.automatic_lights_study

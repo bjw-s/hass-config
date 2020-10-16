@@ -18,7 +18,7 @@ service_data:
             box-shadow: none;
           }
         entities:
-          - entity: light.study_ceiling_front
+          - entity: light.study_front_ceiling
             type: custom:slider-entity-row
             name: Ceiling front
             hide_when_off: true

@@ -1,0 +1,21 @@
+---
+id: study_front_ceiling_light_toggle
+alias: Study - Front ceiling light toggle
+trigger:
+  - platform: state
+    entity_id: sensor.study_switch
+    to: right
+action:
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: light.study_front_ceiling
+          state: 'off'
+      sequence:
+        - scene: scene.study_lights_front_full_brightness
+    - conditions:
+        - condition: state
+          entity_id: light.study_front_ceiling
+          state: 'on'
+      sequence:
+        - scene: scene.study_lights_front_off

@@ -1,0 +1,27 @@
+---
+id: study_rear_ceiling_light_toggle
+alias: Study - Rear ceiling light toggle
+trigger:
+  - platform: state
+    entity_id: sensor.study_switch
+    to: left
+  - platform: state
+    entity_id: sensor.study_remote
+    to: on-press
+  - platform: state
+    entity_id: sensor.study_remote
+    to: off-press
+action:
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: light.study_rear_ceiling
+          state: 'off'
+      sequence:
+        - scene: scene.study_lights_rear_full_brightness
+    - conditions:
+        - condition: state
+          entity_id: light.study_rear_ceiling
+          state: 'on'
+      sequence:
+        - scene: scene.study_lights_rear_off

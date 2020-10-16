@@ -77,29 +77,6 @@ cards:
         cards:
           - type: 'custom:button-card'
             template: header
-            name: Devices
-
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
-                entity: switch.multi_purpose
-                name: Tower fan
-                icon: 'mdi:fan'
-
-      - break
-
-      - break
-
-      - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
-        cards:
-          - type: 'custom:button-card'
-            template: header
             name: Lights
 
           - type: 'custom:layout-card'

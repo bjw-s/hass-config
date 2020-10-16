@@ -1,0 +1,25 @@
+---
+id: study_automatic_lights_on
+alias: Study - Automatic lights on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.study_motion
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.is_dark_study
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_study
+      state: 'on'
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.study_lights_rear_full_brightness
+      transition: 2
+  - service: timer.start
+    data:
+      entity_id: timer.automatic_lights_study
+      duration: "{{ (states('input_number.automatic_lights_duration_study') | float) * 60 }}"

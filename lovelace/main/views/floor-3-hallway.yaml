@@ -24,12 +24,6 @@ cards:
             justify_content: start
             cards:
               - type: 'custom:button-card'
-                template: default_locked
-                name: Automatic?
-                icon: 'mdi:check'
-                entity: input_boolean.automatic_lights_hallway_study
-
-              - type: 'custom:button-card'
                 template: default_button
                 name: Ceiling
                 entity: light.hallway_study_ceiling

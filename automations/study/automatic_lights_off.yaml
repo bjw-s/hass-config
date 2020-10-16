@@ -1,0 +1,25 @@
+---
+id: study_automatic_lights_off
+alias: Study - Automatic lights off
+trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.automatic_lights_study
+  - platform: state
+    entity_id: binary_sensor.is_dark_study
+    to: 'off'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_study
+      state: 'on'
+    - condition: state
+      entity_id: light.study
+      state: 'on'
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.study_lights_rear_off
+      transition: 2
