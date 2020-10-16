@@ -1,0 +1,9 @@
+---
+platform: template
+sensors:
+  automatic_lights_hallway_study:
+    friendly_name: "Hallway Study - Automatic Lights"
+    value_template:  >
+      {{-
+        states('input_boolean.hallway_study_lights_manual_mode')  == 'off'
+      -}}

@@ -1,0 +1,28 @@
+---
+id: hallway_study_ceiling_light_toggle
+alias: Hallway Study - Ceiling light toggle
+trigger:
+  - platform: state
+    entity_id: sensor.hallway_study_switch
+    to: left
+  - platform: state
+    entity_id: sensor.hallway_study_switch
+    to: right
+action:
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: light.hallway_study
+          state: 'off'
+      sequence:
+        - service: automation.trigger
+          data:
+            entity_id: automation.hallway_study_ceiling_light_on
+    - conditions:
+        - condition: state
+          entity_id: light.hallway_study
+          state: 'on'
+      sequence:
+        - service: automation.trigger
+          data:
+            entity_id: automation.hallway_study_ceiling_light_off

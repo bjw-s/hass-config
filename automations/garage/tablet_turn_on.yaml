@@ -17,9 +17,6 @@ trigger:
     from: 'on'
     to: 'off'
 action:
-  - service: light.turn_on
-    data:
-      entity_id: light.garage_tablet
-  - service: switch.turn_on
+  - service: switch.turn_off
     data:
       entity_id: switch.garage_tablet_screensaver

@@ -13,7 +13,7 @@ condition:
       entity_id: binary_sensor.automatic_lights_hallway
       state: 'on'
     - condition: state
-      entity_id: light.hallway_ceiling
+      entity_id: light.hallway
       state: 'on'
 action:
   - scene: scene.hallway_lights_off

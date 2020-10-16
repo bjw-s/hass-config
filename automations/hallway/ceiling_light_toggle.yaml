@@ -1,6 +1,7 @@
 ---
 id: hallway_ceiling_light_toggle
 alias: Hallway - Ceiling light toggle
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: sensor.hallway_switch

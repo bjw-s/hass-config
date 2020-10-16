@@ -127,12 +127,22 @@ cards:
     title: Hallway study
     show_header_toggle: false
     entities:
-      - entity: input_boolean.automatic_lights_hallway_study
+      - entity: binary_sensor.automatic_lights_hallway_study
         name: Automatic lights?
+
       - entity: input_number.automatic_lights_duration_hallway_study
         name: Duration
-      - entity: timer.automatic_lights_hallway_study
-        name: Timer
+
+      - type: conditional
+        conditions:
+          - entity: timer.automatic_lights_hallway_study
+            state_not: idle
+        row:
+          entity: timer.automatic_lights_hallway_study
+          name: Automatic duration
+
+      - entity: input_boolean.hallway_study_lights_manual_mode
+        name: Manual mode
 
   - type: entities
     title: Study

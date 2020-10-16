@@ -1,6 +1,7 @@
 ---
 id: hallway_automatic_lights_on
 alias: Hallway - Automatic lights on
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: binary_sensor.hallway_motion
@@ -21,7 +22,7 @@ action:
   - choose:
     - conditions:
         - condition: state
-          entity_id: light.hallway_ceiling
+          entity_id: light.hallway
           state: 'off'
         - condition: state
           entity_id: binary_sensor.is_dark_hallway

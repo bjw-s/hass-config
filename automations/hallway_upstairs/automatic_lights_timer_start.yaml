@@ -1,0 +1,18 @@
+---
+id: hallway_upstairs_automatic_lights_timer_start
+alias: Hallway Upstairs - Automatic lights timer start
+trigger:
+  - platform: state
+    entity_id: light.hallway_upstairs
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_hallway_upstairs
+      state: 'on'
+action:
+  - service: timer.start
+    data:
+      entity_id: timer.automatic_lights_hallway_upstairs
+      duration: "{{ (states('input_number.automatic_lights_duration_hallway_upstairs') | float) * 60 }}"

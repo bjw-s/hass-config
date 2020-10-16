@@ -1,0 +1,13 @@
+---
+id: hallway_upstairs_ceiling_light_off
+alias: Hallway Upstairs - Ceiling light off
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: sensor.hallway_stairway_switch
+    to: recall_scene_2
+  - platform: state
+    entity_id: sensor.hallway_upstairs_switch
+    to: recall_scene_2
+action:
+  - scene: scene.hallway_upstairs_lights_off
