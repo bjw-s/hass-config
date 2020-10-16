@@ -1,0 +1,10 @@
+---
+id: dining_area_lights_on
+alias: Dining Area - Lights on
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: sensor.kitchen_switch
+    to: recall_scene_3
+action:
+  - scene: scene.dining_area_lights_full_brightness

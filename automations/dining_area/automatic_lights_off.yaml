@@ -1,0 +1,20 @@
+---
+id: dining_area_automatic_lights_off
+alias: Dining Area - Automatic lights off
+trigger:
+  - platform: state
+    entity_id: binary_sensor.is_dark_dining_area
+    to: 'off'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_kitchen
+      state: 'on'
+    - condition: state
+      entity_id: light.dining_area
+      state: 'on'
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.dining_area_lights_off

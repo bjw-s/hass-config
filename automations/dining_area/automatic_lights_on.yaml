@@ -1,0 +1,42 @@
+---
+id: dining_area_automatic_lights_on
+alias: Dining Area - Automatic lights on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.dining_area_motion
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.is_dark_dining_area
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.living_room_media_playing
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_dining_area
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.is_dark_dining_area
+      state: 'on'
+action:
+  - choose:
+    - conditions:
+        - condition: time
+          after: "20:00:00:00"
+        - condition: state
+          entity_id: binary_sensor.living_room_media_playing
+          state:  'on'
+      sequence:
+        - scene: scene.dining_area_lights_movie_mode
+    - conditions:
+      - condition: time
+        after: "20:00:00:00"
+      - condition: state
+        entity_id: binary_sensor.living_room_media_playing
+        state:  'off'
+      sequence:
+        - scene: scene.dining_area_lights_relaxed
+
+    default:
+      - scene: scene.dining_area_lights_full_brightness

@@ -1,0 +1,10 @@
+---
+id: kitchen_lights_off
+alias: Kitchen - Lights off
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: sensor.kitchen_switch
+    to: recall_scene_1
+action:
+  - scene: scene.kitchen_lights_off

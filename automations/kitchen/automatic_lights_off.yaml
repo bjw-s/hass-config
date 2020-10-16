@@ -1,0 +1,21 @@
+---
+id: kitchen_automatic_lights_off
+alias: Kitchen - Automatic lights off
+trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.automatic_lights_kitchen
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_kitchen
+      state: 'on'
+    - condition: state
+      entity_id: light.kitchen
+      state: 'on'
+action:
+  - service: automation.trigger
+    data:
+      entity_id: automation.kitchen_lights_off
