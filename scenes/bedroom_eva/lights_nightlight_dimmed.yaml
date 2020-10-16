@@ -1,0 +1,6 @@
+---
+name: Bedroom Eva - Lights - Nightlight - Dimmed
+entities:
+  light.bedroom_eva_nightlight:
+    state: 'on'
+    brightness: 60

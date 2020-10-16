@@ -1,0 +1,6 @@
+---
+platform: group
+name: Bedroom Eva
+entities:
+  - light.bedroom_eva_ceiling
+  - light.bedroom_eva_nightlight
