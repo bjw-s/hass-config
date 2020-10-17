@@ -8,6 +8,12 @@ trigger:
   - platform: state
     entity_id: binary_sensor.automatic_lights_kitchen
     to: 'off'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: timer.automatic_lights_kitchen
+      state: 'active'
 action:
   - service: timer.cancel
     data:

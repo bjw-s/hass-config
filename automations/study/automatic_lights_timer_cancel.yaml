@@ -3,7 +3,7 @@ id: study_automatic_lights_timer_cancel
 alias: Study - Automatic lights timer cancel
 trigger:
   - platform: state
-    entity_id: light.hallway_study
+    entity_id: light.study
     to: 'off'
   - platform: state
     entity_id: binary_sensor.automatic_lights_study

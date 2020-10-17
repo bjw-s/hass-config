@@ -4,6 +4,9 @@ alias: Backyard - Automatic lights off
 trigger:
   - platform: time
     at: "23:00"
+  - platform: state
+    entity_id: input_boolean.home_modes_bedtime_mode
+    to: 'off'
 condition:
   condition: and
   conditions:

@@ -21,10 +21,16 @@ action:
           after: "19:30:00:00"
           before: "02:00:00"
       sequence:
-        - scene: scene.kitchen_lights_relaxed
+        - service: scene.turn_on
+          data:
+            entity_id: scene.kitchen_lights_relaxed
+            transition: 2
     
     default:
-      - scene: scene.kitchen_lights_full_brightness
+      - service: scene.turn_on
+        data:
+          entity_id: scene.kitchen_lights_full_brightness
+          transition: 2
 
   - service: timer.start
     data:

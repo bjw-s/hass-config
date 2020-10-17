@@ -16,6 +16,19 @@ condition:
       entity_id: light.kitchen
       state: 'on'
 action:
-  - service: automation.trigger
-    data:
-      entity_id: automation.kitchen_lights_off
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.kitchen_motion
+          state:  'on'
+      sequence:
+        - service: timer.start
+          data:
+            entity_id: timer.automatic_lights_kitchen
+            duration: "{{ (states('input_number.automatic_lights_duration_kitchen') | float) * 60 }}"
+
+    default:
+      - service: scene.turn_on
+        data:
+          entity_id: scene.kitchen_lights_off
+          transition: 2

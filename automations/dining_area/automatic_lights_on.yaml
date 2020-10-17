@@ -28,7 +28,10 @@ action:
           entity_id: binary_sensor.living_room_media_playing
           state:  'on'
       sequence:
-        - scene: scene.dining_area_lights_movie_mode
+        - service: scene.turn_on
+          data:
+            entity_id: scene.dining_area_lights_movie_mode
+            transition: 2
     - conditions:
       - condition: time
         after: "20:00:00:00"
@@ -36,7 +39,13 @@ action:
         entity_id: binary_sensor.living_room_media_playing
         state:  'off'
       sequence:
-        - scene: scene.dining_area_lights_relaxed
+        - service: scene.turn_on
+          data:
+            entity_id: scene.dining_area_lights_relaxed
+            transition: 2
 
     default:
-      - scene: scene.dining_area_lights_full_brightness
+      - service: scene.turn_on
+        data:
+          entity_id: scene.dining_area_lights_full_brightness
+          transition: 2
