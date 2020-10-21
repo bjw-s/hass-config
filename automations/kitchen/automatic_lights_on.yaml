@@ -14,11 +14,14 @@ condition:
     - condition: state
       entity_id: binary_sensor.is_dark_kitchen
       state: 'on'
+    - condition: state
+      entity_id: light.kitchen
+      state: 'off'
 action:
   - choose:
     - conditions:
         - condition: time
-          after: "19:30:00:00"
+          after: "20:00:00:00"
           before: "02:00:00"
       sequence:
         - service: scene.turn_on
@@ -32,7 +35,6 @@ action:
           entity_id: scene.kitchen_lights_full_brightness
           transition: 2
 
-  - service: timer.start
+  - service: automation.trigger
     data:
-      entity_id: timer.automatic_lights_kitchen
-      duration: "{{ (states('input_number.automatic_lights_duration_kitchen') | float) * 60 }}"
+      entity_id: automation.kitchen_automatic_lights_timer_re_start

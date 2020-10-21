@@ -1,0 +1,17 @@
+---
+id: home_bedtime_mode_off
+alias: Home - Bedtime mode off
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_bedtime_mode
+    to: 'off'
+
+action:
+  # Undim tablet audio
+  - service: fullykiosk.volume_set
+    data:
+      entity_id: 
+        - media_player.hallway_tablet_media_player
+        - media_player.garage_tablet_media_player
+      volume_level: 0.8
+      stream: 3

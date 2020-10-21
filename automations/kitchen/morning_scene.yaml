@@ -1,0 +1,55 @@
+---
+id: kitchen_morning_scene
+alias: Kitchen - Morning scene
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_bedtime_mode
+    to: 'off'
+action:
+  # Turn on coffee maker
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: input_select.kitchen_automatic_coffee_schedule
+          state: 'Weekend'
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'off'
+      sequence:
+        - service: switch.turn_on
+          data:
+            entity_id: switch.kitchen_coffee_maker_power
+
+    - conditions:
+        - condition: state
+          entity_id: input_select.kitchen_automatic_coffee_schedule
+          state: 'Always'
+      sequence:
+        - service: switch.turn_on
+          data:
+            entity_id: switch.kitchen_coffee_maker_power
+
+  # Turn on Sonos
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'off'
+      sequence:
+        - service: sonos.join
+          data:
+            entity_id: media_player.woonkamer
+            master: media_player.keuken
+        - service: media_player.volume_set
+          data:
+            entity_id: 
+              - media_player.woonkamer
+              - media_player.keuken
+            volume_level: 0.04
+        - service: media_player.play_media
+          data:
+            entity_id: 
+              - media_player.keuken
+            media_content_type: music
+            media_content_id: "x-rincon-mp3radio://http://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3"

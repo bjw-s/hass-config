@@ -1,0 +1,31 @@
+---
+id: home_trash_outside_notification_today
+alias: Home - Trash outside notification today
+mode: single
+trigger:
+  - platform: time
+    at: "07:00"
+
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: input_boolean.trash_outside
+      state: 'off'
+    
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: sensor.afvalwijzer_today
+          state: 'Geen'
+
+action:
+  - service: notify.slack_bot
+    data:
+      message: "♻️ Remember to take out the trash!"
+      data:
+        blocks:
+          - type: section
+            text:
+              type: mrkdwn
+              text: "♻️ Remember: trash type(s) *{{ states.sensor.afvalwijzer_tomorrow.state }}* will be picked up today!"

@@ -12,27 +12,41 @@ trigger:
   - platform: state
     entity_id: binary_sensor.living_room_door
     to: 'on'
+
 condition:
   condition: and
   conditions:
     - condition: state
       entity_id: binary_sensor.automatic_lights_hallway
       state: 'on'
+    - condition: state
+      entity_id: binary_sensor.is_dark_hallway
+      state: 'on'
+
 action:
   - choose:
     - conditions:
         - condition: state
           entity_id: light.hallway
           state: 'off'
-        - condition: state
-          entity_id: binary_sensor.is_dark_hallway
-          state: 'on'
+        - condition: time
+          after: "20:00:00"
+          before: "08:00:00"
       sequence:
-        - service: automation.trigger
+        - service: scene.turn_on
           data:
-            entity_id: automation.hallway_ceiling_light_toggle
+            entity_id: scene.hallway_lights_dimmed
+            transition: 2
 
-    default: []
+    - conditions:
+        - condition: state
+          entity_id: light.hallway
+          state: 'off'
+      sequence:
+        - service: scene.turn_on
+          data:
+            entity_id: scene.hallway_lights_on
+            transition: 2
 
   - service: timer.start
     data:

@@ -1,0 +1,26 @@
+---
+id: home_bedtime_mode_on_reset_lights_manual_mode
+alias: Home - Bedtime mode on reset lights manual mode
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_bedtime_mode
+    to: 'on'
+
+action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.study_lights_manual_mode
+
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.hallway_lights_manual_mode
+
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.kitchen_lights_manual_mode
+
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.living_room_lights_manual_mode
+
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.dining_area_lights_manual_mode
+
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.hallway_upstairs_lights_manual_mode

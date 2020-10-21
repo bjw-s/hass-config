@@ -1,0 +1,26 @@
+---
+id: home_bedtime_mode_on
+alias: Home - Bedtime mode on
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_bedtime_mode
+    to: 'on'
+
+action:
+  # Dim tablet audio
+  - service: fullykiosk.volume_set
+    data:
+      entity_id: 
+        - media_player.hallway_tablet_media_player
+        - media_player.garage_tablet_media_player
+      volume_level: 0.2
+      stream: 3
+
+  - delay:
+      seconds: 2
+
+  # Arm alarm
+  - service: alarm_control_panel.alarm_arm_night
+    data:
+      entity_id: alarm_control_panel.alarm
+      code: !env_var SECRET_ALARM_CODE_AUTOMATION

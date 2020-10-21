@@ -1,0 +1,15 @@
+---
+  id: home_trash_outside_reset
+  alias: Home - Trash outside reset
+  trigger:
+    - platform: state
+      entity_id: input_boolean.trash_outside
+      to: 'on'
+      for:
+        hours: 12
+ 
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.trash_outside
+  

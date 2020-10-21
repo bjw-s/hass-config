@@ -2,8 +2,9 @@
 platform: template
 sensors:
   hallway_light_level:
-    value_template: >
-      {% set current_lux = ((states('sensor.hallway_light_level_1') | float) + (states('sensor.hallway_light_level_2') | float) / 2) %}
-      {{ current_lux }}
+    value_template: |
+      {{ 
+        (states('sensor.hallway_light_level_1') | float) + (states('sensor.hallway_light_level_2') | float) / 2
+      }}
     unit_of_measurement: 'lx'
     device_class: illuminance

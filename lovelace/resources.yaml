@@ -8,7 +8,7 @@
   type: module
 
 - url: /hacsfiles/kiosk-mode/kiosk-mode.js
-  type: js
+  type: module
 
 - url: /hacsfiles/lovelace-layout-card/layout-card.js
   type: module

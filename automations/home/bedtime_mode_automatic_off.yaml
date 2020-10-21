@@ -1,0 +1,22 @@
+---
+id: home_bedtime_mode_automatic_off
+alias: Home - Bedtime mode automatic off
+trigger:
+  - platform: state
+    entity_id: binary_sensor.hallway_motion
+    to: 'on'
+
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: input_boolean.home_modes_bedtime_mode
+      state:  'on'
+    - condition: time
+      after: "06:00:00"
+      before: "09:30:00"
+
+action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.home_modes_bedtime_mode
