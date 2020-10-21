@@ -24,6 +24,7 @@ condition:
       state: 'on'
 action:
   - choose:
+    # Evening: Movie mode
     - conditions:
         - condition: time
           after: "20:00:00:00"
@@ -35,6 +36,7 @@ action:
           data:
             entity_id: scene.dining_area_lights_movie_mode
             transition: 2
+    # Evening: Relaxed mode
     - conditions:
       - condition: time
         after: "20:00:00:00"
@@ -47,6 +49,7 @@ action:
             entity_id: scene.dining_area_lights_relaxed
             transition: 2
 
+    # Default: Full brightness
     default:
       - service: scene.turn_on
         data:

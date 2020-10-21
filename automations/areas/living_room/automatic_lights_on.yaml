@@ -1,0 +1,51 @@
+---
+id: living_room_automatic_lights_on
+alias: Living Room - Automatic lights on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_motion
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.is_dark_living_room
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.living_room_media_playing
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_living_room
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.is_dark_living_room
+      state: 'on'
+action:
+  - choose:
+    - conditions:
+        - condition: time
+          after: "20:00:00:00"
+        - condition: state
+          entity_id: binary_sensor.living_room_media_playing
+          state:  'on'
+      sequence:
+        - service: scene.turn_on
+          data:
+            entity_id: scene.living_room_lights_movie_mode
+            transition: 2
+    - conditions:
+      - condition: time
+        after: "20:00:00:00"
+      - condition: state
+        entity_id: binary_sensor.living_room_media_playing
+        state:  'off'
+      sequence:
+        - service: scene.turn_on
+          data:
+            entity_id: scene.living_room_lights_relaxed
+            transition: 2
+
+    default:
+      - service: scene.turn_on
+        data:
+          entity_id: scene.living_room_lights_full_brightness
+          transition: 2

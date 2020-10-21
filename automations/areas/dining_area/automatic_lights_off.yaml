@@ -9,7 +9,7 @@ condition:
   condition: and
   conditions:
     - condition: state
-      entity_id: binary_sensor.automatic_lights_kitchen
+      entity_id: binary_sensor.automatic_lights_dining_area
       state: 'on'
     - condition: state
       entity_id: light.dining_area

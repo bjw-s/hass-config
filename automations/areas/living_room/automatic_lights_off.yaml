@@ -1,0 +1,21 @@
+---
+id: living_room_automatic_lights_off
+alias: Living Room - Automatic lights off
+trigger:
+  - platform: state
+    entity_id: binary_sensor.is_dark_living_room
+    to: 'off'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_living_room
+      state: 'on'
+    - condition: state
+      entity_id: light.living_room
+      state: 'on'
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.living_room_lights_off
+      transition: 2

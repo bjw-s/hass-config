@@ -1,0 +1,29 @@
+---
+id: dining_area_automatic_lights_on_morning
+alias: Dining Area - Automatic lights on morning
+trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_door
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.automatic_lights_dining_area
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.is_dark_dining_area
+      state: 'on'
+    - condition: state
+      entity_id: light.dining_area
+      state: 'off'
+    - condition: time
+      after: "06:00:00:00"
+      before: "08:30:00:00"
+    - condition: template
+      value_template: "{{ (as_timestamp(now()) - as_timestamp((states.binary_sensor.hallway_motion.last_changed)) < 180)}}"
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.dining_area_lights_relaxed
+      transition: 2
