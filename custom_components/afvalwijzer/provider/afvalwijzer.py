@@ -8,7 +8,7 @@ from requests.exceptions import HTTPError
 from ..const.const import _LOGGER, MONTH_TO_NUMBER, SENSOR_PROVIDER_TO_URL
 
 
-class MijnAfvalWijzer(object):
+class AfvalWijzer(object):
     def __init__(
         self,
         provider,
@@ -27,7 +27,7 @@ class MijnAfvalWijzer(object):
         self.include_date_today = include_date_today
         self.default_label = default_label
 
-        _providers = ("mijnafvalwijzer", "afvalstoffendienstkalender")
+        _providers = ("mijnafvalwijzer", "afvalstoffendienstkalender", "rova")
         if self.provider not in _providers:
             print("Invalid provider: {}, please verify".format(self.provider))
         # date today
@@ -64,7 +64,7 @@ class MijnAfvalWijzer(object):
             _LOGGER.error("Something went wrong calculating days between dates.")
             return False
 
-    def get_date_from_waste_type(self, html, waste_type):
+    def get_date_for_waste_type(self, html, waste_type):
         try:
             results = html.findAll("p", {"class": waste_type})
 
@@ -100,7 +100,7 @@ class MijnAfvalWijzer(object):
             ########## API WASTE DICTIONARY ##########
             if len(self.api_token) != 0:
                 _LOGGER.debug("Connecting to the backend (api) of: %s", self.provider)
-                url = SENSOR_PROVIDER_TO_URL["mijnafvalwijzer_api"][0].format(
+                url = SENSOR_PROVIDER_TO_URL["afvalwijzer_api"][0].format(
                     self.provider,
                     self.api_token,
                     self.postal_code,
@@ -135,9 +135,14 @@ class MijnAfvalWijzer(object):
                 _LOGGER.debug(
                     "Connecting to the frontend (scrape data) of: %s", self.provider
                 )
-                url = SENSOR_PROVIDER_TO_URL["mijnafvalwijzer_scraper"][0].format(
-                    self.provider, self.postal_code, self.street_number, self.suffix
-                )
+                if self.provider == "rova":
+                    url = SENSOR_PROVIDER_TO_URL["afvalwijzer_scraper_rova"][0].format(
+                        self.provider, self.postal_code, self.street_number, self.suffix
+                    )
+                else:
+                    url = SENSOR_PROVIDER_TO_URL["afvalwijzer_scraper"][0].format(
+                        self.provider, self.postal_code, self.street_number, self.suffix
+                    )
                 _LOGGER.debug("URL parsed: %s", url)
 
                 # get scraper data
@@ -146,17 +151,21 @@ class MijnAfvalWijzer(object):
                 html = response.text
                 soup = BeautifulSoup(html, "html.parser")
                 jaaroverzicht = soup.find(id="jaaroverzicht")
-                jaaroverzicht_waste_types = jaaroverzicht.findAll("p")
+                jaaroverzicht_waste_types = jaaroverzicht.findAll("p", {"class": True})
 
                 waste_dict_provider = {}
                 try:
+                    # findAll("p", {"class": waste_type})
                     for waste_type in jaaroverzicht_waste_types:
                         if waste_type not in waste_dict_provider.keys():
                             waste_dict_provider[waste_type["class"][0]] = ""
-                except KeyError:
-                    pass
+                except Exception as err:
+                    _LOGGER.error(
+                        "Error occurred scraping jaaroverzicht_waste_types: %s", err
+                    )
+                    return False
                 for waste_type in waste_dict_provider.keys():
-                    waste_dict_provider[waste_type] = self.get_date_from_waste_type(
+                    waste_dict_provider[waste_type] = self.get_date_for_waste_type(
                         jaaroverzicht, waste_type
                     )
                 # set value to none if no value has been found
@@ -177,7 +186,7 @@ class MijnAfvalWijzer(object):
         today_multiple_items = []
         tomorrow_multiple_items = []
         day_after_tomorrow_multiple_items = []
-        first_next_item_multiple_items = []
+        next_item_multiple_items = []
         waste_dict_temp = {
             key: value for key, value in waste_dict_provider.items() if len(value) != 0
         }
@@ -223,7 +232,7 @@ class MijnAfvalWijzer(object):
             _LOGGER.error("Error occurred: %s", err)
             return False
         try:
-            # create a temporary dictionary for the first_next_* items as the output is dependent on either to take today into account or not
+            # create a temporary dictionary for the next_* items as the output is dependent on either to take today into account or not
             waste_dict_temp_date_selected = {
                 key: value
                 for key, value in waste_dict_provider.items()
@@ -232,33 +241,33 @@ class MijnAfvalWijzer(object):
                 and value >= self.date_selected
             }
             # first upcoming pickup date of any waste type
-            waste_dict_custom["first_next_date"] = datetime.strptime(
+            waste_dict_custom["next_date"] = datetime.strptime(
                 min(waste_dict_temp_date_selected.values()), "%Y-%m-%d"
             ).strftime("%d-%m-%Y")
             # first upcoming waste type pickup in days
-            waste_dict_custom["first_next_in_days"] = self.calculate_days_between_dates(
+            waste_dict_custom["next_in_days"] = self.calculate_days_between_dates(
                 self.today, min(waste_dict_temp_date_selected.values())
             )
             # first upcoming waste type(s) pickup
-            first_upcoming_wate_date = min(waste_dict_temp_date_selected.values())
+            upcoming_wate_date = min(waste_dict_temp_date_selected.values())
 
             for key, value in waste_dict_temp_date_selected.items():
-                if value == first_upcoming_wate_date:
-                    if "first_next_item" in waste_dict_custom.keys():
-                        first_next_item_multiple_items.append(key)
-                        waste_dict_custom["first_next_item"] = ", ".join(
-                            first_next_item_multiple_items
+                if value == upcoming_wate_date:
+                    if "next_item" in waste_dict_custom.keys():
+                        next_item_multiple_items.append(key)
+                        waste_dict_custom["next_item"] = ", ".join(
+                            next_item_multiple_items
                         )
                     else:
-                        first_next_item_multiple_items.append(key)
-                        waste_dict_custom["first_next_item"] = key
+                        next_item_multiple_items.append(key)
+                        waste_dict_custom["next_item"] = key
             # set value to none if no value has been found
-            if "first_next_date" not in waste_dict_custom.keys():
-                waste_dict_custom["first_next_date"] = self.default_label
-            if "first_next_in_days" not in waste_dict_custom.keys():
-                waste_dict_custom["first_next_in_days"] = self.default_label
-            if "first_next_item" not in waste_dict_custom.keys():
-                waste_dict_custom["first_next_item"] = self.default_label
+            if "next_date" not in waste_dict_custom.keys():
+                waste_dict_custom["next_date"] = self.default_label
+            if "next_in_days" not in waste_dict_custom.keys():
+                waste_dict_custom["next_in_days"] = self.default_label
+            if "next_item" not in waste_dict_custom.keys():
+                waste_dict_custom["next_item"] = self.default_label
         except Exception as err:
             _LOGGER.error("Error occurred: %s", err)
             return False
