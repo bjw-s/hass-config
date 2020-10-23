@@ -1,6 +1,7 @@
 ---
 id: dining_area_automatic_lights_off
 alias: Dining Area - Automatic lights off
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: binary_sensor.is_dark_dining_area

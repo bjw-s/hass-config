@@ -1,0 +1,19 @@
+---
+id: home_away_mode_on
+alias: Home - Away mode on
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_away_mode
+    to: 'on'
+
+action:
+  # Turn on scene
+  - service: scene.turn_on
+    data:
+      entity_id: script.home_modes_away_mode
+
+  # Arm alarm
+  - service: alarm_control_panel.alarm_arm_away
+    data:
+      entity_id: alarm_control_panel.alarm
+      code: !env_var SECRET_ALARM_CODE_AUTOMATION

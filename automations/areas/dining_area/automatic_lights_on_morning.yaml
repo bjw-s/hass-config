@@ -1,6 +1,7 @@
 ---
 id: dining_area_automatic_lights_on_morning
 alias: Dining Area - Automatic lights on morning
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: binary_sensor.living_room_door
