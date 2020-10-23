@@ -1,9 +1,10 @@
 ---
-# Custom component for Home Assistant to connect appliances supporting the Home Connect standard
+# The Home Connect integration allows users to integrate their home appliances supporting the Home Connect standard 
+# for Bosch and Siemens using the official cloud API.
 #
-# https://github.com/DavidMStraub/homeassistant-homeconnect
+# https://www.home-assistant.io/integrations/home_connect/
 #
 
 home_connect:
-  client_id: "383E36DF868413C6B31C8E2C97C17C53034E15A3D0D54C913173B41FE82F6010"
-  client_secret: "5C2BBD0CDAAA1E8768BE2456B4B92D71CDBF62906608D6A0389023212EA174BB"
+  client_id: !env_var SECRET_HOME_CONNECT_CLIENT_ID
+  client_secret: !env_var SECRET_HOME_CONNECT_CLIENT_SECRET
