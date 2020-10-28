@@ -7,8 +7,8 @@ trigger:
     to: 'on'
 
 action:
-  # Turn on scene
-  - service: scene.turn_on
+  # Turn on script
+  - service: script.turn_on
     data:
       entity_id: script.home_modes_away_mode
 

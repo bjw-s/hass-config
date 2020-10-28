@@ -12,8 +12,8 @@ homeassistant:
   unit_system: metric
   time_zone: Europe/Amsterdam
 
-  external_url: https://domo.bjws.nl
-  internal_url: http://192.168.26.5:8123
+  external_url: !env_var SECRET_EXTERNAL_URL
+  internal_url: !env_var SECRET_INTERNAL_URL
 
   # Load packages
   packages: !include_dir_named integrations

@@ -1,0 +1,21 @@
+---
+id: living_room_harmony_activity_stops_sonos
+alias: Living Room - Harmony activity stops sonos
+trigger:
+  - platform: state
+    entity_id: sensor.living_room_current_harmony_activity
+condition:
+  condition: not
+  conditions:
+    - condition: state
+      entity_id: sensor.living_room_current_harmony_activity
+      state: Listen to Sonos
+    - condition: state
+      entity_id: sensor.living_room_current_harmony_activity
+      state: PowerOff
+action:
+  - service: media_player.media_stop
+    data:
+      entity_id: 
+        - media_player.keuken
+        - media_player.woonkamer

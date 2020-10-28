@@ -29,6 +29,7 @@ action:
     - conditions:
         - condition: time
           after: "20:00:00:00"
+          before: "02:00:00:00"
         - condition: state
           entity_id: binary_sensor.living_room_media_playing
           state:  'on'
@@ -41,6 +42,7 @@ action:
     - conditions:
       - condition: time
         after: "20:00:00:00"
+        before: "02:00:00:00"
       - condition: state
         entity_id: binary_sensor.living_room_media_playing
         state:  'off'
