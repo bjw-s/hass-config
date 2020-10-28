@@ -1,0 +1,18 @@
+---
+id: living_room_vacuum_runs_when_away
+alias: Living Room - Vacuum runs when away
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_away_mode
+    from: 'off'
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.living_area_vacuum_ran_today
+      state: 'on'
+action:
+  - service: script.turn_on
+    data:
+      entity_id: script.vacuum_all_zones

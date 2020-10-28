@@ -11,10 +11,6 @@ trigger:
     for: "00:02:00"
 action:
   - service: |
-      {% if trigger.to_state.state == 'on' -%}
-        switch.turn_on
-      {%- else -%}
-        switch.turn_off
-      {%- endif %}
+      switch.turn_{{ trigger.to_state.state }}
     data:
       entity_id: switch.living_room_subwoofer

@@ -1,0 +1,12 @@
+---
+platform: template
+sensors:
+  living_area_vacuum_ran_today:
+    friendly_name: 'Vacuum Ran today'
+    value_template: |
+      {% set midnight = now().replace(hour=0, minute=0, second=0, microsecond=0) %}
+      {{ 
+        is_state('sensor.living_area_vacuum_last_run_finished', 'True')
+        and
+        as_timestamp(midnight) - as_timestamp(states.sensor.living_area_vacuum_last_run_finished.last_changed) < 0 
+      }}
