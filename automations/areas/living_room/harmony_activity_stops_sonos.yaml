@@ -1,6 +1,7 @@
 ---
 id: living_room_harmony_activity_stops_sonos
 alias: Living Room - Harmony activity stops sonos
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: sensor.living_room_current_harmony_activity

@@ -1,6 +1,5 @@
 ---
 alarm_manyie_snoozecount:
-  initial: 0
-  min: 0
-  max: 5
+  minimum: 0
+  maximum: 5
   step: 1

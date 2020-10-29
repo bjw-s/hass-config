@@ -1,0 +1,9 @@
+---
+platform: template
+sensors:
+  openweather_forecast_night_temperature:
+    value_template: |
+      {{ states.sensor.openweather_report.attributes.daily[1].temp.min }}
+    unit_of_measurement: "°C"
+    device_class: temperature
+    

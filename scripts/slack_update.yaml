@@ -1,0 +1,14 @@
+---
+slack_update:
+  alias: Slack Update post
+  sequence:
+    - service: rest_command.slack_api
+      data:
+        api: 'chat.update'
+        payload: |
+          {
+            "channel": "{{ channel }}",
+            "ts": "{{ ts }}",
+            "message": "{{ message }}",
+            "blocks": {{ blocks if (blocks is defined) else '[]' }}
+          }

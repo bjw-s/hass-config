@@ -1,4 +1,0 @@
----
-platform: mqtt
-name: living_area_vacuum_map
-topic: valetudo/livingroom/map

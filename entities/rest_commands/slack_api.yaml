@@ -1,0 +1,10 @@
+---
+slack_api:
+  url: https://slack.com/api/{{ api }}
+  content_type: 'application/json; charset=utf-8'
+  verify_ssl: true
+  method: 'post'
+  timeout: 20
+  headers:
+    Authorization: "Bearer {{ states('sensor.system_slack_token') }}"
+  payload: "{{ payload | to_json }}"

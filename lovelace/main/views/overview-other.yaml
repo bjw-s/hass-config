@@ -5,14 +5,6 @@ path: other
 panel: false
 badges: []
 cards:
-  - type: history-graph
-    title: Internet speed
-    entities:
-      - entity: sensor.speedtest_download
-      - entity: sensor.speedtest_upload
-    hours_to_show: 12
-    refresh_interval: 0
-
   - title: Frigate
     type: history-graph
     entities:

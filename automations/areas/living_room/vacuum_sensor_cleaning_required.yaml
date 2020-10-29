@@ -1,0 +1,16 @@
+---
+id: living_room_vacuum_sensor_cleaning_required
+alias: Living Room - Vacuum sensor cleaning required
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: vacuum.living_area_vacuum
+    attribute: sensor
+    to: "0"
+action:
+  - service: notify.slack_bot
+    data:
+      message: "🧹 MiMi sensor cleaning required."
+
+  - delay:
+      hours: 12

@@ -1,6 +1,0 @@
----
-platform: template
-sensors:
-  living_area_vacuum_last_run_finished:
-    friendly_name: 'Vacuum Last Run Finished'
-    value_template: '{{ states.vacuum.living_area_vacuum.attributes.last_run_stats.finishedFlag }}'

@@ -4,9 +4,13 @@ sensors:
   living_area_vacuum_ran_today:
     friendly_name: 'Vacuum Ran today'
     value_template: |
+      {% set vacuum = 'vacuum.living_area_vacuum' %}
       {% set midnight = now().replace(hour=0, minute=0, second=0, microsecond=0) %}
+      {% set lastDuration = state_attr(vacuum, 'last_run_stats').duration / 60 %}
+      {% set finished = state_attr(vacuum, 'last_run_stats').duration %}
+      {% set endTime = state_attr(vacuum, 'last_run_stats').endTime %}
       {{ 
-        is_state('sensor.living_area_vacuum_last_run_finished', 'True')
-        and
-        as_timestamp(midnight) - as_timestamp(states.sensor.living_area_vacuum_last_run_finished.last_changed) < 0 
+        finished and 
+        lastDuration > 5 and 
+        as_timestamp(midnight) - (endTime / 1000) < 0
       }}

@@ -2,14 +2,23 @@
 platform: template
 sensors:
   frigate_frontdoor_camera_fps: 
-    value_template: '{{ states.sensor.frigate_debug.attributes["frontdoor"]["camera_fps"] }}'
+    value_template: |
+      {% set frontdoor = state_attr('sensor.frigate_debug', 'frontdoor') %}
+      {{ frontdoor.camera_fps }}
     unit_of_measurement: 'FPS'
   frigate_frontdoor_skipped_fps: 
-    value_template: '{{ states.sensor.frigate_debug.attributes["frontdoor"]["skipped_fps"] }}'
+    value_template: |
+      {% set frontdoor = state_attr('sensor.frigate_debug', 'frontdoor') %}
+      {{ frontdoor.skipped_fps }}
     unit_of_measurement: 'FPS'
   frigate_frontdoor_detection_fps: 
-    value_template: '{{ states.sensor.frigate_debug.attributes["frontdoor"]["detection_fps"] }}'
-    unit_of_measurement: 'FPS'
+    value_template: |
+      {% set frontdoor = state_attr('sensor.frigate_debug', 'frontdoor') %}
+      {{ frontdoor.detection_fps }}
   frigate_coral_inference:
-    value_template: '{{ states.sensor.frigate_debug.attributes["detectors"]["coral"]["inference_speed"] }}' 
+    value_template: |
+      {% set detectors = state_attr('sensor.frigate_debug', 'detectors') %}
+      {% if detectors != None %}
+        {{ detectors.coral.inference_speed }}
+      {% endif %}
     unit_of_measurement: 'ms'

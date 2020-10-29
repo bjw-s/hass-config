@@ -1,0 +1,36 @@
+---
+id: living_room_vacuum_trigger_from_slack
+alias: Living Room - Vacuum trigger from slack
+trigger:
+  - platform: webhook
+    webhook_id: slack_app
+variables:
+  payload: "{{ trigger.data.payload | from_json -}}"
+condition:
+  condition: and
+  conditions:
+    - condition: template
+      value_template: |
+        {{ "vacuum_not_run" in payload.actions[0].action_id }}
+action:
+  - service: script.slack_update
+    data:
+      channel: "{{ payload.channel.id }}"
+      ts: "ts_{{ payload.message.ts }}"
+      message: "{{ payload.message.text }}"
+      blocks:
+        - type: section
+          text:
+            type: mrkdwn
+            text: "{{ payload.message.blocks[0].text.text }}"
+
+  - choose:
+    # Start the vacuum
+    - conditions:
+      - condition: template
+        value_template: |
+          {{ payload.actions[0].action_id == "vacuum_not_run_start" }}
+      sequence:
+        - service: script.turn_on
+          data:
+            entity_id: script.vacuum_all_zones

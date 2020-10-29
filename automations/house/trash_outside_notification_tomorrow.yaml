@@ -28,4 +28,4 @@ action:
           - type: section
             text:
               type: mrkdwn
-              text: "♻️ Remember: trash type(s) *{{ states.sensor.afvalwijzer_tomorrow.state }}* will be picked up tomorrow!"
+              text: "♻️ Remember: trash type(s) *{{ states('sensor.afvalwijzer_tomorrow') }}* will be picked up tomorrow!"

@@ -1,0 +1,16 @@
+---
+id: living_room_vacuum_filter_replacement_required
+alias: Living Room - Vacuum filter replacement required
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: vacuum.living_area_vacuum
+    attribute: filter
+    to: "0"
+action:
+  - service: notify.slack_bot
+    data:
+      message: "🧹 MiMi filter replacement required."
+
+  - delay:
+      hours: 12
