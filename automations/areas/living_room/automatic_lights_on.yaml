@@ -1,6 +1,7 @@
 ---
 id: living_room_automatic_lights_on
 alias: Living Room - Automatic lights on
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: binary_sensor.living_room_motion

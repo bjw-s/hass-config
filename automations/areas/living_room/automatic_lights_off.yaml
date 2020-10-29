@@ -1,6 +1,7 @@
 ---
 id: living_room_automatic_lights_off
 alias: Living Room - Automatic lights off
+max_exceeded: silent
 trigger:
   - platform: state
     entity_id: binary_sensor.is_dark_living_room

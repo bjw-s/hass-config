@@ -1,7 +1,6 @@
 ---
 id: living_room_lights_on
 alias: Living Room - Lights on
-max_exceeded: silent
 trigger:
   - platform: state
     entity_id: sensor.living_room_switch
