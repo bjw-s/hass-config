@@ -1,7 +1,0 @@
----
-platform: template
-sensors:
-  living_area_vacuum_last_run_error:
-    friendly_name: 'Vacuum Last Run Error'
-    device_class: problem
-    value_template: '{{ states.vacuum.living_area_vacuum.attributes.last_run_stats.errorDescription != "No error" }}'

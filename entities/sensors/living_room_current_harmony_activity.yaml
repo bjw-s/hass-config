@@ -3,4 +3,5 @@ platform: template
 sensors:
   living_room_current_harmony_activity:
     friendly_name: 'Current Harmony activity'
-    value_template: '{{ states.remote.living_room.attributes.current_activity }}'
+    value_template: |
+      {{ state_attr('remote.living_room', 'current_activity') }}
