@@ -105,7 +105,7 @@ class AfvalWijzer(object):
             jaaroverzicht = soup.select('a[href*="#waste"] p[class]')
             jaartal = soup.find("div", {"class": "ophaaldagen"})["id"].strip("jaar-")
 
-            # _LOGGER.debug("Jaaroverzicht %s", jaaroverzicht)
+            #_LOGGER.debug("Jaaroverzicht %s", jaaroverzicht)
             _LOGGER.debug("Year %s", jaartal)
 
             waste_data_with_today = {}
@@ -118,23 +118,30 @@ class AfvalWijzer(object):
                         waste_item = x
                         waste_date = item.find(
                             "span", {"class": "span-line-break"}
-                        ).string.strip()
-                        # Convert month to month number by splitting the waste_date value
+                        )
+                        # when there is no span with class span-line-break, just use date
+                        if waste_date is None:
+                            waste_date = str(item).split(">")[1]
+                            waste_date = waste_date.split("<")[0]
+                        else:
+                            waste_date = waste_date.string.strip()
+
+                        # convert month to month number by splitting the waste_date value
                         split_waste_date = waste_date.split(" ")
                         day = split_waste_date[1]
                         month = MONTH_TO_NUMBER[split_waste_date[2]]
                         waste_date_formatted = datetime.strptime(
                             day + "-" + month + "-" + jaartal, "%d-%m-%Y"
                         )
+                        # create waste data with today
                         if waste_date_formatted >= self.today_date:
                             if waste_item not in waste_data_with_today.keys():
-                                # Remove square brackets and quotes from list for item['class']
                                 waste_data_with_today[
                                     waste_item
                                 ] = waste_date_formatted.strftime("%d-%m-%Y")
+                        # create waste data without today
                         if waste_date_formatted > self.today_date:
                             if waste_item not in waste_data_without_today.keys():
-                                # Remove square brackets and quotes from list for item['class']
                                 waste_data_without_today[
                                     waste_item
                                 ] = waste_date_formatted.strftime("%d-%m-%Y")
@@ -158,7 +165,6 @@ class AfvalWijzer(object):
             _LOGGER.debug(
                 "Generating waste_data_without_today = %s", waste_data_without_today
             )
-
             return waste_data_with_today, waste_data_without_today
 
         except Exception as err:
