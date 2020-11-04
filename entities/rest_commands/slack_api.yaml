@@ -6,5 +6,5 @@ slack_api:
   method: 'post'
   timeout: 20
   headers:
-    Authorization: "Bearer {{ states('sensor.system_slack_token') }}"
+    Authorization: !env_var SECRET_SLACK_API_BEARER_TOKEN
   payload: "{{ payload | to_json }}"
