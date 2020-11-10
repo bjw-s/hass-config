@@ -7,7 +7,7 @@ sensors:
       {% set vacuum = 'vacuum.living_area_vacuum' %}
       {% set midnight = now().replace(hour=0, minute=0, second=0, microsecond=0) %}
       {% set lastDuration = state_attr(vacuum, 'last_run_stats').duration / 60 %}
-      {% set finished = state_attr(vacuum, 'last_run_stats').duration %}
+      {% set finished = state_attr(vacuum, 'last_run_stats').finishedFlag %}
       {% set endTime = state_attr(vacuum, 'last_run_stats').endTime %}
       {{ 
         finished and 
