@@ -22,6 +22,7 @@ trash_button:
           - color: red
       value: >-
         [[[ if (states['input_boolean.trash_outside'].state === 'off' &&
+        entity.attributes.days_until_collection_date != null &&
         entity.attributes.days_until_collection_date <= variables.days_red) return
         true; else return false ]]]
     - operator: template
@@ -30,6 +31,7 @@ trash_button:
           - color: orange
       value: >-
         [[[ if (states['input_boolean.trash_outside'].state === 'off' &&
+        entity.attributes.days_until_collection_date != null &&
         entity.attributes.days_until_collection_date <= variables.days_orange) return
         true; else return false ]]]
   tap_action:

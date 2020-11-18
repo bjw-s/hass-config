@@ -13,6 +13,9 @@ condition:
       entity_id: binary_sensor.living_area_vacuum_ran_today
       state: 'off'
     - condition: state
+      entity_id: vacuum.living_area_vacuum
+      state: 'docked'
+    - condition: state
       entity_id: input_boolean.living_area_vacuum_automatic_cleaning_active
       state:  'on'
 action:

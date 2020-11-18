@@ -7,9 +7,7 @@ trigger:
     to: 'on'
 
 action:
-  - service: input_boolean.turn_off
-    entity_id: input_boolean.study_lights_manual_mode
-
+  # Floor 1
   - service: input_boolean.turn_off
     entity_id: input_boolean.hallway_lights_manual_mode
 
@@ -23,4 +21,15 @@ action:
     entity_id: input_boolean.dining_area_lights_manual_mode
 
   - service: input_boolean.turn_off
+    entity_id: input_boolean.backyard_lights_manual_mode
+
+  # Floor 2
+  - service: input_boolean.turn_off
     entity_id: input_boolean.hallway_upstairs_lights_manual_mode
+
+  # Floor 3
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.hallway_study_lights_manual_mode
+
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.study_lights_manual_mode

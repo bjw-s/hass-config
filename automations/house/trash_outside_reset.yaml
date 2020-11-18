@@ -6,6 +6,9 @@ trigger:
     entity_id: input_boolean.trash_outside
     to: "on"
     for: "12:00:00"
+  - platform: state
+    entity_id: sensor.afvalwijzer_today
+    to: "Geen"
 
 action:
   - service: input_boolean.turn_off
