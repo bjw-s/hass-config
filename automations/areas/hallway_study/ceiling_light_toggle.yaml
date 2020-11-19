@@ -4,10 +4,10 @@ alias: Hallway Study - Ceiling light toggle
 trigger:
   - platform: state
     entity_id: sensor.hallway_study_switch
-    to: left
+    to: single_left
   - platform: state
     entity_id: sensor.hallway_study_switch
-    to: right
+    to: single_right
 action:
   - choose:
     - conditions:

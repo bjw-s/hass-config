@@ -4,7 +4,7 @@ alias: Study - Rear ceiling light toggle
 trigger:
   - platform: state
     entity_id: sensor.study_switch
-    to: left
+    to: single_left
   - platform: state
     entity_id: sensor.study_remote
     to: on-press

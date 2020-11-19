@@ -1,0 +1,32 @@
+---
+id: home_alarm_disarmed
+alias: Home - Alarm disarmed
+trigger:
+  - platform: state
+    entity_id: alarm_control_panel.alarm
+    to: 'disarmed'
+
+action:
+  # OK beep
+  - choose:
+    # Only beep if bedtime mode is off
+    - conditions:
+        - condition: state
+          entity_id: input_boolean.home_modes_bedtime_mode
+          state:  'off'
+      sequence:
+        - service: fullykiosk.play_audio
+          data:
+            entity_id: 
+              - media_player.hallway_tablet_media_player
+              - media_player.garage_tablet_media_player
+            url: "{{ states('sensor.system_url_internal') }}/local/audio/beep-ok.mp3"
+            stream: 3
+
+  - service: script.turn_on
+    data:
+      entity_id: script.hallway_upstairs_siren_off
+
+  - service: timer.cancel
+    data:
+      entity_id: timer.home_security_tripwire

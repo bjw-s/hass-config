@@ -5,7 +5,7 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: sensor.hallway_stairway_switch
-    to: recall_scene_2
+    to: recall_scene_5
   - platform: state
     entity_id: sensor.hallway_upstairs_switch
     to: recall_scene_2

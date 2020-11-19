@@ -4,7 +4,7 @@ alias: Study - Front ceiling light toggle
 trigger:
   - platform: state
     entity_id: sensor.study_switch
-    to: right
+    to: single_right
 action:
   - choose:
     - conditions:
