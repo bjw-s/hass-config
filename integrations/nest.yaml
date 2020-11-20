@@ -1,0 +1,11 @@
+---
+# The nest integration allows you to integrate your Google Nest devices in Home Assistant.
+#
+# https://www.home-assistant.io/integrations/nest/
+#
+
+nest:
+  client_id: !env_var SECRET_NEST_CLIENT_ID
+  client_secret: !env_var SECRET_NEST_CLIENT_SECRET
+  project_id: !env_var SECRET_NEST_PROJECT_ID
+  subscriber_id: !env_var SECRET_NEST_SUBSCRIBER_ID
