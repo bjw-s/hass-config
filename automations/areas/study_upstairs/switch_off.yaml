@@ -1,0 +1,13 @@
+---
+id: study_upstairs_switch_off
+alias: Study Upstairs - Switch - Off
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: binary_sensor.study_upstairs_switch_bottom
+    to: "on"
+action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.study_upstairs_active_lights_scene
+      option: 'Off'

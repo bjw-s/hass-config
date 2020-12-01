@@ -1,0 +1,12 @@
+---
+id: study_upstairs_remote_on
+alias: Study Upstairs - Remote - On
+trigger:
+  - platform: state
+    entity_id: sensor.living_room_remote
+    to: on-press
+action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.study_upstairs_active_lights_scene
+      option: 'Chill'

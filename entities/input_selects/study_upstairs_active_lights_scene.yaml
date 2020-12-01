@@ -1,0 +1,8 @@
+---
+study_upstairs_active_lights_scene:
+  name: Study Upstairs - Active lights scene
+  options:
+    - 'Off'
+    - Work
+    - Chill
+  icon: mdi:movie-open

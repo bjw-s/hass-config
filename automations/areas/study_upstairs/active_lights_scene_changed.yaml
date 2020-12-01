@@ -1,0 +1,11 @@
+---
+id: active_lights_scene_changed
+alias: Study Upstairs - Active lights scene changed
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: input_select.study_upstairs_active_lights_scene
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.study_upstairs_lights_{{ states("input_select.study_upstairs_active_lights_scene").replace(" ", "_") | lower }}

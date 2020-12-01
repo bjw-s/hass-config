@@ -1,0 +1,21 @@
+---
+id: study_upstairs_switch_on
+alias: Study Upstairs - Switch - On
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: binary_sensor.study_upstairs_switch_top
+    to: "on"
+action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.study_upstairs_active_lights_scene
+      option: |
+        {% set entity_id = "input_select.study_upstairs_active_lights_scene" %}
+        {% set options = state_attr(entity_id, "options") %}
+        {% set selection = options.index(states(entity_id)) %}
+        {% if (selection + 1) >= options | length %}
+          {{ options[1] }}
+        {% else %}
+          {{ options[selection + 1] }}
+        {% endif %}

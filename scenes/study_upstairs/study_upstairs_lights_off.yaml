@@ -1,0 +1,5 @@
+---
+  name: Study Upstairs - Lights - Off
+  entities:
+    light.study_upstairs:
+      state: 'off'

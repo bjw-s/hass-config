@@ -1,8 +1,0 @@
----
-platform: template
-sensors:
-  living_room_humidity:
-    friendly_name: "Living Room - Humidity"
-    value_template: "{{ state_attr('climate.living_room_thermostat', 'current_humidity') }}"
-    unit_of_measurement: "%"
-    device_class: humidity

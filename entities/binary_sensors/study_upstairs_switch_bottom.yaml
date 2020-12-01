@@ -1,0 +1,9 @@
+---
+platform: "mqtt"
+name: "Study Upstairs - Switch - Bottom"
+state_topic: "zigbee2mqtt/Study Upstairs - Switch"
+availability_topic: "zigbee2mqtt/bridge/state"
+value_template: "{{ value_json.action }}"
+payload_on: "recall_scene_1"
+payload_off: "recall_scene_5"
+unique_id: "0x0000000001716c1d_greenpower_zigbee2mqtt_bottom"

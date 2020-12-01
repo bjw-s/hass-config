@@ -1,0 +1,9 @@
+---
+  name: Study Upstairs - Lights - Work
+  entities:
+    light.study_upstairs_desk:
+      state: 'off'
+    light.study_upstairs_ceiling:
+      state: 'on'
+      brightness: 254
+      color_temp: 260

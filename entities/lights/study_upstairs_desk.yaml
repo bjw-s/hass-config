@@ -1,0 +1,34 @@
+---
+platform: mqtt
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: true
+brightness_scale: 254
+color_temp: true
+xy: true
+hs: false
+command_topic: "zigbee2mqtt/Study Upstairs - Desk/set"
+
+effect: true
+effect_list: 
+  - blink
+  - breathe
+  - okay
+  - channel_change
+  - finish_effect
+  - stop_effect
+
+json_attributes_topic: "zigbee2mqtt/Study Upstairs - Desk"
+name: "Study Upstairs - Desk"
+schema: json
+
+state_topic: "zigbee2mqtt/Study Upstairs - Desk"
+unique_id: "0x00124b0021382227_zigbee2mqtt"
+
+device:
+  identifiers:
+  - zigbee2mqtt_0x00124b0021382227
+  manufacturer: Gledopto
+  model: Zigbee LED controller RGB + CCT (1 ID) (GL-C-008-1ID)
+  name: Study Upstairs - Desk
+  sw_version: Zigbee2MQTT 1.16.1

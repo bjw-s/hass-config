@@ -45,12 +45,12 @@ cards:
                 justify_content: start
                 cards:
                   - type: 'custom:button-card'
-                    entity: climate.living_room_thermostat
+                    entity: climate.living_room
                     label: '[[[ return `${entity.attributes.temperature} °C` ]]]'
                     name: Thermostat
                     template: temperature
                     triggers_update:
-                      - climate.living_room_thermostat
+                      - climate.living_room
 
                   - type: 'custom:button-card'
                     template: base_button

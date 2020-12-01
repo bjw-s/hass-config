@@ -1,8 +1,0 @@
----
-platform: template
-sensors:
-  living_room_temperature:
-    friendly_name: "Living Room - Temperature"
-    value_template: "{{ state_attr('climate.living_room_thermostat', 'temperature') }}"
-    unit_of_measurement: "°C"
-    device_class: temperature
