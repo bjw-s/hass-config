@@ -5,5 +5,5 @@
       state: 'on'
     light.study_upstairs_ceiling:
       state: 'on'
-      brightness: 128
-      color_temp: 260
+      brightness: 70
+      color_temp: 390
