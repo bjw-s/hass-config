@@ -1,0 +1,9 @@
+---
+name: Living Area - Christmas Lights - On
+entities:
+  light.living_room_christmas_tree:
+    state: 'on'
+  light.living_room_window_christmas:
+    state: 'on'
+  light.dining_area_window_christmas:
+    state: 'on'

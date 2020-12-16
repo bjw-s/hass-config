@@ -1,0 +1,27 @@
+---
+platform: mqtt
+name: Living Room - Speaker Right
+
+availability_topic: zigbee2mqtt/bridge/state
+state_topic: zigbee2mqtt/Living Room - Speaker Right
+command_topic: zigbee2mqtt/Living Room - Speaker Right/set
+json_attributes_topic: zigbee2mqtt/Living Room - Speaker Right
+
+brightness: true
+brightness_scale: 254
+color_temp: true
+xy: true
+hs: false
+
+schema: json
+
+effect: true
+effect_list: 
+  - "blink"
+  - "breathe"
+  - "okay"
+  - "channel_change"
+  - "finish_effect"
+  - "stop_effect"
+
+unique_id: 0x00124b0021f2ae06_light_zigbee2mqtt

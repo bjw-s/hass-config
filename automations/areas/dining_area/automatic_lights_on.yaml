@@ -23,6 +23,9 @@ condition:
     - condition: state
       entity_id: binary_sensor.is_dark_dining_area
       state: 'on'
+    - condition: state
+      entity_id: binary_sensor.living_area_presence_detected
+      state: 'on'
 action:
   - choose:
     # Evening: Movie mode

@@ -1,0 +1,22 @@
+---
+id: living_area_presence_detected
+alias: Living Area - Presence Detected
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_motion
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.dining_area_motion
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: input_boolean.home_modes_away_mode
+      state: 'off'
+action:
+  - service: timer.start
+    data:
+      entity_id: timer.living_area_presence_detected
+      duration: "{{ (states('input_number.living_area_presence_duration') | float) * 60 }}"

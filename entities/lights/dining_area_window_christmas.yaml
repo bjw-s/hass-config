@@ -1,0 +1,13 @@
+---
+platform: mqtt
+name: Dining Area - Window Christmas
+
+availability_topic: zigbee2mqtt/bridge/state
+brightness: false
+color_temp: false
+xy: false
+command_topic: zigbee2mqtt/Multi Purpose Switch/set
+json_attributes_topic: zigbee2mqtt/Multi Purpose Switch
+schema: json
+state_topic: zigbee2mqtt/Multi Purpose Switch
+unique_id: 0x7cb03eaa00ad57e5_light_zigbee2mqtt

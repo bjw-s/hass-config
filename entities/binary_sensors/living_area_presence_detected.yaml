@@ -1,0 +1,7 @@
+---
+platform: template
+sensors:
+  living_area_presence_detected:
+    friendly_name: 'Living Area - Presence Detected'
+    value_template: >
+      {{ is_state('timer.living_area_presence_detected', 'active') }}

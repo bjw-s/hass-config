@@ -1,0 +1,9 @@
+---
+# Determines how long the 1st floor presence detection
+# timer will be active
+#
+living_area_presence_duration:
+  min: 10
+  max: 60
+  step: 1
+  unit_of_measurement: min

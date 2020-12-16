@@ -1,5 +1,0 @@
----
-platform: group
-name: Living Room - Christmas
-entities:
-  - light.living_room_window_christmas

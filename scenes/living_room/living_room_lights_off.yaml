@@ -5,5 +5,5 @@ entities:
     state: 'off'
   light.living_room_hue_go:
     state: 'off'
-  light.living_room_hue_go_tv:
+  light.living_room_speaker_right:
     state: 'off'

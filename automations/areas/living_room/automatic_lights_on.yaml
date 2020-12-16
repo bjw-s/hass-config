@@ -20,6 +20,9 @@ condition:
     - condition: state
       entity_id: binary_sensor.is_dark_living_room
       state: 'on'
+    - condition: state
+      entity_id: binary_sensor.living_area_presence_detected
+      state: 'on'
 action:
   - choose:
     - conditions:

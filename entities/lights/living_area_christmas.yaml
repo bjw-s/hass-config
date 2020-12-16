@@ -1,0 +1,7 @@
+---
+platform: group
+name: Living Area - Christmas
+entities:
+  - light.living_room_window_christmas
+  - light.living_room_christmas_tree
+  - light.dining_area_window_christmas

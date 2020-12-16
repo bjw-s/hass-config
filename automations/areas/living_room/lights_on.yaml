@@ -3,7 +3,10 @@ id: living_room_lights_on
 alias: Living Room - Lights on
 trigger:
   - platform: state
-    entity_id: sensor.living_room_switch
-    to: recall_scene_3
+    entity_id: binary_sensor.living_room_switch_top
+    to: 'on'
 action:
-  - scene: scene.living_room_lights_full_brightness
+  - service: scene.turn_on
+    data:
+      entity_id: scene.living_area_christmas_lights_on
+  # - scene: scene.living_room_lights_full_brightness

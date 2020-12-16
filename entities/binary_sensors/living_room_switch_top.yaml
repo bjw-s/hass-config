@@ -1,8 +1,9 @@
 ---
 platform: "mqtt"
-name: "Living Room - Switch"
+name: "Living Room - Switch - Top"
 state_topic: "zigbee2mqtt/Living Room - Switch"
 availability_topic: "zigbee2mqtt/bridge/state"
-icon: "mdi:gesture-double-tap"
 value_template: "{{ value_json.action }}"
-unique_id: "0x0000000001715691_action_zigbee2mqtt"
+payload_on: "recall_scene_3"
+payload_off: "recall_scene_7"
+unique_id: "0x0000000001715691_greenpower_zigbee2mqtt_top"

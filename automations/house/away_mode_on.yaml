@@ -17,3 +17,7 @@ action:
     data:
       entity_id: alarm_control_panel.alarm
       code: !env_var SECRET_ALARM_CODE_AUTOMATION
+
+  # Christmas lights
+  - service: scene.turn_on
+    entity_id: scene.living_area_christmas_lights_off
