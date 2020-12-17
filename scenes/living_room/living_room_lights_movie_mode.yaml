@@ -1,10 +1,10 @@
 ---
 name: Living Room - Lights - Movie Mode
 entities:
-  light.living_room_floor_lamp:
-    state: 'on'
-    brightness: 175
-    color_temp: 443
+  #light.living_room_floor_lamp:
+  #  state: 'on'
+  #  brightness: 175
+  #  color_temp: 443
   light.living_room_hue_go:
     state: 'on'
     brightness: 150

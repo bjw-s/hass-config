@@ -1,0 +1,19 @@
+---
+id: living_room_switch_bottom_hold
+alias: Living Room - Switch - Bottom (Hold)
+trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_switch_bottom
+    to: 'on'
+    for:
+      seconds: 3
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.living_room_lights_off
+  - service: scene.turn_on
+    data:
+      entity_id: scene.dining_area_lights_off
+  - service: scene.turn_on
+    data:
+      entity_id: scene.kitchen_lights_off
