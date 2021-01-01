@@ -1,0 +1,15 @@
+---
+platform: mqtt
+name: Study - Octoprint - Print - Time Left
+
+availability:
+  topic: "octoPrint/mqtt"
+  payload_available: connected
+  payload_not_available: disconnected
+
+state_topic: "octoPrint/hass/printing"
+value_template: "{{value_json.progress.printTimeLeftFormatted}}"
+
+icon: "mdi:clock-end"
+
+unique_id: "2a9c747c2a164ecbaf5da96e0e6112ba_PRINTING_E"

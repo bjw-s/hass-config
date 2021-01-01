@@ -6,7 +6,6 @@ trigger:
     entity_id: binary_sensor.living_room_switch_bottom
     to: 'on'
 action:
-  # - scene: scene.living_room_lights_off
   - service: scene.turn_on
     data:
-      entity_id: scene.living_area_christmas_lights_off
+      entity_id: scene.living_room_lights_off

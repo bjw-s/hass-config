@@ -1,10 +1,10 @@
 ---
 name: Living Room - Lights - Relaxed
 entities:
-  #light.living_room_floor_lamp:
-  #  state: 'on'
-  #  brightness: 254
-  #  color_temp: 366
+  light.living_room_floor_lamp:
+   state: 'on'
+   brightness: 254
+   color_temp: 366
   light.living_room_hue_go:
     state: 'on'
     brightness: 150

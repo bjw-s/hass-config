@@ -1,97 +1,79 @@
 title: Study
-icon: 'mdi:laptop'
+icon: "mdi:laptop"
 id: study
 path: study
 panel: true
 badges: []
 cards:
-  - type: 'custom:layout-card'
+  - type: "custom:layout-card"
     layout: horizontal
     max_columns: 3
-    justify_content: start
     cards:
-      - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
+      - type: vertical-stack
+        title: Status
         cards:
-          - type: 'custom:button-card'
-            template: header
-            name: Status
-
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
+          - type: glance
+            columns: 3
+            entities:
+              - entity: binary_sensor.is_dark_study
                 name: Dark?
-                entity: binary_sensor.is_dark_study
                 tap_action: !include ../popups/light_levels.yaml
 
-              - type: 'custom:button-card'
-                template: default_button
+              - entity: sensor.study_light_level
                 name: Light level
-                icon: 'mdi:theme-light-dark'
-                entity: sensor.study_light_level
+                icon: "mdi:theme-light-dark"
 
-              - type: 'custom:button-card'
-                template: default_button
+              - entity: binary_sensor.study_motion
                 name: Motion
-                entity: binary_sensor.study_motion
-              
-              - type: 'custom:button-card'
-                template: default_button
+
+              - entity: sensor.study_temperature
                 name: Temperature
-                entity: sensor.study_temperature
 
-              - type: 'custom:button-card'
-                template: default_button
+              - entity: sensor.study_humidity
                 name: Humidity
-                entity: sensor.study_humidity
 
-      - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
+      - type: vertical-stack
+        title: Audio / Video
         cards:
-          - type: 'custom:button-card'
-            template: header
-            name: Audio / Video
-
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
-                entity: media_player.studeerkamer
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: media_player.zolder
                 name: Sonos
-                icon: 'mdi:speaker'
+                icon: "mdi:speaker"
 
-      - break
-
-      - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
+      - type: vertical-stack
+        title: Octoprint
         cards:
-          - type: 'custom:button-card'
-            template: header
-            name: Lights
+          - type: picture-entity
+            entity: camera.study_octoprint
+            camera_view: live
+            show_state: false
+            show_name: false
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: switch.study_3d_printer
+                name: Printer power
+                icon: mdi:power
+              - entity: binary_sensor.study_octoprint_printing
+                name: Printing
+              - entity: sensor.study_octoprint_print_progress
+                name: Print progress
+                icon: mdi:progress-clock
+              - entity: sensor.study_octoprint_print_time_left
+                name: Print time left
 
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
+      - type: vertical-stack
+        title: Lights
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: light.study_front_ceiling
                 name: Front ceiling
-                entity: light.study_front_ceiling
                 hold_action: !include ../popups/floor-3-study_light_front.yaml
 
-              - type: 'custom:button-card'
-                template: default_button
+              - entity: light.study_rear_ceiling
                 name: Rear ceiling
-                entity: light.study_rear_ceiling
                 hold_action: !include ../popups/floor-3-study_light_rear.yaml

@@ -7,23 +7,12 @@ badges: []
 cards:
   - type: 'custom:layout-card'
     layout: horizontal
-    max_columns: 3
-    justify_content: start
     cards:
-      - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
+      - type: vertical-stack
+        title: Lights
         cards:
-          - type: 'custom:button-card'
-            template: header
-            name: Lights
-
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: light.hallway_study_ceiling
                 name: Ceiling
-                entity: light.hallway_study_ceiling

@@ -1,0 +1,18 @@
+---
+platform: mqtt
+name: Study - Octoprint - Print - Progress
+
+availability:
+  topic: "octoPrint/mqtt"
+  payload_available: connected
+  payload_not_available: disconnected
+
+unit_of_measurement: "%"
+
+state_topic: "octoPrint/hass/printing"
+value_template: "{{value_json.progress.completion|float|round(2)|default(0,true)}}"
+
+json_attributes_topic: "octoPrint/hass/printing"
+json_attributes_template: "{{value_json.progress|tojson}}"
+
+unique_id: "2a9c747c2a164ecbaf5da96e0e6112ba_PRINTING_P"

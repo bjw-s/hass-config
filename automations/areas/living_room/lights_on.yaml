@@ -8,5 +8,4 @@ trigger:
 action:
   - service: scene.turn_on
     data:
-      entity_id: scene.living_area_christmas_lights_on
-  # - scene: scene.living_room_lights_full_brightness
+      entity_id: scene.living_room_lights_full_brightness

@@ -1,0 +1,12 @@
+---
+id: home_alarm_armed
+alias: Home - Alarm armed
+trigger:
+  - platform: state
+    entity_id: alarm_control_panel.alarm
+    to: 'armed'
+
+action:
+  - service: timer.cancel
+    data:
+      entity_id: timer.home_security_tripwire

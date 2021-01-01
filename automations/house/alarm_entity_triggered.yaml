@@ -1,0 +1,88 @@
+---
+id: home_alarm_entity_triggered
+alias: Home - Alarm entity triggered
+max_exceeded: silent
+trigger:
+  - platform: event
+    event_type: state_changed
+condition:
+  condition: and
+  conditions:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: alarm_control_panel.alarm
+          state: 'disarmed'
+    - condition: template
+      value_template: |
+        {{ 
+          state_attr(trigger.event.data.entity_id, 'alarm_modes') != None 
+          and 
+          states('alarm_control_panel.alarm') in state_attr(trigger.event.data.entity_id, 'alarm_modes')
+        }}
+    - condition: template
+      value_template: |
+        {{ 
+          trigger.event.data.old_state.state == 'off'
+          and 
+          trigger.event.data.new_state.state == 'on'
+        }}
+action:
+  - choose:
+    # Only arm tripwire
+    - conditions:
+        condition: and
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.home_security_tripwire_armed
+            state:  'off'
+          - condition: template
+            value_template: |
+              {{ 
+                state_attr(trigger.event.data.entity_id, 'alarm_tripwire') != None 
+                and
+                state_attr(trigger.event.data.entity_id, 'alarm_tripwire') == true
+              }}
+          - condition: state
+            entity_id: vacuum.living_area_vacuum
+            state:  docked
+      sequence:
+        - service: timer.start
+          data:
+            entity_id: timer.home_security_tripwire
+  
+    # Sound the alarm!
+    - conditions:
+        condition: or
+        conditions:
+          # Regular entity
+          - condition: template
+            value_template: |
+              {{ 
+                state_attr(trigger.event.data.entity_id, 'alarm_tripwire') == None 
+              }}
+          # Tripwire entity and tripwire is armed
+          - condition: template
+            value_template: |
+              {{ 
+                is_state('binary_sensor.home_security_tripwire_armed', 'on')
+                and
+                state_attr(trigger.event.data.entity_id, 'alarm_tripwire') != None 
+                and
+                state_attr(trigger.event.data.entity_id, 'alarm_tripwire') == true
+              }}
+      sequence:
+        - service: alarm_control_panel.alarm_trigger
+          data:
+            entity_id: alarm_control_panel.alarm
+
+            # - service: notify.slack_bot
+            # data:
+            #   message: "Alarm would have triggered"
+            #   data:
+            #     blocks:
+            #       - type: section
+            #         text:
+            #           type: mrkdwn
+            #           text: "Alarm would have been triggered by {{ state_attr(trigger.event.data.entity_id, 'friendly_name') }}"
+  

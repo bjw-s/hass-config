@@ -13,3 +13,5 @@ sonos:
       - !env_var SECRET_SONOS_PLAYER_1
       - !env_var SECRET_SONOS_PLAYER_2
       - !env_var SECRET_SONOS_PLAYER_3
+      - !env_var SECRET_SONOS_PLAYER_4
+      - !env_var SECRET_SONOS_PLAYER_5

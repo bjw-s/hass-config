@@ -4,3 +4,5 @@ all_sonos:
   - media_player.keuken
   - media_player.studeerkamer
   - media_player.woonkamer
+  - media_player.zolder
+  - media_player.1e_etage

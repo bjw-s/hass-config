@@ -15,9 +15,7 @@ apps:
     tv.emby.embyatv: "Emby"
     com.disney.disneyplus: "Disney+"
 state_detection_rules:
-    'ca.dstudio.atvlauncher.pro':
-        - 'idle'
-    'com.awe.dev.pro.tv':
+    'dxidev.sideloadchannel2':
         - 'idle'
     'com.android.tv.settings':
         - 'idle'
@@ -35,5 +33,3 @@ state_detection_rules:
         - 'paused':
               'wake_lock_size': 1  # this indentation is important!
         - 'idle'
-    'tv.emby.embyatv':
-        - 'media_session_state'
