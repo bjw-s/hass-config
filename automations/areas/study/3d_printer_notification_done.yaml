@@ -1,0 +1,19 @@
+---
+id: study_3d_printer_notification_done
+alias: Study - 3D Printer notification - Done
+trigger:
+  - platform: state
+    entity_id: binary_sensor.study_octoprint_printing
+    from: 'on'
+    to: 'off'
+action:
+  - service: notify.slack_bot
+    data:
+      message: "3D Printer is done"
+      target: "@bernd"
+      data:
+        blocks:
+          - type: section
+            text:
+              type: mrkdwn
+              text: "3D Printer is done"
