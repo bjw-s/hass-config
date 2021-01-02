@@ -5,11 +5,12 @@ trigger:
   - platform: numeric_state
     entity_id: sensor.study_octoprint_print_progress
     above: 90
-conditions:
+condition:
   - condition: and
     conditions:
       - condition: template
-        value_template: '{{ (as_timestamp(now()) - as_timestamp(states.automation.study_3d_printer_notification_almost_done.attributes.last_triggered | default(0)) | int > 3600)}}'
+        value_template: |
+          {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.study_3d_printer_notification_almost_done', 'last_triggered') | default(0)) | int > 3600)}}    
 action:
   - service: notify.slack_bot
     data:
