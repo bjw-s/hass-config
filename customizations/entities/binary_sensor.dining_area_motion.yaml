@@ -1,5 +1,0 @@
----
-binary_sensor.dining_area_motion:
-  alarm_tripwire: true
-  alarm_modes:
-    - armed_away

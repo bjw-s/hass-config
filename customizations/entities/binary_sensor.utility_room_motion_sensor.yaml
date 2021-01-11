@@ -1,5 +1,0 @@
----
-binary_sensor.utility_room_motion_sensor:
-  alarm_tripwire: true
-  alarm_modes:
-    - armed_away

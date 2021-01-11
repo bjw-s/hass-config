@@ -1,5 +1,0 @@
-binary_sensor.living_room_window:
-  alarm_modes:
-    - armed_away
-    - armed_night
-    - armed_home
