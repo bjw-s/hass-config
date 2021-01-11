@@ -6,7 +6,7 @@ service_data:
   large: false
   card:
     type: alarm-panel
-    entity: alarm_control_panel.alarm
+    entity: alarm_control_panel.alarmo
     name: ' '
     states:
       - arm_home

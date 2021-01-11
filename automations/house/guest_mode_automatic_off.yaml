@@ -1,0 +1,13 @@
+---
+id: home_guest_mode_automatic_off
+alias: Home - Guest mode automatic off
+trigger:
+  - platform: state
+    entity_id: binary_sensor.home_occupancy_home_status
+    from: 'off'
+    to: 'on'
+
+action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.home_modes_guest_mode

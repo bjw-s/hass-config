@@ -3,7 +3,7 @@ platform: template
 sensors:
   home_security_alarm_armed:
     value_template: >
-      {{ is_state('alarm_control_panel.alarm', 'armed_home')
-         or is_state('alarm_control_panel.alarm', 'armed_night')
-         or is_state('alarm_control_panel.alarm', 'armed_away')
+      {{ is_state('alarm_control_panel.alarmo', 'armed_home')
+         or is_state('alarm_control_panel.alarmo', 'armed_night')
+         or is_state('alarm_control_panel.alarmo', 'armed_away')
       }}

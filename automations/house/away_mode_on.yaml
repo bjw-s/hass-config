@@ -15,5 +15,4 @@ action:
   # Arm alarm
   - service: alarm_control_panel.alarm_arm_away
     data:
-      entity_id: alarm_control_panel.alarm
-      code: !env_var SECRET_ALARM_CODE_AUTOMATION
+      entity_id: alarm_control_panel.alarmo

@@ -3,7 +3,7 @@ id: home_alarm_disarmed
 alias: Home - Alarm disarmed
 trigger:
   - platform: state
-    entity_id: alarm_control_panel.alarm
+    entity_id: alarm_control_panel.alarmo
     to: 'disarmed'
 
 action:
@@ -23,10 +23,6 @@ action:
             url: "{{ states('sensor.system_url_internal') }}/local/audio/beep-ok.mp3"
             stream: 3
 
-  - service: script.turn_on
+  - service: switch.turn_off
     data:
-      entity_id: script.hallway_upstairs_siren_off
-
-  - service: timer.cancel
-    data:
-      entity_id: timer.home_security_tripwire
+      entity_id: switch.hallway_upstairs_siren

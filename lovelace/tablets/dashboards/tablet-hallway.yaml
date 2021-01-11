@@ -27,7 +27,7 @@ views:
                     name: Alarm
                     template: header
                     type: 'custom:button-card'
-                  - entity: alarm_control_panel.alarm
+                  - entity: alarm_control_panel.alarmo
                     gridcol: 1
                     gridrow: 2
                     name: ' '

@@ -3,15 +3,10 @@ id: home_alarm_pending
 alias: Home - Alarm pending
 trigger:
   - platform: state
-    entity_id: alarm_control_panel.alarm
+    entity_id: alarm_control_panel.alarmo
     to: 'pending'
 
 action:
-  # Flash siren
-  - service: script.turn_on
-    data:
-      entity_id: script.hallway_upstairs_siren_warn
-
   # Alert beep
   - service: fullykiosk.play_audio
     data:

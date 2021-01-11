@@ -1,0 +1,14 @@
+---
+id: home_away_mode_automatic_on
+alias: Home - Away mode automatic on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.home_occupancy_home_status
+    from: 'on'
+    to: 'off'
+    for: "00:04:00"
+
+action:
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.home_modes_away_mode

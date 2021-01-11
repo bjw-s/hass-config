@@ -1,6 +1,0 @@
----
-platform: template
-sensors:
-  home_security_tripwire_armed:
-    value_template: >
-      {{ is_state('timer.home_security_tripwire', 'active') }}

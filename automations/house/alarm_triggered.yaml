@@ -1,0 +1,28 @@
+---
+id: home_alarm_triggered
+alias: Home - Alarm triggered
+trigger:
+  - platform: state
+    entity_id: alarm_control_panel.alarmo
+    to: 'triggered'
+
+action:
+  # Sound the alarm
+  # - service: switch.turn_off
+  #   data:
+  #     entity_id: switch.hallway_upstairs_siren
+
+  # Send notification
+  - service: notify.slack_bot
+    data:
+      message: "Alarm has been triggered"
+      data:
+        blocks:
+          - type: section
+            text:
+              type: mrkdwn
+              text: |
+                Alarm has been triggered by: 
+                {% for open_sensor in state_attr("alarm_control_panel.alarmo", "open_sensors").keys() |list %}
+                - {{ state_attr(open_sensor, 'friendly_name') }}
+                {% endfor %}
