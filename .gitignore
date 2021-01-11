@@ -24,6 +24,9 @@ __pycache__
 /secrets.yaml
 /google_service_account.json
 
+# Ignore snapshot images
+/www/images/snapshots
+
 # Specific keeps
 !.gitkeep
 
