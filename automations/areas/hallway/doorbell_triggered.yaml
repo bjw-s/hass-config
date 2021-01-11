@@ -1,0 +1,57 @@
+---
+id: hallway_doorbell_triggered
+alias: Hallway - Doorbell triggered
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: binary_sensor.home_doorbell
+    from: 'off'
+    to: 'on'
+
+variables:
+  doorbell_filename: |
+    {{ now().strftime('%Y-%m-%d_%H-%M-%S%f') }}.jpg
+  driveway_filename: |
+    {{ states('input_text.system_last_driveway_snapshot') }}
+
+action:
+  # Store snapshot
+  - service: camera.snapshot
+    data:
+      entity_id: camera.driveway_front_door
+      filename: '/config/www/images/snapshots/frontdoor/{{ doorbell_filename }}'
+
+  - service: input_text.set_value
+    data:
+      entity_id: input_text.system_last_doorbell_snapshot
+      value: '{{ doorbell_filename }}'
+
+  # Send notification
+  - service: notify.slack_bot
+    data:
+      message: "There is somebody at the door"
+      data:
+        blocks:
+          - type: section
+            text:
+              type: mrkdwn
+              text: |
+                There is somebody at the door
+          - type: "image"
+            title:
+              type: "plain_text"
+              text: "Doorbell press"
+              emoji: false
+            image_url: 'https://domo.bjws.nl/local/images/snapshots/frontdoor/{{ doorbell_filename }}'
+            alt_text: "Doorbell press"
+          - type: "image"
+            title:
+              type: "plain_text"
+              text: "Driveway"
+              emoji: false
+            image_url: 'https://domo.bjws.nl/local/images/snapshots/driveway/{{ driveway_filename }}'
+            alt_text: "Driveway"
+  
+  # Rate limit the automation to once per 30 seconds
+  - delay:
+      seconds: 30

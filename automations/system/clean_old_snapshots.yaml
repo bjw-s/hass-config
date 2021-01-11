@@ -1,0 +1,8 @@
+---
+id: system_clean_old_snapshots
+alias: System - Clean old snapshots
+trigger:
+  - platform: time_pattern
+    hours: "/12"
+action:
+  - service: shell_command.clean_old_snapshots

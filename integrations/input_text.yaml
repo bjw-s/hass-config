@@ -1,0 +1,7 @@
+---
+# The input_text integration allows the user to define values that can be controlled via the frontend and can 
+# be used within conditions of automation
+#
+# https://www.home-assistant.io/components/input_text/
+#
+input_text: !include_dir_merge_named ../entities/input_text

@@ -1,0 +1,23 @@
+---
+id: driveway_motion_snapshot
+alias: Driveway - Motion snapshot
+trigger:
+  - platform: state
+    entity_id: binary_sensor.driveway_motion
+    to: 'on'
+
+variables:
+  driveway_filename: |
+    {{ now().strftime('%Y-%m-%d_%H-%M-%S%f') }}.jpg
+
+action:
+  # Store snapshot
+  - service: camera.snapshot
+    data:
+      entity_id: camera.driveway_front_door
+      filename: '/config/www/images/snapshots/driveway/{{ driveway_filename }}'
+
+  - service: input_text.set_value
+    data:
+      entity_id: input_text.system_last_driveway_snapshot
+      value: '{{ driveway_filename }}'

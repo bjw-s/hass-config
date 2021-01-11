@@ -1,0 +1,8 @@
+---
+# This integration can expose regular shell commands as services. 
+# Services can be called from a script or in automation
+#
+# https://www.home-assistant.io/components/shell_command/
+#
+
+shell_command: !include_dir_merge_named ../entities/shell_commands
