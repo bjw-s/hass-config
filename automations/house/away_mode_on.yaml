@@ -7,6 +7,45 @@ trigger:
     to: 'on'
 
 action:
+  # Turn off lights 1st floor
+  - service: scene.turn_on
+    data:
+      entity_id: scene.hallway_lights_off
+
+  - service: scene.turn_on
+    data:  
+      entity_id: scene.living_room_lights_off
+
+  - service: scene.turn_on
+    data:  
+      entity_id: scene.dining_area_lights_off
+
+  - service: scene.turn_on
+    data:
+      entity_id: scene.kitchen_lights_off
+
+  # Turn off lights 2nd floor
+  - service: scene.turn_on
+    data:
+      entity_id: scene.hallway_upstairs_lights_off
+
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_lights_off
+
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_eva_lights_off
+
+  # Turn off lights 3rd floor
+  - service: scene.turn_on
+    data:
+      entity_id: scene.hallway_study_lights_off
+
+  - service: scene.turn_on
+    data:
+      entity_id: scene.study_lights_off
+
   # Turn on script
   - service: script.turn_on
     data:
