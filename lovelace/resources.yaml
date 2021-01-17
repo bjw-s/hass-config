@@ -24,3 +24,6 @@
 
 - url: /hacsfiles/text-divider-row/text-divider-row.js
   type: module
+
+- url: /hacsfiles/restriction-card/restriction-card.js
+  type: module
