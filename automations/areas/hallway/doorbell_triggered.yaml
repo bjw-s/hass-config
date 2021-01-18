@@ -4,7 +4,7 @@ alias: Hallway - Doorbell triggered
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: binary_sensor.home_doorbell
+    entity_id: binary_sensor.house_doorbell
     from: 'off'
     to: 'on'
 

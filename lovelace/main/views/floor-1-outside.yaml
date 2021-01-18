@@ -26,13 +26,13 @@ cards:
               - type: 'custom:button-card'
                 template: default_button
                 name: Dusk?
-                entity: binary_sensor.is_dusk_driveway
+                entity: binary_sensor.driveway_is_dusk
                 tap_action: !include ../popups/light_levels.yaml
 
               - type: 'custom:button-card'
                 template: default_button
                 name: Dark?
-                entity: binary_sensor.is_dark_driveway
+                entity: binary_sensor.driveway_is_dark
                 tap_action: !include ../popups/light_levels.yaml
 
               - type: 'custom:button-card'
@@ -63,7 +63,7 @@ cards:
                 template: default_button
                 name: WLANThermo
                 icon: 'mdi:grill'
-                entity: binary_sensor.wlanthermo_on_off
+                entity: binary_sensor.backyard_wlanthermo_on_off
                 tap_action: !include ../popups/floor-1-wlanthermo.yaml
 
       - break

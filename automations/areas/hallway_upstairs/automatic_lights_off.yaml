@@ -10,7 +10,7 @@ condition:
   condition: and
   conditions:
     - condition: state
-      entity_id: binary_sensor.automatic_lights_hallway_upstairs
+      entity_id: binary_sensor.hallway_upstairs_automatic_lights
       state: 'on'
     - condition: state
       entity_id: light.hallway_upstairs

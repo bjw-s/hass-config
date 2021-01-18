@@ -13,7 +13,7 @@ condition:
       entity_id: timer.automatic_lights_kitchen
       state: 'active'
     - condition: state
-      entity_id: binary_sensor.automatic_lights_kitchen
+      entity_id: binary_sensor.kitchen_automatic_lights
       state: 'on'
 action:
   - service: timer.start

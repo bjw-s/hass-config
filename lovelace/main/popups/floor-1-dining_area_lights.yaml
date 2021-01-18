@@ -17,7 +17,7 @@ service_data:
           - type: custom:text-divider-row
             text: Settings
 
-          - entity: binary_sensor.automatic_lights_dining_area
+          - entity: binary_sensor.dining_area_automatic_lights
             name: Automatic?
 
           - entity: input_boolean.dining_area_lights_manual_mode

@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  is_dark_hallway:
+  hallway_is_dark:
     icon_template: >
       {% set current_lux = (states('sensor.hallway_light_level') | float) %}
       {% set is_dark_lux = (states('input_number.is_dark_lux_hallway') | float) %}

@@ -3,7 +3,7 @@ id: home_away_mode_automatic_on
 alias: Home - Away mode automatic on
 trigger:
   - platform: state
-    entity_id: binary_sensor.home_occupancy_home_status
+    entity_id: binary_sensor.house_presence
     from: 'on'
     to: 'off'
     for: "00:04:00"

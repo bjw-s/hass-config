@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  is_dark_living_room:
+  living_room_is_dark:
     icon_template: >
       {% set is_dark_lux = (states('input_number.is_dark_lux_living_room') | float) %}
       {%- if states('light.living_room_floor_lamp') == "on" -%}

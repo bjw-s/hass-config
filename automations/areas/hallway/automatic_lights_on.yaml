@@ -20,10 +20,10 @@ condition:
   condition: and
   conditions:
     - condition: state
-      entity_id: binary_sensor.automatic_lights_hallway
+      entity_id: binary_sensor.hallway_automatic_lights
       state: 'on'
     - condition: state
-      entity_id: binary_sensor.is_dark_hallway
+      entity_id: binary_sensor.hallway_is_dark
       state: 'on'
 
 action:

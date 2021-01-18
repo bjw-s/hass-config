@@ -1,8 +1,8 @@
 ---
 platform: template
 sensors:
-  home_occupancy_home_status:
-    friendly_name: 'Home presence'
+  house_presence:
+    friendly_name: 'Presence'
     device_class: presence
     value_template: >
       {{ is_state('person.bernd', 'home')

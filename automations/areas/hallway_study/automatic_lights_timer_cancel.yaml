@@ -6,7 +6,7 @@ trigger:
     entity_id: light.hallway_study
     to: 'off'
   - platform: state
-    entity_id: binary_sensor.automatic_lights_hallway_study
+    entity_id: binary_sensor.hallway_study_automatic_lights
     to: 'off'
 action:
   - service: timer.cancel

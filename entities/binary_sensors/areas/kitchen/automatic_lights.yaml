@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  automatic_lights_kitchen:
+  kitchen_automatic_lights:
     friendly_name: "Kitchen - Automatic Lights"
     value_template:  >
       {{-

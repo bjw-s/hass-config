@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  automatic_lights_living_room:
+  living_room_automatic_lights:
     friendly_name: "Living Room - Automatic Lights"
     value_template:  >
       {{-

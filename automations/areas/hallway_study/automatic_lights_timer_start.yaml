@@ -9,7 +9,7 @@ condition:
   condition: and
   conditions:
     - condition: state
-      entity_id: binary_sensor.automatic_lights_hallway_study
+      entity_id: binary_sensor.hallway_study_automatic_lights
       state: 'on'
 action:
   - service: timer.start

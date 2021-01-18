@@ -7,7 +7,7 @@ trigger:
     entity_id: binary_sensor.living_room_motion
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.is_dark_living_room
+    entity_id: binary_sensor.living_room_is_dark
     to: 'on'
   - platform: state
     entity_id: binary_sensor.living_room_media_playing
@@ -15,10 +15,10 @@ condition:
   condition: and
   conditions:
     - condition: state
-      entity_id: binary_sensor.automatic_lights_living_room
+      entity_id: binary_sensor.living_room_automatic_lights
       state: 'on'
     - condition: state
-      entity_id: binary_sensor.is_dark_living_room
+      entity_id: binary_sensor.living_room_is_dark
       state: 'on'
     - condition: state
       entity_id: binary_sensor.living_area_presence_detected

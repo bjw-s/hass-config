@@ -6,14 +6,14 @@ trigger:
   - platform: state
     entity_id: input_boolean.maintenance_enabled
   - platform: state
-    entity_id: binary_sensor.is_dark_driveway
+    entity_id: binary_sensor.driveway_is_dark
 action:
   - service: frontend.set_theme
     data:
       name: |
         {%- if is_state("input_boolean.maintenance_enabled", "on") -%}
           darkorange
-        {%- elif is_state("binary_sensor.is_dark_driveway", "on") -%}
+        {%- elif is_state("binary_sensor.driveway_is_dark", "on") -%}
           Google Dark Theme
         {%- else -%}
           Google Light Theme

@@ -7,13 +7,13 @@ trigger:
     event_data:
       entity_id: timer.automatic_lights_study
   - platform: state
-    entity_id: binary_sensor.is_dark_study
+    entity_id: binary_sensor.study_is_dark
     to: 'off'
 condition:
   condition: and
   conditions:
     - condition: state
-      entity_id: binary_sensor.automatic_lights_study
+      entity_id: binary_sensor.study_automatic_lights
       state: 'on'
     - condition: state
       entity_id: light.study

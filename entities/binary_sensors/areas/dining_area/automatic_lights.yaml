@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  automatic_lights_dining_area:
+  dining_area_automatic_lights:
     friendly_name: "Dining Area - Automatic Lights"
     value_template:  >
       {{-

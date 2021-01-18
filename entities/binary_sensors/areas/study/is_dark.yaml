@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  is_dark_study:
+  study_is_dark:
     icon_template: >
       {% set is_dark_lux = (states('input_number.is_dark_lux_study') | float) %}
       {%- if states('light.study_ceiling') == "on" -%}

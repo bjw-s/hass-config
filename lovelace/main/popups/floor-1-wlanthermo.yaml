@@ -10,7 +10,7 @@ service_data:
     cards:
       - type: conditional
         conditions:
-          - entity: binary_sensor.wlanthermo_on_off
+          - entity: binary_sensor.backyard_wlanthermo_on_off
             state: 'on'
         card:
           type: history-graph

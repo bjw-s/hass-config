@@ -1,6 +1,6 @@
 ---
 platform: mqtt
-name: home_doorbell
+name: house_doorbell
 state_topic: "doorbell/doorbell_press"
 payload_on: 1
 payload_off: 0

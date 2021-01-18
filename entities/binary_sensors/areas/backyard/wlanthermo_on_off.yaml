@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  wlanthermo_on_off:
+  backyard_wlanthermo_on_off:
     friendly_name: 'WLANThermo On/Off'
     device_class: power
     value_template: >

@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  automatic_lights_backyard:
+  backyard_automatic_lights:
     friendly_name: "Backyard - Automatic Lights"
     value_template:  >
       {{-

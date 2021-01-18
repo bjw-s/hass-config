@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  automatic_lights_hallway:
+  hallway_automatic_lights:
     friendly_name: "Hallway - Automatic Lights"
     value_template:  >
       {{-

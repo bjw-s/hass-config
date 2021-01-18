@@ -17,7 +17,7 @@ service_data:
           - type: custom:text-divider-row
             text: Settings
 
-          - entity: binary_sensor.automatic_lights_kitchen
+          - entity: binary_sensor.kitchen_automatic_lights
             name: Automatic?
 
           - type: conditional

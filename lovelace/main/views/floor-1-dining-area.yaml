@@ -27,7 +27,7 @@ cards:
               - type: 'custom:button-card'
                 template: default_button
                 name: Dark?
-                entity: binary_sensor.is_dark_dining_area
+                entity: binary_sensor.dining_area_is_dark
                 tap_action: !include ../popups/light_levels.yaml
 
               - type: 'custom:button-card'

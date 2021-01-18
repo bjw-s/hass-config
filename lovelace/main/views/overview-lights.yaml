@@ -11,7 +11,7 @@ cards:
         title: Living area
         show_header_toggle: false
         entities:
-          - entity: binary_sensor.automatic_lights_living_room
+          - entity: binary_sensor.living_room_automatic_lights
             name: Automatic lights?
 
           - entity: input_boolean.living_room_lights_manual_mode
@@ -32,7 +32,7 @@ cards:
         title: Dining area
         show_header_toggle: false
         entities:
-          - entity: binary_sensor.automatic_lights_dining_area
+          - entity: binary_sensor.dining_area_automatic_lights
             name: Automatic lights?
 
           - entity: input_boolean.dining_area_lights_manual_mode
@@ -53,7 +53,7 @@ cards:
         title: Kitchen
         show_header_toggle: false
         entities:
-          - entity: binary_sensor.automatic_lights_kitchen
+          - entity: binary_sensor.kitchen_automatic_lights
             name: Automatic lights?
 
           - entity: input_number.automatic_lights_duration_kitchen
@@ -85,7 +85,7 @@ cards:
     title: Hallway downstairs
     show_header_toggle: false
     entities:
-      - entity: binary_sensor.automatic_lights_hallway
+      - entity: binary_sensor.hallway_automatic_lights
         name: Automatic lights?
 
       - entity: input_number.automatic_lights_duration_hallway
@@ -106,7 +106,7 @@ cards:
     title: Hallway upstairs
     show_header_toggle: false
     entities:
-      - entity: binary_sensor.automatic_lights_hallway_upstairs
+      - entity: binary_sensor.hallway_upstairs_automatic_lights
         name: Automatic lights?
 
       - entity: input_number.automatic_lights_duration_hallway_upstairs
@@ -127,7 +127,7 @@ cards:
     title: Hallway study
     show_header_toggle: false
     entities:
-      - entity: binary_sensor.automatic_lights_hallway_study
+      - entity: binary_sensor.hallway_study_automatic_lights
         name: Automatic lights?
 
       - entity: input_number.automatic_lights_duration_hallway_study
@@ -148,7 +148,7 @@ cards:
     title: Study
     show_header_toggle: false
     entities:
-      - entity: binary_sensor.automatic_lights_study
+      - entity: binary_sensor.study_automatic_lights
         name: Automatic lights?
 
       - entity: input_number.automatic_lights_duration_study
@@ -169,7 +169,7 @@ cards:
     title: Backyard
     show_header_toggle: false
     entities:
-      - entity: binary_sensor.automatic_lights_backyard
+      - entity: binary_sensor.backyard_automatic_lights
         name: Automatic lights?
 
       - entity: input_boolean.backyard_lights_manual_mode

@@ -26,7 +26,7 @@ cards:
               - type: 'custom:button-card'
                 template: default_button
                 name: Dark?
-                entity: binary_sensor.is_dark_hallway
+                entity: binary_sensor.hallway_is_dark
                 tap_action: !include ../popups/light_levels.yaml
 
               - type: 'custom:button-card'

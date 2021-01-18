@@ -17,7 +17,7 @@ service_data:
           - type: custom:text-divider-row
             text: Settings
 
-          - entity: binary_sensor.automatic_lights_backyard
+          - entity: binary_sensor.backyard_automatic_lights
             name: Automatic?
 
           - entity: input_boolean.backyard_lights_manual_mode

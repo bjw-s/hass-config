@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  home_security_alarm_armed:
+  house_alarm_armed:
     value_template: >
       {{ is_state('alarm_control_panel.alarmo', 'armed_home')
          or is_state('alarm_control_panel.alarmo', 'armed_night')
