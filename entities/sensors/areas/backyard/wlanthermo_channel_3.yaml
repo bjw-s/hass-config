@@ -1,10 +1,11 @@
+---
 platform: mqtt
-name : WlanThermo Channel 1
+name : WlanThermo Channel 3
 device_class: temperature
 unit_of_measurement: "°C"
 state_topic: "WLanThermo/NANO-c1cec8/status/data"
 value_template: >
-  {% set channel_id = 0 %}
+  {% set channel_id = 2 %}
   {%- if value_json.channel[channel_id].temp == 999.0 -%}
     unavailable
   {%- else -%}
@@ -12,7 +13,7 @@ value_template: >
   {%- endif -%}
 json_attributes_topic: "WLanThermo/NANO-c1cec8/status/data"
 json_attributes_template: >
-  {% set channel_id = 0 %}
+  {% set channel_id = 2 %}
   {{-
     {
       'min': value_json.channel[channel_id].min | float,
@@ -22,3 +23,4 @@ json_attributes_template: >
     } | tojson
   -}}
 expire_after: 60
+unique_id: wlanthermo_channel_3

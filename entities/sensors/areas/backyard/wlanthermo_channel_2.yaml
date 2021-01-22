@@ -23,3 +23,4 @@ json_attributes_template: >
     } | tojson
   -}}
 expire_after: 60
+unique_id: wlanthermo_channel_2
