@@ -74,8 +74,8 @@ async def async_setup_entry(hass, config_entry, async_add_devices):
             name=config["name"],
             area_id=config["area_id"],
         )
-        async_add_devices([alarm_entity])
         hass.data[const.DOMAIN]["areas"][config["area_id"]] = alarm_entity
+        async_add_devices([alarm_entity])
 
     async_dispatcher_connect(hass, "alarmo_register_entity", async_add_alarm_entity)
 
@@ -89,8 +89,8 @@ async def async_setup_entry(hass, config_entry, async_add_devices):
             entity_id=entity_id,
             name=config["name"],
         )
-        async_add_devices([alarm_entity])
         hass.data[const.DOMAIN]["master"] = alarm_entity
+        async_add_devices([alarm_entity])
 
     async_dispatcher_connect(hass, "alarmo_register_master", async_add_alarm_master)
     async_dispatcher_send(hass, "alarmo_platform_loaded")
@@ -259,6 +259,7 @@ class AlarmoBaseEntity(AlarmControlPanelEntity, RestoreEntity):
             self.open_sensors = None
             self.bypassed_sensors = None
             await self.async_update_state(STATE_ALARM_DISARMED)
+            return True
 
     async def async_handle_arm_request(self, arm_mode, code, skip_code):
         """check if conditions are met for starting arm procedure"""
@@ -308,7 +309,7 @@ class AlarmoBaseEntity(AlarmControlPanelEntity, RestoreEntity):
 
     async def async_added_to_hass(self):
         """Connect to dispatcher listening for entity data notifications."""
-        _LOGGER.debug("async_added_to_hass")
+        _LOGGER.debug("{} is added to hass".format(self.entity_id))
         await super().async_added_to_hass()
 
         state = await self.async_get_last_state()
@@ -326,9 +327,8 @@ class AlarmoBaseEntity(AlarmControlPanelEntity, RestoreEntity):
                 self._bypassed_sensors = state.attributes["bypassed_sensors"]
 
     async def async_will_remove_from_hass(self):
-        _LOGGER.debug("async_will_remove_from_hass")
         await super().async_will_remove_from_hass()
-
+        _LOGGER.debug("{} is removed from hass".format(self.entity_id))
 
 class AlarmoAreaEntity(AlarmoBaseEntity):
     """Defines a base alarm_control_panel entity."""
@@ -410,11 +410,6 @@ class AlarmoAreaEntity(AlarmoBaseEntity):
             await self.async_update_state(STATE_ALARM_DISARMED)
 
         self.async_write_ha_state()
-
-    async def async_will_remove_from_hass(self):
-        await super().async_will_remove_from_hass()
-
-        self.hass.data[const.DOMAIN]["areas"].pop(self.area_id, None)
 
     async def async_update_state(self, state: str = None):
         """update the state or refresh state attributes"""
@@ -629,17 +624,11 @@ class AlarmoMasterEntity(AlarmoBaseEntity):
             self._state = STATE_ALARM_DISARMED
         self.async_write_ha_state()
 
-    async def async_will_remove_from_hass(self):
-        await super().async_will_remove_from_hass()
-
-        self.hass.data[const.DOMAIN]["master"] = None
-
     async def async_update_state(self, state: str = None):
         """update the state or refresh state attributes"""
 
-        if state == STATE_ALARM_DISARMED:
-            for item in self.hass.data[const.DOMAIN]["areas"].values():
-                await item.async_alarm_disarm()
+        if state:
+            # do not allow updating the state directly
             return
 
         states = [
@@ -698,6 +687,13 @@ class AlarmoMasterEntity(AlarmoBaseEntity):
             async_dispatcher_send(self.hass, "alarmo_state_updated", None, old_state, state)
 
         self.async_write_ha_state()
+
+    async def async_alarm_disarm(self, code=None, skip_code=False):
+        """Send disarm command."""
+        res = await super().async_alarm_disarm(code, skip_code)
+        if res:
+            for item in self.hass.data[const.DOMAIN]["areas"].values():
+                await item.async_alarm_disarm(code, skip_code)
 
     async def async_arm(self, arm_mode, skip_delay=False, bypass_open_sensors=False):
         """Arm the alarm or switch between arm modes."""
