@@ -12,6 +12,7 @@ python3 -m afvalwijzer.test_sensor
 """
 
 provider = "mijnafvalwijzer"
+
 # provider = "afvalstoffendienstkalender"
 # api_token = "5ef443e778f41c4f75c69459eea6e6ae0c2d92de729aa0fc61653815fbd6a8ca"
 
@@ -23,8 +24,14 @@ provider = "mijnafvalwijzer"
 # postal_code = "5146EG"
 # street_number = "1"
 
-postal_code = "4707PB"
-street_number = "110"
+# postal_code = "4707PB"
+# street_number = "110"
+
+# Rova
+provider = "rova"
+postal_code = "3824XB"
+street_number = "2"
+
 
 # postal_code = "4714CB"
 # street_number = "57"
