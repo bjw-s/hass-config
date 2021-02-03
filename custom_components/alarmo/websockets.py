@@ -95,7 +95,10 @@ class AlarmoConfigView(HomeAssistantView):
                         vol.Optional(const.COMMAND_DISARM): cv.string,
                     }),
                     vol.Required(const.ATTR_REQUIRE_CODE): cv.boolean,
+<<<<<<< HEAD
                     vol.Required(CONF_EVENT_TOPIC): cv.string,
+=======
+>>>>>>> eaea56def3b651a028e07926645b0fb06221308a
                 }),
                 vol.Optional(const.ATTR_MASTER): vol.Schema({
                     vol.Required(const.ATTR_ENABLED): cv.boolean,

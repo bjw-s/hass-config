@@ -1,5 +1,6 @@
 import logging
 
+<<<<<<< HEAD
 from homeassistant.core import (
     HomeAssistant,
 )
@@ -23,3 +24,7 @@ def friendly_name_for_entity_id(entity_id: str, hass: HomeAssistant):
         return state.attributes["friendly_name"]
 
     return entity_id
+=======
+
+_LOGGER = logging.getLogger(__name__)
+>>>>>>> eaea56def3b651a028e07926645b0fb06221308a

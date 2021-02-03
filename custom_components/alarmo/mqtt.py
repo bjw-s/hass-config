@@ -13,17 +13,25 @@ from homeassistant.components.mqtt import (
 )
 
 import homeassistant.components.mqtt as mqtt
+<<<<<<< HEAD
 from homeassistant.helpers.json import JSONEncoder
+=======
+>>>>>>> eaea56def3b651a028e07926645b0fb06221308a
 
 from homeassistant.util import slugify
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from . import const
+<<<<<<< HEAD
 from .helpers import (
     friendly_name_for_entity_id,
 )
 
 _LOGGER = logging.getLogger(__name__)
 CONF_EVENT_TOPIC = "event_topic"
+=======
+
+_LOGGER = logging.getLogger(__name__)
+>>>>>>> eaea56def3b651a028e07926645b0fb06221308a
 
 
 class MqttHandler:
@@ -77,6 +85,7 @@ class MqttHandler:
 
         async_dispatcher_connect(self.hass, "alarmo_state_updated", async_alarm_state_changed)
 
+<<<<<<< HEAD
         @callback
         def async_handle_event(event: str, area_id: str, args: dict = {}):
 
@@ -140,6 +149,8 @@ class MqttHandler:
 
         async_dispatcher_connect(self.hass, "alarmo_event", async_handle_event)
 
+=======
+>>>>>>> eaea56def3b651a028e07926645b0fb06221308a
         # @callback
         # def async_failed_to_arm(area_id: str):
         #     _LOGGER.debug("area {} has failed to arm".format(area_id))
@@ -232,7 +243,11 @@ class MqttHandler:
             if self._config[const.ATTR_MASTER][const.ATTR_ENABLED] and len(self.hass.data[const.DOMAIN]["areas"]) > 1:
                 entity = self.hass.data[const.DOMAIN]["master"]
             elif len(self.hass.data[const.DOMAIN]["areas"]) == 1:
+<<<<<<< HEAD
                 entity = list(self.hass.data[const.DOMAIN]["areas"].values())[0]
+=======
+                entity = self.hass.data[const.DOMAIN]["areas"].values()[0]
+>>>>>>> eaea56def3b651a028e07926645b0fb06221308a
             else:
                 _LOGGER.warning("No area specified")
                 return
