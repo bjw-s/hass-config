@@ -1,0 +1,17 @@
+{
+  "domain": "frigate",
+  "documentation": "https://github.com/blakeblackshear/frigate",
+  "name": "Frigate",
+  "issue_tracker": "https://github.com/blakeblackshear/frigate-hass-integration/issues",
+  "dependencies": [
+    "http"
+  ],
+  "after_dependencies": [
+    "mqtt"
+  ],
+  "config_flow": true,
+  "codeowners": [
+    "@blakeblackshear"
+  ],
+  "requirements": []
+}
