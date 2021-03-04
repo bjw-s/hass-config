@@ -8,6 +8,9 @@ trigger:
 condition:
   - condition: and
     conditions:
+      - condition: state
+        entity_id: input_boolean.study_3d_printer_notifications
+        state: 'on'
       - condition: template
         value_template: |
           {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.study_3d_printer_notification_almost_done', 'last_triggered') | default(0)) | int > 3600)}}    

@@ -6,6 +6,12 @@ trigger:
     entity_id: binary_sensor.study_octoprint_printing
     from: 'on'
     to: 'off'
+condition:
+  - condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.study_3d_printer_notifications
+        state: 'on'
 action:
   - service: notify.slack_bot
     data:
