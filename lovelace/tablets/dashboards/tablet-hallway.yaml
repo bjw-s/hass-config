@@ -27,14 +27,10 @@ views:
                     name: Alarm
                     template: header
                     type: 'custom:button-card'
-                  - entity: alarm_control_panel.alarmo
+                  - type: 'custom:alarmo-card'
+                    entity: alarm_control_panel.alarmo
                     gridcol: 1
                     gridrow: 2
-                    name: ' '
-                    states:
-                      - arm_home
-                      - arm_night
-                      - arm_away
                     style:
                       '#keypad mwc-button':
                         $: |
@@ -54,7 +50,6 @@ views:
                         .card-header {
                           height: 30px;
                         }
-                    type: alarm-panel
                 gridcols: auto
                 gridrows: 40px auto
                 layout: grid
