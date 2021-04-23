@@ -1,8 +1,5 @@
 base_button:
-  styles:
-    card:
-      - height: 120px
-      - width: 120px
+  aspect_ratio: 1/1
 
 default_button:
   template: base_button
