@@ -1,0 +1,35 @@
+---
+id: home_alarm_arm_automatically
+alias: Home - Alarm - Arm automatically
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_away_mode
+    to: 'on'
+
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: alarm_control_panel.alarmo
+      state: 'disarmed'
+
+action:
+  # Wait until vacuum is docked
+  - choose:
+      - alias: "Wait until vacuum is docked"
+        conditions:
+          - condition: not
+            conditions:
+              - condition: state
+                entity_id: vacuum.living_area_vacuum
+                state: 'docked'
+        sequence:
+          - wait_for_trigger:
+              - platform: state
+                entity_id: vacuum.living_area_vacuum
+                to: 'docked'
+  
+  # Arm alarm
+  - service: alarm_control_panel.alarm_arm_away
+    data:
+      entity_id: alarm_control_panel.alarmo

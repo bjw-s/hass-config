@@ -50,8 +50,3 @@ action:
   - service: script.turn_on
     data:
       entity_id: script.home_modes_away_mode
-
-  # Arm alarm
-  - service: alarm_control_panel.alarm_arm_away
-    data:
-      entity_id: alarm_control_panel.alarmo
