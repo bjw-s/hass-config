@@ -2,167 +2,145 @@ title: Security
 icon: 'mdi:lock'
 id: security
 path: security
-panel: true
 badges: []
+type: 'custom:grid-layout'
+layout:
+  grid-template-columns: 30% 30% 30%
+  grid-template-rows: auto
+  grid-template-areas: |
+    "driveway hallway living_room"
+    "driveway garage  dining_area"
+    "driveway study   utility_room"
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "driveway"
+        "hallway"
+        "living_room"
+        "dining_area"
+        "utility_room"
+        "garage"
+        "study"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
 cards:
   - type: 'custom:layout-card'
-    column_width: 98%
+    view_layout:
+      grid-area: driveway
     cards:
+      - type: 'custom:button-card'
+        name: Driveway
+        template: header
       - type: 'custom:layout-card'
-        layout: horizontal
-        max_columns: 3
+        layout_type: grid
+        layout:
+          grid-template-areas: |
+            "camera"
+            "main"
         cards:
-          - type: 'custom:layout-card'
-            gridcols: auto
-            gridrows: 40px auto
-            layout: grid
-            cards:
-              - type: 'custom:button-card'
-                gridcol: 1
-                gridrow: 1
-                name: Driveway
-                template: header
+          - type: picture-entity
+            view_layout:
+              grid-area: camera
+            camera_image: camera.driveway_front_door
+            entity: camera.driveway_front_door
+            name: Driveway
+            show_name: false
+            show_state: false
 
-              - type: picture-entity
-                gridcol: 1
-                gridrow: 2
-                camera_image: camera.driveway_front_door
-                entity: camera.driveway_front_door
-                name: Driveway
-                show_name: false
-                show_state: false
+          - type: glance
+            entities:
+              - entity: binary_sensor.driveway_person_detected
+                name: Driveway person
+              - entity: camera.driveway_last_person
+                name: Last person
 
-              - type: glance
-                gridcol: 1
-                gridrow: 3
-                entities:
-                  - entity: binary_sensor.driveway_person_detected
-                    name: Driveway person
-                  - entity: camera.driveway_last_person
-                    name: Last person
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: hallway
+    cards:
+      - type: 'custom:button-card'
+        name: Hallway
+        template: header
+      - type: glance
+        entities:
+          - entity: binary_sensor.hallway_front_door
+            name: Front door
+          - entity: binary_sensor.hallway_motion
+            name: Motion
 
-          - type: 'custom:layout-card'
-            gridcols: auto
-            gridrows: 40px auto
-            layout: grid
-            cards:
-              - type: 'custom:button-card'
-                gridcol: 1
-                gridrow: 1
-                name: Hallway
-                template: header
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: living_room
+    cards:
+      - type: 'custom:button-card'
+        name: Living room
+        template: header
+      - type: glance
+        entities:
+          - entity: binary_sensor.living_room_door
+            name: Door
+          - entity: binary_sensor.living_room_window
+            name: Front window
+          - entity: binary_sensor.living_room_motion
+            name: Motion
+          - entity: binary_sensor.dining_area_garden_doors
+            name: Garden doors
 
-              - type: glance
-                gridcol: 1
-                gridrow: 2
-                entities:
-                  - entity: binary_sensor.hallway_front_door
-                    name: Front door
-                  - entity: binary_sensor.hallway_motion
-                    name: Motion
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: dining_area
+    cards:
+      - type: 'custom:button-card'
+        name: Dining area & Kitchen
+        template: header
+      - type: glance
+        entities:
+          - entity: binary_sensor.dining_area_motion
+            name: Dining area
+          - entity: binary_sensor.kitchen_motion
+            name: Kitchen
 
-          - type: 'custom:layout-card'
-            gridcols: auto
-            gridrows: 40px auto
-            layout: grid
-            cards:
-              - type: 'custom:button-card'
-                gridcol: 1
-                gridrow: 1
-                name: Living room
-                template: header
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: utility_room
+    cards:
+      - type: 'custom:button-card'
+        name: Utility Room
+        template: header
+      - type: glance
+        entities:
+          - entity: binary_sensor.utility_room_door
+            name: Door
+          - entity: binary_sensor.utility_room_garden_door
+            name: Garden door
 
-              - type: glance
-                gridcol: 1
-                gridrow: 2
-                entities:
-                  - entity: binary_sensor.living_room_door
-                    name: Door
-                  - entity: binary_sensor.living_room_window
-                    name: Front window
-                  - entity: binary_sensor.living_room_motion
-                    name: Motion
-                  - entity: binary_sensor.dining_area_garden_doors
-                    name: Garden doors
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: garage
+    cards:
+      - type: 'custom:button-card'
+        name: Garage
+        template: header
+      - type: glance
+        entities:
+          - entity: binary_sensor.garage_entry_door
+            name: Entry door
+          - entity: binary_sensor.garage_door
+            name: Garage door
+          - entity: binary_sensor.garage_motion
+            name: Motion
 
-          - type: 'custom:layout-card'
-            gridcols: auto
-            gridrows: 40px auto
-            layout: grid
-            cards:
-              - type: 'custom:button-card'
-                gridcol: 1
-                gridrow: 1
-                name: Dining area & Kitchen
-                template: header
-
-              - type: glance
-                gridcol: 1
-                gridrow: 2
-                entities:
-                  - entity: binary_sensor.dining_area_motion
-                    name: Dining area
-                  - entity: binary_sensor.kitchen_motion
-                    name: Kitchen
-
-          - type: 'custom:layout-card'
-            layout: grid
-            gridcols: auto
-            gridrows: 40px auto
-            cards:
-              - type: 'custom:button-card'
-                gridcol: 1
-                gridrow: 1
-                name: Utility room
-                template: header
-
-              - type: glance
-                gridcol: 1
-                gridrow: 2
-                entities:
-                  - entity: binary_sensor.utility_room_door
-                    name: Door
-                  - entity: binary_sensor.utility_room_garden_door
-                    name: Garden door
-
-          - type: 'custom:layout-card'
-            layout: grid
-            gridcols: auto
-            gridrows: 40px auto
-            cards:
-              - type: 'custom:button-card'
-                gridcol: 1
-                gridrow: 1
-                name: Garage
-                template: header
-
-              - type: glance
-                gridcol: 1
-                gridrow: 2
-                entities:
-                  - entity: binary_sensor.garage_entry_door
-                    name: Entry door
-                  - entity: binary_sensor.garage_door
-                    name: Garage door
-                  - entity: binary_sensor.garage_motion
-                    name: Motion
-
-          - type: 'custom:layout-card'
-            layout: grid
-            gridcols: auto
-            gridrows: 40px auto
-            cards:
-              - type: 'custom:button-card'
-                gridcol: 1
-                gridrow: 1
-                name: Study
-                template: header
-
-              - type: glance
-                gridcol: 1
-                gridrow: 2
-                entities:
-                  - entity: binary_sensor.study_balcony_door
-                    name: Balcony door
-                  - entity: binary_sensor.study_window
-                    name: Window
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: study
+    cards:
+      - type: 'custom:button-card'
+        name: Study
+        template: header
+      - type: glance
+        entities:
+          - entity: binary_sensor.study_balcony_door
+            name: Balcony door
+          - entity: binary_sensor.study_window
+            name: Window

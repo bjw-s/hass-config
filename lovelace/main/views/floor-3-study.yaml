@@ -2,92 +2,141 @@ title: Study
 icon: "mdi:laptop"
 id: study
 path: study
-panel: true
 badges: []
+type: 'custom:grid-layout'
+layout:
+  grid-template-columns: 30% 30% 30%
+  grid-template-rows: auto
+  grid-template-areas: |
+    "status audio_video octoprint"
+    "lights .           octoprint"
+    ".      .           octoprint"
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "status"
+        "audio_video"
+        "lights"
+        "octoprint"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
+      grid-template-areas: |
+        "status audio_video"
+        "lights octoprint"
 cards:
-  - type: "custom:layout-card"
-    layout: horizontal
-    max_columns: 3
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: status
     cards:
-      - type: vertical-stack
-        title: Status
-        cards:
-          - type: glance
-            columns: 3
-            entities:
-              - entity: binary_sensor.study_is_dark
-                name: Dark?
-                tap_action: !include ../popups/light_levels.yaml
+      - type: 'custom:button-card'
+        template: header
+        name: Status
 
-              - entity: sensor.study_light_level
-                name: Light level
-                icon: "mdi:theme-light-dark"
+      - type: glance
+        columns: 3
+        entities:
+          - entity: binary_sensor.study_is_dark
+            name: Dark?
+            tap_action: !include ../popups/light_levels.yaml
 
-              - entity: binary_sensor.study_motion
-                name: Motion
+          - entity: sensor.study_light_level
+            name: Light level
+            icon: "mdi:theme-light-dark"
 
-              - entity: sensor.study_temperature
-                name: Temperature
+          - entity: binary_sensor.study_motion
+            name: Motion
 
-              - entity: sensor.study_humidity
-                name: Humidity
+          - entity: sensor.study_temperature
+            name: Temperature
 
-      - type: vertical-stack
-        title: Audio / Video
-        cards:
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: media_player.zolder
-                name: Sonos
-                icon: "mdi:speaker"
+          - entity: sensor.study_humidity
+            name: Humidity
 
-      - type: vertical-stack
-        title: Octoprint
-        cards:
-          - type: picture-entity
-            entity: camera.study_octoprint
-            camera_view: live
-            show_state: false
-            show_name: false
-          - type: 'custom:hui-entities-card'
-            show_header_toggle: false
-            entities:
-              - type: 'custom:restriction-card'
-                card:
-                  entity: switch.study_3d_printer
-                restrictions:
-                  block: true
-                condition:
-                  entity: binary_sensor.study_octoprint_printing
-                  value: 'on'
-                row: true
-                name: Printer power
-                icon: mdi:power
-              - entity: automation.study_3d_printer_automatic_off
-                name: Automatic power off
-                icon: mdi:power
-              - entity: input_boolean.study_3d_printer_notifications
-                name: Notifications
-                icon: mdi:bell
-              - entity: binary_sensor.study_octoprint_printing
-                name: Printing
-              - entity: sensor.study_octoprint_print_progress
-                name: Print progress
-                icon: mdi:progress-clock
-              - entity: sensor.study_octoprint_print_time_left
-                name: Print time left
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: audio_video
+    cards:
+      - type: 'custom:button-card'
+        template: header
+        name: Audio / Video
 
-      - type: vertical-stack
-        title: Lights
-        cards:
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: light.study_front_ceiling
-                name: Front ceiling
-                hold_action: !include ../popups/floor-3-study_light_front.yaml
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: media_player.zolder
+            name: Sonos
+            icon: "mdi:speaker"
 
-              - entity: light.study_rear_ceiling
-                name: Rear ceiling
-                hold_action: !include ../popups/floor-3-study_light_rear.yaml
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: octoprint
+    layout_type: grid
+    layout:
+      grid-template-areas: |
+        "header"
+        "camera"
+        "main"
+    cards:
+      - type: 'custom:button-card'
+        view_layout:
+          grid-area: header
+        template: header
+        name: Octoprint
+
+      - type: picture-entity
+        view_layout:
+          grid-area: camera
+        entity: camera.study_octoprint
+        camera_view: live
+        show_state: false
+        show_name: false
+
+      - type: 'custom:hui-entities-card'
+        view_layout:
+          grid-area: main
+        show_header_toggle: false
+        entities:
+          - type: 'custom:restriction-card'
+            card:
+              entity: switch.study_3d_printer
+            restrictions:
+              block: true
+            condition:
+              entity: binary_sensor.study_octoprint_printing
+              value: 'on'
+            row: true
+            name: Printer power
+            icon: mdi:power
+          - entity: automation.study_3d_printer_automatic_off
+            name: Automatic power off
+            icon: mdi:power
+          - entity: input_boolean.study_3d_printer_notifications
+            name: Notifications
+            icon: mdi:bell
+          - entity: binary_sensor.study_octoprint_printing
+            name: Printing
+          - entity: sensor.study_octoprint_print_progress
+            name: Print progress
+            icon: mdi:progress-clock
+          - entity: sensor.study_octoprint_print_time_left
+            name: Print time left
+
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: lights
+    cards:
+      - type: 'custom:button-card'
+        template: header
+        name: Lights
+
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: light.study_front_ceiling
+            name: Front ceiling
+            hold_action: !include ../popups/floor-3-study_light_front.yaml
+
+          - entity: light.study_rear_ceiling
+            name: Rear ceiling
+            hold_action: !include ../popups/floor-3-study_light_rear.yaml

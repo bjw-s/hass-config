@@ -2,134 +2,99 @@ background: var(--background-image)
 button_card_templates: !include ../button_card_templates.yaml
 
 views:
-  - cards:
-      - cards:
-          - entity: sensor.time
-            gridcol: 1
-            gridrow: 1
-            show_icon: false
-            show_name: false
-            show_state: true
-            styles:
-              card:
-                - padding-top: 10px
-                - padding-bottom: 10px
-                - background: none
-                - box-shadow: none
-              state:
-                - font-weight: normal
-                - font-size: xxx-large
-            type: 'custom:button-card'
-          - cards:
-              - cards:
-                  - gridcol: 1
-                    gridrow: 1
-                    name: Alarm
-                    template: header
-                    type: 'custom:button-card'
-                  - entity: alarm_control_panel.alarmo
-                    gridcol: 1
-                    gridrow: 2
-                    name: ' '
-                    states:
-                      - arm_home
-                      - arm_night
-                      - arm_away
-                    style:
-                      '#keypad mwc-button':
-                        $: |
-                          button {
-                            font-size: 16px !important;
-                          }
-                      '#keypad mwc-button:nth-of-type(12)':
-                        $: |
-                          button {
-                            font-size: 16px !important;
-                            --mdc-theme-primary: green;
-                          }
-                      .: |
-                        ha-card {
-                          --mdc-theme-primary: var(--primary-text-color);
-                        }
-                        .card-header {
-                          height: 30px;
-                        }
-                    type: alarm-panel
-                gridcols: auto
-                gridrows: 40px auto
-                layout: grid
-                type: 'custom:layout-card'
-              - cards:
-                  - gridcol: 1 / span 3
-                    gridrow: 1
-                    name: Trash
-                    template: header
-                    type: 'custom:button-card'
-                  - entity:  sensor.afvalwijzer_restafval
-                    gridcol: 1
-                    gridrow: 2
-                    icon: 'mdi:trash-can'
-                    name: Restafval
-                    template: trash_button
-                    triggers_update:
-                      - sensor.afvalwijzer_restafval
-                      - input_boolean.trash_outside
-                    type: 'custom:button-card'
-                  - entity: sensor.afvalwijzer_gft
-                    gridcol: 2
-                    gridrow: 2
-                    icon: 'mdi:leaf'
-                    name: GFT
-                    template: trash_button
-                    triggers_update:
-                      - sensor.afvalwijzer_gft
-                      - input_boolean.trash_gft_afval_outside
-                    type: 'custom:button-card'
-                  - entity: sensor.afvalwijzer_pmd
-                    gridcol: 3
-                    gridrow: 2
-                    icon: 'mdi:recycle'
-                    name: PMD
-                    template: trash_button
-                    triggers_update:
-                      - sensor.afvalwijzer_pmd
-                      - input_boolean.trash_pmd_outside
-                    type: 'custom:button-card'
-                  - entity: sensor.afvalwijzer_papier
-                    gridcol: 1
-                    gridrow: 3
-                    icon: 'mdi:package-variant'
-                    name: Papier
-                    template: trash_button
-                    triggers_update:
-                      - sensor.afvalwijzer_papier
-                      - input_boolean.trash_oud_papier_outside
-                    type: 'custom:button-card'
-                  - entity: sensor.afvalwijzer_takken
-                    gridcol: 2
-                    gridrow: 3
-                    icon: 'mdi:sprout'
-                    name: Snoeiafval
-                    template: trash_button
-                    triggers_update:
-                      - sensor.afvalwijzer_takken
-                      - input_boolean.trash_snoeiafval_outside
-                    type: 'custom:button-card'
-                    variables:
-                      days_orange: 14
-                  - color_type: blank-card
-                    gridcol: 3
-                    gridrow: 3
-                    type: 'custom:button-card'
-                gridcols: auto
-                gridrows: 40px auto
-                layout: grid
-                type: 'custom:layout-card'
-            layout: horizontal
-            max_columns: 2
-            min_columns: 2
-            type: 'custom:layout-card'
-        column_width: 100%
-        layout: vertical
-        type: 'custom:layout-card'
-    panel: true
+  - badges: []
+    type: 'custom:grid-layout'
+    layout:
+      grid-template-columns: 50% 50%
+      grid-template-rows: auto
+      grid-template-areas: |
+        "header header"
+        "alarm  trash"
+    cards:
+      - type: 'custom:button-card'
+        view_layout:
+          grid-area: header
+        entity: sensor.time
+        show_icon: false
+        show_name: false
+        show_state: true
+        styles:
+          card:
+            - padding-top: 10px
+            - padding-bottom: 10px
+            - background: none
+            - box-shadow: none
+          state:
+            - font-weight: normal
+            - font-size: xxx-large
+
+      - type: 'custom:layout-card'
+        view_layout:
+          grid-area: alarm
+        cards:
+          - type: 'custom:button-card'
+            name: Alarm
+            template: header
+          - type: 'custom:alarmo-card'
+            entity: alarm_control_panel.alarmo
+            keep_keypad_visible: true
+
+      - type: 'custom:layout-card'
+        layout_type: grid
+        view_layout:
+          grid-area: trash
+        cards:
+          - type: 'custom:button-card'
+            name: Trash
+            template: header
+          - type: 'custom:layout-card'
+            layout_type: grid
+            layout:
+              grid-template-columns: 33% 33% 33%
+            cards:
+              - type: 'custom:button-card'
+                entity: sensor.afvalwijzer_restafval
+                icon: 'mdi:trash-can'
+                name: Restafval
+                template: trash_button
+                triggers_update:
+                  - sensor.afvalwijzer_restafval
+                  - input_boolean.trash_outside
+                
+              - type: 'custom:button-card'
+                entity: sensor.afvalwijzer_gft
+                icon: 'mdi:leaf'
+                name: GFT
+                template: trash_button
+                triggers_update:
+                  - sensor.afvalwijzer_gft
+                  - input_boolean.trash_gft_afval_outside
+                
+              - type: 'custom:button-card'
+                entity: sensor.afvalwijzer_pmd
+                icon: 'mdi:recycle'
+                name: PMD
+                template: trash_button
+                triggers_update:
+                  - sensor.afvalwijzer_pmd
+                  - input_boolean.trash_pmd_outside
+                
+              - type: 'custom:button-card'
+                entity: sensor.afvalwijzer_papier
+                icon: 'mdi:package-variant'
+                name: Papier
+                template: trash_button
+                triggers_update:
+                  - sensor.afvalwijzer_papier
+                  - input_boolean.trash_oud_papier_outside
+                
+              - type: 'custom:button-card'
+                entity: sensor.afvalwijzer_takken
+                icon: 'mdi:sprout'
+                name: Snoeiafval
+                template: trash_button
+                triggers_update:
+                  - sensor.afvalwijzer_takken
+                  - input_boolean.trash_snoeiafval_outside
+                variables:
+                  days_orange: 14
