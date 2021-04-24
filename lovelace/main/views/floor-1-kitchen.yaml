@@ -2,52 +2,68 @@ title: Kitchen
 icon: 'mdi:pot-mix'
 id: kitchen
 path: kitchen
-panel: true
 badges: []
+type: 'custom:grid-layout'
+layout:
+  grid-template-columns: 30% 30% 30%
+  grid-template-rows: auto
+  grid-template-areas: |
+    "status audio_video appliances"
+    "lights .       ."
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "status"
+        "audio_video"
+        "appliances"
+        "lights"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
 cards:
   - type: 'custom:layout-card'
-    layout: horizontal
-    max_columns: 3
-    justify_content: start
+    view_layout:
+      grid-area: status
     cards:
-      - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
-        cards:
-          - type: 'custom:button-card'
-            template: header
-            name: Status
-
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
-                name: Dark?
-                entity: binary_sensor.kitchen_is_dark
-                tap_action: !include ../popups/light_levels.yaml
-
-              - type: 'custom:button-card'
-                template: default_button
-                name: Light level
-                icon: 'mdi:theme-light-dark'
-                entity: sensor.kitchen_light_level
-
-              - type: 'custom:button-card'
-                entity: binary_sensor.kitchen_motion
-                template: default_button
-                name: Motion
+      - type: 'custom:button-card'
+        name: Status
+        template: header
 
       - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
+        layout_type: grid
+        layout:
+          grid-template-columns: 30% 30% 30%
         cards:
           - type: 'custom:button-card'
-            template: header
-            name: Audio / Video
+            template: default_button
+            name: Dark?
+            entity: binary_sensor.kitchen_is_dark
+            tap_action: !include ../popups/light_levels.yaml
 
+          - type: 'custom:button-card'
+            template: default_button
+            name: Light level
+            icon: 'mdi:theme-light-dark'
+            entity: sensor.kitchen_light_level
+
+          - type: 'custom:button-card'
+            entity: binary_sensor.kitchen_motion
+            template: default_button
+            name: Motion
+
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: audio_video
+    cards:
+      - type: 'custom:button-card'
+        name: Audio / Video
+        template: header
+
+      - type: 'custom:layout-card'
+        layout_type: grid
+        layout:
+          grid-template-columns: 30% 30% 30%
+        cards:
           - type: 'custom:layout-card'
             layout: horizontal
             column_width: 121px
@@ -60,60 +76,53 @@ cards:
                 entity: media_player.keuken
                 show_state: true
 
-      - break
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: appliances
+    cards:
+      - type: 'custom:button-card'
+        name: Appliances
+        template: header
 
       - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
+        layout_type: grid
+        layout:
+          grid-template-columns: 30% 30% 30%
         cards:
           - type: 'custom:button-card'
-            template: header
-            name: Appliances
+            template: default_button
+            name: Coffee maker
+            icon: 'mdi:coffee'
+            entity: switch.kitchen_coffee_maker_power
 
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
-                name: Coffee maker
-                icon: 'mdi:coffee'
-                entity: switch.kitchen_coffee_maker_power
+          - type: 'custom:button-card'
+            template: default_button
+            name: Oven
+            icon: 'mdi:microwave'
+            entity: switch.kitchen_oven_power
 
-              - type: 'custom:button-card'
-                template: default_button
-                name: Oven
-                icon: 'mdi:microwave'
-                entity: switch.kitchen_oven_power
-
-      - break
-
-      - break
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: lights
+    cards:
+      - type: 'custom:button-card'
+        name: Lights
+        template: header
+        tap_action: !include ../popups/floor-1-kitchen_lights.yaml
 
       - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
+        layout_type: grid
+        layout:
+          grid-template-columns: 30% 30% 30%
         cards:
           - type: 'custom:button-card'
-            template: header
-            name: Lights
-            tap_action: !include ../popups/floor-1-kitchen_lights.yaml
+            template: default_button
+            name: Front
+            entity: light.kitchen_ceiling_front
+            hold_action: !include ../popups/floor-1-kitchen_lights.yaml
 
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
-                name: Front
-                entity: light.kitchen_ceiling_front
-                hold_action: !include ../popups/floor-1-kitchen_lights.yaml
-
-              - type: 'custom:button-card'
-                template: default_button
-                name: Rear
-                entity: light.kitchen_ceiling_rear
-                hold_action: !include ../popups/floor-1-kitchen_lights.yaml
+          - type: 'custom:button-card'
+            template: default_button
+            name: Rear
+            entity: light.kitchen_ceiling_rear
+            hold_action: !include ../popups/floor-1-kitchen_lights.yaml
