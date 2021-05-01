@@ -1,6 +1,6 @@
 ---
-id: home_alarm_arm_automatically
-alias: Home - Alarm - Arm automatically
+id: home_alarm_arm_away_automatically
+alias: Home - Alarm - Arm Away automatically
 trigger:
   - platform: state
     entity_id: input_boolean.home_modes_away_mode

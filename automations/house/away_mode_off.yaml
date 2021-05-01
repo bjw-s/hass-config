@@ -1,0 +1,18 @@
+---
+id: home_away_mode_off
+alias: Home - Away mode off
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_away_mode
+    to: 'off'
+
+action:
+  # Reset automation.home_alarm_arm_automatically
+  - service: automation.turn_off
+    data:
+      entity_id: home_alarm_arm_away_automatically
+      stop_actions: true
+
+  - service: automation.turn_on
+    data:
+      entity_id: home_alarm_arm_away_automatically

@@ -1,10 +1,17 @@
 ---
-id: home_bedtime_mode_on
-alias: Home - Bedtime mode on
+id: home_alarm_arm_night_automatically
+alias: Home - Alarm - Arm Night automatically
 trigger:
   - platform: state
     entity_id: input_boolean.home_modes_bedtime_mode
     to: 'on'
+
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: alarm_control_panel.alarmo
+      state: 'disarmed'
 
 action:
   # Dim tablet audio
