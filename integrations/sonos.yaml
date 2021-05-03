@@ -7,8 +7,6 @@
 
 sonos:
   media_player:
-    # advertise_addr: !env_var SECRET_ADVERTISE_HOST
-    advertise_addr: 192.168.26.5
     hosts: 
       - !env_var SECRET_SONOS_PLAYER_1
       - !env_var SECRET_SONOS_PLAYER_2
