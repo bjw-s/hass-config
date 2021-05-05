@@ -2,22 +2,42 @@ title: Configuration
 icon: 'mdi:cog'
 id: configuration
 path: configuration
-panel: false
 badges: []
+type: 'custom:grid-layout'
+layout:
+  grid-template-columns: 30% 30% 30%
+  grid-template-rows: auto
+  grid-template-areas: |
+    "low_batteries . ."
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "low_batteries"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
 cards:
-  - type: 'custom:auto-entities'
-    card:
-      show_header_toggle: false
-      title: Low batteries
-      type: entities
-    filter:
-      exclude:
-        - attributes:
-            battery_report: false
-      include:
-        - entity_id: '*battery_level'
-          options:
-            icon: 'mdi:battery-alert'
-            secondary_info: last-changed
-          state: <= 30
-    show_empty: true
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: low_batteries
+    cards:
+      - type: 'custom:button-card'
+        name: Low batteries
+        template: header
+
+      - type: 'custom:auto-entities'
+        card:
+          show_header_toggle: false
+          type: entities
+        show_empty: true
+        unique: true
+        filter:
+          exclude:
+            - attributes:
+                battery_report: false
+          include:
+            - entity_id: '*battery_level'
+              options:
+                icon: 'mdi:battery-alert'
+                secondary_info: last-changed
+              state: <= 30

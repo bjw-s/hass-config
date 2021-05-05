@@ -6,5 +6,4 @@ views:
   - !include ../views/overview-security.yaml
   - !include ../views/overview-lights.yaml
   - !include ../views/overview-temperatures.yaml
-  - !include ../views/overview-other.yaml
   - !include ../views/overview-configuration.yaml

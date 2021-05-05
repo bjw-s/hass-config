@@ -2,13 +2,39 @@ title: Lights
 icon: 'mdi:lightbulb'
 id: lights
 path: lights
-panel: false
 badges: []
+type: 'custom:grid-layout'
+layout:
+  grid-template-columns: 30% 30% 30%
+  grid-template-rows: auto
+  grid-template-areas: |
+    "living_area dining_area             kitchen"
+    "hallway_downstairs hallway_upstairs hallway_study"
+    "study              backyard         ."
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "living_area"
+        "dining_area"
+        "kitchen"
+        "hallway_downstairs"
+        "hallway_upstairs"
+        "hallway_study"
+        "study"
+        "backyard"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
 cards:
-  - type: vertical-stack
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: living_area
     cards:
+      - type: 'custom:button-card'
+        name: Living Area
+        template: header
+
       - type: entities
-        title: Living area
         show_header_toggle: false
         entities:
           - entity: binary_sensor.living_room_automatic_lights
@@ -28,8 +54,15 @@ cards:
               entity: timer.living_room_lights_manual_mode
               name: Manual mode duration
 
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: dining_area
+    cards:
+      - type: 'custom:button-card'
+        name: Dining Area
+        template: header
+
       - type: entities
-        title: Dining area
         show_header_toggle: false
         entities:
           - entity: binary_sensor.dining_area_automatic_lights
@@ -49,8 +82,15 @@ cards:
               entity: timer.dining_area_lights_manual_mode
               name: Manual mode duration
 
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: kitchen
+    cards:
+      - type: 'custom:button-card'
+        name: Kitchen
+        template: header
+
       - type: entities
-        title: Kitchen
         show_header_toggle: false
         entities:
           - entity: binary_sensor.kitchen_automatic_lights
@@ -81,103 +121,131 @@ cards:
               entity: timer.kitchen_lights_manual_mode
               name: Manual mode duration
 
-  - type: entities
-    title: Hallway downstairs
-    show_header_toggle: false
-    entities:
-      - entity: binary_sensor.hallway_automatic_lights
-        name: Automatic lights?
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: hallway_downstairs
+    cards:
+      - type: 'custom:button-card'
+        name: Hallway Downstairs
+        template: header
 
-      - entity: input_number.automatic_lights_duration_hallway
-        name: Duration
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.hallway_automatic_lights
+            name: Automatic lights?
 
-      - type: conditional
-        conditions:
-          - entity: timer.automatic_lights_hallway
-            state_not: idle
-        row:
-          entity: timer.automatic_lights_hallway
-          name: Automatic duration
+          - entity: input_number.automatic_lights_duration_hallway
+            name: Duration
 
-      - entity: input_boolean.hallway_lights_manual_mode
-        name: Manual mode
+          - type: conditional
+            conditions:
+              - entity: timer.automatic_lights_hallway
+                state_not: idle
+            row:
+              entity: timer.automatic_lights_hallway
+              name: Automatic duration
 
-  - type: entities
-    title: Hallway upstairs
-    show_header_toggle: false
-    entities:
-      - entity: binary_sensor.hallway_upstairs_automatic_lights
-        name: Automatic lights?
+          - entity: input_boolean.hallway_lights_manual_mode
+            name: Manual mode
 
-      - entity: input_number.automatic_lights_duration_hallway_upstairs
-        name: Duration
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: hallway_upstairs
+    cards:
+      - type: 'custom:button-card'
+        name: Hallway Upstairs
+        template: header
 
-      - type: conditional
-        conditions:
-          - entity: timer.automatic_lights_hallway_upstairs
-            state_not: idle
-        row:
-          entity: timer.automatic_lights_hallway_upstairs
-          name: Automatic duration
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.hallway_upstairs_automatic_lights
+            name: Automatic lights?
 
-      - entity: input_boolean.hallway_upstairs_lights_manual_mode
-        name: Manual mode
+          - entity: input_number.automatic_lights_duration_hallway_upstairs
+            name: Duration
 
-  - type: entities
-    title: Hallway study
-    show_header_toggle: false
-    entities:
-      - entity: binary_sensor.hallway_study_automatic_lights
-        name: Automatic lights?
+          - type: conditional
+            conditions:
+              - entity: timer.automatic_lights_hallway_upstairs
+                state_not: idle
+            row:
+              entity: timer.automatic_lights_hallway_upstairs
+              name: Automatic duration
 
-      - entity: input_number.automatic_lights_duration_hallway_study
-        name: Duration
+          - entity: input_boolean.hallway_upstairs_lights_manual_mode
+            name: Manual mode
 
-      - type: conditional
-        conditions:
-          - entity: timer.automatic_lights_hallway_study
-            state_not: idle
-        row:
-          entity: timer.automatic_lights_hallway_study
-          name: Automatic duration
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: hallway_study
+    cards:
+      - type: 'custom:button-card'
+        name: Hallway Study
+        template: header
 
-      - entity: input_boolean.hallway_study_lights_manual_mode
-        name: Manual mode
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.hallway_study_automatic_lights
+            name: Automatic lights?
 
-  - type: entities
-    title: Study
-    show_header_toggle: false
-    entities:
-      - entity: binary_sensor.study_automatic_lights
-        name: Automatic lights?
+          - entity: input_number.automatic_lights_duration_hallway_study
+            name: Duration
 
-      - entity: input_number.automatic_lights_duration_study
-        name: Duration
+          - type: conditional
+            conditions:
+              - entity: timer.automatic_lights_hallway_study
+                state_not: idle
+            row:
+              entity: timer.automatic_lights_hallway_study
+              name: Automatic duration
 
-      - type: conditional
-        conditions:
-          - entity: timer.automatic_lights_study
-            state_not: idle
-        row:
-          entity: timer.automatic_lights_study
-          name: Automatic duration
+          - entity: input_boolean.hallway_study_lights_manual_mode
+            name: Manual mode
 
-      - entity: input_boolean.study_lights_manual_mode
-        name: Manual mode
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: study
+    cards:
+      - type: 'custom:button-card'
+        name: Study
+        template: header
 
-  - type: entities
-    title: Backyard
-    show_header_toggle: false
-    entities:
-      - entity: binary_sensor.backyard_automatic_lights
-        name: Automatic lights?
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.study_automatic_lights
+            name: Automatic lights?
 
-      - entity: input_boolean.backyard_lights_manual_mode
-        name: Manual mode
+          - entity: input_number.automatic_lights_duration_study
+            name: Duration
 
-  - type: entities
-    title: Other
-    show_header_toggle: false
-    entities:
-      - entity: input_boolean.automatic_lights_driveway
-        name: Driveway
+          - type: conditional
+            conditions:
+              - entity: timer.automatic_lights_study
+                state_not: idle
+            row:
+              entity: timer.automatic_lights_study
+              name: Automatic duration
+
+          - entity: input_boolean.study_lights_manual_mode
+            name: Manual mode
+
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: backyard
+    cards:
+      - type: 'custom:button-card'
+        name: Backyard
+        template: header
+
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.backyard_automatic_lights
+            name: Automatic lights?
+
+          - entity: input_boolean.backyard_lights_manual_mode
+            name: Manual mode

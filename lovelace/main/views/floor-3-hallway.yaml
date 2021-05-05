@@ -2,17 +2,36 @@ title: Hallway
 icon: 'mdi:floor-plan'
 id: hallway
 path: hallway
-panel: true
 badges: []
+type: 'custom:grid-layout'
+layout:
+  grid-template-columns: 30% 30% 30%
+  grid-template-rows: auto
+  grid-template-areas: |
+    "lights .       ."
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "lights"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
 cards:
   - type: 'custom:layout-card'
-    layout: horizontal
+    view_layout:
+      grid-area: lights
     cards:
-      - type: vertical-stack
-        title: Lights
+      - type: 'custom:button-card'
+        name: Lights
+        template: header
+
+      - type: 'custom:layout-card'
+        layout_type: grid
+        layout:
+          grid-template-columns: 30% 30% 30%
         cards:
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: light.hallway_study_ceiling
-                name: Ceiling
+          - type: 'custom:button-card'
+            template: default_button
+            name: Ceiling
+            entity: light.hallway_study_ceiling
+            icon: 'mdi:ceiling-light'

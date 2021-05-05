@@ -2,60 +2,70 @@ title: Hallway
 icon: 'mdi:floor-plan'
 id: hallway
 path: hallway
-panel: true
 badges: []
+type: 'custom:grid-layout'
+layout:
+  grid-template-columns: 30% 30% 30%
+  grid-template-rows: auto
+  grid-template-areas: |
+    "lights .   ."
+    "devices .  ."
+  mediaquery:
+    "(max-width: 600px)":
+      grid-template-columns: 100%
+      grid-template-areas: |
+        "lights"
+        "devices"
+    "(max-width: 800px)":
+      grid-template-columns: 50% 50%
 cards:
   - type: 'custom:layout-card'
-    layout: horizontal
-    max_columns: 3
-    justify_content: start
+    view_layout:
+      grid-area: lights
     cards:
-      - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
-        cards:
-        - type: 'custom:button-card'
-          template: header
-          name: Lights
-
-        - type: 'custom:layout-card'
-          layout: horizontal
-          column_width: 121px
-          justify_content: start
-          cards:
-            - type: 'custom:button-card'
-              template: default_locked
-              name: Automatic?
-              icon: 'mdi:check'
-              entity: input_boolean.automatic_lights_hallway_upstairs
-
-            - type: 'custom:button-card'
-              template: default_button
-              name: Ceiling
-              entity: light.hallway_upstairs_ceiling
+      - type: 'custom:button-card'
+        name: Lights
+        template: header
 
       - type: 'custom:layout-card'
-        layout: vertical
-        column_width: 98%
+        layout_type: grid
+        layout:
+          grid-template-columns: 30% 30% 30%
         cards:
           - type: 'custom:button-card'
-            template: header
-            name: Devices
+            template: default_locked
+            name: Automatic?
+            icon: 'mdi:check'
+            entity: input_boolean.automatic_lights_hallway_upstairs
 
-          - type: 'custom:layout-card'
-            layout: horizontal
-            column_width: 121px
-            justify_content: start
-            cards:
-              - type: 'custom:button-card'
-                template: default_button
-                name: MiMi 🕶️
-                icon: 'mdi:robot-vacuum'
-                entity: vacuum.upstairs_vacuum
-                show_label: true
-                show_state: true
-                state:
-                  - color: var(--disabled-text-color)
-                    value: docked
-                  - spin: true
-                    value: cleaning
+          - type: 'custom:button-card'
+            template: default_button
+            name: Ceiling
+            entity: light.hallway_upstairs_ceiling
+            icon: 'mdi:ceiling-light'
+
+  - type: 'custom:layout-card'
+    view_layout:
+      grid-area: devices
+    cards:
+      - type: 'custom:button-card'
+        name: Devices
+        template: header
+
+      - type: 'custom:layout-card'
+        layout_type: grid
+        layout:
+          grid-template-columns: 30% 30% 30%
+        cards:
+          - type: 'custom:button-card'
+            template: default_button
+            name: MiMi 🕶️
+            icon: 'mdi:robot-vacuum'
+            entity: vacuum.upstairs_vacuum
+            show_label: true
+            show_state: true
+            state:
+              - color: var(--disabled-text-color)
+                value: docked
+              - spin: true
+                value: cleaning

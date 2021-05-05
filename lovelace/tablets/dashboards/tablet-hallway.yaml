@@ -85,8 +85,6 @@ views:
                         return 'Are you sure you want to turn on doorbell audio?';
                     ]]]
                 entity: switch.home_doorbell_sound_enabled
-                gridcol: 2
-                gridrow: 2
                 name: Doorbell
                 show_label: true
                 state:
@@ -101,8 +99,6 @@ views:
               - type: 'custom:button-card'
                 aspect_ratio: 1 / 1
                 entity: vacuum.living_area_vacuum
-                gridcol: 3
-                gridrow: 2
                 icon: 'mdi:robot-vacuum'
                 name: MiMi
                 show_label: true
