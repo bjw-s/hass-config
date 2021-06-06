@@ -10,9 +10,9 @@ action:
   # Reset automation.home_alarm_arm_automatically
   - service: automation.turn_off
     data:
-      entity_id: home_alarm_arm_away_automatically
+      entity_id: automation.home_alarm_arm_away_automatically
       stop_actions: true
 
   - service: automation.turn_on
     data:
-      entity_id: home_alarm_arm_away_automatically
+      entity_id: automation.home_alarm_arm_away_automatically

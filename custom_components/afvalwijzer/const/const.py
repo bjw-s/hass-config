@@ -1,6 +1,11 @@
 import logging
 from datetime import timedelta
 
+API = "api"
+NAME = "afvalwijzer"
+VERSION = "2021.05.01"
+ISSUE_URL = "https://github.com/xirixiz/homeassistant-afvalwijzer/issues"
+
 SENSOR_PROVIDER_TO_URL = {
     "afvalwijzer_data_default": [
         "https://api.{0}.nl/webservices/appsinput/?apikey=5ef443e778f41c4f75c69459eea6e6ae0c2d92de729aa0fc61653815fbd6a8ca&method=postcodecheck&postcode={1}&street=&huisnummer={2}&toevoeging={3}&app_name=afvalwijzer&platform=phone&afvaldata={4}&langs=nl&"
@@ -23,7 +28,6 @@ SENSOR_PREFIX = "afvalwijzer "
 SENSOR_ICON = "mdi:recycle"
 
 ATTR_LAST_UPDATE = "last_update"
-ATTR_HIDDEN = "hidden"
 ATTR_IS_COLLECTION_DATE_TODAY = "is_collection_date_today"
 ATTR_IS_COLLECTION_DATE_TOMORROW = "is_collection_date_tomorrow"
 ATTR_IS_COLLECTION_DATE_DAY_AFTER_TOMORROW = "is_collection_date_day_after_tomorrow"
@@ -39,12 +43,11 @@ SCAN_INTERVAL = timedelta(seconds=30)
 DOMAIN = "afvalwijzer"
 DOMAIN_DATA = "afvalwijzer_data"
 
-STARTUP_MESSAGE = """
+STARTUP_MESSAGE = f"""
 -------------------------------------------------------------------
 Afvalwijzer
-Version: 5.3.3
 This is a custom integration!
 If you have any issues with this you need to open an issue here:
-"https://github.com/xirixiz/homeassistant-afvalwijzer/issues"
+https://github.com/xirixiz/homeassistant-afvalwijzer/issues
 -------------------------------------------------------------------
 """
