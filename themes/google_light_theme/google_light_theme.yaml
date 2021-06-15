@@ -75,3 +75,103 @@ Google Light Theme:
   mdc-theme-surface: var(--paper-card-background-color)
   # Pre/Code
   markdown-code-background-color: rgb(242, 242, 242)
+
+  #custom variables
+  custom-layout-card-padding: 3.3vw
+
+  ####################################################
+  #                                                  #
+  #                     CARD-MOD                     #
+  #                                                  #
+  ####################################################
+
+  card-mod-theme: Google Light Theme
+
+  card-mod-view-yaml: |
+    .: |
+      hui-view {
+        min-height: 100vh;
+      }
+
+    grid-layout:
+      $: |
+        #root {
+          margin: 0 !important;
+        }
+
+    #################################################
+    #                                               #
+    #                   HEADER                      #
+    #                                               #
+    #################################################
+
+    "grid-layout$hui-markdown-card:first-of-type":
+      $: |
+        ha-card {
+          background: url('/local/images/lowpoly-dark.svg');
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          backround-position: center;
+          opacity: 0.8;
+          border-radius: 0;
+          min-width: 100vw;
+          min-height: 5vh;
+          padding: 2.5vh 1vw 2vh 1vw !important;
+           /*CSS transitions*/
+          transition-property: none !important;
+          /*CSS transforms*/
+          transform: none !important;
+          /*CSS animations*/
+          animation: none !important;
+        }
+
+        @keyframes ha-card {
+          0%, 100% {
+            border-bottom: 0.1vw solid rgba(58, 69, 73, 0.2);
+          }
+        }
+
+        /* phone */
+        @media screen and (max-width: 800px) {
+          ha-card {
+            padding: 2.5vh 1vw 1vh 1vw !important;
+          }
+
+      "$ha-card>ha-markdown":
+        $: |
+          h1 {
+            line-height: 0 !important;
+            font-family: SF Display;
+            font-weight: 500 !important;
+            font-size: xx-large;
+            color: var(--text-primary-color);
+          }
+          p {
+            line-height: 0 !important;
+            font-family: SF Display;
+            color: var(--text-primary-color);
+          }
+
+    #################################################
+    #                                               #
+    #               GRID CARD HEADER                #
+    #                                               #
+    #################################################
+    "grid-layout$":
+      hui-grid-card:
+        $: |
+          h1 {
+            line-height: 0 !important;
+            padding: 1vw 0 2vw 0 !important;
+            font-family: SF Text;
+            font-weight: 400 !important;
+          }
+          /* phone */
+          @media screen and (max-width: 800px) {
+            h1 {
+              font-size: 5.5vw !important;
+              line-height: 6vw !important;
+              margin: 2vw 0 0 0 !important;
+            }
+          }

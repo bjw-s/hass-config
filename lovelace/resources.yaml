@@ -27,3 +27,6 @@
 
 - url: /hacsfiles/restriction-card/restriction-card.js
   type: module
+
+- url: /local/css/font.css
+  type: css

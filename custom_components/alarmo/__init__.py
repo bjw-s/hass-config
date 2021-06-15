@@ -89,12 +89,21 @@ async def async_unload_entry(hass, entry):
             *[hass.config_entries.async_forward_entry_unload(entry, PLATFORM)]
         )
     )
-    if unload_ok:
-        async_unregister_panel(hass)
-        coordinator = hass.data[const.DOMAIN]["coordinator"]
-        await coordinator.async_delete()
-        del hass.data[const.DOMAIN]
-    return unload_ok
+    if not unload_ok:
+        return False
+
+    async_unregister_panel(hass)
+    coordinator = hass.data[const.DOMAIN]["coordinator"]
+    await coordinator.async_unload()
+    return True
+
+
+async def async_remove_entry(hass, entry):
+    """Remove Alarmo config entry."""
+    async_unregister_panel(hass)
+    coordinator = hass.data[const.DOMAIN]["coordinator"]
+    await coordinator.async_delete_config()
+    del hass.data[const.DOMAIN]
 
 
 class AlarmoCoordinator(DataUpdateCoordinator):
@@ -106,12 +115,14 @@ class AlarmoCoordinator(DataUpdateCoordinator):
         self.hass = hass
         self.entry = entry
         self.store = store
-        self._push_listeners = []
+        self._subscriptions = []
 
-        async_dispatcher_connect(
-            hass, "alarmo_platform_loaded", self.setup_alarm_entities
+        self._subscriptions.append(
+            async_dispatcher_connect(
+                hass, "alarmo_platform_loaded", self.setup_alarm_entities
+            )
         )
-        self.listen_push_events()
+        self.register_events()
 
         super().__init__(hass, _LOGGER, name=const.DOMAIN)
 
@@ -139,10 +150,9 @@ class AlarmoCoordinator(DataUpdateCoordinator):
                 if data["master"]["enabled"]:
                     async_dispatcher_send(self.hass, "alarmo_register_master", data["master"])
                 else:
-                    automations = self.store.async_get_automations()
-                    automations = dict(filter(lambda el: el[1]["area"] is None, automations.items()))
-                    if automations:
-                        for el in automations.keys():
+                    automations = self.hass.data[const.DOMAIN]["automation_handler"].get_automations_by_area(None)
+                    if len(automations):
+                        for el in automations:
                             self.store.async_delete_automation(el)
                         async_dispatcher_send(self.hass, "alarmo_automations_updated")
 
@@ -162,10 +172,9 @@ class AlarmoCoordinator(DataUpdateCoordinator):
                     self.store.async_delete_sensor(el)
                 async_dispatcher_send(self.hass, "alarmo_sensors_updated")
 
-            automations = self.store.async_get_automations()
-            automations = dict(filter(lambda el: el[1]["area"] == area_id, automations.items()))
-            if automations:
-                for el in automations.keys():
+            automations = self.hass.data[const.DOMAIN]["automation_handler"].get_automations_by_area(area_id)
+            if len(automations):
+                for el in automations:
                     self.store.async_delete_automation(el)
                 async_dispatcher_send(self.hass, "alarmo_automations_updated")
 
@@ -258,12 +267,10 @@ class AlarmoCoordinator(DataUpdateCoordinator):
 
         async_dispatcher_send(self.hass, "alarmo_automations_updated")
 
-    async def async_delete(self):
-        await self.store.async_delete()
-
-    def listen_push_events(self):
+    def register_events(self):
+        # handle push notifications with action buttons
         @callback
-        async def async_handle_event(event):
+        async def async_handle_push_event(event):
             action = None
             if (
                 event.data
@@ -304,8 +311,43 @@ class AlarmoCoordinator(DataUpdateCoordinator):
                 await alarm_entity.async_alarm_disarm(None, True)
 
         for event in const.PUSH_EVENTS:
-            handle = self.hass.bus.async_listen(event, async_handle_event)
-            self._push_listeners.append(handle)
+            self._subscriptions.append(
+                self.hass.bus.async_listen(event, async_handle_push_event)
+            )
+
+        @callback
+        async def async_handle_event(event: str, area_id: str, args: dict = {}):
+            """fire events in HA for use with automations"""
+            if event not in [
+                const.EVENT_FAILED_TO_ARM,
+                const.EVENT_COMMAND_NOT_ALLOWED,
+                const.EVENT_INVALID_CODE_PROVIDED,
+                const.EVENT_NO_CODE_PROVIDED
+            ]:
+                return
+
+            reasons = {
+                const.EVENT_FAILED_TO_ARM: "open_sensors",
+                const.EVENT_COMMAND_NOT_ALLOWED: "not_allowed",
+                const.EVENT_INVALID_CODE_PROVIDED: "invalid_code",
+                const.EVENT_NO_CODE_PROVIDED: "invalid_code",
+            }
+
+            data = {
+                "reason": reasons[event],
+            }
+            if "command" in args:
+                data["command"] = args["command"].upper()
+            if event == const.EVENT_FAILED_TO_ARM:
+                data["sensors"] = list(args["open_sensors"].keys())
+
+            self.hass.bus.fire("alarmo_failed_to_arm", data)
+
+        self._subscriptions.append(
+            async_dispatcher_connect(
+                self.hass, "alarmo_event", async_handle_event
+            )
+        )
 
     async def async_remove_entity(self, area_id: str):
         entity_registry = await self.hass.helpers.entity_registry.async_get_registry()
@@ -317,3 +359,25 @@ class AlarmoCoordinator(DataUpdateCoordinator):
             entity = self.hass.data[const.DOMAIN]["areas"][area_id]
             entity_registry.async_remove(entity.entity_id)
             self.hass.data[const.DOMAIN]["areas"].pop(area_id, None)
+
+    async def async_unload(self):
+        """remove all alarmo objects"""
+
+        # remove alarm_control_panel entities
+        areas = list(self.hass.data[const.DOMAIN]["areas"].keys())
+        for area in areas:
+            await self.async_remove_entity(area)
+        if self.hass.data[const.DOMAIN]["master"]:
+            await self.async_remove_entity("master")
+
+        del self.hass.data[const.DOMAIN]["sensor_handler"]
+        del self.hass.data[const.DOMAIN]["automation_handler"]
+        del self.hass.data[const.DOMAIN]["mqtt_handler"]
+
+        # remove subscriptions for coordinator
+        while len(self._subscriptions):
+            self._subscriptions.pop()()
+
+    async def async_delete_config(self):
+        """wipe alarmo storage"""
+        await self.store.async_delete()

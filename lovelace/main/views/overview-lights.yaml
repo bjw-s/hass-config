@@ -5,35 +5,71 @@ path: lights
 badges: []
 type: 'custom:grid-layout'
 layout:
-  grid-template-columns: 30% 30% 30%
-  grid-template-rows: auto
+  #default
+  grid-gap: var(--custom-layout-card-padding)
+  grid-template-columns: 0 repeat(3, 1fr) 0
+  grid-template-rows: 6vh repeat(3, fit-content(100%)) 0fr
+
   grid-template-areas: |
-    "living_area dining_area             kitchen"
-    "hallway_downstairs hallway_upstairs hallway_study"
-    "study              backyard         ."
+    "header  header               header            header         header"
+    ".       living_area          dining_area       kitchen        ."
+    ".       hallway_downstairs   hallway_upstairs  hallway_attic  ."
+    ".       attic                backyard          .              ."
+    ".       .                    .                 .              ."
+
   mediaquery:
-    "(max-width: 600px)":
-      grid-template-columns: 100%
-      grid-template-areas: |
-        "living_area"
-        "dining_area"
-        "kitchen"
-        "hallway_downstairs"
-        "hallway_upstairs"
-        "hallway_study"
-        "study"
-        "backyard"
+    #phone
     "(max-width: 800px)":
-      grid-template-columns: 50% 50%
+      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
+      grid-template-columns: 0 repeat(1, 1fr) 0
+      grid-template-rows: 8vh repeat(8, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "header  header              header"
+        ".       living_area         ."
+        ".       dining_area         ."
+        ".       kitchen             ."
+        ".       hallway_downstairs  ."
+        ".       hallway_upstairs    ."
+        ".       hallway_attic       ."
+        ".       attic               ."
+        ".       backyard            ."
+        ".       .                   ."
+
+    #tablet portrait
+    "(max-width: 1000px)":
+      grid-gap: calc(var(--custom-layout-card-padding))
+      grid-template-columns: 0 repeat(2, 1fr) 0
+      grid-template-rows: 6vh repeat(5, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "header  header            header              ."
+        ".       living_area       dining_area         ."
+        ".       kitchen           hallway_downstairs  ."
+        ".       hallway_upstairs  hallway_attic       ."
+        ".       attic             backyard            ."
+        ".       .                 .                   ."
+
 cards:
-  - type: 'custom:layout-card'
+  #################################################
+  #                    Header                     #
+  #################################################
+
+  - type: markdown
+    view_layout:
+      grid-area: header
+    content: |
+      # Lights overview
+
+  #################################################
+  #                 Living Area                   #
+  #################################################
+
+  - type: grid
+    title: Living area
     view_layout:
       grid-area: living_area
+    columns: 1
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Living Area
-        template: header
-
       - type: entities
         show_header_toggle: false
         entities:
@@ -54,14 +90,17 @@ cards:
               entity: timer.living_room_lights_manual_mode
               name: Manual mode duration
 
-  - type: 'custom:layout-card'
+  #################################################
+  #                 Dining Area                   #
+  #################################################
+
+  - type: grid
+    title: Dining area
     view_layout:
       grid-area: dining_area
+    columns: 1
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Dining Area
-        template: header
-
       - type: entities
         show_header_toggle: false
         entities:
@@ -82,14 +121,17 @@ cards:
               entity: timer.dining_area_lights_manual_mode
               name: Manual mode duration
 
-  - type: 'custom:layout-card'
+  #################################################
+  #                   Kitchen                     #
+  #################################################
+
+  - type: grid
+    title: Kitchen
     view_layout:
       grid-area: kitchen
+    columns: 1
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Kitchen
-        template: header
-
       - type: entities
         show_header_toggle: false
         entities:
@@ -121,14 +163,17 @@ cards:
               entity: timer.kitchen_lights_manual_mode
               name: Manual mode duration
 
-  - type: 'custom:layout-card'
+  #################################################
+  #             Hallway downstairs                #
+  #################################################
+
+  - type: grid
+    title: Hallway downstairs
     view_layout:
       grid-area: hallway_downstairs
+    columns: 1
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Hallway Downstairs
-        template: header
-
       - type: entities
         show_header_toggle: false
         entities:
@@ -149,14 +194,17 @@ cards:
           - entity: input_boolean.hallway_lights_manual_mode
             name: Manual mode
 
-  - type: 'custom:layout-card'
+  #################################################
+  #              Hallway upstairs                 #
+  #################################################
+
+  - type: grid
+    title: Hallway upstairs
     view_layout:
       grid-area: hallway_upstairs
+    columns: 1
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Hallway Upstairs
-        template: header
-
       - type: entities
         show_header_toggle: false
         entities:
@@ -177,14 +225,17 @@ cards:
           - entity: input_boolean.hallway_upstairs_lights_manual_mode
             name: Manual mode
 
-  - type: 'custom:layout-card'
-    view_layout:
-      grid-area: hallway_study
-    cards:
-      - type: 'custom:button-card'
-        name: Hallway Study
-        template: header
+  #################################################
+  #                Hallway attic                  #
+  #################################################
 
+  - type: grid
+    title: Hallway attic
+    view_layout:
+      grid-area: hallway_attic
+    columns: 1
+    square: false
+    cards:
       - type: entities
         show_header_toggle: false
         entities:
@@ -205,14 +256,17 @@ cards:
           - entity: input_boolean.hallway_study_lights_manual_mode
             name: Manual mode
 
-  - type: 'custom:layout-card'
-    view_layout:
-      grid-area: study
-    cards:
-      - type: 'custom:button-card'
-        name: Study
-        template: header
+  #################################################
+  #                    Attic                      #
+  #################################################
 
+  - type: grid
+    title: Attic
+    view_layout:
+      grid-area: attic
+    columns: 1
+    square: false
+    cards:
       - type: entities
         show_header_toggle: false
         entities:
@@ -233,14 +287,17 @@ cards:
           - entity: input_boolean.study_lights_manual_mode
             name: Manual mode
 
-  - type: 'custom:layout-card'
+  #################################################
+  #                    Attic                      #
+  #################################################
+
+  - type: grid
+    title: Backyard
     view_layout:
       grid-area: backyard
+    columns: 1
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Backyard
-        template: header
-
       - type: entities
         show_header_toggle: false
         entities:

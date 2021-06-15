@@ -5,208 +5,226 @@ path: home
 badges: []
 type: 'custom:grid-layout'
 layout:
-  grid-template-columns: 30% 30%
-  grid-template-rows: 60px auto
+  #default
+  grid-gap: var(--custom-layout-card-padding)
+  grid-template-columns: 0 repeat(3, 1fr) 0
+  grid-template-rows: 6vh repeat(2, fit-content(100%)) 0fr
+
   grid-template-areas: |
-    "header   header"
-    "glance   trash"
-    "presence trash"
-    "modes    ."
+    "header   header   header   header   header"
+    ".        glance   modes    trash    ."
+    ".        presence .        trash    ."
+    ".        .        .        .        ."
+
   mediaquery:
-    "(max-width: 600px)":
-      grid-template-columns: 100%
-      grid-template-areas: |
-        "header"
-        "glance"
-        "presence"
-        "modes"
-        "trash"
+    #phone
     "(max-width: 800px)":
-      grid-template-columns: 50% 50%
+      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
+      grid-template-columns: 0 repeat(1, 1fr) 0
+      grid-template-rows: 8vh repeat(4, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "header  header      header"
+        ".       glance      ."
+        ".       presence    ."
+        ".       modes       ."
+        ".       trash       ."
+        ".       .           ."
+
+    #tablet portrait
+    "(max-width: 1000px)":
+      grid-gap: calc(var(--custom-layout-card-padding) * 1.8)
+      grid-template-columns: 0 repeat(2, 1fr) 0
+      grid-template-rows: 6vh repeat(4, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "header  header    header   header"
+        ".       glance    modes    ."
+        ".       presence  .        ."
+        ".       trash     .        ."
+        ".       .         .        ."
+
 cards:
-  - type: 'custom:button-card'
+  #################################################
+  #                                               #
+  #                    Header                     #
+  #                                               #
+  #################################################
+
+  - type: markdown
     view_layout:
       grid-area: header
-    name: >-
-      [[[ var d = new Date(); var n = d.getHours(); if (0 <= n && n <
-      12) return "Good morning."; else if (12 <= n && n < 18) return
-      "Good afternoon."; else if (18 <= n && n < 24) return "Good
-      evening."; else return "ERROR";]]]
-    styles:
-      card:
-        - width: 100%
-        - background: none
-        - box-shadow: none
-      name:
-        - justify-self: start
-        - margin-left: 10px
-        - font-weight: normal
-        - font-size: xx-large
+    content: |
+      {%- set hour = now().hour -%}
+      {%- if hour > 0 and hour < 12 -%}
+        # Good morning
+      {%- elif hour >= 12 and hour < 18 -%}
+        # Good afternoon
+      {%- else -%}
+        # Good evening
+      {%- endif %}
 
-  - type: 'custom:layout-card'
+  #################################################
+  #                                               #
+  #                    GLANCE                     #
+  #                                               #
+  #################################################
+
+  - type: grid
+    title: At a glance
     view_layout:
       grid-area: glance
+    columns: 3
     cards:
       - type: 'custom:button-card'
-        template: header
-        name: At a glance
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-areas: |
-            "main main main"
-        cards:
-        - type: 'custom:button-card'
-          entity: climate.living_room
-          label: '[[[ return `${entity.attributes.temperature} °C` ]]]'
-          name: Thermostat
-          template: temperature
-          triggers_update:
-            - climate.living_room
+        entity: climate.living_room
+        label: '[[[ return `${entity.attributes.temperature} °C` ]]]'
+        name: Thermostat
+        template: temperature
+        triggers_update:
+          - climate.living_room
 
-        - type: 'custom:button-card'
-          template: base_button
-          entity: alarm_control_panel.alarmo
-          name: Alarm
-          show_label: true
-          show_state: true
-          size: 80%
+      - type: 'custom:button-card'
+        template: base_button
+        entity: alarm_control_panel.alarmo
+        name: Alarm
+        show_label: true
+        show_state: true
+        size: 80%
+        state:
+          - icon: 'mdi:shield-check'
+            styles:
+              icon:
+                - color: var(--label-badge-green)
+            value: disarmed
+          - icon: 'mdi:shield-lock'
+            styles:
+              icon:
+                - color: var(--label-badge-red)
+            operator: regex
+            value: armed_.*
+          - icon: 'mdi:shield-lock'
+            styles:
+              icon:
+                - color: var(--label-badge-yellow)
+            value: pending
+          - icon: 'mdi:shield-lock'
+            styles:
+              icon:
+                - color: var(--label-badge-yellow)
+            value: arming
+        styles:
+          grid:
+            - grid-template-areas: '"i l" "n n" "s s"'
+            - grid-template-columns: 1fr 2fr
+            - grid-template-rows: 1fr min-content
+          img_cell:
+            - margin-bottom: 30%
+            - margin-left: 0%
+          name:
+            - justify-self: start
+            - margin-left: 10%
           state:
-            - icon: 'mdi:shield-check'
-              styles:
-                icon:
-                  - color: var(--label-badge-green)
-              value: disarmed
-            - icon: 'mdi:shield-lock'
-              styles:
-                icon:
-                  - color: var(--label-badge-red)
-              operator: regex
-              value: armed_.*
-            - icon: 'mdi:shield-lock'
-              styles:
-                icon:
-                  - color: var(--label-badge-yellow)
-              value: pending
-            - icon: 'mdi:shield-lock'
-              styles:
-                icon:
-                  - color: var(--label-badge-yellow)
-              value: arming
-          styles:
-            grid:
-              - grid-template-areas: '"i l" "n n" "s s"'
-              - grid-template-columns: 1fr 2fr
-              - grid-template-rows: 1fr min-content
-            img_cell:
-              - margin-bottom: 30%
-              - margin-left: 0%
-            name:
-              - justify-self: start
-              - margin-left: 10%
-            state:
-              - justify-self: start
-              - margin-left: 10%
-              - font-weight: lighter
-              - text-transform: capitalize
-              - white-space: nowrap
-              - overflow: visible
-          tap_action: !include ../popups/alarm.yaml
+            - justify-self: start
+            - margin-left: 10%
+            - font-weight: lighter
+            - text-transform: capitalize
+            - white-space: nowrap
+            - overflow: visible
+        tap_action: !include ../popups/alarm.yaml
 
-  - type: 'custom:layout-card'
+  #################################################
+  #                                               #
+  #                   PRESENCE                    #
+  #                                               #
+  #################################################
+
+  - type: grid
+    title: Presence
     view_layout:
       grid-area: presence
+    columns: 3
     cards:
       - type: 'custom:button-card'
-        template: header
-        name: Presence
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 33% 33% 33%
-        cards:
-          - type: 'custom:button-card'
-            entity: person.bernd
-            template: person
+        entity: person.bernd
+        template: person
 
-          - type: 'custom:button-card'
-            entity: person.man_yie
-            template: person
+      - type: 'custom:button-card'
+        entity: person.man_yie
+        template: person
 
-  - type: 'custom:layout-card'
+  #################################################
+  #                                               #
+  #                     MODES                     #
+  #                                               #
+  #################################################
+
+  - type: grid
+    title: Modes
     view_layout:
       grid-area: modes
+    columns: 3
     cards:
       - type: 'custom:button-card'
-        template: header
-        name: Modes
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 33% 33% 33%
-        cards:
-          - type: 'custom:button-card'
-            entity: input_boolean.home_modes_guest_mode
-            name: Guest
-            show_state: true
-            template: default_locked
+        entity: input_boolean.home_modes_guest_mode
+        name: Guest
+        show_state: true
+        template: default_locked
 
-          - type: 'custom:button-card'
-            entity: input_boolean.home_modes_bedtime_mode
-            name: Bedtime
-            show_state: true
-            template: default_locked
+      - type: 'custom:button-card'
+        entity: input_boolean.home_modes_bedtime_mode
+        name: Bedtime
+        show_state: true
+        template: default_locked
 
-          - type: 'custom:button-card'
-            entity: input_boolean.home_modes_holiday_mode
-            name: Holiday
-            show_state: true
-            template: default_locked
+      - type: 'custom:button-card'
+        entity: input_boolean.home_modes_holiday_mode
+        name: Holiday
+        show_state: true
+        template: default_locked
 
-  - type: 'custom:layout-card'
+  #################################################
+  #                                               #
+  #                     TRASH                     #
+  #                                               #
+  #################################################
+
+  - type: grid
+    title: Trash
     view_layout:
       grid-area: trash
+    columns: 3
     cards:
       - type: 'custom:button-card'
-        template: header
-        name: Trash
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 33% 33% 33%
-        cards:
-          - type: 'custom:button-card'
-            entity:  sensor.afvalwijzer_restafval
-            icon: 'mdi:trash-can'
-            name: Restafval
-            template: trash_button
-            triggers_update:
-              - sensor.afvalwijzer_restafval
-              - input_boolean.trash_outside
+        entity:  sensor.afvalwijzer_restafval
+        icon: 'mdi:trash-can'
+        name: Restafval
+        template: trash_button
+        triggers_update:
+          - sensor.afvalwijzer_restafval
+          - input_boolean.trash_outside
 
-          - type: 'custom:button-card'
-            entity: sensor.afvalwijzer_gft
-            icon: 'mdi:leaf'
-            name: GFT
-            template: trash_button
-            triggers_update:
-              - sensor.afvalwijzer_gft
-              - input_boolean.trash_outside
+      - type: 'custom:button-card'
+        entity: sensor.afvalwijzer_gft
+        icon: 'mdi:leaf'
+        name: GFT
+        template: trash_button
+        triggers_update:
+          - sensor.afvalwijzer_gft
+          - input_boolean.trash_outside
 
-          - type: 'custom:button-card'
-            entity: sensor.afvalwijzer_pmd
-            icon: 'mdi:recycle'
-            name: PMD
-            template: trash_button
-            triggers_update:
-              - sensor.afvalwijzer_pmd
-              - input_boolean.trash_outside
+      - type: 'custom:button-card'
+        entity: sensor.afvalwijzer_pmd
+        icon: 'mdi:recycle'
+        name: PMD
+        template: trash_button
+        triggers_update:
+          - sensor.afvalwijzer_pmd
+          - input_boolean.trash_outside
 
-          - type: 'custom:button-card'
-            entity: sensor.afvalwijzer_papier
-            icon: 'mdi:package-variant'
-            name: Papier
-            template: trash_button
-            triggers_update:
-              - sensor.afvalwijzer_papier
-              - input_boolean.trash_outside
+      - type: 'custom:button-card'
+        entity: sensor.afvalwijzer_papier
+        icon: 'mdi:package-variant'
+        name: Papier
+        template: trash_button
+        triggers_update:
+          - sensor.afvalwijzer_papier
+          - input_boolean.trash_outside

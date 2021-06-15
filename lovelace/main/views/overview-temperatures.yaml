@@ -5,248 +5,267 @@ path: temperatures
 badges: []
 type: 'custom:grid-layout'
 layout:
-  grid-template-columns: 30% 30% 30%
-  grid-template-rows: auto
+  #default
+  grid-gap: var(--custom-layout-card-padding)
+  grid-template-columns: 0 repeat(3, 1fr) 0
+  grid-template-rows: 6vh repeat(3, fit-content(100%)) 0fr
+
   grid-template-areas: |
-    "living_room bedroom bedroom_eva"
-    "bathroom    study   garage"
-    "other       .       ."
+    "header  header       header       header     header"
+    ".       living_room  attic        .          ."
+    ".       bedroom      bedroom_eva  bathroom   ."
+    ".       garage       other        .          ."
+    ".       .            .            .          ."
+
   mediaquery:
-    "(max-width: 600px)":
-      grid-template-columns: 100%
-      grid-template-areas: |
-        "living_room"
-        "bedroom"
-        "bedroom_eva"
-        "bathroom"
-        "study"
-        "garage"
-        "other"
+    #phone
     "(max-width: 800px)":
-      grid-template-columns: 50% 50%
+      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
+      grid-template-columns: 0 repeat(1, 1fr) 0
+      grid-template-rows: 8vh repeat(7, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "header  header        header"      
+        ".       living_room   ."
+        ".       garage        ."
+        ".       bedroom       ."
+        ".       bedroom_eva   ."
+        ".       bathroom      ."
+        ".       attic         ."
+        ".       other         ."
+        ".       .             ."
+
+    #tablet portrait
+    "(max-width: 1000px)":
+      grid-gap: calc(var(--custom-layout-card-padding))
+      grid-template-columns: 0 repeat(2, 1fr) 0
+      grid-template-rows: 6vh repeat(4, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "header  header       header       header"
+        ".       living_room  garage       ."
+        ".       bedroom      bedroom_eva  ."
+        ".       bathroom     .            ."
+        ".       attic        other        ."
+        ".       .            .            ."
+
 cards:
-  - type: 'custom:layout-card'
+  #################################################
+  #                    Header                     #
+  #################################################
+
+  - type: markdown
+    view_layout:
+      grid-area: header
+    content: |
+      # Temperature overview
+
+  #################################################
+  #                 Living Room                   #
+  #################################################
+
+  - type: grid
+    title: Living room
     view_layout:
       grid-area: living_room
+    columns: 2
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Living Room
-        template: header
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.living_room_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 50% 50%
-        cards:
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.living_room_temperature
-                name: Temperature
-            font_size: 75
-            line_color: '#3498db'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.living_room_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
 
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.living_room_humidity
-                name: Humidity
-            color_thresholds:
-              - color: '#e74c3c'
-                value: 40
-              - color: '#29AB87'
-                value: 50
-              - color: '#e74c3c'
-                value: 51
-            font_size: 75
+  #################################################
+  #                   Bedroom                     #
+  #################################################
 
-  - type: 'custom:layout-card'
+  - type: grid
+    title: Bedroom
     view_layout:
       grid-area: bedroom
+    columns: 2
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Bedroom
-        template: header
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bedroom_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 50% 50%
-        cards:
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.bedroom_temperature
-                name: Temperature
-            font_size: 75
-            line_color: '#3498db'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bedroom_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
 
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.bedroom_humidity
-                name: Humidity
-            color_thresholds:
-              - color: '#e74c3c'
-                value: 40
-              - color: '#29AB87'
-                value: 50
-              - color: '#e74c3c'
-                value: 51
-            font_size: 75
+  #################################################
+  #                Bedroom Eva                    #
+  #################################################
 
-  - type: 'custom:layout-card'
+  - type: grid
+    title: Bedroom Eva
     view_layout:
       grid-area: bedroom_eva
+    columns: 2
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Bedroom Eva
-        template: header
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bedroom_eva_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 50% 50%
-        cards:
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.bedroom_eva_temperature
-                name: Temperature
-            font_size: 75
-            line_color: '#3498db'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bedroom_eva_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
 
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.bedroom_eva_humidity
-                name: Humidity
-            color_thresholds:
-              - color: '#e74c3c'
-                value: 40
-              - color: '#29AB87'
-                value: 50
-              - color: '#e74c3c'
-                value: 51
-            font_size: 75
+  #################################################
+  #                  Bathroom                     #
+  #################################################
 
-  - type: 'custom:layout-card'
+  - type: grid
+    title: Bathroom
     view_layout:
       grid-area: bathroom
+    columns: 2
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Bathroom
-        template: header
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bathroom_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 50% 50%
-        cards:
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.bathroom_temperature
-                name: Temperature
-            font_size: 75
-            line_color: '#3498db'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.bathroom_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
 
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.bathroom_humidity
-                name: Humidity
-            color_thresholds:
-              - color: '#e74c3c'
-                value: 40
-              - color: '#29AB87'
-                value: 50
-              - color: '#e74c3c'
-                value: 51
-            font_size: 75
+  #################################################
+  #                    Attic                      #
+  #################################################
 
-  - type: 'custom:layout-card'
+  - type: grid
+    title: Attic
     view_layout:
-      grid-area: study
+      grid-area: attic
+    columns: 2
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Study
-        template: header
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.study_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 50% 50%
-        cards:
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.study_temperature
-                name: Temperature
-            font_size: 75
-            line_color: '#3498db'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.study_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
 
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.study_humidity
-                name: Humidity
-            color_thresholds:
-              - color: '#e74c3c'
-                value: 40
-              - color: '#29AB87'
-                value: 50
-              - color: '#e74c3c'
-                value: 51
-            font_size: 75
+  #################################################
+  #                    Garage                     #
+  #################################################
 
-  - type: 'custom:layout-card'
+  - type: grid
+    title: Garage
     view_layout:
       grid-area: garage
+    columns: 2
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Garage
-        template: header
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.garage_temperature
+            name: Temperature
+        font_size: 75
+        line_color: '#3498db'
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 50% 50%
-        cards:
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.garage_temperature
-                name: Temperature
-            font_size: 75
-            line_color: '#3498db'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.garage_humidity
+            name: Humidity
+        color_thresholds:
+          - color: '#e74c3c'
+            value: 40
+          - color: '#29AB87'
+            value: 50
+          - color: '#e74c3c'
+            value: 51
+        font_size: 75
 
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.garage_humidity
-                name: Humidity
-            color_thresholds:
-              - color: '#e74c3c'
-                value: 40
-              - color: '#29AB87'
-                value: 50
-              - color: '#e74c3c'
-                value: 51
-            font_size: 75
+  #################################################
+  #                     Other                     #
+  #################################################
 
-  - type: 'custom:layout-card'
+  - type: grid
+    title: Other
     view_layout:
       grid-area: other
+    columns: 2
+    square: false
     cards:
-      - type: 'custom:button-card'
-        name: Other
-        template: header
+      - type: 'custom:mini-graph-card'
+        icon: mdi:thermometer
+        entities:
+          - entity: sensor.hallway_temperature
+            name: Hallway temperature
+        font_size: 75
+        line_color: '#3498db'
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 50% 50%
-        cards:
-          - type: 'custom:mini-graph-card'
-            icon: mdi:thermometer
-            entities:
-              - entity: sensor.hallway_temperature
-                name: Hallway temperature
-            font_size: 75
-            line_color: '#3498db'
-
-          - type: 'custom:mini-graph-card'
-            entities:
-              - entity: sensor.driveway_temperature
-                name: Outside temperature
-            font_size: 75
-            line_color: '#3498db'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.driveway_temperature
+            name: Outside temperature
+        font_size: 75
+        line_color: '#3498db'
