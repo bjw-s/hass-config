@@ -98,7 +98,7 @@ views:
                 
               - type: 'custom:button-card'
                 aspect_ratio: 1 / 1
-                entity: vacuum.living_area_vacuum
+                entity: vacuum.living_area
                 icon: 'mdi:robot-vacuum'
                 name: MiMi
                 show_label: true
@@ -120,6 +120,6 @@ views:
                         return "none";
                     ]]]
                   service_data:
-                    entity_id: vacuum.living_area_vacuum
+                    entity_id: vacuum.living_area
                 triggers_update:
-                  - vacuum.living_area_vacuum
+                  - vacuum.living_area

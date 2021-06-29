@@ -16,7 +16,7 @@ condition:
     - condition: not
       conditions:
         - condition: state
-          entity_id: vacuum.living_area_vacuum
+          entity_id: vacuum.living_area
           state: 'cleaning'
 action:
   - choose:

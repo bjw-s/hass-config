@@ -4,4 +4,4 @@
 #
 # https://www.home-assistant.io/components/vacuum/
 #
-vacuum: !include_dir_list ../entities/vacuums
+vacuum:

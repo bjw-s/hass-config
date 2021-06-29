@@ -10,14 +10,14 @@ vacuum_all_zones:
             state: "on"
         sequence:
           - service: vacuum.send_command
-            entity_id: vacuum.living_area_vacuum
+            entity_id: vacuum.living_area
             data:
               command: segmented_cleanup
               params:
                 segment_ids: [ "Woonkamer", "Eethoek", "Keuken", "Bijkeuken" ]
     default:
       - service: vacuum.send_command
-        entity_id: vacuum.living_area_vacuum
+        entity_id: vacuum.living_area
         data:
           command: segmented_cleanup
           params:

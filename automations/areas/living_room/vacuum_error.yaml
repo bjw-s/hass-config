@@ -4,10 +4,10 @@ alias: Living Room - Vacuum Error
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: vacuum.living_area_vacuum
+    entity_id: vacuum.living_area
     to: "error"
 action:
   - service: notify.slack_bot
     data:
       message: |
-        🔴 MiMi error: {{ state_attr('vacuum.living_area_vacuum', 'valetudo_state').name }}
+        🔴 MiMi error: {{ state_attr('vacuum.living_area', 'valetudo_state').name }}

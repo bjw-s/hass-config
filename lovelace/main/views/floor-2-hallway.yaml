@@ -61,7 +61,7 @@ cards:
             template: default_button
             name: MiMi 🕶️
             icon: 'mdi:robot-vacuum'
-            entity: vacuum.upstairs_vacuum
+            entity: vacuum.upstairs
             show_label: true
             show_state: true
             state:

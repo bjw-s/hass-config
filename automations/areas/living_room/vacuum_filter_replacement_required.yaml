@@ -4,7 +4,7 @@ alias: Living Room - Vacuum filter replacement required
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: vacuum.living_area_vacuum
+    entity_id: vacuum.living_area
     attribute: filter
     to: "0"
 action:

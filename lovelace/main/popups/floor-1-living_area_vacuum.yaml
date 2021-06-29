@@ -8,7 +8,7 @@ browser_mod:
     column_width: 100%
     cards:
       - type: picture-entity
-        entity: vacuum.living_area_vacuum
+        entity: vacuum.living_area
         camera_image: camera.living_area_vacuum_map
         camera_view: live
         show_name: false
