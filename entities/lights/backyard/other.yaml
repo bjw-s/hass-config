@@ -1,8 +1,10 @@
 ---
 platform: mqtt
 name: "Backyard - Other"
+
 command_topic: "garden_lights/switch/garden_lights/command"
 state_topic: "garden_lights/switch/garden_lights/state"
 availability_topic: "garden_lights/status"
+
 payload_on: "ON"
 payload_off: "OFF"
