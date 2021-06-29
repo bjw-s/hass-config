@@ -1,14 +1,6 @@
 ---
-platform: mqtt
-
-availability_topic: zigbee2mqtt/bridge/state
-brightness: true
-brightness_scale: 254
-command_topic: "zigbee2mqtt/Hallway - Ceiling Light/set"
-
-json_attributes_topic: "zigbee2mqtt/Hallway - Ceiling Light"
-name: "Hallway - Ceiling"
-schema: json
-
-state_topic: "zigbee2mqtt/Hallway - Ceiling Light"
-unique_id: "0x00178801081b387c_0x00178801081b2da1_zigbee2mqtt"
+platform: group
+name: Hallway - Ceiling
+entities:
+  - light.hallway_ceiling_light_1
+  - light.hallway_ceiling_light_2

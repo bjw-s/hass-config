@@ -2,9 +2,12 @@
 id: living_room_lights_off
 alias: Living Room - Lights off
 trigger:
-  - platform: state
-    entity_id: binary_sensor.living_room_switch_bottom
-    to: 'on'
+  - platform: device
+    domain: mqtt
+    device_id: 030ecf5d6e97435dfceeffb7c5e0d5b0
+    type: action
+    subtype: recall_scene_1
+    discovery_id: 0x0000000001715691 action_recall_scene_1
 action:
   - service: scene.turn_on
     data:
