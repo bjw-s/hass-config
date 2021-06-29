@@ -1,14 +1,8 @@
 ---
-platform: mqtt
-name: "Study - Rear Ceiling"
-
-availability_topic: zigbee2mqtt/bridge/state
-brightness: true
-brightness_scale: 254
-command_topic: "zigbee2mqtt/Study - Rear Ceiling Light/set"
-
-json_attributes_topic: "zigbee2mqtt/Study - Rear Ceiling Light"
-schema: json
-
-state_topic: "zigbee2mqtt/Study - Rear Ceiling Light"
-unique_id: "0x90fd9ffffe105ab1_0x000b57fffeebec09_0x000b57fffed4fc8f_0x000b57fffea84605_light_zigbee2mqtt"
+platform: group
+name: Study - Rear Ceiling
+entities:
+  - light.study_rear_ceiling_1
+  - light.study_rear_ceiling_2
+  - light.study_rear_ceiling_3
+  - light.study_rear_ceiling_4

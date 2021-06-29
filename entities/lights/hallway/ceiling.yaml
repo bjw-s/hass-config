@@ -2,5 +2,5 @@
 platform: group
 name: Hallway - Ceiling
 entities:
-  - light.hallway_ceiling_light_1
-  - light.hallway_ceiling_light_2
+  - light.hallway_ceiling_1
+  - light.hallway_ceiling_2

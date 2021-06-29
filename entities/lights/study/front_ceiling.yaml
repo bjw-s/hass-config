@@ -1,14 +1,7 @@
 ---
-platform: mqtt
-name: "Study - Front Ceiling"
-
-availability_topic: zigbee2mqtt/bridge/state
-brightness: true
-brightness_scale: 254
-command_topic: "zigbee2mqtt/Study - Front Ceiling Light/set"
-
-json_attributes_topic: "zigbee2mqtt/Study - Front Ceiling Light"
-schema: json
-
-state_topic: "zigbee2mqtt/Study - Front Ceiling Light"
-unique_id: "0x90fd9ffffe1450dd_0x000b57fffeebef4e_0x000b57fffed84bd4_light_zigbee2mqtt"
+platform: group
+name: Study - Front Ceiling
+entities:
+  - light.study_front_ceiling_1
+  - light.study_front_ceiling_2
+  - light.study_front_ceiling_3

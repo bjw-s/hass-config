@@ -1,34 +1,7 @@
 ---
-platform: mqtt
-
-availability_topic: zigbee2mqtt/bridge/state
-brightness: true
-brightness_scale: 254
-color_temp: true
-xy: false
-hs: false
-command_topic: "zigbee2mqtt/Study Upstairs - Ceiling Light/set"
-
-effect: true
-effect_list: 
-  - blink
-  - breathe
-  - okay
-  - channel_change
-  - finish_effect
-  - stop_effect
-
-json_attributes_topic: "zigbee2mqtt/Study Upstairs - Ceiling Light"
-name: "Study Upstairs - Ceiling"
-schema: json
-
-state_topic: "zigbee2mqtt/Study Upstairs - Ceiling Light"
-unique_id: "0xd0cf5efffee6f491_zigbee2mqtt"
-
-device:
-  identifiers:
-  - zigbee2mqtt_0xd0cf5efffee6f491
-  manufacturer: IKEA
-  model: TRADFRI LED bulb E27 1000 lumen, dimmable, white spectrum, opal white (LED1732G11)
-  name: Study Upstairs - Ceiling Light
-  sw_version: Zigbee2MQTT 1.16.1
+platform: group
+name: Study Upstairs - Ceiling
+entities:
+  - light.study_upstairs_ceiling_1
+  - light.study_upstairs_ceiling_2
+  - light.study_upstairs_ceiling_3
