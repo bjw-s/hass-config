@@ -5,96 +5,117 @@ path: hallway
 badges: []
 type: 'custom:grid-layout'
 layout:
-  grid-template-columns: 30% 30% 30%
-  grid-template-rows: auto
+  #default
+  grid-gap: var(--custom-layout-card-padding)
+  grid-template-columns: 0 repeat(3, 1fr) 0
+  grid-template-rows: 6vh repeat(2, fit-content(100%)) 0fr
+
   grid-template-areas: |
-    "status devices ."
-    "lights .       ."
+    "header   header   header   header   header"
+    ".        status   devices  .        ."
+    ".        lights   .        .        ."
+    ".        .        .        .        ."
+
   mediaquery:
-    "(max-width: 600px)":
-      grid-template-columns: 100%
-      grid-template-areas: |
-        "status"
-        "devices"
-        "lights"
+    #phone
     "(max-width: 800px)":
-      grid-template-columns: 50% 50%
+      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
+      grid-template-columns: 0 repeat(1, 1fr) 0
+      grid-template-rows: 8vh repeat(3, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "header  header      header"
+        ".       status      ."
+        ".       devices     ."
+        ".       lights      ."
+        ".       .           ."
+
+    #tablet portrait
+    "(max-width: 1000px)":
+      grid-gap: calc(var(--custom-layout-card-padding) * 1.8)
+      grid-template-columns: 0 repeat(2, 1fr) 0
+      grid-template-rows: 6vh repeat(2, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "header  header    header   header"
+        ".       status    devices  ."
+        ".       lights    .        ."
+        ".       .         .        ."
+
 cards:
-  - type: 'custom:layout-card'
+  #################################################
+  #                    Header                     #
+  #################################################
+
+  - type: markdown
+    view_layout:
+      grid-area: header
+    content: |
+      # Hallway
+
+  #################################################
+  #                    Status                     #
+  #################################################
+
+  - type: grid
+    title: Status
     view_layout:
       grid-area: status
+    columns: 3
     cards:
       - type: 'custom:button-card'
-        name: Status
-        template: header
+        template: default_button
+        name: Dark?
+        entity: binary_sensor.hallway_is_dark
+        tap_action: !include ../popups/light_levels.yaml
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 30% 30% 30%
-        cards:
-          - type: 'custom:button-card'
-            template: default_button
-            name: Dark?
-            entity: binary_sensor.hallway_is_dark
-            tap_action: !include ../popups/light_levels.yaml
+      - type: 'custom:button-card'
+        template: default_button
+        name: Light level
+        icon: 'mdi:theme-light-dark'
+        entity: sensor.hallway_light_level
 
-          - type: 'custom:button-card'
-            template: default_button
-            name: Light level
-            icon: 'mdi:theme-light-dark'
-            entity: sensor.hallway_light_level
+      - type: 'custom:button-card'
+        entity: binary_sensor.hallway_motion
+        template: default_button
+        name: Motion
 
-          - type: 'custom:button-card'
-            entity: binary_sensor.hallway_motion
-            template: default_button
-            name: Motion
+  #################################################
+  #                    Status                     #
+  #################################################
 
-  - type: 'custom:layout-card'
+  - type: grid
+    title: Devices
     view_layout:
       grid-area: devices
+    columns: 3
     cards:
       - type: 'custom:button-card'
-        name: Devices
-        template: header
+        entity: switch.home_doorbell_sound_enabled
+        template: default_button
+        name: Doorbell
+        icon: 'mdi:bell'
+        show_state: false
+        state:
+          - color: var(--disabled-text-color)
+            icon: 'mdi:volume-off'
+            label: Silent
+            value: 'off'
+          - icon: 'mdi:volume-high'
+            label: 'On'
+            value: 'on'
 
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 30% 30% 30%
-        cards:
-          - type: 'custom:button-card'
-            entity: switch.home_doorbell_sound_enabled
-            template: default_button
-            name: Doorbell
-            icon: 'mdi:bell'
-            show_state: false
-            state:
-              - color: var(--disabled-text-color)
-                icon: 'mdi:volume-off'
-                label: Silent
-                value: 'off'
-              - icon: 'mdi:volume-high'
-                label: 'On'
-                value: 'on'
+  #################################################
+  #                    Status                     #
+  #################################################
 
-  - type: 'custom:layout-card'
+  - type: grid
+    title: Lights
     view_layout:
       grid-area: lights
+    columns: 3
     cards:
       - type: 'custom:button-card'
-        name: Lights
-        template: header
-        tap_action: !include ../popups/floor-1-hallway_lights.yaml
-
-      - type: 'custom:layout-card'
-        layout_type: grid
-        layout:
-          grid-template-columns: 30% 30% 30%
-        cards:
-          - type: 'custom:button-card'
-            template: default_button
-            name: Ceiling
-            entity: light.hallway_ceiling
-            icon: 'mdi:ceiling-light'
-            hold_action: !include ../popups/floor-1-hallway_lights.yaml
+        template: default_button
+        name: Ceiling
+        entity: light.hallway_ceiling
+        icon: 'mdi:ceiling-light'
+        hold_action: !include ../popups/floor-1-hallway_lights.yaml
