@@ -158,12 +158,12 @@ cards:
     square: false
     cards:
       - type: 'custom:button-card'
-        entity: binary_sensor.dining_area_motion
+        entity: binary_sensor.dining_area_motion_sensor_occupancy
         name: Dining Area
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.kitchen_motion
+        entity: binary_sensor.kitchen_motion_sensor_occupancy
         name: Kitchen
         template: default_button
 

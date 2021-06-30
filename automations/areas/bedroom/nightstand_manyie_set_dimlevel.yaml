@@ -2,12 +2,18 @@
 id: bedroom_nightstand_manyie_set_dimlevel
 alias: Bedroom - Nightstand ManYie set dimlevel
 trigger:
-  - platform: state
-    entity_id: sensor.bedroom_nightstand_manyie_remote
-    to: brightness_up_click
-  - platform: state
-    entity_id: sensor.bedroom_nightstand_manyie_remote
-    to: brightness_down_click
+  - platform: device
+    domain: mqtt
+    device_id: 16ddfbe0fa5d3d2f9839f22c06427b62
+    type: action
+    subtype: brightness_up_click
+    discovery_id: 0x90fd9ffffe9096ea action_brightness_up_click
+  - platform: device
+    domain: mqtt
+    device_id: 16ddfbe0fa5d3d2f9839f22c06427b62
+    type: action
+    subtype: brightness_down_click
+    discovery_id: 0x90fd9ffffe9096ea action_brightness_down_click
 variables:
   target: light.bedroom_nightstand_manyie
   min_brightness: 0

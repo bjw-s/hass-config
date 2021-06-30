@@ -3,7 +3,7 @@ id: kitchen_automatic_lights_on
 alias: Kitchen - Automatic lights on
 trigger:
   - platform: state
-    entity_id: binary_sensor.kitchen_motion
+    entity_id: binary_sensor.kitchen_motion_sensor_occupancy
     to: 'on'
 condition:
   condition: and

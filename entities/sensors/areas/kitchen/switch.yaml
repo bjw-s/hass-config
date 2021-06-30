@@ -1,8 +1,0 @@
----
-platform: "mqtt"
-name: "Kitchen - Switch"
-state_topic: "zigbee2mqtt/Kitchen - Switch"
-availability_topic: "zigbee2mqtt/bridge/state"
-icon: "mdi:gesture-double-tap"
-value_template: "{{ value_json.action }}"
-unique_id: "0x0000000001715668_greenpower_zigbee2mqtt"

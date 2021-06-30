@@ -44,10 +44,10 @@ cards:
             template: default_button
             name: Light level
             icon: 'mdi:theme-light-dark'
-            entity: sensor.kitchen_light_level
+            entity: sensor.kitchen_motion_sensor_illuminance_lux
 
           - type: 'custom:button-card'
-            entity: binary_sensor.kitchen_motion
+            entity: binary_sensor.kitchen_motion_sensor_occupancy
             template: default_button
             name: Motion
 

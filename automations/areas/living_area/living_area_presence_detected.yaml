@@ -7,7 +7,7 @@ trigger:
     entity_id: binary_sensor.living_room_motion
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.dining_area_motion
+    entity_id: binary_sensor.dining_area_motion_sensor_occupancy
     to: 'on'
 condition:
   condition: and

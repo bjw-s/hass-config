@@ -4,7 +4,7 @@ alias: Kitchen - Automatic lights timer (re)start
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: binary_sensor.kitchen_motion
+    entity_id: binary_sensor.kitchen_motion_sensor_occupancy
     to: 'on'
 condition:
   condition: and

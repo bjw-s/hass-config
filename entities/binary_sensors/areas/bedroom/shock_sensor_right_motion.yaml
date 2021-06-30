@@ -6,12 +6,12 @@ sensors:
     value_template:  >
       {% set value = states('sensor.bedroom_shock_sensor_right_strength') %}
       {{-
-        states('sensor.bedroom_shock_sensor_right')  == 'tilt'
+        states('sensor.bedroom_shock_sensor_right_action')  == 'tilt'
         or
-        states('sensor.bedroom_shock_sensor_right')  == 'vibration'
+        states('sensor.bedroom_shock_sensor_right_action')  == 'vibration'
         or
         (
-          states('sensor.bedroom_shock_sensor_right')  == ''
+          states('sensor.bedroom_shock_sensor_right_action')  == ''
           and
           ((as_timestamp(now()) - as_timestamp(states.sensor.bedroom_shock_sensor_right.last_changed)) | round(0)) < 300
         )

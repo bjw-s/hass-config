@@ -102,14 +102,14 @@ cards:
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bedroom_temperature
+          - entity: sensor.bedroom_multisensor_temperature
             name: Temperature
         font_size: 75
         line_color: '#3498db'
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bedroom_humidity
+          - entity: sensor.bedroom_multisensor_humidity
             name: Humidity
         color_thresholds:
           - color: '#e74c3c'
@@ -133,14 +133,14 @@ cards:
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bedroom_eva_temperature
+          - entity: sensor.bedroom_eva_multisensor_temperature
             name: Temperature
         font_size: 75
         line_color: '#3498db'
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bedroom_eva_humidity
+          - entity: sensor.bedroom_eva_multisensor_humidity
             name: Humidity
         color_thresholds:
           - color: '#e74c3c'
@@ -164,14 +164,14 @@ cards:
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bathroom_temperature
+          - entity: sensor.bathroom_multisensor_temperature
             name: Temperature
         font_size: 75
         line_color: '#3498db'
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bathroom_humidity
+          - entity: sensor.bathroom_multisensor_humidity
             name: Humidity
         color_thresholds:
           - color: '#e74c3c'
@@ -265,7 +265,7 @@ cards:
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.driveway_temperature
+          - entity: sensor.driveway_motion_sensor_temperature
             name: Outside temperature
         font_size: 75
         line_color: '#3498db'

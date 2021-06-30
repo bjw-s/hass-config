@@ -3,9 +3,12 @@ id: bedroom_eva_ceiling_light_toggle
 alias: Bedroom Eva - Ceiling light toggle
 max_exceeded: silent
 trigger:
-  - platform: state
-    entity_id: sensor.bedroom_eva_switch
-    to: single
+  - platform: device
+    domain: mqtt
+    device_id: 69f575f7db8e116d27f324a335bdb26b
+    type: click
+    subtype: single
+    discovery_id: 0x00158d0001833e04 click_single
 action:
   - choose:
     - conditions:

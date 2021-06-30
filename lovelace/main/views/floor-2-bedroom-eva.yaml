@@ -35,12 +35,12 @@ cards:
           - type: 'custom:button-card'
             template: default_button
             name: Temperature
-            entity: sensor.bedroom_eva_temperature
+            entity: sensor.bedroom_eva_multisensor_temperature
 
           - type: 'custom:button-card'
             template: default_button
             name: Humidity
-            entity: sensor.bedroom_eva_humidity
+            entity: sensor.bedroom_eva_multisensor_humidity
 
   - type: 'custom:layout-card'
     view_layout:

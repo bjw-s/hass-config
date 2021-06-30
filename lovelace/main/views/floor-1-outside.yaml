@@ -46,7 +46,7 @@ cards:
             tap_action: !include ../popups/light_levels.yaml
 
           - type: 'custom:button-card'
-            entity: sensor.driveway_light_level
+            entity: sensor.driveway_motion_sensor_illuminance_lux
             template: default_button
             name: Light level
             icon: 'mdi:theme-light-dark'

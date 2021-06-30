@@ -42,12 +42,12 @@ cards:
             template: default_button
             name: Light level
             icon: 'mdi:theme-light-dark'
-            entity: sensor.dining_area_light_level
+            entity: sensor.dining_area_motion_sensor_illuminance_lux
 
           - type: 'custom:button-card'
             template: default_button
             name: Motion
-            entity: binary_sensor.dining_area_motion
+            entity: binary_sensor.dining_area_motion_sensor_occupancy
 
   - type: 'custom:layout-card'
     view_layout:

@@ -1,15 +1,6 @@
 ---
-platform: mqtt
-
-availability_topic: zigbee2mqtt/bridge/state
-brightness: true
-brightness_scale: 254
-color_temp: true
-command_topic: "zigbee2mqtt/Kitchen - Ceiling Light Rear/set"
-
-json_attributes_topic: "zigbee2mqtt/Kitchen - Ceiling Light Rear"
-name: "Kitchen - Ceiling Rear"
-schema: json
-
-state_topic: "zigbee2mqtt/Kitchen - Ceiling Light Rear"
-unique_id: "0x00178801068f8e61_0x0017880106ba99e0_zigbee2mqtt"
+platform: group
+name: Kitchen - Ceiling Rear
+entities:
+  - light.kitchen_ceiling_rear_1
+  - light.kitchen_ceiling_rear_2

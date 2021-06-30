@@ -1,15 +1,6 @@
 ---
-platform: mqtt
-
-availability_topic: zigbee2mqtt/bridge/state
-brightness: true
-brightness_scale: 254
-color_temp: true
-command_topic: "zigbee2mqtt/Kitchen - Ceiling Light Front/set"
-
-json_attributes_topic: "zigbee2mqtt/Kitchen - Ceiling Light Front"
-name: "Kitchen - Ceiling Front"
-schema: json
-
-state_topic: "zigbee2mqtt/Kitchen - Ceiling Light Front"
-unique_id: "0x00178801068f9620_0x00178801068f72e7_zigbee2mqtt"
+platform: group
+name: Kitchen - Ceiling Front
+entities:
+  - light.kitchen_ceiling_front_1
+  - light.kitchen_ceiling_front_2
