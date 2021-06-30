@@ -2,9 +2,12 @@
 id: study_front_ceiling_light_toggle
 alias: Study - Front ceiling light toggle
 trigger:
-  - platform: state
-    entity_id: sensor.study_switch
-    to: single_right
+  - platform: device
+    domain: mqtt
+    device_id: 50905b5ed0f10f4c253b254088525b7f
+    type: action
+    subtype: single_right
+    discovery_id: 0x00158d0002fcea27 action_single_right
 action:
   - choose:
     - conditions:

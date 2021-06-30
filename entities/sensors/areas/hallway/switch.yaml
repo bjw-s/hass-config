@@ -1,8 +1,0 @@
----
-platform: "mqtt"
-name: "Hallway Study - Switch"
-state_topic: "zigbee2mqtt/Hallway Study - Switch"
-availability_topic: "zigbee2mqtt/bridge/state"
-icon: "mdi:gesture-double-tap"
-value_template: "{{ value_json.action }}"
-unique_id: "0x00158d0001f3f4fd_action_zigbee2mqtt"

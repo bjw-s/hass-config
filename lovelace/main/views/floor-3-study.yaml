@@ -40,17 +40,17 @@ cards:
             name: Dark?
             tap_action: !include ../popups/light_levels.yaml
 
-          - entity: sensor.study_light_level
+          - entity: sensor.attic_motion_sensor_illuminance_lux
             name: Light level
             icon: "mdi:theme-light-dark"
 
-          - entity: binary_sensor.study_motion
+          - entity: binary_sensor.attic_motion_sensor_occupancy
             name: Motion
 
-          - entity: sensor.study_temperature
+          - entity: sensor.attic_multisensor_temperature
             name: Temperature
 
-          - entity: sensor.study_humidity
+          - entity: sensor.attic_multisensor_humidity
             name: Humidity
 
   - type: 'custom:layout-card'

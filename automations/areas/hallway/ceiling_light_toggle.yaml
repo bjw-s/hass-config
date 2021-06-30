@@ -3,9 +3,12 @@ id: hallway_ceiling_light_toggle
 alias: Hallway - Ceiling light toggle
 max_exceeded: silent
 trigger:
-  - platform: state
-    entity_id: sensor.hallway_switch
-    to: single
+  - platform: device
+    domain: mqtt
+    device_id: 499df9322b3af0805f83f1f486395718
+    type: action
+    subtype: single
+    discovery_id: 0x00158d000183a80d action_single
 action:
   - choose:
     - conditions:

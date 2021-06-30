@@ -1,0 +1,6 @@
+---
+name: Hallway Attic - Lights - On
+entities:
+  light.hallway_attic_ceiling:
+    state: 'on'
+    brightness: 220

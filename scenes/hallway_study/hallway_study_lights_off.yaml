@@ -1,5 +1,0 @@
----
-name: Hallway Study - Lights - Off
-entities:
-  light.hallway_study_ceiling:
-    state: 'off'

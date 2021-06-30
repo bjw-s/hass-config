@@ -71,7 +71,7 @@ cards:
         template: default_button
         name: Light level
         icon: 'mdi:theme-light-dark'
-        entity: sensor.hallway_light_level
+        entity: sensor.hallway_illuminance_lux
 
       - type: 'custom:button-card'
         entity: binary_sensor.hallway_motion

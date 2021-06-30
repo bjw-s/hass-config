@@ -4,16 +4,16 @@ alias: Hallway - Automatic lights on
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: binary_sensor.hallway_motion_1
+    entity_id: binary_sensor.hallway_motion_sensor_1_occupancy
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.hallway_motion_2
+    entity_id: binary_sensor.hallway_motion_sensor_2_occupancy
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.hallway_front_door
+    entity_id: binary_sensor.hallway_front_door_contact
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.living_room_door
+    entity_id: binary_sensor.living_room_door_contact
     to: 'on'
 
 condition:

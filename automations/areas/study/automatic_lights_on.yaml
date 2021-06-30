@@ -3,7 +3,7 @@ id: study_automatic_lights_on
 alias: Study - Automatic lights on
 trigger:
   - platform: state
-    entity_id: binary_sensor.study_motion
+    entity_id: binary_sensor.attic_motion_sensor_occupancy
     to: 'on'
 condition:
   condition: and

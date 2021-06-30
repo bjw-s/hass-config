@@ -1,0 +1,10 @@
+---
+platform: template
+sensors:
+  hallway_illuminance_lux:
+    value_template: |
+      {{ 
+        (states('sensor.hallway_motion_sensor_1_illuminance_lux') | float) + (states('sensor.hallway_motion_sensor_2_illuminance_lux') | float) / 2
+      }}
+    unit_of_measurement: 'lx'
+    device_class: illuminance

@@ -239,21 +239,21 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: binary_sensor.hallway_study_automatic_lights
+          - entity: binary_sensor.hallway_attic_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.automatic_lights_duration_hallway_study
+          - entity: input_number.automatic_lights_duration_hallway_attic
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.automatic_lights_hallway_study
+              - entity: timer.automatic_lights_hallway_attic
                 state_not: idle
             row:
-              entity: timer.automatic_lights_hallway_study
+              entity: timer.automatic_lights_hallway_attic
               name: Automatic duration
 
-          - entity: input_boolean.hallway_study_lights_manual_mode
+          - entity: input_boolean.hallway_attic_lights_manual_mode
             name: Manual mode
 
   #################################################

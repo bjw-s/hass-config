@@ -2,15 +2,24 @@
 id: study_rear_ceiling_light_toggle
 alias: Study - Rear ceiling light toggle
 trigger:
-  - platform: state
-    entity_id: sensor.study_switch
-    to: single_left
-  - platform: state
-    entity_id: sensor.study_remote
-    to: on-press
-  - platform: state
-    entity_id: sensor.study_remote
-    to: off-press
+  - platform: device
+    domain: mqtt
+    device_id: 50905b5ed0f10f4c253b254088525b7f
+    type: action
+    subtype: single_left
+    discovery_id: 0x00158d0002fcea27 action_single_left
+  - platform: device
+    domain: mqtt
+    device_id: df0f3d49be139fa0b32df312af3d9bf8
+    type: action
+    subtype: on-press
+    discovery_id: 0x0017880110493d0c action_on-press
+  - platform: device
+    domain: mqtt
+    device_id: df0f3d49be139fa0b32df312af3d9bf8
+    type: action
+    subtype: off-press
+    discovery_id: 0x0017880110493d0c action_off-press
 action:
   - choose:
     - conditions:

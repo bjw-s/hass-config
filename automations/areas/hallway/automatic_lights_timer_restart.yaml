@@ -4,10 +4,10 @@ alias: Hallway - Automatic lights timer (re)start
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: binary_sensor.hallway_motion_1
+    entity_id: binary_sensor.hallway_motion_sensor_1_occupancy
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.hallway_motion_2
+    entity_id: binary_sensor.hallway_motion_sensor_2_occupancy
     to: 'on'
 condition:
   condition: and

@@ -40,7 +40,7 @@ action:
   # Turn off lights 3rd floor
   - service: scene.turn_on
     data:
-      entity_id: scene.hallway_study_lights_off
+      entity_id: scene.hallway_attic_lights_off
 
   - service: scene.turn_on
     data:

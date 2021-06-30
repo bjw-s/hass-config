@@ -3,11 +3,17 @@ id: hallway_upstairs_ceiling_light_off
 alias: Hallway Upstairs - Ceiling light off
 max_exceeded: silent
 trigger:
-  - platform: state
-    entity_id: sensor.hallway_stairway_switch
-    to: recall_scene_5
-  - platform: state
-    entity_id: sensor.hallway_upstairs_switch
-    to: recall_scene_2
+  - platform: device
+    domain: mqtt
+    device_id: 66e77759181c96a80d427dd55b3e0d75
+    type: action
+    subtype: recall_scene_5
+    discovery_id: 0x0000000001716b6f action_recall_scene_5
+  - platform: device
+    domain: mqtt
+    device_id: 4b41fc02c4f375ddbe1c405fe173600d
+    type: action
+    subtype: recall_scene_2
+    discovery_id: 0x0000000001716b46 action_recall_scene_2
 action:
   - scene: scene.hallway_upstairs_lights_off

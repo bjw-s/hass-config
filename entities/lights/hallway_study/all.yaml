@@ -1,5 +1,0 @@
----
-platform: group
-name: Hallway Study
-entities:
-  - light.hallway_study_ceiling

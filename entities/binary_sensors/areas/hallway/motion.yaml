@@ -5,8 +5,8 @@ sensors:
     friendly_name: "Hallway - Motion"
     value_template:  >
       {{- 
-        states('binary_sensor.hallway_motion_1')  == 'on'
+        states('binary_sensor.hallway_motion_sensor_1_occupancy')  == 'on'
         or 
-        states('binary_sensor.hallway_motion_2')  == 'on'
+        states('binary_sensor.hallway_motion_sensor_2_occupancy')  == 'on'
       -}}
     device_class: motion
