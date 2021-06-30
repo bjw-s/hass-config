@@ -3,7 +3,7 @@ id: driveway_motion_snapshot
 alias: Driveway - Motion snapshot
 trigger:
   - platform: state
-    entity_id: binary_sensor.driveway_motion
+    entity_id: binary_sensor.driveway_motion_sensor_occupancy
     to: 'on'
 
 variables:

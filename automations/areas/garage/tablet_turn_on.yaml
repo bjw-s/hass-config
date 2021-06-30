@@ -4,10 +4,10 @@ alias: Garage - Tablet turn on
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: binary_sensor.garage_door
+    entity_id: binary_sensor.garage_door_contact
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.garage_entry_door
+    entity_id: binary_sensor.garage_entry_door_contact
     to: 'on'
   - platform: state
     entity_id: binary_sensor.garage_motion
