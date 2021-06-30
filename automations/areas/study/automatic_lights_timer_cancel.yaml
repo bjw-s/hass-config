@@ -6,7 +6,7 @@ trigger:
     entity_id: light.study
     to: 'off'
   - platform: state
-    entity_id: binary_sensor.study_automatic_lights
+    entity_id: binary_sensor.attic_automatic_lights
     to: 'off'
 action:
   - service: timer.cancel

@@ -37,7 +37,7 @@ browser_mod:
 
       - label: Study
         type: section
-      - entity: input_number.is_dark_lux_study
+      - entity: input_number.is_dark_lux_attic
         name: Is dark lux
         type: custom:slider-entity-row
         hide_state: false

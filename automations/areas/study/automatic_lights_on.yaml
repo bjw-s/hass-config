@@ -9,10 +9,10 @@ condition:
   condition: and
   conditions:
     - condition: state
-      entity_id: binary_sensor.study_is_dark
+      entity_id: binary_sensor.attic_is_dark
       state: 'on'
     - condition: state
-      entity_id: binary_sensor.study_automatic_lights
+      entity_id: binary_sensor.attic_automatic_lights
       state: 'on'
 action:
   - service: scene.turn_on
@@ -22,4 +22,4 @@ action:
   - service: timer.start
     data:
       entity_id: timer.automatic_lights_study
-      duration: "{{ (states('input_number.automatic_lights_duration_study') | float) * 60 }}"
+      duration: "{{ (states('input_number.automatic_lights_duration_attic') | float) * 60 }}"

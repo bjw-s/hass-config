@@ -36,7 +36,7 @@ cards:
       - type: glance
         columns: 3
         entities:
-          - entity: binary_sensor.study_is_dark
+          - entity: binary_sensor.attic_is_dark
             name: Dark?
             tap_action: !include ../popups/light_levels.yaml
 

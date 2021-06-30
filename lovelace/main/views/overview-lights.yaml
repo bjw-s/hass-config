@@ -270,10 +270,10 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: binary_sensor.study_automatic_lights
+          - entity: binary_sensor.attic_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.automatic_lights_duration_study
+          - entity: input_number.automatic_lights_duration_attic
             name: Duration
 
           - type: conditional
@@ -284,7 +284,7 @@ cards:
               entity: timer.automatic_lights_study
               name: Automatic duration
 
-          - entity: input_boolean.study_lights_manual_mode
+          - entity: input_boolean.attic_lights_manual_mode
             name: Manual mode
 
   #################################################

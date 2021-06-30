@@ -4,7 +4,7 @@
 #
 # https://www.home-assistant.io/components/input_number/
 #
-automatic_lights_duration_study:
+automatic_lights_duration_attic:
   min: 5
   max: 60
   step: 1
