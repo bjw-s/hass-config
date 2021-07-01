@@ -1,6 +1,0 @@
----
-  name: Study - Lights - Front - Dimmed
-  entities:
-    light.study_front_ceiling:
-      state: 'on'
-      brightness: 128

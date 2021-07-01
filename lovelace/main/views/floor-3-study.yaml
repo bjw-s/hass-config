@@ -87,7 +87,7 @@ cards:
       - type: picture-entity
         view_layout:
           grid-area: camera
-        entity: camera.study_octoprint
+        entity: camera.attic_octoprint
         camera_view: live
         show_state: false
         show_name: false
@@ -103,7 +103,7 @@ cards:
             restrictions:
               block: true
             condition:
-              entity: binary_sensor.study_octoprint_printing
+              entity: binary_sensor.attic_ender_3_printing
               value: 'on'
             row: true
             name: Printer power
@@ -114,12 +114,12 @@ cards:
           - entity: input_boolean.study_3d_printer_notifications
             name: Notifications
             icon: mdi:bell
-          - entity: binary_sensor.study_octoprint_printing
+          - entity: binary_sensor.attic_ender_3_printing
             name: Printing
-          - entity: sensor.study_octoprint_print_progress
+          - entity: sensor.attic_ender_3_print_progress
             name: Print progress
             icon: mdi:progress-clock
-          - entity: sensor.study_octoprint_print_time_left
+          - entity: sensor.attic_ender_3_print_time_left
             name: Print time left
 
   - type: 'custom:layout-card'
@@ -133,10 +133,10 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: light.study_front_ceiling
+          - entity: light.attic_front_ceiling
             name: Front ceiling
             hold_action: !include ../popups/floor-3-study_light_front.yaml
 
-          - entity: light.study_rear_ceiling
+          - entity: light.attic_rear_ceiling
             name: Rear ceiling
             hold_action: !include ../popups/floor-3-study_light_rear.yaml

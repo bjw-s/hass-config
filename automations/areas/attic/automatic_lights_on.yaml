@@ -1,0 +1,25 @@
+---
+id: attic_automatic_lights_on
+alias: Attic - Automatic lights on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.attic_motion_sensor_occupancy
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.attic_is_dark
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.attic_automatic_lights
+      state: 'on'
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.attic_lights_rear_full_brightness
+      transition: 2
+  - service: timer.start
+    data:
+      entity_id: timer.automatic_lights_attic
+      duration: "{{ (states('input_number.automatic_lights_duration_attic') | float) * 60 }}"

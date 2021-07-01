@@ -142,7 +142,7 @@ cards:
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.dining_area_garden_doors
+        entity: binary_sensor.dining_area_garden_doors_contact
         name: Garden doors
         template: default_button
 
@@ -179,12 +179,12 @@ cards:
     square: false
     cards:
       - type: 'custom:button-card'
-        entity: binary_sensor.utility_room_door
+        entity: binary_sensor.utility_room_door_contact
         name: Door
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.utility_room_garden_door
+        entity: binary_sensor.utility_room_garden_door_contact
         name: Garden door
         template: default_button
 

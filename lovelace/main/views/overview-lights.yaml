@@ -278,10 +278,10 @@ cards:
 
           - type: conditional
             conditions:
-              - entity: timer.automatic_lights_study
+              - entity: timer.automatic_lights_attic
                 state_not: idle
             row:
-              entity: timer.automatic_lights_study
+              entity: timer.automatic_lights_attic
               name: Automatic duration
 
           - entity: input_boolean.attic_lights_manual_mode

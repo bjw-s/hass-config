@@ -4,7 +4,7 @@ sensors:
   attic_is_dark:
     icon_template: >
       {% set is_dark_lux = (states('input_number.is_dark_lux_attic') | float) %}
-      {%- if states('light.study_ceiling') == "on" -%}
+      {%- if states('light.attic_ceiling') == "on" -%}
         {% set is_dark_lux = is_dark_lux + 10 %}
       {%- endif -%}
       {%- if (states('sensor.attic_motion_sensor_illuminance_lux') | float) < is_dark_lux -%}
@@ -14,7 +14,7 @@ sensors:
       {%- endif -%}
     value_template: >
       {% set is_dark_lux = (states('input_number.is_dark_lux_attic') | float) %}
-      {%- if states('light.study_rear_ceiling') == "on" -%}
+      {%- if states('light.attic_rear_ceiling') == "on" -%}
         {% set is_dark_lux = is_dark_lux + 20 %}
       {%- endif -%}
       {{

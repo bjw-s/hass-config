@@ -99,7 +99,7 @@ cards:
 
           - type: 'custom:button-card'
             template: default_button
-            name: Other
+            name: Shed
             icon: 'mdi:patio-heater'
-            entity: light.backyard_other
+            entity: light.backyard_shed
             hold_action: !include ../popups/floor-1-backyard_lights.yaml

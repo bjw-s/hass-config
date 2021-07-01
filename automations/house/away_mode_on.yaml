@@ -44,7 +44,7 @@ action:
 
   - service: scene.turn_on
     data:
-      entity_id: scene.study_lights_off
+      entity_id: scene.attic_lights_off
 
   # Turn on script
   - service: script.turn_on

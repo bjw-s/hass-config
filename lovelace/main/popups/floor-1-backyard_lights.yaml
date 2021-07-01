@@ -30,9 +30,9 @@ browser_mod:
             name: Wall
             hide_when_off: true
 
-          - entity: light.backyard_wall
+          - entity: light.backyard_shed
             type: custom:slider-entity-row
-            name: Other
+            name: Shed
             hide_when_off: true
 
           - type: custom:text-divider-row

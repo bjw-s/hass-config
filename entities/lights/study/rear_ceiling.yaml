@@ -1,8 +1,0 @@
----
-platform: group
-name: Study - Rear Ceiling
-entities:
-  - light.study_rear_ceiling_1
-  - light.study_rear_ceiling_2
-  - light.study_rear_ceiling_3
-  - light.study_rear_ceiling_4

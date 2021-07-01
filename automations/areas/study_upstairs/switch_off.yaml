@@ -3,9 +3,12 @@ id: study_upstairs_switch_off
 alias: Study Upstairs - Switch - Off
 max_exceeded: silent
 trigger:
-  - platform: state
-    entity_id: binary_sensor.study_upstairs_switch_bottom
-    to: "on"
+  - platform: device
+    domain: mqtt
+    device_id: d3d7eacc2f60052c0861c61f306afa52
+    type: action
+    subtype: recall_scene_2
+    discovery_id: 0x0000000001716c1d action_recall_scene_2
 action:
   - service: input_select.select_option
     data:

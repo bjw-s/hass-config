@@ -1,5 +1,0 @@
----
-  name: Study - Lights - Off
-  entities:
-    light.study:
-      state: 'off'

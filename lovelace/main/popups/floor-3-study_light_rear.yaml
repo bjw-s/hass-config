@@ -17,7 +17,7 @@ browser_mod:
             box-shadow: none;
           }
         entities:
-          - entity: light.study_rear_ceiling
+          - entity: light.attic_rear_ceiling
             type: custom:slider-entity-row
             name: Ceiling rear
             hide_when_off: true
@@ -33,8 +33,8 @@ browser_mod:
             box-shadow: none;
           }
         entities:
-          - entity: scene.study_lights_rear_full_brightness
+          - entity: scene.attic_lights_rear_full_brightness
             name: Full brightness
 
-          - entity: scene.study_lights_rear_dimmed
+          - entity: scene.attic_lights_rear_dimmed
             name: Dimmed

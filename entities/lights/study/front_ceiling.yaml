@@ -1,7 +1,0 @@
----
-platform: group
-name: Study - Front Ceiling
-entities:
-  - light.study_front_ceiling_1
-  - light.study_front_ceiling_2
-  - light.study_front_ceiling_3
