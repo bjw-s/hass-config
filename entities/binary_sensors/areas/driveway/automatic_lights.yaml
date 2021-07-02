@@ -1,0 +1,9 @@
+---
+platform: template
+sensors:
+  driveway_automatic_lights:
+    friendly_name: "Driveway - Automatic Lights"
+    value_template:  >
+      {{-
+        states('input_boolean.driveway_lights_manual_mode')  == 'off'
+      -}}

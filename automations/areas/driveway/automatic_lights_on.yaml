@@ -1,0 +1,29 @@
+---
+id: driveway_automatic_lights_on
+alias: Driveway - Automatic lights on
+trigger:
+  - platform: state
+    entity_id: binary_sensor.driveway_motion_sensor_occupancy
+    from: 'off'
+    to: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.driveway_automatic_lights
+      state: 'on'
+    - condition: state
+      entity_id: light.driveway_wall
+      state: 'off'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.driveway_is_dusk
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.driveway_is_dark
+          state: 'on'
+action:
+  - service: automation.trigger
+    data:
+      entity_id: automation.driveway_lights_on

@@ -1,0 +1,9 @@
+---
+id: driveway_lights_on
+alias: Driveway - Lights on
+max_exceeded: silent
+trigger:
+  - platform: event
+    event_type: dummy_event
+action:
+  - scene: scene.driveway_lights_on

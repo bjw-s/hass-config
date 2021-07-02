@@ -19,7 +19,7 @@ variables:
   min_brightness: 0
   max_brightness: 254
   percentage: |
-    {% if trigger.to_state.state == 'brightness_up_click' -%}
+    {% if trigger.payload == 'brightness_up_click' -%}
       5
     {%- else -%}
       -5
@@ -50,4 +50,3 @@ action:
 
     # Default
     default: []
-  

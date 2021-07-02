@@ -1,0 +1,14 @@
+---
+id: driveway_automatic_lights_timer_cancel
+alias: Driveway - Automatic lights timer cancel
+trigger:
+  - platform: state
+    entity_id: light.driveway_wall
+    to: 'off'
+  - platform: state
+    entity_id: binary_sensor.driveway_automatic_lights
+    to: 'off'
+action:
+  - service: timer.cancel
+    data:
+      entity_id: timer.driveway_automatic_lights

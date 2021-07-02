@@ -10,7 +10,7 @@ condition:
   - condition: and
     conditions:
       - condition: state
-        entity_id: input_boolean.study_3d_printer_notifications
+        entity_id: input_boolean.attic_3d_printer_notifications
         state: 'on'
 action:
   - service: notify.slack_bot

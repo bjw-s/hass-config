@@ -14,7 +14,7 @@ layout:
     "header  header               header            header         header"
     ".       living_area          dining_area       kitchen        ."
     ".       hallway_downstairs   hallway_upstairs  hallway_attic  ."
-    ".       attic                backyard          .              ."
+    ".       attic                driveway          backyard       ."
     ".       .                    .                 .              ."
 
   mediaquery:
@@ -22,7 +22,7 @@ layout:
     "(max-width: 800px)":
       grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
       grid-template-columns: 0 repeat(1, 1fr) 0
-      grid-template-rows: 8vh repeat(8, fit-content(100%)) 0fr
+      grid-template-rows: 8vh repeat(9, fit-content(100%)) 0fr
       grid-template-areas: |
         "header  header              header"
         ".       living_area         ."
@@ -32,6 +32,7 @@ layout:
         ".       hallway_upstairs    ."
         ".       hallway_attic       ."
         ".       attic               ."
+        ".       driveway            ."
         ".       backyard            ."
         ".       .                   ."
 
@@ -39,14 +40,14 @@ layout:
     "(max-width: 1000px)":
       grid-gap: calc(var(--custom-layout-card-padding))
       grid-template-columns: 0 repeat(2, 1fr) 0
-      grid-template-rows: 6vh repeat(5, fit-content(100%)) 0fr
+      grid-template-rows: 6vh repeat(6, fit-content(100%)) 0fr
       grid-template-areas: |
         "header  header            header              ."
         ".       living_area       dining_area         ."
         ".       kitchen           hallway_downstairs  ."
         ".       hallway_upstairs  hallway_attic       ."
-        ".       attic             backyard            ."
-        ".       .                 .                   ."
+        ".       attic             driveway            ."
+        ".       backyard          .                   ."
 
 cards:
   #################################################
@@ -305,4 +306,35 @@ cards:
             name: Automatic lights?
 
           - entity: input_boolean.backyard_lights_manual_mode
+            name: Manual mode
+
+  #################################################
+  #                 Driveway                      #
+  #################################################
+
+  - type: grid
+    title: Driveway
+    view_layout:
+      grid-area: driveway
+    columns: 1
+    square: false
+    cards:
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.driveway_automatic_lights
+            name: Automatic lights?
+
+          - entity: input_number.driveway_automatic_lights_duration
+            name: Duration
+
+          - type: conditional
+            conditions:
+              - entity: timer.driveway_automatic_lights
+                state_not: idle
+            row:
+              entity: timer.driveway_automatic_lights
+              name: Automatic duration
+
+          - entity: input_boolean.driveway_lights_manual_mode
             name: Manual mode

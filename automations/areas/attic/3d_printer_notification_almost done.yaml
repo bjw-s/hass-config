@@ -9,11 +9,11 @@ condition:
   - condition: and
     conditions:
       - condition: state
-        entity_id: input_boolean.study_3d_printer_notifications
+        entity_id: input_boolean.attic_3d_printer_notifications
         state: 'on'
       - condition: template
         value_template: |
-          {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.study_3d_printer_notification_almost_done', 'last_triggered') | default(0)) | int > 3600)}}    
+          {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.attic_3d_printer_notification_almost_done', 'last_triggered') | default(0)) | int > 3600)}}    
 action:
   - service: notify.slack_bot
     data:
