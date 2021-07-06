@@ -13,16 +13,17 @@ action:
   #     entity_id: switch.hallway_upstairs_siren
 
   # Send notification
-  - service: notify.slack_bot
+  - service: notify.iphone_bernd
     data:
-      message: "Alarm has been triggered"
+      title: Alarm
+      message: |
+        Alarm has been triggered by: 
+        {%- for open_sensor in state_attr("alarm_control_panel.house", "open_sensors").keys() |list %}
+        - {{ state_attr(open_sensor, 'friendly_name') }}
+        {%- endfor %}
       data:
-        blocks:
-          - type: section
-            text:
-              type: mrkdwn
-              text: |
-                Alarm has been triggered by: 
-                {% for open_sensor in state_attr("alarm_control_panel.alarmo", "open_sensors").keys() |list %}
-                - {{ state_attr(open_sensor, 'friendly_name') }}
-                {% endfor %}
+        push:
+          sound:
+            name: "SOSFallDetection_Haptic-Newton.caf"
+            critical: 1
+            volume: 1.0

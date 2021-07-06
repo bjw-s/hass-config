@@ -64,7 +64,7 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: media_player.zolder
+          - entity: media_player.attic_sonos
             name: Sonos
             icon: "mdi:speaker"
 
@@ -100,13 +100,13 @@ cards:
           - type: 'custom:restriction-card'
             card:
               entity: switch.attic_3d_printer
+              name: Printer power
             restrictions:
               block: true
             condition:
               entity: binary_sensor.attic_ender_3_printing
               value: 'on'
             row: true
-            name: Printer power
             icon: mdi:power
           - entity: automation.attic_3d_printer_automatic_off
             name: Automatic power off

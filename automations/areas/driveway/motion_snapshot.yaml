@@ -15,7 +15,7 @@ action:
   - service: camera.snapshot
     data:
       entity_id: camera.driveway_front_door
-      filename: '/config/www/images/snapshots/driveway/{{ driveway_filename }}'
+      filename: '/media/snapshots/driveway/{{ driveway_filename }}'
 
   - service: input_text.set_value
     data:

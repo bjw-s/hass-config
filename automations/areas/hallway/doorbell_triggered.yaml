@@ -19,39 +19,45 @@ action:
   - service: camera.snapshot
     data:
       entity_id: camera.driveway_front_door
-      filename: '/config/www/images/snapshots/frontdoor/{{ doorbell_filename }}'
+      filename: '/media/snapshots/frontdoor/{{ doorbell_filename }}'
 
   - service: input_text.set_value
     data:
       entity_id: input_text.system_last_doorbell_snapshot
       value: '{{ doorbell_filename }}'
 
-  # Send notification
-  - service: notify.slack_bot
-    data:
-      message: "There is somebody at the door"
-      data:
-        blocks:
-          - type: section
-            text:
-              type: mrkdwn
-              text: |
-                There is somebody at the door
-          - type: "image"
-            title:
-              type: "plain_text"
-              text: "Doorbell press"
-              emoji: false
-            image_url: 'https://domo.bjws.nl/local/images/snapshots/frontdoor/{{ doorbell_filename }}'
-            alt_text: "Doorbell press"
-          - type: "image"
-            title:
-              type: "plain_text"
-              text: "Driveway"
-              emoji: false
-            image_url: 'https://domo.bjws.nl/local/images/snapshots/driveway/{{ driveway_filename }}'
-            alt_text: "Driveway"
+#   # Send notification
+#   - service: notify.slack_bot
+#     data:
+#       message: "There is somebody at the door"
+#       data:
+#         blocks:
+#           - type: section
+#             text:
+#               type: mrkdwn
+#               text: |
+#                 There is somebody at the door
+#           - type: "image"
+#             title:
+#               type: "plain_text"
+#               text: "Doorbell press"
+#               emoji: false
+#             image_url: 'https://domo.bjws.nl/local/images/snapshots/frontdoor/{{ doorbell_filename }}'
+#             alt_text: "Doorbell press"
+#           - type: "image"
+#             title:
+#               type: "plain_text"
+#               text: "Driveway"
+#               emoji: false
+#             image_url: 'https://domo.bjws.nl/local/images/snapshots/driveway/{{ driveway_filename }}'
+#             alt_text: "Driveway"
   
+  - service: notify.mobile_app_iphone_bernd_ios
+    data:
+      message: There is somebody at the door
+      data:
+        entity_id: camera.driveway_front_door
+
   # Rate limit the automation to once per 30 seconds
   - delay:
       seconds: 30

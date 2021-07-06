@@ -1,8 +1,8 @@
 ---
 all_sonos:
   entities:
-  - media_player.keuken
-  - media_player.studeerkamer
-  - media_player.woonkamer
-  - media_player.zolder
-  - media_player.1e_etage
+  - media_player.kitchen_sonos
+  - media_player.study_upstairs_sonos
+  - media_player.living_room_sonos
+  - media_player.attic_sonos
+  - media_player.bedroom_eva_sonos

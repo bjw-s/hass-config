@@ -6,13 +6,13 @@ home_modes_away_mode:
       entity_id: switch.living_room_subwoofer
 
     - service: media_player.media_stop
-      entity_id: media_player.keuken
+      entity_id: media_player.kitchen_sonos
 
     - service: media_player.media_stop
-      entity_id: media_player.studeerkamer
+      entity_id: media_player.study_upstairs_sonos
 
     - service: media_player.media_stop
-      entity_id: media_player.woonkamer
+      entity_id: media_player.living_room_sonos
 
     - service: script.turn_on
       entity_id: script.living_room_harmony_poweroff

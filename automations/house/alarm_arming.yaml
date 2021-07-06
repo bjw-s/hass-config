@@ -3,7 +3,7 @@ id: home_alarm_arming
 alias: Home - Alarm arming
 trigger:
   - platform: state
-    entity_id: alarm_control_panel.alarmo
+    entity_id: alarm_control_panel.house
     to: 'arming'
 
 action:

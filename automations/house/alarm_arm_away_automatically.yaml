@@ -10,7 +10,7 @@ condition:
   condition: and
   conditions:
     - condition: state
-      entity_id: alarm_control_panel.alarmo
+      entity_id: alarm_control_panel.house
       state: 'disarmed'
 
 action:
@@ -32,4 +32,4 @@ action:
   # Arm alarm
   - service: alarm_control_panel.alarm_arm_away
     data:
-      entity_id: alarm_control_panel.alarmo
+      entity_id: alarm_control_panel.house

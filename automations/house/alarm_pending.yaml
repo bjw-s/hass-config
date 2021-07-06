@@ -3,7 +3,7 @@ id: home_alarm_pending
 alias: Home - Alarm pending
 trigger:
   - platform: state
-    entity_id: alarm_control_panel.alarmo
+    entity_id: alarm_control_panel.house
     to: 'pending'
 
 action:

@@ -109,12 +109,11 @@ Google Dark Theme:
     "grid-layout$hui-markdown-card:first-of-type":
       $: |
         ha-card {
-          background: url('/local/images/lowpoly-light.svg');
+          background: url('/local/images/lowpoly-dark.svg');
           background-size: cover;
           background-repeat: no-repeat;
           background-attachment: fixed;
           backround-position: center;
-          opacity: 0.8;
           border-radius: 0;
           min-width: 100vw;
           min-height: 5vh;
@@ -138,6 +137,7 @@ Google Dark Theme:
           ha-card {
             padding: 2.5vh 1vw 1vh 1vw !important;
           }
+        }
 
       "$ha-card>ha-markdown":
         $: |
@@ -146,12 +146,12 @@ Google Dark Theme:
             font-family: SF Display;
             font-weight: 500 !important;
             font-size: xx-large;
-            color: var(--primary-text-color);
+            color: var(--text-primary-color);
           }
           p {
             line-height: 0 !important;
             font-family: SF Display;
-            color: var(--primary-text-color);
+            color: var(--text-primary-color);
           }
 
     #################################################

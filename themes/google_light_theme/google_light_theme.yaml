@@ -137,6 +137,7 @@ Google Light Theme:
           ha-card {
             padding: 2.5vh 1vw 1vh 1vw !important;
           }
+        }
 
       "$ha-card>ha-markdown":
         $: |

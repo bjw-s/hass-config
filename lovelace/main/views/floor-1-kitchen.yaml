@@ -68,7 +68,7 @@ cards:
             template: default_button
             name: Sonos
             icon: 'mdi:speaker'
-            entity: media_player.keuken
+            entity: media_player.kitchen_sonos
             show_state: true
 
   - type: 'custom:layout-card'

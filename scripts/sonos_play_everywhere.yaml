@@ -5,33 +5,33 @@ sonos_play_everywhere:
   - service: sonos.snapshot
     data_template:
       entity_id:
-      - media_player.keuken
-      - media_player.woonkamer
-      - media_player.studeerkamer
+      - media_player.kitchen_sonos
+      - media_player.living_room_sonos
+      - media_player.study_upstairs_sonos
 
   - service: sonos.unjoin
     data_template:
       entity_id:
-      - media_player.keuken
-      - media_player.woonkamer
-      - media_player.studeerkamer
+      - media_player.kitchen_sonos
+      - media_player.living_room_sonos
+      - media_player.study_upstairs_sonos
 
   - service: sonos.join
     entity_id: all    
     data:
-      master: media_player.keuken
+      master: media_player.kitchen_sonos
 
   - service: media_player.volume_set
     data_template:
       entity_id:
-      - media_player.keuken
-      - media_player.woonkamer
-      - media_player.studeerkamer
+      - media_player.kitchen_sonos
+      - media_player.living_room_sonos
+      - media_player.study_upstairs_sonos
       volume_level: '{{ volume }}'
     
   - service: media_player.play_media
     data_template:
-      entity_id: media_player.keuken
+      entity_id: media_player.kitchen_sonos
       media_content_id: '{{ sonos_source }}'
       media_content_type: music
 
@@ -40,7 +40,7 @@ sonos_play_everywhere:
   - service: sonos.restore
     data_template:
       entity_id:
-      - media_player.keuken
-      - media_player.woonkamer
-      - media_player.studeerkamer
+      - media_player.kitchen_sonos
+      - media_player.living_room_sonos
+      - media_player.study_upstairs_sonos
     

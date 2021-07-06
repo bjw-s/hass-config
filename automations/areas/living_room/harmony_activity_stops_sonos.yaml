@@ -18,5 +18,5 @@ action:
   - service: media_player.media_stop
     data:
       entity_id: 
-        - media_player.keuken
-        - media_player.woonkamer
+        - media_player.kitchen_sonos
+        - media_player.living_room_sonos

@@ -5,7 +5,7 @@ browser_mod:
   large: false
   card:
     type: alarm-panel
-    entity: alarm_control_panel.alarmo
+    entity: alarm_control_panel.house
     name: ' '
     states:
       - arm_home

@@ -16,6 +16,9 @@ homeassistant:
   external_url: !env_var SECRET_EXTERNAL_URL
   internal_url: !env_var SECRET_INTERNAL_URL
 
+  media_dirs:
+    local: /media
+
   # Load packages
   packages: !include_dir_named integrations
 

@@ -60,13 +60,13 @@ cards:
             template: scene_button
             name: Ceiling full
             variables:
-              script: scene.bedroom_lights_ceiling_light_on
+              scene: scene.bedroom_lights_ceiling_light_on
 
           - type: 'custom:button-card'
             template: scene_button
             name: Ceiling dimmed
             variables:
-              script: scene.bedroom_lights_ceiling_light_dimmed
+              scene: scene.bedroom_lights_ceiling_light_dimmed
 
   - type: 'custom:layout-card'
     view_layout:

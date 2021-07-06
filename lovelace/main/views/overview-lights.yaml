@@ -40,14 +40,16 @@ layout:
     "(max-width: 1000px)":
       grid-gap: calc(var(--custom-layout-card-padding))
       grid-template-columns: 0 repeat(2, 1fr) 0
-      grid-template-rows: 6vh repeat(6, fit-content(100%)) 0fr
+      grid-template-rows: 6vh 1vh repeat(5, fit-content(100%)) 0fr
       grid-template-areas: |
         "header  header            header              ."
+        ".       .                 .                   ."
         ".       living_area       dining_area         ."
         ".       kitchen           hallway_downstairs  ."
         ".       hallway_upstairs  hallway_attic       ."
         ".       attic             driveway            ."
         ".       backyard          .                   ."
+        ".       .                 .                   ."
 
 cards:
   #################################################
@@ -61,16 +63,43 @@ cards:
       # Lights overview
 
   #################################################
-  #                 Living Area                   #
+  #                 Living Room                   #
   #################################################
 
   - type: grid
-    title: Living area
+    title: Living room
     view_layout:
       grid-area: living_area
     columns: 1
     square: false
     cards:
+      - type: grid
+        columns: 4
+        cards:
+          - type: 'custom:button-card'
+            template: scene_button
+            name: 'Off'
+            variables:
+              scene: scene.living_room_lights_off
+
+          - type: 'custom:button-card'
+            template: scene_button
+            name: Movie
+            variables:
+              scene: scene.living_room_lights_movie_mode
+
+          - type: 'custom:button-card'
+            template: scene_button
+            name: Relaxed
+            variables:
+              scene: scene.living_room_lights_relaxed
+
+          - type: 'custom:button-card'
+            template: scene_button
+            name: Full
+            variables:
+              scene: scene.living_room_lights_full_brightness
+
       - type: entities
         show_header_toggle: false
         entities:
@@ -102,6 +131,33 @@ cards:
     columns: 1
     square: false
     cards:
+      - type: grid
+        columns: 4
+        cards:
+          - type: 'custom:button-card'
+            template: scene_button
+            name: 'Off'
+            variables:
+              scene: scene.dining_area_lights_off
+
+          - type: 'custom:button-card'
+            template: scene_button
+            name: Movie
+            variables:
+              scene: scene.dining_area_lights_movie_mode
+
+          - type: 'custom:button-card'
+            template: scene_button
+            name: Relaxed
+            variables:
+              scene: scene.dining_area_lights_relaxed
+
+          - type: 'custom:button-card'
+            template: scene_button
+            name: Full
+            variables:
+              scene: scene.dining_area_lights_full_brightness
+
       - type: entities
         show_header_toggle: false
         entities:
@@ -133,6 +189,27 @@ cards:
     columns: 1
     square: false
     cards:
+      - type: grid
+        columns: 4
+        cards:
+          - type: 'custom:button-card'
+            template: scene_button
+            name: 'Off'
+            variables:
+              scene: scene.kitchen_lights_off
+
+          - type: 'custom:button-card'
+            template: scene_button
+            name: Relaxed
+            variables:
+              scene: scene.kitchen_lights_relaxed
+
+          - type: 'custom:button-card'
+            template: scene_button
+            name: Full
+            variables:
+              scene: scene.kitchen_lights_full_brightness
+
       - type: entities
         show_header_toggle: false
         entities:

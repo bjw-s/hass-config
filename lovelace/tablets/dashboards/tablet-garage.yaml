@@ -36,7 +36,8 @@ views:
             name: Alarm
             template: header
           - type: 'custom:alarmo-card'
-            entity: alarm_control_panel.alarmo
+            entity: alarm_control_panel.house
+            name: Alarm
             keep_keypad_visible: true
 
       - type: 'custom:layout-card'
