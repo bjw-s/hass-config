@@ -1,0 +1,61 @@
+---
+id: home_alarm_failed_to_arm
+alias: Home - Alarm failed to arm
+
+mode: restart
+
+trigger:
+  - platform: event
+    event_type: alarmo_failed_to_arm
+    event_data:
+      reason: open_sensors
+
+variables:
+  # Notification target
+  notify_device: mobile_app_iphone_bernd_ios
+
+action:
+  - service: "notify.{{ notify_device }}"
+    data:
+      title: Failed to arm alarm
+      message: |
+        {%- if trigger.event.data.reason == "open_sensors" %}
+        Open sensors:
+        {% for sensor in trigger.event.data.sensors -%}
+        - {{state_attr(sensor, "friendly_name")}}
+        {% endfor %}
+        {% else %}
+          {{- trigger.event.data.reason }}
+        {% endif %}
+      data:
+        group: 'alarm'
+        push:
+          sound:
+            name: "RingerChanged.caf"
+            critical: 1
+            volume: 0.3
+        actions:
+          - action: ALARMO_FORCE_ARM
+            title: Force arm
+            destructive: true
+          - action: ALARMO_IGNORE
+            title: Ignore
+
+  - wait_for_trigger:
+      - platform: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: 'ALARMO_FORCE_ARM'
+      - platform: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: 'ALARMO_IGNORE'
+    timeout:
+      minutes: 5
+    continue_on_timeout: true
+
+  - service: fullykiosk.load_start_url
+    data:
+      entity_id: 
+        - media_player.garage_tablet_media_player
+        - media_player.hallway_tablet_media_player

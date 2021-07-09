@@ -1,0 +1,20 @@
+---
+id: home_alarm_invalid_code
+alias: Home - Alarm invalid code
+trigger:
+  - platform: event
+    event_type: alarmo_failed_to_arm
+    event_data:
+      reason: invalid_code
+
+variables:
+  # Notification target
+  notify_device: adults
+
+action:
+  - service: "notify.{{ notify_device }}"
+    data:
+      message: Invalid code entered for alarm
+      data:
+        group: 'alarm'
+        sound: none
