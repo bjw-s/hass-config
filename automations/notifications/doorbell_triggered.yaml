@@ -17,7 +17,7 @@ variables:
   # Event sensor
   check_entity: sensor.frigate_frontdoor_event
   # Frigate event ID
-  id: "{{ states(check_entity) }}"
+  id: "{{ state_attr(check_entity, 'id') }}"
   # Camera name in Frigate
   camera: frontdoor
   # Notification target

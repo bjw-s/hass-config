@@ -2,8 +2,7 @@
 id: events_frigate_events
 alias: Events - Frigate events
 
-mode: single
-max_exceeded: silent
+mode: parallel
 
 trigger:
   platform: mqtt
@@ -15,18 +14,23 @@ variables:
   # Frigate event type
   type: "{{ trigger.payload_json['type'] }}"
   # Frigate camera name
-  camera: "{{ value_json['after']['camera'] }}"
+  camera: "{{ trigger.payload_json['after']['camera'] }}"
+  # Frigate event label
+  label: "{{ trigger.payload_json['after']['label'] }}"
 
-condition:
-  - "{{ type != 'end' }}"
+- condition: or
+  conditions:
+    - "{{ type != 'end' }}"
 
 action: 
   - service: python_script.set_state
     data:
       entity_id: "sensor.frigate_{{ camera }}_event"
       allow_create: true
-      state: "{{ id }}"
+      state: "on"
+      id: "{{ id }}"
       active: true
+      label: "{{ label }}"
 
   - repeat:
       until: "{{ wait.trigger.payload_json['type'] == 'end' }}"
@@ -47,4 +51,5 @@ action:
           data:
             entity_id: "sensor.frigate_{{ camera }}_event"
             allow_create: true
+            state: "off"
             active: false
