@@ -6,28 +6,8 @@ trigger:
     entity_id: alarm_control_panel.alarmo
     to: 'triggered'
 
-variables:
-  # Notification target
-  notify_device: adults
-
 action:
   # Sound the alarm
   # - service: switch.turn_on
   #   data:
   #     entity_id: switch.hallway_upstairs_siren
-
-  # Send notification
-  - service: "notify.{{ notify_device }}"
-    data:
-      title: Alarm
-      message: |
-        Alarm has been triggered by: 
-        {%- for open_sensor in state_attr("alarm_control_panel.house", "open_sensors").keys() |list %}
-        - {{ state_attr(open_sensor, 'friendly_name') }}
-        {%- endfor %}
-      data:
-        push:
-          sound:
-            name: "SOSFallDetection_Haptic-Newton.caf"
-            critical: 1
-            volume: 0.7

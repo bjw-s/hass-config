@@ -1,0 +1,50 @@
+---
+id: events_frigate_events
+alias: Events - Frigate events
+
+mode: single
+max_exceeded: silent
+
+trigger:
+  platform: mqtt
+  topic: frigate/events
+
+variables:
+  # Frigate event ID
+  id: "{{ trigger.payload_json['after']['id'] }}"
+  # Frigate event type
+  type: "{{ trigger.payload_json['type'] }}"
+  # Frigate camera name
+  camera: "{{ value_json['after']['camera'] }}"
+
+condition:
+  - "{{ type != 'end' }}"
+
+action: 
+  - service: python_script.set_state
+    data:
+      entity_id: "sensor.frigate_{{ camera }}_event"
+      allow_create: true
+      state: "{{ id }}"
+      active: true
+
+  - repeat:
+      until: "{{ wait.trigger.payload_json['type'] == 'end' }}"
+      sequence:
+        - wait_for_trigger:
+            - platform: mqtt
+              topic: frigate/events
+              payload: "{{ id }}"
+              value_template: "{{ value_json['after']['id'] }}"
+          timeout:
+            minutes: 2
+          continue_on_timeout: false
+
+        - condition: template
+          value_template: "{{ wait.trigger.payload_json['type'] == 'end' }}"
+
+        - service: python_script.set_state
+          data:
+            entity_id: "sensor.frigate_{{ camera }}_event"
+            allow_create: true
+            active: false

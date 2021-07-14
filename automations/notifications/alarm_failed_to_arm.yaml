@@ -1,6 +1,6 @@
 ---
-id: home_alarm_failed_to_arm
-alias: Home - Alarm failed to arm
+id: notifications_alarm_failed_to_arm
+alias: Notifications - Alarm failed to arm
 
 mode: restart
 
@@ -12,7 +12,7 @@ trigger:
 
 variables:
   # Notification target
-  notify_device: mobile_app_iphone_bernd_ios
+  notify_device: adults
 
 action:
   - service: "notify.{{ notify_device }}"

@@ -1,0 +1,73 @@
+---
+id: notifications_doorbell_triggered
+alias: Notifications - Doorbell triggered
+
+mode: single
+max_exceeded: silent
+
+trigger:
+  platform: state
+  entity_id: binary_sensor.house_doorbell
+  from: 'off'
+  to: 'on'
+
+variables:
+  # The external url for the Home Assistant instance
+  base_url: ""
+  # Event sensor
+  check_entity: sensor.frigate_frontdoor_event
+  # Frigate event ID
+  id: "{{ states(check_entity) }}"
+  # Camera name in Frigate
+  camera: frontdoor
+  # Notification target
+  notify_device: adults
+  # Rate limit the automation to once per 30 seconds
+  cooldown: 30
+
+condition:
+  - condition: template
+    value_template: "{{ state_attr(check_entity, 'active') == true }}"
+
+action: 
+  - choose:
+      - conditions: "{{ state_attr(check_entity, 'active') == true }}"
+        sequence:
+          - service: "notify.{{ notify_device }}"
+            data:
+              message: 'There is somebody at the door'
+              data:
+                tag: '{{ camera }}_{{ id }}'
+                group: 'frigate-notification-{{ camera }}'
+                attachment:
+                  url: '{{ base_url }}/api/frigate/notifications/{{id}}/thumbnail.jpg'
+
+  - choose:
+      - conditions: "{{ state_attr(check_entity, 'active') != false }}"
+        sequence:
+          - wait_template: "{{ state_attr(check_entity, 'active') == false }}"
+            timeout:
+              minutes: 5
+
+  - condition: template
+    value_template: "{{ state_attr(check_entity, 'active') == false }}"
+
+  - service: "notify.{{ notify_device }}"
+    data:
+      message: 'There was somebody at the door'
+      data:
+        tag: '{{ camera }}_{{ id }}'
+        group: 'frigate-notification-{{ camera }}'
+        sound: none
+        attachment:
+          url: '{{ base_url }}/api/frigate/notifications/{{id}}/thumbnail.jpg'
+        actions:
+          - action: URI
+            title: View Clip
+            uri: '{{base_url}}/api/frigate/notifications/{{id}}/{{camera}}/clip.mp4'
+          - action: URI
+            title: View Snapshot
+            uri: '{{base_url}}/api/frigate/notifications/{{id}}/snapshot.jpg'
+
+  - delay:
+      seconds: '{{ cooldown }}'
