@@ -79,22 +79,22 @@ views:
                 confirmation:
                   text: |
                     [[[
-                      if (entity.state == 'on')
+                      if (entity.state == 'off')
                         return 'Are you sure you want to turn off doorbell audio?';
                       else
                         return 'Are you sure you want to turn on doorbell audio?';
                     ]]]
-                entity: switch.home_doorbell_sound_enabled
+                entity: switch.home_doorbell_muted
                 name: Doorbell
                 show_label: true
                 state:
                   - color: var(--disabled-text-color)
                     icon: 'mdi:volume-off'
                     label: Silent
-                    value: 'off'
+                    value: 'on'
                   - icon: 'mdi:volume-high'
                     label: 'On'
-                    value: 'on'
+                    value: 'off'
                 
               - type: 'custom:button-card'
                 aspect_ratio: 1 / 1

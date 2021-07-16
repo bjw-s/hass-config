@@ -89,7 +89,7 @@ cards:
     columns: 3
     cards:
       - type: 'custom:button-card'
-        entity: switch.home_doorbell_sound_enabled
+        entity: switch.home_doorbell_muted
         template: default_button
         name: Doorbell
         icon: 'mdi:bell'
@@ -98,10 +98,10 @@ cards:
           - color: var(--disabled-text-color)
             icon: 'mdi:volume-off'
             label: Silent
-            value: 'off'
+            value: 'on'
           - icon: 'mdi:volume-high'
             label: 'On'
-            value: 'on'
+            value: 'off'
 
   #################################################
   #                    Status                     #

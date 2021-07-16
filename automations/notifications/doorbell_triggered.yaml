@@ -7,7 +7,7 @@ max_exceeded: silent
 
 trigger:
   platform: state
-  entity_id: binary_sensor.house_doorbell
+  entity_id: binary_sensor.home_doorbell_pressed
   from: 'off'
   to: 'on'
 
