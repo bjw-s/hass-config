@@ -18,9 +18,10 @@ variables:
   # Frigate event label
   label: "{{ trigger.payload_json['after']['label'] }}"
 
-- condition: or
-  conditions:
-    - "{{ type != 'end' }}"
+condition:
+  - condition: or
+    conditions:
+      - "{{ type != 'end' }}"
 
 action: 
   - service: python_script.set_state
