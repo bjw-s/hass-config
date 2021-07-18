@@ -13,7 +13,7 @@ trigger:
 
 variables:
   # The external url for the Home Assistant instance
-  base_url: ""
+  base_url: "{{ states('sensor.system_url_external') }}"
   # Event sensor
   check_entity: sensor.frigate_frontdoor_event
   # Frigate event ID
