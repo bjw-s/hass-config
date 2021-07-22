@@ -7,7 +7,7 @@ max_exceeded: silent
 
 trigger:
   platform: state
-  entity_id: binary_sensor.home_doorbell_pressed
+  entity_id: binary_sensor.front_door_doorbell
   from: 'off'
   to: 'on'
 
@@ -15,11 +15,11 @@ variables:
   # The external url for the Home Assistant instance
   base_url: "{{ states('sensor.system_url_external') }}"
   # Event sensor
-  check_entity: sensor.frigate_frontdoor_event
+  check_entity: sensor.frigate_doorbell_event
   # Frigate event ID
   id: "{{ state_attr(check_entity, 'id') }}"
   # Camera name in Frigate
-  camera: frontdoor
+  camera: doorbell
   # Notification target
   notify_device: adults
   # Rate limit the automation to once per 30 seconds

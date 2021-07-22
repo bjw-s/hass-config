@@ -89,7 +89,7 @@ cards:
     columns: 3
     cards:
       - type: 'custom:button-card'
-        entity: switch.home_doorbell_muted
+        entity: switch.doorbell_chime_muted
         template: default_button
         name: Doorbell
         icon: 'mdi:bell'

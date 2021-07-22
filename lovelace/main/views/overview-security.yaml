@@ -72,9 +72,9 @@ cards:
       - type: vertical-stack
         cards:
           - type: picture-entity
-            camera_image: camera.driveway_front_door
-            entity: camera.driveway_front_door
-            name: Driveway
+            camera_image: camera.doorbell
+            entity: camera.doorbell
+            name: Doorbell
             show_name: false
             show_state: false
 
@@ -89,7 +89,7 @@ cards:
                 template: default_button
 
               - type: 'custom:button-card'
-                entity: camera.driveway_last_person
+                entity: camera.doorbell_person
                 name: Last person
                 template: default_button
                 show_entity_picture: true

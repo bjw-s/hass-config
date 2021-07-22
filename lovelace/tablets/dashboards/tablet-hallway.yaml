@@ -84,7 +84,7 @@ views:
                       else
                         return 'Are you sure you want to turn on doorbell audio?';
                     ]]]
-                entity: switch.home_doorbell_muted
+                entity: switch.doorbell_chime_muted
                 name: Doorbell
                 show_label: true
                 state:
