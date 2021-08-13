@@ -1,0 +1,9 @@
+---
+platform: history_stats
+name: "Dining Area - Lights - Stats"
+entity_id: light.dining_area
+state: "on"
+type: count
+start: >
+  {{ as_timestamp(now()) - (7*86400) }}
+duration: 00:00:10

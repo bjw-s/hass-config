@@ -84,7 +84,7 @@ cards:
             square: false
             cards:
               - type: 'custom:button-card'
-                entity: binary_sensor.driveway_person_detected
+                entity: binary_sensor.doorbell_person_motion
                 name: Driveway person
                 template: default_button
 

@@ -20,13 +20,13 @@ condition:
           state: 'cleaning'
 action:
   - choose:
-    # Start the vacuum automatically when holiday mode is on
+    # Start the vacuum automatically when vacation mode is on
     - conditions:
         - condition: state
           entity_id: input_boolean.living_area_vacuum_automatic_cleaning_active
           state: 'on'
         - condition: state
-          entity_id: input_boolean.home_modes_holiday_mode
+          entity_id: input_boolean.home_modes_vacation_mode
           state: 'on'
       sequence:
         - service: script.turn_on

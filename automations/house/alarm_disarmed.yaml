@@ -7,6 +7,10 @@ trigger:
     to: 'disarmed'
 
 action:
+  - service: switch.turn_off
+    data:
+      entity_id: switch.hallway_upstairs_siren
+
   # OK beep
   - choose:
     # Only beep if bedtime mode is off
@@ -22,7 +26,3 @@ action:
               - media_player.garage_tablet_media_player
             url: "{{ states('sensor.system_url_internal') }}/local/audio/beep-ok.mp3"
             stream: 3
-
-  - service: switch.turn_off
-    data:
-      entity_id: switch.hallway_upstairs_siren

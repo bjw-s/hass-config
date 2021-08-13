@@ -176,8 +176,8 @@ cards:
         template: default_locked
 
       - type: 'custom:button-card'
-        entity: input_boolean.home_modes_holiday_mode
-        name: Holiday
+        entity: input_boolean.home_modes_vacation_mode
+        name: Vacation
         show_state: true
         template: default_locked
 

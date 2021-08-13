@@ -3,7 +3,7 @@ id: notifications_alarm_triggered
 alias: Notifications - Alarm triggered
 trigger:
   - platform: state
-    entity_id: alarm_control_panel.alarmo
+    entity_id: alarm_control_panel.house
     to: 'triggered'
 
 variables:

@@ -1,0 +1,73 @@
+---
+id: home_vacation_mode
+alias: Home - Vacation mode
+mode: parallel
+
+variables:
+  corresponding_entity: >
+    {% if trigger.entity_id == 'sensor.dining_area_lights_stats' %}
+      light.dining_area
+    {% elif trigger.entity_id == 'sensor.kitchen_lights_stats' %}
+     light.kitchen
+    {% elif trigger.entity_id == 'sensor.living_room_lights_stats' %}
+      light.living_room
+    {% elif trigger.entity_id == 'sensor.hallway_lights_stats' %}
+      light.hallway
+    {% elif trigger.entity_id == 'sensor.bedroom_lights_nightstands_stats' %}
+      light.bedroom_nightstands
+    {% endif %}
+
+trigger:
+  - platform: state
+    entity_id:
+      - sensor.dining_area_lights_stats
+      - sensor.kitchen_lights_stats
+      - sensor.living_room_lights_stats
+      - sensor.hallway_lights_stats
+      - sensor.bedroom_lights_nightstands_stats
+
+condition:
+  - condition: and
+    conditions:    
+    - condition: state
+      entity_id: input_boolean.home_modes_vacation_mode
+      state: 'on'
+
+action:
+ - choose:
+    # Replay turned on && entity_id is "LIGHT"
+    - conditions:
+        condition: and
+        conditions: 
+          - condition: template
+            value_template: '{{ trigger.to_state.state  == "1" }}'
+          - condition: template
+            value_template: '{{ corresponding_entity.split(".")[0] == "light" }}'
+
+      sequence:
+        - service: light.turn_on
+          data:
+            entity_id: '{{ corresponding_entity }}'
+            brightness_pct: 50
+        - service: system_log.write
+          data:
+            message: 'Vacation - Replay Lighting: {{trigger.to_state.entity_id}}: turning on: {{ corresponding_entity }}'
+            level: info
+    
+    # Replay turned on && entity_id is "LIGHT"
+    - conditions:
+        condition: and
+        conditions: 
+          - condition: template
+            value_template: '{{ trigger.to_state.state  == "0" }}'
+          - condition: template
+            value_template: '{{ corresponding_entity.split(".")[0] == "light" }}'
+
+      sequence:
+        - service: light.turn_off
+          data:
+            entity_id: '{{ corresponding_entity }}'
+        - service: system_log.write
+          data:
+            message: 'Vacation - Replay Lighting: {{trigger.to_state.entity_id}}: turning off: {{ corresponding_entity }}'
+            level: info

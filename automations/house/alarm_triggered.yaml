@@ -3,11 +3,11 @@ id: home_alarm_triggered
 alias: Home - Alarm triggered
 trigger:
   - platform: state
-    entity_id: alarm_control_panel.alarmo
+    entity_id: alarm_control_panel.house
     to: 'triggered'
 
 action:
   # Sound the alarm
-  # - service: switch.turn_on
-  #   data:
-  #     entity_id: switch.hallway_upstairs_siren
+  - service: switch.turn_on
+    data:
+      entity_id: switch.hallway_upstairs_siren
