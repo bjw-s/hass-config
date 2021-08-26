@@ -31,5 +31,8 @@
 - url: /hacsfiles/lovelace-state-switch/state-switch.js
   type: module
 
+- url: /hacsfiles/alarmo-card/alarmo-card.js
+  type: module
+
 - url: /local/css/font.css
   type: css
