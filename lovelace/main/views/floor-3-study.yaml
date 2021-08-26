@@ -99,7 +99,7 @@ cards:
         entities:
           - type: 'custom:restriction-card'
             card:
-              entity: switch.attic_3d_printer
+              entity: switch.attic_3d_printer_power
               name: Printer power
             restrictions:
               block: true
