@@ -4,122 +4,158 @@ button_card_templates: !include ../button_card_templates.yaml
 views:
   - badges: []
     type: 'custom:grid-layout'
-    layout:
-      grid-template-columns: 50% 50%
-      grid-template-rows: auto
-      grid-template-areas: |
-        "header header"
-        "alarm  buttons"
     cards:
-      - type: 'custom:button-card'
-        view_layout:
-          grid-area: header
-        entity: sensor.time
-        show_icon: false
-        show_name: false
-        show_state: true
-        styles:
-          card:
-            - padding-top: 10px
-            - padding-bottom: 10px
-            - background: none
-            - box-shadow: none
-          state:
-            - font-weight: normal
-            - font-size: xxx-large
-
-      - type: 'custom:layout-card'
-        view_layout:
-          grid-area: alarm
-        cards:
-          - type: 'custom:button-card'
-            name: Alarm
-            template: header
-          - type: 'custom:alarmo-card'
-            entity: alarm_control_panel.house
-            keep_keypad_visible: true
-
-      - type: 'custom:layout-card'
-        layout_type: grid
-        view_layout:
-          grid-area: buttons
-        cards:
-          - type: 'custom:button-card'
-            name: Info
-            template: header
-          - type: 'custom:layout-card'
-            layout_type: grid
+      - type: custom:state-switch
+        entity: template
+        template: |
+          {%- if is_state('input_boolean.home_modes_vacation_mode', 'on') -%}
+            vacation
+          {%- else -%} 
+            full
+          {%- endif -%}
+        states:
+          full:
+            type: custom:layout-card
+            layout_type: 'custom:grid-layout'
             layout:
-              grid-template-columns: 33% 33% 33%
+              grid-template-columns: 50% 50%
+              grid-template-rows: auto
+              grid-template-areas: |
+                "header header"
+                "alarm  buttons"
             cards:
               - type: 'custom:button-card'
-                aspect_ratio: 1 / 1
-                confirmation:
-                  text: |
-                    [[[
-                      if (entity.state == 'on')
-                        return 'Are you sure you want to turn off bedtime mode?';
-                      else
-                        return 'Are you sure you want to turn on bedtime mode?';
-                    ]]]
-                entity: input_boolean.home_modes_bedtime_mode
-                name: Bedtime
-                show_label: true
+                view_layout:
+                  grid-area: header
+                entity: sensor.time
+                show_icon: false
+                show_name: false
                 show_state: true
-                state:
-                  - color: var(--disabled-text-color)
-                    icon: 'mdi:sleep'
-                    value: 'on'
-                  - color: var(--disabled-text-color)
-                    icon: 'mdi:sleep-off'
-                    value: 'off'
-                
-              - type: 'custom:button-card'
-                aspect_ratio: 1 / 1
-                confirmation:
-                  text: |
-                    [[[
-                      if (entity.state == 'off')
-                        return 'Are you sure you want to turn off doorbell audio?';
-                      else
-                        return 'Are you sure you want to turn on doorbell audio?';
-                    ]]]
-                entity: switch.doorbell_chime_muted
-                name: Doorbell
-                show_label: true
-                state:
-                  - color: var(--disabled-text-color)
-                    icon: 'mdi:volume-off'
-                    label: Silent
-                    value: 'on'
-                  - icon: 'mdi:volume-high'
-                    label: 'On'
-                    value: 'off'
-                
-              - type: 'custom:button-card'
-                aspect_ratio: 1 / 1
-                entity: vacuum.living_area
-                icon: 'mdi:robot-vacuum'
-                name: MiMi
-                show_label: true
-                show_state: true
-                state:
-                  - color: var(--disabled-text-color)
-                    value: docked
-                  - spin: true
-                    value: cleaning
-                tap_action:
-                  action: call-service
-                  service: |
-                    [[[
-                      if (entity.state === "docked")
-                        return "script.vacuum_all_zones";
-                      else if (entity.state === "cleaning")
-                        return "vacuum.return_to_base";
-                      else
-                        return "none";
-                    ]]]
-                  service_data:
-                    entity_id: vacuum.living_area
-                triggers_update:
-                  - vacuum.living_area
+                styles:
+                  card:
+                    - padding-top: 10px
+                    - padding-bottom: 10px
+                    - background: none
+                    - box-shadow: none
+                  state:
+                    - font-weight: normal
+                    - font-size: xxx-large
+
+              - type: 'custom:layout-card'
+                view_layout:
+                  grid-area: alarm
+                cards:
+                  - type: 'custom:button-card'
+                    name: Alarm
+                    template: header
+                  - type: 'custom:alarmo-card'
+                    entity: alarm_control_panel.house
+                    keep_keypad_visible: true
+
+              - type: 'custom:layout-card'
+                layout_type: grid
+                view_layout:
+                  grid-area: buttons
+                cards:
+                  - type: 'custom:button-card'
+                    name: Info
+                    template: header
+                  - type: 'custom:layout-card'
+                    layout_type: grid
+                    layout:
+                      grid-template-columns: 33% 33% 33%
+                    cards:
+                      - type: 'custom:button-card'
+                        aspect_ratio: 1 / 1
+                        confirmation:
+                          text: |
+                            [[[
+                              if (entity.state == 'on')
+                                return 'Are you sure you want to turn off bedtime mode?';
+                              else
+                                return 'Are you sure you want to turn on bedtime mode?';
+                            ]]]
+                        entity: input_boolean.home_modes_bedtime_mode
+                        name: Bedtime
+                        show_label: true
+                        show_state: true
+                        state:
+                          - color: var(--disabled-text-color)
+                            icon: 'mdi:sleep'
+                            value: 'on'
+                          - color: var(--disabled-text-color)
+                            icon: 'mdi:sleep-off'
+                            value: 'off'
+                        
+                      - type: 'custom:button-card'
+                        aspect_ratio: 1 / 1
+                        confirmation:
+                          text: |
+                            [[[
+                              if (entity.state == 'off')
+                                return 'Are you sure you want to turn off doorbell audio?';
+                              else
+                                return 'Are you sure you want to turn on doorbell audio?';
+                            ]]]
+                        entity: switch.doorbell_chime_muted
+                        name: Doorbell
+                        show_label: true
+                        state:
+                          - color: var(--disabled-text-color)
+                            icon: 'mdi:volume-off'
+                            label: Silent
+                            value: 'on'
+                          - icon: 'mdi:volume-high'
+                            label: 'On'
+                            value: 'off'
+                        
+                      - type: 'custom:button-card'
+                        aspect_ratio: 1 / 1
+                        entity: vacuum.living_area
+                        icon: 'mdi:robot-vacuum'
+                        name: MiMi
+                        show_label: true
+                        show_state: true
+                        state:
+                          - color: var(--disabled-text-color)
+                            value: docked
+                          - spin: true
+                            value: cleaning
+                        tap_action:
+                          action: call-service
+                          service: |
+                            [[[
+                              if (entity.state === "docked")
+                                return "script.vacuum_all_zones";
+                              else if (entity.state === "cleaning")
+                                return "vacuum.return_to_base";
+                              else
+                                return "none";
+                            ]]]
+                          service_data:
+                            entity_id: vacuum.living_area
+                        triggers_update:
+                          - vacuum.living_area
+
+          vacation:
+            type: custom:layout-card
+            cards:
+              - type: alarm-panel
+                entity: alarm_control_panel.house
+                states:
+                  - arm_away
+                style:
+                  "#armActions mwc-button":
+                    $: |
+                      .mdc-button {
+                        font-size: x-large !important;
+                      }
+
+                  "#keypad mwc-button":
+                    $: |
+                      button {
+                        height: 75px !important;
+                      }
+                      .mdc-button {
+                        font-size: large !important;
+                      }
