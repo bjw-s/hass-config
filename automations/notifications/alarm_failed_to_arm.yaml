@@ -54,8 +54,9 @@ action:
       minutes: 5
     continue_on_timeout: true
 
-  - service: fullykiosk.load_start_url
-    data:
-      entity_id: 
-        - media_player.garage_tablet_media_player
-        - media_player.hallway_tablet_media_player
+  - event: wallpanels_publish_payload
+    event_data:
+      payload: |
+        {
+          "reload": true
+        }

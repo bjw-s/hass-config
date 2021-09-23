@@ -5,7 +5,10 @@ trigger:
   - platform: time
     at: "06:00:00"
 action:
-  - service: light.turn_on
-    data:
-      entity_id: light.hallway_tablet_screen
-      brightness_pct: 80
+  - service: mqtt.publish
+    data_template:
+      topic: wallpanel/hallway/command
+      payload: |
+        {
+          "brightness": 80
+        }

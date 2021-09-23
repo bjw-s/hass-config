@@ -17,6 +17,10 @@ trigger:
     from: 'on'
     to: 'off'
 action:
-  - service: switch.turn_off
-    data:
-      entity_id: switch.garage_tablet_screensaver
+  - service: mqtt.publish
+    data_template:
+      topic: wallpanel/garage/command
+      payload: |
+        {
+          "wake": true
+        }
