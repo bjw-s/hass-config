@@ -8,15 +8,15 @@ value_template: >
   {%- if value_json.channel[channel_id].temp == 999.0 -%}
     unavailable
   {%- else -%}
-    {{ value_json.channel[channel_id].temp | float }}
+    {{ value_json.channel[channel_id].temp | float(0) }}
   {%- endif -%}
 json_attributes_topic: "WLanThermo/NANO-c1cec8/status/data"
 json_attributes_template: >
   {% set channel_id = 0 %}
   {{-
     {
-      'min': value_json.channel[channel_id].min | float,
-      'max': value_json.channel[channel_id].max | float,
+      'min': value_json.channel[channel_id].min | float(0),
+      'max': value_json.channel[channel_id].max | float(0),
       'alarm': value_json.channel[channel_id].alarm,
       'type': value_json.channel[channel_id].typ
     } | tojson

@@ -9,9 +9,9 @@ trigger:
 action:
   - wait_template: |
       {{ 
-        states('sensor.attic_ender_3_bed_temperature') | float < 30
+        states('sensor.attic_ender_3_bed_temperature') | float(0) < 30
         and
-        states('sensor.attic_ender_3_tool_0_temperature') | float < 50
+        states('sensor.attic_ender_3_tool_0_temperature') | float(0) < 50
       }}
     continue_on_timeout: true
     timeout: 00:30:00

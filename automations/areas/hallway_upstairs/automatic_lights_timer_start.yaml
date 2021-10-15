@@ -15,4 +15,4 @@ action:
   - service: timer.start
     data:
       entity_id: timer.automatic_lights_hallway_upstairs
-      duration: "{{ (states('input_number.automatic_lights_duration_hallway_upstairs') | float) * 60 }}"
+      duration: "{{ (states('input_number.automatic_lights_duration_hallway_upstairs') | float(0)) * 60 }}"

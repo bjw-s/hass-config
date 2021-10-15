@@ -19,4 +19,4 @@ action:
   - service: timer.start
     data:
       entity_id: timer.living_area_presence_detected
-      duration: "{{ (states('input_number.living_area_presence_duration') | float) * 60 }}"
+      duration: "{{ (states('input_number.living_area_presence_duration') | float(0)) * 60 }}"
