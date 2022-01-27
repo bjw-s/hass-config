@@ -1,0 +1,3 @@
+[submodule "custom_components/androidtv"]
+	path = custom_components/androidtv
+	url = https://github.com/deviant-aut/HA-androidtv11.git
