@@ -4,7 +4,7 @@ sensors:
   hallway_illuminance_lux:
     value_template: |
       {{ 
-        (states('sensor.hallway_motion_sensor_1_illuminance_lux') | float(0)) + (states('sensor.hallway_motion_sensor_2_illuminance_lux') | float(0)) / 2
+        [(states('sensor.hallway_motion_sensor_1_illuminance_lux') | float(0)), (states('sensor.hallway_motion_sensor_2_illuminance_lux') | float(0))] | average
       }}
     unit_of_measurement: 'lx'
     device_class: illuminance

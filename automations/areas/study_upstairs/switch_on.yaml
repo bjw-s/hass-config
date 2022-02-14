@@ -7,18 +7,24 @@ trigger:
     domain: mqtt
     device_id: d3d7eacc2f60052c0861c61f306afa52
     type: action
-    subtype: recall_scene_3
-    discovery_id: 0x0000000001716c1d action_recall_scene_3
+    subtype: press_1_and_3
+    discovery_id: 0x0000000001716c1d action_press_1_and_3
+  - platform: device
+    domain: mqtt
+    device_id: d3d7eacc2f60052c0861c61f306afa52
+    type: action
+    subtype: press_1
+    discovery_id: 0x0000000001716c1d action_press_1
+  - platform: device
+    domain: mqtt
+    device_id: d3d7eacc2f60052c0861c61f306afa52
+    type: action
+    subtype: press_3
+    discovery_id: 0x0000000001716c1d action_press_3
+
 action:
-  - service: input_select.select_option
+  - service: script.input_select_next_with_skip
     data:
-      entity_id: input_select.study_upstairs_active_lights_scene
-      option: |
-        {% set entity_id = "input_select.study_upstairs_active_lights_scene" %}
-        {% set options = state_attr(entity_id, "options") %}
-        {% set selection = options.index(states(entity_id)) %}
-        {% if (selection + 1) >= options | length %}
-          {{ options[1] }}
-        {% else %}
-          {{ options[selection + 1] }}
-        {% endif %}
+      entity_id: input_select.study_upstairs_lights_scene
+      skip_options:
+        - "Off"

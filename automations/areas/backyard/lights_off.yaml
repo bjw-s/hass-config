@@ -7,7 +7,7 @@ trigger:
     domain: mqtt
     device_id: dd81282b220b5523490be40a8cb92b6e
     type: action
-    subtype: recall_scene_2
-    discovery_id: 0x000000000171680f action_recall_scene_2
+    subtype: press_4
+    discovery_id: 0x000000000171680f action_press_4
 action:
   - scene: scene.backyard_lights_off

@@ -132,7 +132,7 @@ cards:
             template: default_button
             name: MiMi
             icon: 'mdi:robot-vacuum'
-            entity: vacuum.living_area
+            entity: vacuum.valetudo_livingroom
             show_label: true
             show_state: true
             state:

@@ -1,0 +1,26 @@
+---
+id: bedroom_ceiling_light_on
+alias: Bedroom - Ceiling light on
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 1eb8a1cbd7e1baf762316b075b3be5c0
+    type: action
+    subtype: press_1_and_3
+    discovery_id: 0x00000000017579b6 action_press_1_and_3
+  - platform: device
+    domain: mqtt
+    device_id: 1eb8a1cbd7e1baf762316b075b3be5c0
+    type: action
+    subtype: press_1
+    discovery_id: 0x00000000017579b6 action_press_1
+  - platform: device
+    domain: mqtt
+    device_id: 1eb8a1cbd7e1baf762316b075b3be5c0
+    type: action
+    subtype: press_3
+    discovery_id: 0x00000000017579b6 action_press_3
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_lights_ceiling_on

@@ -7,13 +7,13 @@ trigger:
     domain: mqtt
     device_id: 66e77759181c96a80d427dd55b3e0d75
     type: action
-    subtype: recall_scene_4
-    discovery_id: 0x0000000001716b6f action_recall_scene_4
+    subtype: press_1
+    discovery_id: 0x0000000001716b6f action_press_1
   - platform: device
     domain: mqtt
     device_id: 4b41fc02c4f375ddbe1c405fe173600d
     type: action
-    subtype: recall_scene_3
-    discovery_id: 0x0000000001716b46 action_recall_scene_3
+    subtype: press_3
+    discovery_id: 0x0000000001716b46 action_press_3
 action:
   - scene: scene.hallway_upstairs_lights_on

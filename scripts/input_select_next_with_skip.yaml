@@ -1,0 +1,34 @@
+---
+input_select_next_with_skip:
+  alias: "input_select select_next with skip"
+  fields:
+    entity_id:
+      name: entity_id
+      required: true
+      selector:
+        entity:
+          domain: input_select
+    skip_options:
+      name: Skip options
+      description: A list of options that should be skipped
+      default: []
+      selector:
+        object:
+  sequence:
+    - service: input_select.select_option
+      data:
+        entity_id: "{{ entity_id }}"
+        option: |
+          {% set all_options = state_attr(entity_id, "options") %}
+          {% set filtered_options = all_options | reject('in', skip_options) | list %}
+
+          {% if not states(entity_id) in filtered_options %}
+            {{ filtered_options | first }}
+          {% else %}
+            {% set current_index = filtered_options.index(states(entity_id)) %}
+            {% if (current_index + 1) >= filtered_options | length %}
+              {{ filtered_options | first }}
+            {% else %}
+              {{ filtered_options[current_index + 1] }}
+            {% endif %}
+          {% endif %}

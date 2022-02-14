@@ -19,10 +19,19 @@ condition:
       entity_id: light.dining_area
       state: 'off'
     - condition: time
-      after: "06:00:00:00"
-      before: "08:30:00:00"
+      after: "06:00:00"
+      before: "08:30:00"
     - condition: template
-      value_template: "{{ (as_timestamp(now()) - as_timestamp((states.binary_sensor.hallway_motion.last_changed)) < 180)}}"
+      value_template: |
+        {% set entity = 'binary_sensor.hallway_motion' %}
+        {% if states[entity] %}
+          {% set last_changed = as_timestamp(states[entity].last_changed) %}
+        {% else %}
+          {% set last_changed = 0 %}
+        {% endif %}
+        {{ 
+          (as_timestamp(now()) - last_changed) < 180
+        }}
 action:
   - service: scene.turn_on
     data:

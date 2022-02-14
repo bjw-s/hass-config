@@ -6,6 +6,7 @@ trigger:
   - platform: state
     entity_id: binary_sensor.living_room_is_dark
     to: 'off'
+    for: "00:02:00"
 condition:
   condition: and
   conditions:

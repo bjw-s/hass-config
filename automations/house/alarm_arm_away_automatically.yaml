@@ -21,12 +21,12 @@ action:
           - condition: not
             conditions:
               - condition: state
-                entity_id: vacuum.living_area
+                entity_id: vacuum.valetudo_livingroom
                 state: 'docked'
         sequence:
           - wait_for_trigger:
               - platform: state
-                entity_id: vacuum.living_area
+                entity_id: vacuum.valetudo_livingroom
                 to: 'docked'
   
   # Arm alarm

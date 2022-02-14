@@ -1,0 +1,15 @@
+---
+id: attic_switch_left_hold
+alias: Attic - Switch - Left - Hold
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 50905b5ed0f10f4c253b254088525b7f
+    type: action
+    subtype: hold_left
+    discovery_id: 0x00158d0002fcea27 action_hold_left
+action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.attic_lights_scene
+      option: 'Off'

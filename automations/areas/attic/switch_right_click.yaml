@@ -1,6 +1,6 @@
 ---
-id: attic_front_ceiling_light_toggle
-alias: Attic - Front ceiling light toggle
+id: attic_switch_right_click
+alias: Attic - Switch - Right - Click
 trigger:
   - platform: device
     domain: mqtt

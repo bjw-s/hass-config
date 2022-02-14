@@ -1,0 +1,27 @@
+---
+id: bedroom_eva_ceiling_light_off
+alias: Bedroom Eva - Ceiling light off
+max_exceeded: silent
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_2_and_4
+    discovery_id: 0x00000000017579ae action_press_2_and_4
+  - platform: device
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_2
+    discovery_id: 0x00000000017579ae action_press_2
+  - platform: device
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_4
+    discovery_id: 0x00000000017579ae action_press_4
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_eva_lights_ceiling_off

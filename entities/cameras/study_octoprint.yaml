@@ -1,5 +1,0 @@
----
-platform: mjpeg
-name: Attic - Octoprint
-still_image_url: http://octoprint.home-automation/webcam/?action=snapshot
-mjpeg_url: http://octoprint.home-automation/webcam/?action=stream

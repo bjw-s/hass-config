@@ -1,0 +1,8 @@
+---
+# The rest sensor platform is consuming a given endpoint which is exposed by a RESTful API
+# of a device, an application, or a web service. The sensor has support for GET and 
+# POST requests.
+#
+# https://www.home-assistant.io/integrations/rest/
+#
+rest: !include_dir_list ../entities/rest

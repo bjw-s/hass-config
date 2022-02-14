@@ -111,7 +111,7 @@ views:
                         
                       - type: 'custom:button-card'
                         aspect_ratio: 1 / 1
-                        entity: vacuum.living_area
+                        entity: vacuum.valetudo_livingroom
                         icon: 'mdi:robot-vacuum'
                         name: MiMi
                         show_label: true
@@ -126,16 +126,18 @@ views:
                           service: |
                             [[[
                               if (entity.state === "docked")
-                                return "script.vacuum_all_zones";
+                                return "script.vacuum_downstairs";
+                              else if (entity.state === "idle")
+                                return "vacuum.return_to_base";
                               else if (entity.state === "cleaning")
                                 return "vacuum.return_to_base";
                               else
                                 return "none";
                             ]]]
                           service_data:
-                            entity_id: vacuum.living_area
+                            entity_id: vacuum.valetudo_livingroom
                         triggers_update:
-                          - vacuum.living_area
+                          - vacuum.valetudo_livingroom
 
           vacation:
             type: custom:layout-card

@@ -87,24 +87,24 @@ cards:
       - type: picture-entity
         view_layout:
           grid-area: camera
-        entity: camera.attic_octoprint
+        entity: camera.attic_3d_printer
         camera_view: live
         show_state: false
         show_name: false
 
       - type: 'custom:hui-entities-card'
         view_layout:
-          grid-area: main
+        grid-area: main
         show_header_toggle: false
         entities:
           - type: 'custom:restriction-card'
             card:
-              entity: switch.attic_3d_printer_power
+              entity: switch.attic_3d_printer_power_switch
               name: Printer power
             restrictions:
               block: true
             condition:
-              entity: binary_sensor.attic_ender_3_printing
+              entity: binary_sensor.attic_3d_printer_lock_power
               value: 'on'
             row: true
             icon: mdi:power
@@ -114,13 +114,41 @@ cards:
           - entity: input_boolean.attic_3d_printer_notifications
             name: Notifications
             icon: mdi:bell
-          - entity: binary_sensor.attic_ender_3_printing
-            name: Printing
-          - entity: sensor.attic_ender_3_print_progress
-            name: Print progress
-            icon: mdi:progress-clock
-          - entity: sensor.attic_ender_3_print_time_left
-            name: Print time left
+          - entity: sensor.attic_3d_printer_state
+            name: Printer state
+          - type: conditional
+            conditions:
+              - entity: sensor.attic_3d_printer_state
+                state: "printing"
+            row:
+              entity: sensor.attic_3d_printer_current_progress
+              name: Print job percentage
+              icon: mdi:progress-clock
+          - type: conditional
+            conditions:
+              - entity: sensor.attic_3d_printer_state
+                state: "printing"
+            row:
+              entity: sensor.attic_3d_printer_eta_formatted
+              name: ETA
+          - entity: sensor.attic_3d_printer_bed_actual
+            name: Bed temperature
+          - type: conditional
+            conditions:
+              - entity: sensor.attic_3d_printer_bed_target
+                state_not: "0.0"
+            row:
+              entity: sensor.attic_3d_printer_bed_target
+              name: Target bed temperature
+          - entity: sensor.attic_3d_printer_hotend_actual
+            name: Hotend temperature
+          - type: conditional
+            conditions:
+              - entity: sensor.attic_3d_printer_hotend_target
+                state_not: "0.0"
+            row:
+              entity: sensor.attic_3d_printer_hotend_target
+              name: Target hotend temperature
 
   - type: 'custom:layout-card'
     view_layout:
@@ -133,6 +161,9 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
+          - entity: input_select.attic_lights_scene
+            name: Scene
+
           - entity: light.attic_front_ceiling
             name: Front ceiling
             hold_action: !include ../popups/floor-3-attic_light_front.yaml

@@ -1,0 +1,17 @@
+---
+id: bedroom_eva_ceiling_light_automatic_off
+alias: Bedroom Eva - Ceiling light Automatic off
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: light.bedroom_eva_nightlight
+    from: "off"
+    to: "on"
+condition:
+  - condition: state
+    entity_id: light.bedroom_eva_ceiling
+    state: "on"
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_eva_lights_ceiling_off

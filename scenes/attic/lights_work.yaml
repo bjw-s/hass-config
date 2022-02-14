@@ -1,0 +1,7 @@
+---
+name: Attic - Lights - Work
+entities:
+  light.attic_rear_ceiling:
+    state: 'on'
+    brightness: 200
+    color_temp: 319

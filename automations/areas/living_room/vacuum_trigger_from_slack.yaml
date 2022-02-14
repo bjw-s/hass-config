@@ -33,4 +33,4 @@ action:
       sequence:
         - service: script.turn_on
           data:
-            entity_id: script.vacuum_all_zones
+            entity_id: script.vacuum_downstairs

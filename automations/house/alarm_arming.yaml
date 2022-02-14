@@ -12,5 +12,5 @@ action:
     event_data:
       payload: |
         {
-          "audio": "{{ states('sensor.system_url_internal') }}/local/audio/beep-warning.mp3"
+          "audio": "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-warning.mp3"
         }

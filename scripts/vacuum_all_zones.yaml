@@ -1,24 +1,22 @@
 ---
-vacuum_all_zones:
+vacuum_downstairs:
   alias: Vacuum all downstairs rooms
   mode: single
   sequence:
-    choose:
-      - conditions:
-          - condition: state
-            entity_id: binary_sensor.utility_room_door_contact
-            state: "on"
-        sequence:
-          - service: vacuum.send_command
-            entity_id: vacuum.living_area
-            data:
-              command: segmented_cleanup
-              params:
-                segment_ids: [ "Woonkamer", "Eethoek", "Keuken", "Bijkeuken" ]
-    default:
-      - service: vacuum.send_command
-        entity_id: vacuum.living_area
-        data:
-          command: segmented_cleanup
-          params:
-            segment_ids: [ "Woonkamer", "Eethoek", "Keuken" ]
+    - service: script.turn_on
+      target:
+        entity_id: script.vacuum_clean_segments_message
+      data:
+        variables:
+          vacuum: livingroom
+          segments: |
+            {{expand("group.vacuum_rooms") | selectattr("state","eq","on") | map(attribute="attributes.valetudo_segment_id") | list | to_json}}
+
+vacuum_clean_segments_message:
+  alias: vacuum_clean_segments_message
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: valetudo/{{vacuum}}/MapSegmentationCapability/clean/set
+      payload_template: '{"segment_ids": {{segments}}}'
+  mode: single

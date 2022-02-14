@@ -1,7 +1,0 @@
----
-platform: scrape
-name: "Living Room - Denon AVR X1500h - HDR"
-resource: https://10.1.3.17:10443/ajax/general/get_config?type=12
-verify_ssl: false
-select: "Information Video HDMISignalInfo HDR"
-scan_interval: 10

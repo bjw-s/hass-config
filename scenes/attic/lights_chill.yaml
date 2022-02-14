@@ -1,0 +1,7 @@
+---
+name: Attic - Lights - Chill
+entities:
+  light.attic_rear_ceiling:
+    state: 'on'
+    brightness: 150
+    color_temp: 319

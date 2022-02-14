@@ -1,7 +1,9 @@
 ---
 platform: template
 sensors:
-  system_url_internal: 
+  system_url_internal:
     value_template: !env_var SECRET_INTERNAL_URL
+  system_url_internal_direct:
+    value_template: !env_var SECRET_INTERNAL_URL_DIRECT
   system_url_external: 
     value_template: !env_var SECRET_EXTERNAL_URL

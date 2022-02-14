@@ -16,7 +16,7 @@ condition:
     - condition: not
       conditions:
         - condition: state
-          entity_id: vacuum.living_area
+          entity_id: vacuum.valetudo_livingroom
           state: 'cleaning'
 action:
   - choose:
@@ -31,7 +31,7 @@ action:
       sequence:
         - service: script.turn_on
           data:
-            entity_id: script.vacuum_all_zones
+            entity_id: script.vacuum_downstairs
 
     # Default asks if vacuum should run
     default:

@@ -4,12 +4,6 @@ alias: Bedroom - Ceiling light toggle
 trigger:
   - platform: device
     domain: mqtt
-    device_id: 4b50851dfdcad28915a32dae34280692
-    type: click
-    subtype: single
-    discovery_id: 0x00158d000183a7c6 click_single
-  - platform: device
-    domain: mqtt
     device_id: 16ddfbe0fa5d3d2f9839f22c06427b62
     type: action
     subtype: arrow_left_click

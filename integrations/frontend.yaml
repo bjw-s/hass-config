@@ -9,3 +9,4 @@ frontend:
 
   extra_module_url:
     - /local/js/ThemeOverride.js
+    - /hacsfiles/lovelace-card-mod/card-mod.js

@@ -1,5 +1,0 @@
----
-platform: slack
-name: slack_bot
-api_key: !env_var SECRET_SLACK_API_TOKEN
-default_channel: '#home-automation'

@@ -3,9 +3,8 @@ id: attic_3d_printer_cancel_automatic_off
 alias: Attic - 3D Printer cancel automatic off
 trigger:
   - platform: state
-    entity_id: binary_sensor.attic_ender_3_printing
-    from: 'off'
-    to: 'on'
+    entity_id: sensor.attic_3d_printer_state
+    to: 'printing'
 condition:
   - condition: and
     conditions:
