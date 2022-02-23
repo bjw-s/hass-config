@@ -16,6 +16,9 @@ browser_mod:
           - type: custom:text-divider-row
             text: Settings
 
+          - entity: input_select.kitchen_lights_scene
+            name: Scene
+
           - entity: binary_sensor.kitchen_automatic_lights
             name: Automatic?
 
@@ -50,15 +53,3 @@ browser_mod:
             type: custom:slider-entity-row
             name: Ceiling rear
             hide_when_off: true
-
-          - type: custom:text-divider-row
-            text: Scenes
-
-          - entity: scene.kitchen_lights_full_brightness
-            name: Full brightness
-
-          - entity: scene.kitchen_lights_relaxed
-            name: Dimmed
-
-          - entity: scene.kitchen_lights_off
-            name: 'Off'

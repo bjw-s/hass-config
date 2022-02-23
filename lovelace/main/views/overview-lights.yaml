@@ -73,36 +73,12 @@ cards:
     columns: 1
     square: false
     cards:
-      - type: grid
-        columns: 4
-        cards:
-          - type: 'custom:button-card'
-            template: scene_button
-            name: 'Off'
-            variables:
-              scene: scene.living_room_lights_off
-
-          - type: 'custom:button-card'
-            template: scene_button
-            name: Movie
-            variables:
-              scene: scene.living_room_lights_movie_mode
-
-          - type: 'custom:button-card'
-            template: scene_button
-            name: Relaxed
-            variables:
-              scene: scene.living_room_lights_relaxed
-
-          - type: 'custom:button-card'
-            template: scene_button
-            name: Full
-            variables:
-              scene: scene.living_room_lights_full_brightness
-
       - type: entities
         show_header_toggle: false
         entities:
+          - entity: input_select.living_room_lights_scene
+            name: Scene
+
           - entity: binary_sensor.living_room_automatic_lights
             name: Automatic lights?
 
@@ -131,36 +107,12 @@ cards:
     columns: 1
     square: false
     cards:
-      - type: grid
-        columns: 4
-        cards:
-          - type: 'custom:button-card'
-            template: scene_button
-            name: 'Off'
-            variables:
-              scene: scene.dining_area_lights_off
-
-          - type: 'custom:button-card'
-            template: scene_button
-            name: Movie
-            variables:
-              scene: scene.dining_area_lights_movie_mode
-
-          - type: 'custom:button-card'
-            template: scene_button
-            name: Relaxed
-            variables:
-              scene: scene.dining_area_lights_relaxed
-
-          - type: 'custom:button-card'
-            template: scene_button
-            name: Full
-            variables:
-              scene: scene.dining_area_lights_full_brightness
-
       - type: entities
         show_header_toggle: false
         entities:
+          - entity: input_select.dining_area_lights_scene
+            name: Scene
+
           - entity: binary_sensor.dining_area_automatic_lights
             name: Automatic lights?
 
@@ -189,30 +141,12 @@ cards:
     columns: 1
     square: false
     cards:
-      - type: grid
-        columns: 4
-        cards:
-          - type: 'custom:button-card'
-            template: scene_button
-            name: 'Off'
-            variables:
-              scene: scene.kitchen_lights_off
-
-          - type: 'custom:button-card'
-            template: scene_button
-            name: Relaxed
-            variables:
-              scene: scene.kitchen_lights_relaxed
-
-          - type: 'custom:button-card'
-            template: scene_button
-            name: Full
-            variables:
-              scene: scene.kitchen_lights_full_brightness
-
       - type: entities
         show_header_toggle: false
         entities:
+          - entity: input_select.kitchen_lights_scene
+            name: Scene
+
           - entity: binary_sensor.kitchen_automatic_lights
             name: Automatic lights?
 
@@ -255,6 +189,9 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
+          - entity: input_select.hallway_downstairs_lights_scene
+            name: Scene
+
           - entity: binary_sensor.hallway_automatic_lights
             name: Automatic lights?
 
@@ -348,6 +285,9 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
+          - entity: input_select.attic_lights_scene
+            name: Scene
+
           - entity: binary_sensor.attic_automatic_lights
             name: Automatic lights?
 
@@ -366,7 +306,7 @@ cards:
             name: Manual mode
 
   #################################################
-  #                    Attic                      #
+  #                  Backyard                     #
   #################################################
 
   - type: grid

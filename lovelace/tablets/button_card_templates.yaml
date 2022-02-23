@@ -1,3 +1,6 @@
+base_button:
+  aspect_ratio: 1/1
+
 header:
   styles:
     card:

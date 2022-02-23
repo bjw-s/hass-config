@@ -16,6 +16,9 @@ browser_mod:
           - type: custom:text-divider-row
             text: Settings
 
+          - entity: input_select.hallway_downstairs_lights_scene
+            name: Scene
+
           - entity: binary_sensor.hallway_automatic_lights
             name: Automatic?
 
@@ -29,15 +32,3 @@ browser_mod:
             type: custom:slider-entity-row
             name: Ceiling
             hide_when_off: true
-
-          - type: custom:text-divider-row
-            text: Scenes
-
-          - entity: scene.hallway_lights_on
-            name: Full brightness
-
-          - entity: scene.hallway_lights_dimmed
-            name: Dimmed
-
-          - entity: scene.hallway_lights_off
-            name: 'Off'

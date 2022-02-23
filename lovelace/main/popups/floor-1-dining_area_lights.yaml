@@ -16,6 +16,9 @@ browser_mod:
           - type: custom:text-divider-row
             text: Settings
 
+          - entity: input_select.living_room_lights_scene
+            name: Scene
+
           - entity: binary_sensor.dining_area_automatic_lights
             name: Automatic?
 
@@ -37,18 +40,3 @@ browser_mod:
             type: custom:slider-entity-row
             name: Ceiling
             hide_when_off: true
-
-          - type: custom:text-divider-row
-            text: Scenes
-
-          - entity: scene.dining_area_lights_full_brightness
-            name: Full brightness
-
-          - entity: scene.dining_area_lights_relaxed
-            name: Dimmed
-
-          - entity: scene.dining_area_lights_movie_mode
-            name: Movie mode
-
-          - entity: scene.dining_area_lights_off
-            name: 'Off'
