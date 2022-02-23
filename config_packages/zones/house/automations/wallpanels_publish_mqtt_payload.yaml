@@ -1,0 +1,16 @@
+---
+id: home_wallpanels_publish_mqtt_payload
+alias: Home - Wall Panels - Publish MQTT Payload
+mode: queued
+trigger:
+  - platform: event
+    event_type: wallpanels_publish_payload
+action:
+    - service: mqtt.publish
+      data_template:
+        topic: wallpanel/hallway/command
+        payload: "{{ trigger.event.data.payload }}"
+    - service: mqtt.publish
+      data_template:
+        topic: wallpanel/garage/command
+        payload: "{{ trigger.event.data.payload }}"

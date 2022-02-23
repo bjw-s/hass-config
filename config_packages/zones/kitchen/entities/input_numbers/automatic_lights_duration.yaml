@@ -1,0 +1,6 @@
+---
+automatic_lights_duration_kitchen:
+  min: 0
+  max: 30
+  step: 1
+  unit_of_measurement: min

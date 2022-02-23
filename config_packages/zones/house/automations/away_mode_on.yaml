@@ -1,0 +1,56 @@
+---
+id: home_away_mode_on
+alias: Home - Away mode on
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_away_mode
+    to: 'on'
+
+action:
+  # Turn off lights 1st floor
+  - service: input_select.select_option
+    data:  
+      entity_id: input_select.hallway_downstairs_lights_scene
+      option: 'Off'
+
+  - service: input_select.select_option
+    data:  
+      entity_id: input_select.living_room_lights_scene
+      option: 'Off'
+
+  - service: input_select.select_option
+    data:  
+      entity_id: input_select.dining_area_lights_scene
+      option: 'Off'
+
+  - service: input_select.select_option
+    data:  
+      entity_id: input_select.kitchen_lights_scene
+      option: 'Off'
+
+  # Turn off lights 2nd floor
+  - service: scene.turn_on
+    data:
+      entity_id: scene.hallway_upstairs_lights_off
+
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_lights_off
+
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_eva_lights_off
+
+  # Turn off lights 3rd floor
+  - service: scene.turn_on
+    data:
+      entity_id: scene.hallway_attic_lights_off
+
+  - service: scene.turn_on
+    data:
+      entity_id: scene.attic_lights_off
+
+  # Turn on script
+  - service: script.turn_on
+    data:
+      entity_id: script.home_modes_away_mode

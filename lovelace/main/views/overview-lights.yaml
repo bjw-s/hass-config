@@ -155,10 +155,10 @@ cards:
 
           - type: conditional
             conditions:
-              - entity: timer.automatic_lights_kitchen
+              - entity: timer.kitchen_automatic_lights
                 state_not: idle
             row:
-              entity: timer.automatic_lights_kitchen
+              entity: timer.kitchen_automatic_lights
               name: Automatic duration
 
           - entity: input_boolean.kitchen_lights_manual_mode
@@ -192,21 +192,21 @@ cards:
           - entity: input_select.hallway_downstairs_lights_scene
             name: Scene
 
-          - entity: binary_sensor.hallway_automatic_lights
+          - entity: binary_sensor.hallway_downstairs_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.automatic_lights_duration_hallway
+          - entity: input_number.hallway_downstairs_automatic_lights_duration
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.automatic_lights_hallway
+              - entity: timer.hallway_downstairs_automatic_lights
                 state_not: idle
             row:
-              entity: timer.automatic_lights_hallway
+              entity: timer.hallway_downstairs_automatic_lights
               name: Automatic duration
 
-          - entity: input_boolean.hallway_lights_manual_mode
+          - entity: input_boolean.hallway_downstairs_lights_manual_mode
             name: Manual mode
 
   #################################################
@@ -226,15 +226,15 @@ cards:
           - entity: binary_sensor.hallway_upstairs_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.automatic_lights_duration_hallway_upstairs
+          - entity: input_number.hallway_upstairs_automatic_lights_duration
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.automatic_lights_hallway_upstairs
+              - entity: timer.hallway_upstairs_automatic_lights
                 state_not: idle
             row:
-              entity: timer.automatic_lights_hallway_upstairs
+              entity: timer.hallway_upstairs_automatic_lights
               name: Automatic duration
 
           - entity: input_boolean.hallway_upstairs_lights_manual_mode
@@ -257,15 +257,15 @@ cards:
           - entity: binary_sensor.hallway_attic_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.automatic_lights_duration_hallway_attic
+          - entity: input_number.hallway_attic_automatic_lights_duration
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.automatic_lights_hallway_attic
+              - entity: timer.hallway_attic_automatic_lights
                 state_not: idle
             row:
-              entity: timer.automatic_lights_hallway_attic
+              entity: timer.hallway_attic_automatic_lights
               name: Automatic duration
 
           - entity: input_boolean.hallway_attic_lights_manual_mode
@@ -291,15 +291,15 @@ cards:
           - entity: binary_sensor.attic_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.automatic_lights_duration_attic
+          - entity: input_number.attic_automatic_lights_duration
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.automatic_lights_attic
+              - entity: timer.attic_automatic_lights
                 state_not: idle
             row:
-              entity: timer.automatic_lights_attic
+              entity: timer.attic_automatic_lights
               name: Automatic duration
 
           - entity: input_boolean.attic_lights_manual_mode

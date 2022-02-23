@@ -1,0 +1,4 @@
+---
+hass_maintenance_enabled:
+  name: Maintenance mode
+  icon: mdi:auto-fix

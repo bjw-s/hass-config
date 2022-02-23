@@ -1,0 +1,11 @@
+---
+id: hass_turn_off_recently_started
+alias: Hass - Turn off recently started
+trigger:
+  platform: homeassistant
+  event: start
+action:
+  - delay: 00:00:30
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.hass_recently_started

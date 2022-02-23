@@ -1,0 +1,6 @@
+---
+kitchen_lights_manual_mode_duration:
+  min: 15
+  max: 120
+  step: 15
+  unit_of_measurement: min

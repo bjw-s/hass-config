@@ -1,8 +1,0 @@
----
-platform: min_max
-name: Hallway - Temperature
-type: mean
-round_digits: 1
-entity_ids:
-  - sensor.hallway_motion_sensor_1_temperature
-  - sensor.hallway_motion_sensor_2_temperature

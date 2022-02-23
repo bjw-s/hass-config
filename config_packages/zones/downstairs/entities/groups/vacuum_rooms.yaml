@@ -1,0 +1,7 @@
+---
+downstairs_vacuum_rooms:
+  entities:
+  - input_boolean.living_room_vacuum
+  - input_boolean.dining_area_vacuum
+  - input_boolean.kitchen_vacuum
+  - input_boolean.utility_room_vacuum

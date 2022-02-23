@@ -1,0 +1,37 @@
+---
+id: system_set_theme
+alias: System - Set theme
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: input_boolean.hass_maintenance_enabled
+  - platform: state
+    entity_id: binary_sensor.driveway_is_dark
+action:
+  - service: frontend.set_theme
+    data:
+      name: |
+        {%- if is_state("input_boolean.hass_maintenance_enabled", "on") -%}
+          darkorange
+        {%- elif is_state("binary_sensor.driveway_is_dark", "on") -%}
+          Google Dark Theme
+        {%- else -%}
+          Google Light Theme
+        {%- endif -%}
+      mode: light
+  - service: frontend.set_theme
+    data:
+      name: |
+        {%- if is_state("input_boolean.hass_maintenance_enabled", "on") -%}
+          darkorange
+        {%- else -%}
+          Google Dark Theme
+        {%- endif -%}
+      mode: dark
+
+  - event: wallpanels_publish_payload
+    event_data:
+      payload: |
+        {
+          "reload": true
+        }

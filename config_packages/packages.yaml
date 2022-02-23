@@ -1,0 +1,26 @@
+home_assistant: !include home-assistant/package.yaml
+# Ugly hack because integrations require `include_dir_merge_named` but
+# won't work from inside a nested package
+home_assistant_integrations: !include_dir_merge_named home-assistant/integrations
+
+system: !include system/package.yaml
+notifications: !include notifications/package.yaml
+
+house: !include zones/house/package.yaml
+
+area_downstairs:  !include zones/downstairs/package.yaml
+
+area_attic: !include zones/attic/package.yaml
+area_backyard: !include zones/backyard/package.yaml
+area_bedroom: !include zones/bedroom/package.yaml
+area_bedroom_eva: !include zones/bedroom_eva/package.yaml
+area_dining_area: !include zones/dining_area/package.yaml
+area_driveway: !include zones/driveway/package.yaml
+area_garage: !include zones/garage/package.yaml
+area_hallway_attic: !include zones/hallway_attic/package.yaml
+area_hallway_downstairs: !include zones/hallway_downstairs/package.yaml
+area_hallway_upstairs: !include zones/hallway_upstairs/package.yaml
+area_kitchen: !include zones/kitchen/package.yaml
+area_living_room: !include zones/living_room/package.yaml
+area_study_upstairs: !include zones/study_upstairs/package.yaml
+area_utility_room: !include zones/utility_room/package.yaml

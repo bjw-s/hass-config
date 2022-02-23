@@ -1,6 +1,0 @@
----
-is_dark_lux_hallway:
-  min: 0
-  max: 250
-  step: 5
-  unit_of_measurement: lx

@@ -20,6 +20,6 @@ homeassistant:
     local: /media
 
   # Load packages
-  packages: !include_dir_named integrations
+  packages: !include config_packages/packages.yaml
 
   allowlist_external_dirs: !include whitelist_external_dirs.yaml

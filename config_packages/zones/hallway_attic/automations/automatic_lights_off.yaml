@@ -1,0 +1,19 @@
+---
+id: hallway_attic_automatic_lights_off
+alias: Hallway Attic - Automatic lights off
+trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.hallway_attic_automatic_lights
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.hallway_attic_automatic_lights
+      state: 'on'
+    - condition: state
+      entity_id: light.hallway_attic
+      state: 'on'
+action:
+  - scene: scene.hallway_attic_lights_off

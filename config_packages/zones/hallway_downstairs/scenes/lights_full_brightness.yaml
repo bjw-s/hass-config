@@ -1,0 +1,6 @@
+---
+name: Hallway Downstairs - Lights - Full brightness
+entities:
+  light.hallway_downstairs_ceiling:
+    state: 'on'
+    brightness: 220

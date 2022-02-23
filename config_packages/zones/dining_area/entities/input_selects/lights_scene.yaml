@@ -1,0 +1,9 @@
+---
+dining_area_lights_scene:
+  name: Dining Area - Lights scene
+  options:
+    - 'Off'
+    - Full brightness
+    - Relaxed
+    - Movie mode
+  icon: mdi:movie-open

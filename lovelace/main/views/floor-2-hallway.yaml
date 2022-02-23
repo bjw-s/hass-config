@@ -36,7 +36,7 @@ cards:
             template: default_locked
             name: Automatic?
             icon: 'mdi:check'
-            entity: input_boolean.automatic_lights_hallway_upstairs
+            entity: input_boolean.hallway_upstairs_automatic_lights
 
           - type: 'custom:button-card'
             template: default_button

@@ -1,9 +1,0 @@
----
-platform: history_stats
-name: "Hallway - Lights - Stats"
-entity_id: light.hallway
-state: "on"
-type: count
-start: >
-  {{ as_timestamp(now()) - (7*86400) }}
-duration: 00:00:10

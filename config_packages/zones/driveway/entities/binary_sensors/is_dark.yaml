@@ -1,0 +1,18 @@
+---
+platform: template
+sensors:
+  driveway_is_dark:
+    icon_template: >
+      {%- if (states('sensor.driveway_motion_sensor_illuminance_lux') | float(0)) < (states('input_number.driveway_is_dark_lux') | float(0)) -%} 
+        mdi:brightness-4
+      {%- else -%}
+        mdi:brightness-5
+      {%- endif -%}
+    value_template: >
+      {{
+        (states('input_number.driveway_is_dark_lux') | float(0)) > 0
+        and
+        (states('sensor.driveway_motion_sensor_illuminance_lux') | float(0)) < (states('input_number.driveway_is_dark_lux') | float(0)) 
+      }}
+    delay_on:
+      minutes: 1

@@ -1,0 +1,136 @@
+---
+id: dining_area_lights_scene_controller
+alias: Dining Area - Lights - Scene controller
+max_exceeded: silent
+
+trigger:
+  - id: dining_area_switch_top
+    platform: device
+    domain: mqtt
+    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    type: action
+    subtype: press_3
+    discovery_id: 0x0000000001715668 action_press_3
+
+  - id: dining_area_switch_bottom
+    platform: device
+    domain: mqtt
+    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    type: action
+    subtype: press_4
+    discovery_id: 0x0000000001715668 action_press_4
+
+  - id: dining_area_is_dark
+    platform: state
+    entity_id: binary_sensor.dining_area_is_dark
+    to: "on"
+
+  - id: dining_area_motion_detected
+    platform: state
+    entity_id: binary_sensor.dining_area_motion_sensor_occupancy
+    to: "on"
+
+  - id: living_room_media_playing
+    platform: state
+    entity_id: binary_sensor.living_room_media_playing
+
+  - id: dining_area_no_longer_dark
+    platform: state
+    entity_id: binary_sensor.dining_area_is_dark
+    to: "off"
+    for: "00:02:00"
+
+variables:
+  scene_helper: input_select.dining_area_lights_scene
+
+action:
+  - alias: "choose scene based on trigger"
+    choose:
+      # Loop through scenes with button
+      - conditions:
+          - condition: trigger
+            id: dining_area_switch_top
+        sequence:
+          - service: script.input_select_next_with_skip
+            data:
+              entity_id: "{{ scene_helper }}"
+              skip_options:
+                - "Off"
+                - "Movie mode"
+
+      # Turn on automatically to a specific scene
+      - conditions:
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.dining_area_automatic_lights
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.dining_area_is_dark
+                state: "on"
+              - condition: or
+                conditions:
+                  - condition: trigger
+                    id: dining_area_is_dark
+                  - condition: trigger
+                    id: living_room_media_playing
+                  - condition: trigger
+                    id: dining_area_motion_detected
+        sequence:
+          - choose:
+              # Only set these scenes in the evening
+              - conditions:
+                  - condition: time
+                    after: "20:00:00"
+                    before: "02:00:00"
+                sequence:
+                  - choose:
+                      # Select "Movie mode"
+                      - conditions:
+                          - condition: state
+                            entity_id: binary_sensor.living_room_media_playing
+                            state: "on"
+                        sequence:
+                          - service: input_select.select_option
+                            data:
+                              entity_id: "{{ scene_helper }}"
+                              option: "Movie mode"
+
+                      # Select "Relaxed"
+                      - conditions:
+                          - condition: state
+                            entity_id: binary_sensor.living_room_media_playing
+                            state: "off"
+                        sequence:
+                          - service: input_select.select_option
+                            data:
+                              entity_id: "{{ scene_helper }}"
+                              option: "Relaxed"
+
+            # Select "Full brightness"
+            default:
+              - service: input_select.select_option
+                data:
+                  entity_id: "{{ scene_helper }}"
+                  option: "Full brightness"
+
+      # Select "off" scene
+      - conditions:
+          - condition: or
+            conditions:
+              # Turned off manually
+              - condition: trigger
+                id: dining_area_switch_bottom
+              # Turn off automatically
+              - condition: and
+                conditions:
+                  - condition: trigger
+                    id: dining_area_no_longer_dark
+                  - condition: state
+                    entity_id: binary_sensor.dining_area_automatic_lights
+                    state: "on"
+        sequence:
+          - service: input_select.select_option
+            data:
+              entity_id: "{{ scene_helper }}"
+              option: "Off"

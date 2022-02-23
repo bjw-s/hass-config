@@ -1,0 +1,136 @@
+---
+id: living_room_lights_scene_controller
+alias: Living Room - Lights - Scene controller
+max_exceeded: silent
+
+trigger:
+  - id: living_room_switch_top
+    platform: device
+    domain: mqtt
+    device_id: 030ecf5d6e97435dfceeffb7c5e0d5b0
+    type: action
+    subtype: press_1
+    discovery_id: 0x0000000001715691 action_press_1
+
+  - id: living_room_switch_bottom
+    platform: device
+    domain: mqtt
+    device_id: 030ecf5d6e97435dfceeffb7c5e0d5b0
+    type: action
+    subtype: press_2
+    discovery_id: 0x0000000001715691 action_press_2
+
+  - id: living_room_is_dark
+    platform: state
+    entity_id: binary_sensor.living_room_is_dark
+    to: "on"
+
+  - id: living_room_motion_detected
+    platform: state
+    entity_id: binary_sensor.living_room_motion_sensor_occupancy
+    to: "on"
+
+  - id: living_room_media_playing
+    platform: state
+    entity_id: binary_sensor.living_room_media_playing
+
+  - id: living_room_no_longer_dark
+    platform: state
+    entity_id: binary_sensor.living_room_is_dark
+    to: "off"
+    for: "00:02:00"
+
+variables:
+  scene_helper: input_select.living_room_lights_scene
+
+action:
+  - alias: "choose scene based on trigger"
+    choose:
+      # Loop through scenes with button
+      - conditions:
+          - condition: trigger
+            id: living_room_switch_top
+        sequence:
+          - service: script.input_select_next_with_skip
+            data:
+              entity_id: "{{ scene_helper }}"
+              skip_options:
+                - "Off"
+                - "Movie mode"
+
+      # Turn on automatically to a specific scene
+      - conditions:
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.living_room_automatic_lights
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.living_room_is_dark
+                state: "on"
+              - condition: or
+                conditions:
+                  - condition: trigger
+                    id: living_room_is_dark
+                  - condition: trigger
+                    id: living_room_media_playing
+                  - condition: trigger
+                    id: living_room_motion_detected
+        sequence:
+          - choose:
+              # Only set these scenes in the evening
+              - conditions:
+                  - condition: time
+                    after: "20:00:00"
+                    before: "02:00:00"
+                sequence:
+                  - choose:
+                      # Select "Movie mode"
+                      - conditions:
+                          - condition: state
+                            entity_id: binary_sensor.living_room_media_playing
+                            state: "on"
+                        sequence:
+                          - service: input_select.select_option
+                            data:
+                              entity_id: "{{ scene_helper }}"
+                              option: "Movie mode"
+
+                      # Select "Relaxed"
+                      - conditions:
+                          - condition: state
+                            entity_id: binary_sensor.living_room_media_playing
+                            state: "off"
+                        sequence:
+                          - service: input_select.select_option
+                            data:
+                              entity_id: "{{ scene_helper }}"
+                              option: "Relaxed"
+
+            # Select "Full brightness"
+            default:
+              - service: input_select.select_option
+                data:
+                  entity_id: "{{ scene_helper }}"
+                  option: "Full brightness"
+
+      # Select "off" scene
+      - conditions:
+          - condition: or
+            conditions:
+              # Turned off manually
+              - condition: trigger
+                id: living_room_switch_bottom
+              # Turn off automatically
+              - condition: and
+                conditions:
+                  - condition: trigger
+                    id: living_room_no_longer_dark
+                  - condition: state
+                    entity_id: binary_sensor.living_room_automatic_lights
+                    state: "on"
+        sequence:
+          - service: input_select.select_option
+            data:
+              entity_id: "{{ scene_helper }}"
+              option: "Off"

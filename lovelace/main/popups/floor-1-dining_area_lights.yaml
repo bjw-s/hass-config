@@ -16,7 +16,7 @@ browser_mod:
           - type: custom:text-divider-row
             text: Settings
 
-          - entity: input_select.living_room_lights_scene
+          - entity: input_select.dining_area_lights_scene
             name: Scene
 
           - entity: binary_sensor.dining_area_automatic_lights

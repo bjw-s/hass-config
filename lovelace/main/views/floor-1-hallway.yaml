@@ -64,17 +64,17 @@ cards:
       - type: 'custom:button-card'
         template: default_button
         name: Dark?
-        entity: binary_sensor.hallway_is_dark
+        entity: binary_sensor.hallway_downstairs_is_dark
         tap_action: !include ../popups/light_levels.yaml
 
       - type: 'custom:button-card'
         template: default_button
         name: Light level
         icon: 'mdi:theme-light-dark'
-        entity: sensor.hallway_illuminance_lux
+        entity: sensor.hallway_downstairs_illuminance_lux
 
       - type: 'custom:button-card'
-        entity: binary_sensor.hallway_motion
+        entity: binary_sensor.hallway_downstairs_motion
         template: default_button
         name: Motion
 
@@ -116,6 +116,6 @@ cards:
       - type: 'custom:button-card'
         template: default_button
         name: Ceiling
-        entity: light.hallway_ceiling
+        entity: light.hallway_downstairs_ceiling
         icon: 'mdi:ceiling-light'
         hold_action: !include ../popups/floor-1-hallway_lights.yaml

@@ -24,10 +24,10 @@ browser_mod:
 
           - type: conditional
             conditions:
-              - entity: timer.automatic_lights_kitchen
+              - entity: timer.kitchen_automatic_lights
                 state_not: idle
             row:
-              entity: timer.automatic_lights_kitchen
+              entity: timer.kitchen_automatic_lights
               name: Automatic duration
 
           - entity: input_boolean.kitchen_lights_manual_mode

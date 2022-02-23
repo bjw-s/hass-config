@@ -1,0 +1,9 @@
+---
+living_room_lights_scene:
+  name: Living Room - Lights scene
+  options:
+    - 'Off'
+    - Full brightness
+    - Relaxed
+    - Movie mode
+  icon: mdi:movie-open

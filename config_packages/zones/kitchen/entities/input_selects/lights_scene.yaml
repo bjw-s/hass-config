@@ -1,0 +1,8 @@
+---
+kitchen_lights_scene:
+  name: Kitchen - Lights scene
+  options:
+    - 'Off'
+    - Full brightness
+    - Relaxed
+  icon: mdi:movie-open

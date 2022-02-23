@@ -1,0 +1,6 @@
+# This will override the default home zone
+- name: home
+  latitude: !env_var SECRET_ZONE_HOME_LATITUDE
+  longitude: !env_var SECRET_ZONE_HOME_LONGITUDE
+  radius: 20
+  icon: mdi:home

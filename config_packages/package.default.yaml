@@ -1,0 +1,27 @@
+automation: !include_dir_list automations
+binary_sensor: !include_dir_list entities/binary_sensors
+camera: !include_dir_list entities/cameras
+counter: !include_dir_merge_named entities/counters
+cover: !include_dir_list entities/covers
+group: !include_dir_merge_named entities/groups
+homeassistant:
+  # Customize individual entities
+  customize: !include_dir_merge_named customizations/entities
+  # Customize all entities in a domain
+  customize_domain: !include_dir_merge_named customizations/domains
+  # Customize entities based on a matching pattern
+  customize_glob: !include_dir_merge_named customizations/globs
+input_boolean: !include_dir_merge_named entities/input_booleans
+input_number: !include_dir_merge_named entities/input_numbers
+input_select: !include_dir_merge_named entities/input_selects
+input_text: !include_dir_merge_named entities/input_texts
+light: !include_dir_list entities/lights
+media_player: !include_dir_list entities/media_players
+rest_command: !include_dir_merge_named rest_commands
+scene: !include_dir_list scenes
+script: !include_dir_merge_named scripts
+sensor: !include_dir_list entities/sensors
+shell_command: !include_dir_merge_named shell_commands
+switch: !include_dir_list entities/switches
+timer: !include_dir_merge_named entities/timers
+zone: !include_dir_merge_list zones

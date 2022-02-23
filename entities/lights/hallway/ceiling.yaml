@@ -1,6 +1,0 @@
----
-platform: group
-name: Hallway - Ceiling
-entities:
-  - light.hallway_ceiling_1
-  - light.hallway_ceiling_2

@@ -1,6 +1,0 @@
----
-name: Hallway - Lights - On
-entities:
-  light.hallway_ceiling:
-    state: 'on'
-    brightness: 220
