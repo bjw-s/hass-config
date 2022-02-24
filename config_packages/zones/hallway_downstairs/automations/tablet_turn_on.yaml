@@ -10,7 +10,7 @@ trigger:
     entity_id: binary_sensor.hallway_front_door_contact
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.hallway_motion
+    entity_id: binary_sensor.hallway_downstairs_motion
     to: 'on'
   - platform: state
     entity_id: input_boolean.home_modes_away_mode

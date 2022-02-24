@@ -111,7 +111,7 @@ cards:
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.hallway_motion
+        entity: binary_sensor.hallway_downstairs_motion
         name: Motion
         template: default_button
 

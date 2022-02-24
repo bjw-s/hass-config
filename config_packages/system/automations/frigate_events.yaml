@@ -3,6 +3,7 @@ id: events_frigate_events
 alias: Events - Frigate events
 
 mode: parallel
+max: 20
 
 trigger:
   platform: mqtt

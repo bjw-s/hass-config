@@ -1,6 +1,6 @@
 ---
-id: home_bedtime_mode_off
-alias: Home - Bedtime mode off
+id: home_mode_bedtime_off
+alias: Home - Mode - Bedtime - Off
 trigger:
   - platform: state
     entity_id: input_boolean.home_modes_bedtime_mode
