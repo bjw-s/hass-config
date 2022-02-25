@@ -15,7 +15,7 @@ area_dining_area: !include zones/dining_area/package.yaml
 area_driveway: !include zones/driveway/package.yaml
 area_garage: !include zones/garage/package.yaml
 area_downstairs_hallway: !include zones/downstairs_hallway/package.yaml
-area_hallway_upstairs: !include zones/hallway_upstairs/package.yaml
+area_upstairs_hallway: !include zones/upstairs_hallway/package.yaml
 area_kitchen: !include zones/kitchen/package.yaml
 area_living_room: !include zones/living_room/package.yaml
 area_upstairs_office: !include zones/upstairs_office/package.yaml

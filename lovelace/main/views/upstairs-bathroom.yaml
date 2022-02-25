@@ -33,9 +33,9 @@ cards:
           - type: 'custom:button-card'
             template: default_button
             name: Temperature
-            entity: sensor.bathroom_multisensor_temperature
+            entity: sensor.upstairs_bathroom_multisensor_temperature
 
           - type: 'custom:button-card'
             template: default_button
             name: Humidity
-            entity: sensor.bathroom_multisensor_humidity
+            entity: sensor.upstairs_bathroom_multisensor_humidity

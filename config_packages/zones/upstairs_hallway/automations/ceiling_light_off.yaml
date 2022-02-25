@@ -1,6 +1,6 @@
 ---
-id: hallway_upstairs_ceiling_light_off
-alias: Hallway Upstairs - Ceiling light off
+id: upstairs_hallway_ceiling_light_off
+alias: Upstairs Hallway - Ceiling light off
 max_exceeded: silent
 trigger:
   - platform: device
@@ -16,4 +16,4 @@ trigger:
     subtype: press_4
     discovery_id: 0x0000000001716b46 action_press_4
 action:
-  - scene: scene.hallway_upstairs_lights_off
+  - scene: scene.upstairs_hallway_lights_off

@@ -1,0 +1,6 @@
+---
+name: Upstairs Hallway - Lights - On
+entities:
+  light.upstairs_hallway_ceiling:
+    state: 'on'
+    brightness: 220

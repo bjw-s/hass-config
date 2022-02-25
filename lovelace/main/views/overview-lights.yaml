@@ -13,7 +13,7 @@ layout:
   grid-template-areas: |
     "header  header               header            header         header"
     ".       living_area          dining_area       kitchen        ."
-    ".       downstairs_hallway   hallway_upstairs  attic_hallway  ."
+    ".       downstairs_hallway   upstairs_hallway  attic_hallway  ."
     ".       attic                driveway          backyard       ."
     ".       .                    .                 .              ."
 
@@ -29,7 +29,7 @@ layout:
         ".       dining_area         ."
         ".       kitchen             ."
         ".       downstairs_hallway  ."
-        ".       hallway_upstairs    ."
+        ".       upstairs_hallway    ."
         ".       attic_hallway       ."
         ".       attic               ."
         ".       driveway            ."
@@ -46,7 +46,7 @@ layout:
         ".       .                 .                   ."
         ".       living_area       dining_area         ."
         ".       kitchen           downstairs_hallway  ."
-        ".       hallway_upstairs  attic_hallway       ."
+        ".       upstairs_hallway  attic_hallway       ."
         ".       attic             driveway            ."
         ".       backyard          .                   ."
         ".       .                 .                   ."
@@ -210,34 +210,34 @@ cards:
             name: Manual mode
 
   #################################################
-  #              Hallway upstairs                 #
+  #              Upstairs Hallway                 #
   #################################################
 
   - type: grid
-    title: Hallway upstairs
+    title: Upstairs Hallway
     view_layout:
-      grid-area: hallway_upstairs
+      grid-area: upstairs_hallway
     columns: 1
     square: false
     cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: binary_sensor.hallway_upstairs_automatic_lights
+          - entity: binary_sensor.upstairs_hallway_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.hallway_upstairs_automatic_lights_duration
+          - entity: input_number.upstairs_hallway_automatic_lights_duration
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.hallway_upstairs_automatic_lights
+              - entity: timer.upstairs_hallway_automatic_lights
                 state_not: idle
             row:
-              entity: timer.hallway_upstairs_automatic_lights
+              entity: timer.upstairs_hallway_automatic_lights
               name: Automatic duration
 
-          - entity: input_boolean.hallway_upstairs_lights_manual_mode
+          - entity: input_boolean.upstairs_hallway_lights_manual_mode
             name: Manual mode
 
   #################################################

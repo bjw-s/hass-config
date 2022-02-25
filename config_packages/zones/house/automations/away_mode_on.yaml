@@ -31,7 +31,7 @@ action:
   # Turn off lights 2nd floor
   - service: scene.turn_on
     data:
-      entity_id: scene.hallway_upstairs_lights_off
+      entity_id: scene.upstairs_hallway_lights_off
 
   - service: scene.turn_on
     data:

@@ -10,4 +10,4 @@ action:
   # Sound the alarm
   - service: switch.turn_on
     data:
-      entity_id: switch.hallway_upstairs_siren
+      entity_id: switch.upstairs_hallway_siren

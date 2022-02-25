@@ -16,7 +16,7 @@ action:
 
   - service: switch.turn_off
     data:
-      entity_id: switch.hallway_upstairs_siren
+      entity_id: switch.upstairs_hallway_siren
 
   # OK beep
   - choose:

@@ -25,7 +25,7 @@ action:
 
   # Floor 2
   - service: input_boolean.turn_off
-    entity_id: input_boolean.hallway_upstairs_lights_manual_mode
+    entity_id: input_boolean.upstairs_hallway_lights_manual_mode
 
   # Floor 3
   - service: input_boolean.turn_off

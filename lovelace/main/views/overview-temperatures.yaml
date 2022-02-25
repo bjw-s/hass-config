@@ -164,14 +164,14 @@ cards:
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bathroom_multisensor_temperature
+          - entity: sensor.upstairs_bathroom_multisensor_temperature
             name: Temperature
         font_size: 75
         line_color: '#3498db'
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bathroom_multisensor_humidity
+          - entity: sensor.upstairs_bathroom_multisensor_humidity
             name: Humidity
         color_thresholds:
           - color: '#e74c3c'
