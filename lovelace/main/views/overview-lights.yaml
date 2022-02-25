@@ -13,7 +13,7 @@ layout:
   grid-template-areas: |
     "header  header               header            header         header"
     ".       living_area          dining_area       kitchen        ."
-    ".       hallway_downstairs   hallway_upstairs  hallway_attic  ."
+    ".       downstairs_hallway   hallway_upstairs  hallway_attic  ."
     ".       attic                driveway          backyard       ."
     ".       .                    .                 .              ."
 
@@ -28,7 +28,7 @@ layout:
         ".       living_area         ."
         ".       dining_area         ."
         ".       kitchen             ."
-        ".       hallway_downstairs  ."
+        ".       downstairs_hallway  ."
         ".       hallway_upstairs    ."
         ".       hallway_attic       ."
         ".       attic               ."
@@ -45,7 +45,7 @@ layout:
         "header  header            header              ."
         ".       .                 .                   ."
         ".       living_area       dining_area         ."
-        ".       kitchen           hallway_downstairs  ."
+        ".       kitchen           downstairs_hallway  ."
         ".       hallway_upstairs  hallway_attic       ."
         ".       attic             driveway            ."
         ".       backyard          .                   ."
@@ -176,37 +176,37 @@ cards:
               name: Manual mode duration
 
   #################################################
-  #             Hallway downstairs                #
+  #             Downstairs hallway                #
   #################################################
 
   - type: grid
-    title: Hallway downstairs
+    title: Downstairs hallway
     view_layout:
-      grid-area: hallway_downstairs
+      grid-area: downstairs_hallway
     columns: 1
     square: false
     cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: input_select.hallway_downstairs_lights_scene
+          - entity: input_select.downstairs_hallway_lights_scene
             name: Scene
 
-          - entity: binary_sensor.hallway_downstairs_automatic_lights
+          - entity: binary_sensor.downstairs_hallway_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.hallway_downstairs_automatic_lights_duration
+          - entity: input_number.downstairs_hallway_automatic_lights_duration
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.hallway_downstairs_automatic_lights
+              - entity: timer.downstairs_hallway_automatic_lights
                 state_not: idle
             row:
-              entity: timer.hallway_downstairs_automatic_lights
+              entity: timer.downstairs_hallway_automatic_lights
               name: Automatic duration
 
-          - entity: input_boolean.hallway_downstairs_lights_manual_mode
+          - entity: input_boolean.downstairs_hallway_lights_manual_mode
             name: Manual mode
 
   #################################################

@@ -1,0 +1,11 @@
+---
+id: downstairs_hallway_lights_scene_changed
+alias: Downstairs hallway - Lights - Scene changed
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: input_select.downstairs_hallway_lights_scene
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.downstairs_hallway_lights_{{ trigger.to_state.state.replace(" ", "_") | lower }}

@@ -258,7 +258,7 @@ cards:
       - type: 'custom:mini-graph-card'
         icon: mdi:thermometer
         entities:
-          - entity: sensor.hallway_temperature
+          - entity: sensor.downstairs_hallway_temperature
             name: Hallway temperature
         font_size: 75
         line_color: '#3498db'

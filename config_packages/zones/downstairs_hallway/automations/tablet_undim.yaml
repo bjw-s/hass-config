@@ -1,0 +1,14 @@
+---
+id: downstairs_hallway_tablet_undim
+alias: Downstairs hallway - Tablet undim
+trigger:
+  - platform: time
+    at: "06:00:00"
+action:
+  - service: mqtt.publish
+    data_template:
+      topic: wallpanel/hallway/command
+      payload: |
+        {
+          "brightness": 80
+        }

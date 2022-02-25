@@ -1,0 +1,8 @@
+---
+downstairs_hallway_lights_scene:
+  name: Downstairs hallway - Lights scene
+  options:
+    - 'Off'
+    - Full brightness
+    - Dimmed
+  icon: mdi:movie-open

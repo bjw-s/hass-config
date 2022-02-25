@@ -3,7 +3,7 @@ id: home_mode_bedtime_automatic_off
 alias: Home - Mode - Bedtime - Automatc off
 trigger:
   - platform: state
-    entity_id: binary_sensor.hallway_downstairs_motion
+    entity_id: binary_sensor.downstairs_hallway_motion
     to: 'on'
 
 condition:

@@ -10,7 +10,7 @@ action:
   # Turn off lights 1st floor
   - service: input_select.select_option
     data:  
-      entity_id: input_select.hallway_downstairs_lights_scene
+      entity_id: input_select.downstairs_hallway_lights_scene
       option: 'Off'
 
   - service: input_select.select_option

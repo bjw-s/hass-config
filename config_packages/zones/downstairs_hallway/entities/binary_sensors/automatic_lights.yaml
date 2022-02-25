@@ -1,0 +1,9 @@
+---
+platform: template
+sensors:
+  downstairs_hallway_automatic_lights:
+    friendly_name: "Downstairs hallway - Automatic Lights"
+    value_template:  >
+      {{-
+        states('input_boolean.downstairs_hallway_lights_manual_mode')  == 'off'
+      -}}

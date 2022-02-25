@@ -7,9 +7,9 @@ browser_mod:
     type: entities
     show_header_toggle: false
     entities:
-      - label: Hallway downstairs
+      - label: Downstairs hallway
         type: section
-      - entity: input_number.hallway_downstairs_is_dark_lux
+      - entity: input_number.downstairs_hallway_is_dark_lux
         name: Is dark lux
         type: custom:slider-entity-row
         hide_state: false

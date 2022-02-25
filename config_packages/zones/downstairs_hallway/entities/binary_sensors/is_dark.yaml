@@ -1,0 +1,20 @@
+---
+platform: template
+sensors:
+  downstairs_hallway_is_dark:
+    icon_template: >
+      {% set current_lux = (states('sensor.downstairs_hallway_illuminance_lux') | float(0)) %}
+      {% set is_dark_lux = (states('input_number.downstairs_hallway_is_dark_lux') | float(0)) %}
+      {% set lights_turned_off_recently = (is_state("light.downstairs_hallway_ceiling", "off") and (as_timestamp(now()) - as_timestamp((states.light.downstairs_hallway_ceiling.last_changed)) < 60)) %} 
+      {%- if (current_lux < is_dark_lux) or lights_turned_off_recently -%}
+        mdi:brightness-4
+      {%- else -%}
+        mdi:brightness-5
+      {%- endif -%}
+    value_template: >
+      {% set current_lux = (states('sensor.downstairs_hallway_illuminance_lux') | float(0)) %} 
+      {% set is_dark_lux = (states('input_number.downstairs_hallway_is_dark_lux') | float(0)) %}
+      {% set lights_turned_off_recently = (is_state("light.downstairs_hallway_ceiling", "off") and (as_timestamp(now()) - as_timestamp((states.light.downstairs_hallway_ceiling.last_changed)) < 60)) %} 
+      {{
+        (current_lux < is_dark_lux) or lights_turned_off_recently
+      }}

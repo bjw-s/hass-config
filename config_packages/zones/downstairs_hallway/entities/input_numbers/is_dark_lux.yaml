@@ -1,0 +1,6 @@
+---
+downstairs_hallway_is_dark_lux:
+  min: 0
+  max: 250
+  step: 5
+  unit_of_measurement: lx

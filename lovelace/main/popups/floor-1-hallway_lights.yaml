@@ -16,19 +16,19 @@ browser_mod:
           - type: custom:text-divider-row
             text: Settings
 
-          - entity: input_select.hallway_downstairs_lights_scene
+          - entity: input_select.downstairs_hallway_lights_scene
             name: Scene
 
-          - entity: binary_sensor.hallway_downstairs_automatic_lights
+          - entity: binary_sensor.downstairs_hallway_automatic_lights
             name: Automatic?
 
-          - entity: input_boolean.hallway_downstairs_lights_manual_mode
+          - entity: input_boolean.downstairs_hallway_lights_manual_mode
             name: Manual mode
 
           - type: custom:text-divider-row
             text: Brightness
 
-          - entity: light.hallway_downstairs_ceiling
+          - entity: light.downstairs_hallway_ceiling
             type: custom:slider-entity-row
             name: Ceiling
             hide_when_off: true
