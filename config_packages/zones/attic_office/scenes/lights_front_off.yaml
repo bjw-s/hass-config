@@ -1,0 +1,5 @@
+---
+  name: Attic office - Lights - Front - Off
+  entities:
+    light.attic_office_front_ceiling:
+      state: 'off'

@@ -1,6 +1,0 @@
-background: var(--background-image)
-button_card_templates: !include ../button_card_templates.yaml
-
-views:
-  - !include ../views/floor-3-hallway.yaml
-  - !include ../views/floor-3-study.yaml

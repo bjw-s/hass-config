@@ -272,11 +272,11 @@ cards:
             name: Manual mode
 
   #################################################
-  #                    Attic                      #
+  #                 Attic office                  #
   #################################################
 
   - type: grid
-    title: Attic
+    title: Attic office
     view_layout:
       grid-area: attic
     columns: 1
@@ -285,24 +285,24 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: input_select.attic_lights_scene
+          - entity: input_select.attic_office_lights_scene
             name: Scene
 
-          - entity: binary_sensor.attic_automatic_lights
+          - entity: binary_sensor.attic_office_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.attic_automatic_lights_duration
+          - entity: input_number.attic_office_automatic_lights_duration
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.attic_automatic_lights
+              - entity: timer.attic_office_automatic_lights
                 state_not: idle
             row:
-              entity: timer.attic_automatic_lights
+              entity: timer.attic_office_automatic_lights
               name: Automatic duration
 
-          - entity: input_boolean.attic_lights_manual_mode
+          - entity: input_boolean.attic_office_lights_manual_mode
             name: Manual mode
 
   #################################################

@@ -1,0 +1,6 @@
+---
+  name: Attic office - Lights - Front - Dimmed
+  entities:
+    light.attic_office_front_ceiling:
+      state: 'on'
+      brightness: 128

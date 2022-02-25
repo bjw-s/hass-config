@@ -1,0 +1,6 @@
+---
+attic_office_automatic_lights_duration:
+  min: 5
+  max: 60
+  step: 1
+  unit_of_measurement: min

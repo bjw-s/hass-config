@@ -1,0 +1,6 @@
+---
+  name: Attic office - Lights - Rear - Full Brightness
+  entities:
+    light.attic_office_rear_ceiling:
+      state: 'on'
+      brightness: 254

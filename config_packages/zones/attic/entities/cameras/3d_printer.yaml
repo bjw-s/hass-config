@@ -1,5 +1,0 @@
----
-platform: mjpeg
-name: Attic - 3D Printer
-still_image_url: http://fluiddpi.bjw-s.tech/webcam/?action=snapshot
-mjpeg_url: http://fluiddpi.bjw-s.tech/webcam/?action=stream

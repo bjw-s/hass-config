@@ -28,7 +28,7 @@ action:
 
   - service: input_select.select_option
     data:  
-      entity_id: input_select.attic_lights_scene
+      entity_id: input_select.attic_office_lights_scene
       option: 'Off'
 
   - service: scene.turn_on

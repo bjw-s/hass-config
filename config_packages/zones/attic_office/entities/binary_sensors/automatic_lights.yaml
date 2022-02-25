@@ -1,0 +1,9 @@
+---
+platform: template
+sensors:
+  attic_office_automatic_lights:
+    friendly_name: "Attic office - Automatic Lights"
+    value_template:  >
+      {{-
+        states('input_boolean.attic_office_lights_manual_mode')  == 'off'
+      -}}

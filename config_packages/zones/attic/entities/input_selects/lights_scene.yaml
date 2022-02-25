@@ -1,8 +1,0 @@
----
-attic_lights_scene:
-  name: Attic - Lights scene
-  options:
-    - 'Off'
-    - Work
-    - Chill
-  icon: mdi:movie-open

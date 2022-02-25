@@ -37,7 +37,7 @@ browser_mod:
 
       - label: Attic
         type: section
-      - entity: input_number.attic_is_dark_lux
+      - entity: input_number.attic_office_is_dark_lux
         name: Is dark lux
         type: custom:slider-entity-row
         hide_state: false

@@ -1,5 +1,0 @@
----
-  name: Attic - Lights - Off
-  entities:
-    light.attic:
-      state: 'off'

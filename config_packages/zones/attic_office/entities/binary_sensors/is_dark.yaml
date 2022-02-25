@@ -1,0 +1,22 @@
+---
+platform: template
+sensors:
+  attic_office_is_dark:
+    icon_template: >
+      {% set is_dark_lux = (states('input_number.attic_office_is_dark_lux') | float(0)) %}
+      {%- if states('light.attic_office_ceiling') == "on" -%}
+        {% set is_dark_lux = is_dark_lux + 10 %}
+      {%- endif -%}
+      {%- if (states('sensor.attic_office_motion_sensor_illuminance_lux') | float(0)) < is_dark_lux -%}
+        mdi:brightness-4
+      {%- else -%}
+        mdi:brightness-5
+      {%- endif -%}
+    value_template: >
+      {% set is_dark_lux = (states('input_number.attic_office_is_dark_lux') | float(0)) %}
+      {%- if states('light.attic_office_rear_ceiling') == "on" -%}
+        {% set is_dark_lux = is_dark_lux + 20 %}
+      {%- endif -%}
+      {{
+        (states('sensor.attic_office_motion_sensor_illuminance_lux') | float(0)) < is_dark_lux
+      }}

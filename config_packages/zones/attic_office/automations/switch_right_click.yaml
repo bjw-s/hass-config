@@ -1,0 +1,24 @@
+---
+id: attic_office_switch_right_click
+alias: Attic office - Switch - Right - Click
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 50905b5ed0f10f4c253b254088525b7f
+    type: action
+    subtype: single_right
+    discovery_id: 0x00158d0002fcea27 action_single_right
+action:
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: light.attic_office_front_ceiling
+          state: 'off'
+      sequence:
+        - scene: scene.attic_office_lights_front_full_brightness
+    - conditions:
+        - condition: state
+          entity_id: light.attic_office_front_ceiling
+          state: 'on'
+      sequence:
+        - scene: scene.attic_office_lights_front_off

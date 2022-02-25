@@ -1,0 +1,6 @@
+---
+platform: group
+name: Attic
+entities:
+  - light.attic_office_front_ceiling
+  - light.attic_office_rear_ceiling

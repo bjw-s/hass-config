@@ -1,5 +1,0 @@
----
-  name: Attic - Lights - Rear - Off
-  entities:
-    light.attic_rear_ceiling:
-      state: 'off'

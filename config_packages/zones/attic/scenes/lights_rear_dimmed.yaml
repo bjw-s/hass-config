@@ -1,6 +1,0 @@
----
-  name: Attic - Lights - Rear - Dimmed
-  entities:
-    light.attic_rear_ceiling:
-      state: 'on'
-      brightness: 128

@@ -221,11 +221,11 @@ cards:
     square: false
     cards:
       - type: 'custom:button-card'
-        entity: binary_sensor.attic_balcony_door_contact
+        entity: binary_sensor.attic_office_balcony_door_contact
         name: Balcony door
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.attic_window_contact
+        entity: binary_sensor.attic_office_window_contact
         name: Window
         template: default_button

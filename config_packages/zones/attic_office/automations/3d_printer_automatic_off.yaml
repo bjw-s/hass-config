@@ -1,0 +1,20 @@
+---
+id: attic_office_3d_printer_automatic_off
+alias: Attic office - 3D Printer automatic off
+trigger:
+  - platform: state
+    entity_id: sensor.attic_office_3d_printer_state
+    from: 'printing'
+    to: 'complete'
+action:
+  - wait_template: |
+      {{ 
+        states('sensor.attic_office_3d_printer_bed_actual') | float(0) < 30
+        and
+        states('sensor.attic_office_3d_printer_hotend_actual') | float(0) < 50
+      }}
+    continue_on_timeout: true
+    timeout: 00:30:00
+  - service: switch.turn_off
+    data:
+      entity_id: switch.attic_office_3d_printer_power_switch

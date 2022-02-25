@@ -24,9 +24,9 @@ lovelace:
       show_in_sidebar: true
       require_admin: false
 
-    3rd-floor: # Needs to contain a hyphen (-)
+    dash-attic: # Needs to contain a hyphen (-)
       mode: yaml
-      filename: ui-lovelace-floor-3.yaml
+      filename: ui-lovelace-attic.yaml
       title: 3rd Floor
       icon: mdi:numeric-3-box-multiple-outline
       show_in_sidebar: true

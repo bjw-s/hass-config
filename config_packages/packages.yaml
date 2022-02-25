@@ -10,7 +10,7 @@ house: !include zones/house/package.yaml
 
 area_downstairs:  !include zones/downstairs/package.yaml
 
-area_attic: !include zones/attic/package.yaml
+area_attic_office: !include zones/attic_office/package.yaml
 area_backyard: !include zones/backyard/package.yaml
 area_bedroom: !include zones/bedroom/package.yaml
 area_bedroom_eva: !include zones/bedroom_eva/package.yaml
