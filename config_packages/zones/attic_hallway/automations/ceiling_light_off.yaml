@@ -1,6 +1,6 @@
 ---
-id: hallway_attic_ceiling_light_off
-alias: Hallway Attic - Ceiling light off
+id: attic_hallway_ceiling_light_off
+alias: Attic hallway - Ceiling light off
 max_exceeded: silent
 trigger:
   - platform: device
@@ -10,4 +10,4 @@ trigger:
     subtype: press_2
     discovery_id: 0x0000000001716b46 action_press_2
 action:
-  - scene: scene.hallway_attic_lights_off
+  - scene: scene.attic_hallway_lights_off

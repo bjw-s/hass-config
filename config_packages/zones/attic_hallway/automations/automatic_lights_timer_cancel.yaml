@@ -1,0 +1,14 @@
+---
+id: attic_hallway_automatic_lights_timer_cancel
+alias: Attic hallway - Automatic lights timer cancel
+trigger:
+  - platform: state
+    entity_id: light.attic_hallway
+    to: 'off'
+  - platform: state
+    entity_id: binary_sensor.attic_hallway_automatic_lights
+    to: 'off'
+action:
+  - service: timer.cancel
+    data:
+      entity_id: timer.attic_hallway_automatic_lights

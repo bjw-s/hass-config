@@ -1,5 +1,0 @@
----
-platform: group
-name: Hallway Attic
-entities:
-  - light.hallway_attic_ceiling

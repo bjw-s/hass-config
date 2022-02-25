@@ -33,5 +33,5 @@ cards:
           - type: 'custom:button-card'
             template: default_button
             name: Ceiling
-            entity: light.hallway_attic_ceiling
+            entity: light.attic_hallway_ceiling
             icon: 'mdi:ceiling-light'

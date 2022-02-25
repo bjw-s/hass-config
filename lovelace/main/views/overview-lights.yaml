@@ -13,7 +13,7 @@ layout:
   grid-template-areas: |
     "header  header               header            header         header"
     ".       living_area          dining_area       kitchen        ."
-    ".       downstairs_hallway   hallway_upstairs  hallway_attic  ."
+    ".       downstairs_hallway   hallway_upstairs  attic_hallway  ."
     ".       attic                driveway          backyard       ."
     ".       .                    .                 .              ."
 
@@ -30,7 +30,7 @@ layout:
         ".       kitchen             ."
         ".       downstairs_hallway  ."
         ".       hallway_upstairs    ."
-        ".       hallway_attic       ."
+        ".       attic_hallway       ."
         ".       attic               ."
         ".       driveway            ."
         ".       backyard            ."
@@ -46,7 +46,7 @@ layout:
         ".       .                 .                   ."
         ".       living_area       dining_area         ."
         ".       kitchen           downstairs_hallway  ."
-        ".       hallway_upstairs  hallway_attic       ."
+        ".       hallway_upstairs  attic_hallway       ."
         ".       attic             driveway            ."
         ".       backyard          .                   ."
         ".       .                 .                   ."
@@ -241,34 +241,34 @@ cards:
             name: Manual mode
 
   #################################################
-  #                Hallway attic                  #
+  #                Attic hallway                  #
   #################################################
 
   - type: grid
-    title: Hallway attic
+    title: Attic hallway
     view_layout:
-      grid-area: hallway_attic
+      grid-area: attic_hallway
     columns: 1
     square: false
     cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: binary_sensor.hallway_attic_automatic_lights
+          - entity: binary_sensor.attic_hallway_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.hallway_attic_automatic_lights_duration
+          - entity: input_number.attic_hallway_automatic_lights_duration
             name: Duration
 
           - type: conditional
             conditions:
-              - entity: timer.hallway_attic_automatic_lights
+              - entity: timer.attic_hallway_automatic_lights
                 state_not: idle
             row:
-              entity: timer.hallway_attic_automatic_lights
+              entity: timer.attic_hallway_automatic_lights
               name: Automatic duration
 
-          - entity: input_boolean.hallway_attic_lights_manual_mode
+          - entity: input_boolean.attic_hallway_lights_manual_mode
             name: Manual mode
 
   #################################################

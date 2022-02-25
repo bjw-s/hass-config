@@ -29,7 +29,7 @@ action:
 
   # Floor 3
   - service: input_boolean.turn_off
-    entity_id: input_boolean.hallway_attic_lights_manual_mode
+    entity_id: input_boolean.attic_hallway_lights_manual_mode
 
   - service: input_boolean.turn_off
     entity_id: input_boolean.attic_lights_manual_mode

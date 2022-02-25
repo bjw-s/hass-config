@@ -59,7 +59,7 @@ trigger:
 
   - id: front_door_opened
     platform: state
-    entity_id: binary_sensor.hallway_front_door_contact
+    entity_id: binary_sensor.downstairs_hallway_front_door_contact
     to: 'on'
 
   - id: living_room_door_opened

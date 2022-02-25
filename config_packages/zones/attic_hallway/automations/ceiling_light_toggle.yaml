@@ -1,6 +1,6 @@
 ---
-id: hallway_attic_ceiling_light_toggle
-alias: Hallway Attic - Ceiling light toggle
+id: attic_hallway_ceiling_light_toggle
+alias: Attic hallway - Ceiling light toggle
 trigger:
   - platform: device
     domain: mqtt
@@ -18,17 +18,17 @@ action:
   - choose:
     - conditions:
         - condition: state
-          entity_id: light.hallway_attic
+          entity_id: light.attic_hallway
           state: 'off'
       sequence:
         - service: automation.trigger
           data:
-            entity_id: automation.hallway_attic_ceiling_light_on
+            entity_id: automation.attic_hallway_ceiling_light_on
     - conditions:
         - condition: state
-          entity_id: light.hallway_attic
+          entity_id: light.attic_hallway
           state: 'on'
       sequence:
         - service: automation.trigger
           data:
-            entity_id: automation.hallway_attic_ceiling_light_off
+            entity_id: automation.attic_hallway_ceiling_light_off

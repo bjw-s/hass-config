@@ -106,7 +106,7 @@ cards:
     square: false
     cards:
       - type: 'custom:button-card'
-        entity: binary_sensor.hallway_front_door_contact
+        entity: binary_sensor.downstairs_hallway_front_door_contact
         name: Front door
         template: default_button
 
