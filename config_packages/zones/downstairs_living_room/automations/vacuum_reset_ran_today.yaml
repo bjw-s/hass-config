@@ -1,0 +1,10 @@
+---
+id: downstairs_living_room_vacuum_reset_ran_today
+alias: Downstairs living room - Vacuum reset ran today
+max_exceeded: silent
+trigger:
+  - platform: time
+    at: "00:00:00"
+action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.downstairs_living_room_vacuum_ran_today

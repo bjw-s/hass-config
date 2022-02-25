@@ -12,7 +12,7 @@ layout:
 
   grid-template-areas: |
     "header  header       header       header     header"
-    ".       living_room  attic        .          ."
+    ".       downstairs_living_room  attic        .          ."
     ".       bedroom      upstairs_bedroom_eva  bathroom   ."
     ".       garage       other        .          ."
     ".       .            .            .          ."
@@ -25,7 +25,7 @@ layout:
       grid-template-rows: 8vh repeat(7, fit-content(100%)) 0fr
       grid-template-areas: |
         "header  header        header"      
-        ".       living_room   ."
+        ".       downstairs_living_room   ."
         ".       garage        ."
         ".       bedroom       ."
         ".       upstairs_bedroom_eva   ."
@@ -41,7 +41,7 @@ layout:
       grid-template-rows: 6vh repeat(4, fit-content(100%)) 0fr
       grid-template-areas: |
         "header  header       header       header"
-        ".       living_room  garage       ."
+        ".       downstairs_living_room  garage       ."
         ".       bedroom      upstairs_bedroom_eva  ."
         ".       bathroom     .            ."
         ".       attic        other        ."
@@ -59,26 +59,26 @@ cards:
       # Temperature overview
 
   #################################################
-  #                 Living Room                   #
+  #                 Downstairs living room                   #
   #################################################
 
   - type: grid
-    title: Living room
+    title: Downstairs living room
     view_layout:
-      grid-area: living_room
+      grid-area: downstairs_living_room
     columns: 2
     square: false
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.living_room_temperature
+          - entity: sensor.downstairs_living_room_temperature
             name: Temperature
         font_size: 75
         line_color: '#3498db'
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.living_room_humidity
+          - entity: sensor.downstairs_living_room_humidity
             name: Humidity
         color_thresholds:
           - color: '#e74c3c'

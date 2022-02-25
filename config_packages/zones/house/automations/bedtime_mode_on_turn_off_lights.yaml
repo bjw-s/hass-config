@@ -18,7 +18,7 @@ action:
 
   - service: input_select.select_option
     data:  
-      entity_id: input_select.living_room_lights_scene
+      entity_id: input_select.downstairs_living_room_lights_scene
       option: 'Off'
 
   - service: input_select.select_option

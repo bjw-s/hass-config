@@ -1,0 +1,12 @@
+---
+id: downstairs_living_room_lights_scene_changed
+alias: Downstairs living room - Lights scene changed
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: input_select.downstairs_living_room_lights_scene
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.downstairs_living_room_lights_{{ trigger.to_state.state.replace(" ", "_") | lower }}
+      transition: 1

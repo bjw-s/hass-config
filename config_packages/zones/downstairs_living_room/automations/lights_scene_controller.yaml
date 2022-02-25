@@ -1,47 +1,47 @@
 ---
-id: dining_area_lights_scene_controller
-alias: Dining Area - Lights - Scene controller
+id: downstairs_living_room_lights_scene_controller
+alias: Downstairs living room - Lights - Scene controller
 max_exceeded: silent
 
 trigger:
-  - id: dining_area_switch_top
+  - id: downstairs_living_room_switch_top
     platform: device
     domain: mqtt
-    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    device_id: 030ecf5d6e97435dfceeffb7c5e0d5b0
     type: action
-    subtype: press_3
-    discovery_id: 0x0000000001715668 action_press_3
+    subtype: press_1
+    discovery_id: 0x0000000001715691 action_press_1
 
-  - id: dining_area_switch_bottom
+  - id: downstairs_living_room_switch_bottom
     platform: device
     domain: mqtt
-    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    device_id: 030ecf5d6e97435dfceeffb7c5e0d5b0
     type: action
-    subtype: press_4
-    discovery_id: 0x0000000001715668 action_press_4
+    subtype: press_2
+    discovery_id: 0x0000000001715691 action_press_2
 
-  - id: dining_area_is_dark
+  - id: downstairs_living_room_is_dark
     platform: state
-    entity_id: binary_sensor.dining_area_is_dark
+    entity_id: binary_sensor.downstairs_living_room_is_dark
     to: "on"
 
-  - id: dining_area_motion_detected
+  - id: downstairs_living_room_motion_detected
     platform: state
-    entity_id: binary_sensor.dining_area_motion_sensor_occupancy
+    entity_id: binary_sensor.downstairs_living_room_motion_sensor_occupancy
     to: "on"
 
   - id: downstairs_living_room_media_playing
     platform: state
     entity_id: binary_sensor.downstairs_living_room_media_playing
 
-  - id: dining_area_no_longer_dark
+  - id: downstairs_living_room_no_longer_dark
     platform: state
-    entity_id: binary_sensor.dining_area_is_dark
+    entity_id: binary_sensor.downstairs_living_room_is_dark
     to: "off"
     for: "00:02:00"
 
 variables:
-  scene_helper: input_select.dining_area_lights_scene
+  scene_helper: input_select.downstairs_living_room_lights_scene
 
 action:
   - alias: "choose scene based on trigger"
@@ -49,7 +49,7 @@ action:
       # Loop through scenes with button
       - conditions:
           - condition: trigger
-            id: dining_area_switch_top
+            id: downstairs_living_room_switch_top
         sequence:
           - service: script.input_select_next_with_skip
             data:
@@ -63,19 +63,19 @@ action:
           - condition: and
             conditions:
               - condition: state
-                entity_id: binary_sensor.dining_area_automatic_lights
+                entity_id: binary_sensor.downstairs_living_room_automatic_lights
                 state: "on"
               - condition: state
-                entity_id: binary_sensor.dining_area_is_dark
+                entity_id: binary_sensor.downstairs_living_room_is_dark
                 state: "on"
               - condition: or
                 conditions:
                   - condition: trigger
-                    id: dining_area_is_dark
+                    id: downstairs_living_room_is_dark
                   - condition: trigger
                     id: downstairs_living_room_media_playing
                   - condition: trigger
-                    id: dining_area_motion_detected
+                    id: downstairs_living_room_motion_detected
         sequence:
           - choose:
               # Only set these scenes in the evening
@@ -120,14 +120,14 @@ action:
             conditions:
               # Turned off manually
               - condition: trigger
-                id: dining_area_switch_bottom
+                id: downstairs_living_room_switch_bottom
               # Turn off automatically
               - condition: and
                 conditions:
                   - condition: trigger
-                    id: dining_area_no_longer_dark
+                    id: downstairs_living_room_no_longer_dark
                   - condition: state
-                    entity_id: binary_sensor.dining_area_automatic_lights
+                    entity_id: binary_sensor.downstairs_living_room_automatic_lights
                     state: "on"
         sequence:
           - service: input_select.select_option

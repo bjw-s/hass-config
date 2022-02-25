@@ -1,0 +1,13 @@
+---
+id: downstairs_living_room_vacuum_ran_today
+alias: Downstairs living room - Vacuum ran today
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: vacuum.valetudo_livingroom
+    to: "cleaning"
+    for:
+      minutes: 10
+action:
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.downstairs_living_room_vacuum_ran_today

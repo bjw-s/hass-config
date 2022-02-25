@@ -75,12 +75,12 @@ cards:
     columns: 3
     cards:
       - type: 'custom:button-card'
-        entity: climate.living_room
+        entity: climate.downstairs_living_room
         label: '[[[ return `${entity.attributes.temperature} °C` ]]]'
         name: Thermostat
         template: temperature
         triggers_update:
-          - climate.living_room
+          - climate.downstairs_living_room
 
       - type: 'custom:button-card'
         template: base_button

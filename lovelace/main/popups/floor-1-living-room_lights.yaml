@@ -1,7 +1,7 @@
 action: fire-dom-event
 browser_mod:
   command: popup
-  title: 'Living Room'
+  title: 'Downstairs living room'
   large: false
   card:
     type: 'vertical-stack'
@@ -16,37 +16,37 @@ browser_mod:
           - type: custom:text-divider-row
             text: Settings
 
-          - entity: input_select.living_room_lights_scene
+          - entity: input_select.downstairs_living_room_lights_scene
             name: Scene
 
-          - entity: binary_sensor.living_room_automatic_lights
+          - entity: binary_sensor.downstairs_living_room_automatic_lights
             name: Automatic?
 
-          - entity: input_boolean.living_room_lights_manual_mode
+          - entity: input_boolean.downstairs_living_room_lights_manual_mode
             name: Manual mode
 
           - type: conditional
             conditions:
-              - entity: timer.living_room_lights_manual_mode
+              - entity: timer.downstairs_living_room_lights_manual_mode
                 state_not: idle
             row:
-              entity: timer.living_room_lights_manual_mode
+              entity: timer.downstairs_living_room_lights_manual_mode
               name: Manual mode duration
 
           - type: custom:text-divider-row
             text: Brightness
 
-          - entity: light.living_room_floor_lamp
+          - entity: light.downstairs_living_room_floor_lamp
             type: custom:slider-entity-row
             name: Floor lamp
             hide_when_off: true
 
-          - entity: light.living_room_speaker_right
+          - entity: light.downstairs_living_room_speaker_right
             type: custom:slider-entity-row
             name: Speaker right
             hide_when_off: true
 
-          - entity: light.living_room_hue_go
+          - entity: light.downstairs_living_room_hue_go
             type: custom:slider-entity-row
             name: Hue Go corner
             hide_when_off: true

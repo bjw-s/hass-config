@@ -12,8 +12,8 @@ layout:
 
   grid-template-areas: |
     "header  header    header       header       ."
-    ".       driveway  living_room  hallway      ."
-    ".       driveway  living_room  dining_area  ."
+    ".       driveway  downstairs_living_room  hallway      ."
+    ".       driveway  downstairs_living_room  dining_area  ."
     ".       garage    study        utility_room ."
     ".       .         .        .            ."
 
@@ -27,7 +27,7 @@ layout:
         "header  header        header"      
         ".       driveway      ."
         ".       hallway       ."
-        ".       living_room   ."
+        ".       downstairs_living_room   ."
         ".       dining_area   ."
         ".       utility_room  ."
         ".       garage        ."
@@ -43,7 +43,7 @@ layout:
         "header  header        header       ."
         ".       driveway      garage       ."
         ".       driveway      hallway      ."
-        ".       living_room   dining_area  ."
+        ".       downstairs_living_room   dining_area  ."
         ".       utility_room  study        ."
         ".       .             .            ."
 
@@ -116,28 +116,28 @@ cards:
         template: default_button
 
   #################################################
-  #                 Living Room                   #
+  #                 Downstairs living room                   #
   #################################################
 
   - type: grid
-    title: Living room
+    title: Downstairs living room
     view_layout:
-      grid-area: living_room
+      grid-area: downstairs_living_room
     columns: 3
     square: false
     cards:
       - type: 'custom:button-card'
-        entity: binary_sensor.living_room_door_contact
+        entity: binary_sensor.downstairs_living_room_door_contact
         name: Door
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.living_room_window_contact
+        entity: binary_sensor.downstairs_living_room_window_contact
         name: Front window
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.living_room_motion_sensor_occupancy
+        entity: binary_sensor.downstairs_living_room_motion_sensor_occupancy
         name: Motion
         template: default_button
 

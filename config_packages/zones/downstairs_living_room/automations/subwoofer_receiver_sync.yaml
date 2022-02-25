@@ -1,0 +1,16 @@
+---
+id: downstairs_living_room_subwoofer_receiver_sync
+alias: Downstairs living room - Subwoofer Receiver sync
+trigger:
+  - platform: state
+    entity_id: media_player.downstairs_living_room_denon_avr_x1500h
+    to: "on"
+  - platform: state
+    entity_id: media_player.downstairs_living_room_denon_avr_x1500h
+    to: "off"
+    for: "00:02:00"
+action:
+  - service: |
+      switch.turn_{{ trigger.to_state.state }}
+    data:
+      entity_id: switch.downstairs_living_room_subwoofer

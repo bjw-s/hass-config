@@ -63,11 +63,11 @@ cards:
       # Lights overview
 
   #################################################
-  #                 Living Room                   #
+  #                 Downstairs living room                   #
   #################################################
 
   - type: grid
-    title: Living room
+    title: Downstairs living room
     view_layout:
       grid-area: living_area
     columns: 1
@@ -76,24 +76,24 @@ cards:
       - type: entities
         show_header_toggle: false
         entities:
-          - entity: input_select.living_room_lights_scene
+          - entity: input_select.downstairs_living_room_lights_scene
             name: Scene
 
-          - entity: binary_sensor.living_room_automatic_lights
+          - entity: binary_sensor.downstairs_living_room_automatic_lights
             name: Automatic lights?
 
-          - entity: input_boolean.living_room_lights_manual_mode
+          - entity: input_boolean.downstairs_living_room_lights_manual_mode
             name: Manual mode
 
-          - entity: input_number.living_room_lights_manual_mode_duration
+          - entity: input_number.downstairs_living_room_lights_manual_mode_duration
             name: Manual mode duration
 
           - type: conditional
             conditions:
-              - entity: timer.living_room_lights_manual_mode
+              - entity: timer.downstairs_living_room_lights_manual_mode
                 state_not: idle
             row:
-              entity: timer.living_room_lights_manual_mode
+              entity: timer.downstairs_living_room_lights_manual_mode
               name: Manual mode duration
 
   #################################################

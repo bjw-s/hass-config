@@ -1,4 +1,4 @@
-title: Living room
+title: Downstairs living room
 icon: 'mdi:sofa'
 id: living-room
 path: living-room
@@ -37,29 +37,29 @@ cards:
           - type: 'custom:button-card'
             template: default_button
             name: Dark?
-            entity: binary_sensor.living_room_is_dark
+            entity: binary_sensor.downstairs_living_room_is_dark
             tap_action: !include ../popups/light_levels.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Light level
             icon: 'mdi:theme-light-dark'
-            entity: sensor.living_room_motion_sensor_illuminance_lux
+            entity: sensor.downstairs_living_room_motion_sensor_illuminance_lux
 
           - type: 'custom:button-card'
             template: default_button
             name: Motion
-            entity: binary_sensor.living_room_motion_sensor_occupancy
+            entity: binary_sensor.downstairs_living_room_motion_sensor_occupancy
 
           - type: 'custom:button-card'
             template: default_button
             name: Temperature
-            entity: sensor.living_room_temperature
+            entity: sensor.downstairs_living_room_temperature
 
           - type: 'custom:button-card'
             template: default_button
             name: Humidity
-            entity: sensor.living_room_humidity
+            entity: sensor.downstairs_living_room_humidity
 
   - type: 'custom:layout-card'
     view_layout:
@@ -79,40 +79,40 @@ cards:
             name: Remote
             icon: 'mdi:remote'
             show_state: true
-            entity: sensor.living_room_current_harmony_activity
+            entity: sensor.downstairs_living_room_current_harmony_activity
 
           - type: 'custom:button-card'
             template: default_button
             name: Sonos
             icon: 'mdi:speaker'
             show_state: true
-            entity: media_player.living_room_sonos
+            entity: media_player.downstairs_living_room_sonos
 
           - type: 'custom:button-card'
             template: default_button
             name: TV
             icon: 'mdi:television'
             show_state: true
-            entity: media_player.living_room_lg_tv
+            entity: media_player.downstairs_living_room_lg_tv
 
           - type: 'custom:button-card'
             template: default_button
             name: Receiver
             icon: 'mdi:surround-sound'
             show_state: true
-            entity: media_player.living_room_denon_avr_x1500h
+            entity: media_player.downstairs_living_room_denon_avr_x1500h
 
           - type: 'custom:button-card'
             template: default_button
             name: Subwoofer
             show_state: true
-            entity: switch.living_room_subwoofer
+            entity: switch.downstairs_living_room_subwoofer
 
           - type: 'custom:button-card'
             template: default_button
             name: Playing media
             icon: 'mdi:audio-video'
-            entity: binary_sensor.living_room_media_playing
+            entity: binary_sensor.downstairs_living_room_media_playing
             show_state: true
 
   - type: 'custom:layout-card'
@@ -160,17 +160,17 @@ cards:
             template: default_button
             name: Floor lamp
             icon: 'mdi:floor-lamp'
-            entity: light.living_room_floor_lamp
+            entity: light.downstairs_living_room_floor_lamp
             hold_action: !include ../popups/floor-1-living-room_lights.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Speaker right
-            entity: light.living_room_speaker_right
+            entity: light.downstairs_living_room_speaker_right
             hold_action: !include ../popups/floor-1-living-room_lights.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Hue Go
-            entity: light.living_room_hue_go
+            entity: light.downstairs_living_room_hue_go
             hold_action: !include ../popups/floor-1-living-room_lights.yaml

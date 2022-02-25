@@ -1,0 +1,7 @@
+---
+downstairs_living_room_harmony_poweroff:
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.downstairs_living_room
+        activity: PowerOff

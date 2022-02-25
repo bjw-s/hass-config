@@ -1,0 +1,9 @@
+---
+downstairs_living_room_lights_scene:
+  name: Downstairs living room - Lights scene
+  options:
+    - 'Off'
+    - Full brightness
+    - Relaxed
+    - Movie mode
+  icon: mdi:movie-open

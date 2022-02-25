@@ -1,0 +1,7 @@
+---
+platform: template
+sensors:
+  downstairs_living_room_current_harmony_activity:
+    friendly_name: 'Current Harmony activity'
+    value_template: |
+      {{ state_attr('remote.downstairs_living_room', 'current_activity') }}

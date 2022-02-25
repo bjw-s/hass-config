@@ -1,0 +1,7 @@
+---
+platform: group
+name: Downstairs living room
+entities:
+  - light.downstairs_living_room_floor_lamp
+  - light.downstairs_living_room_hue_go
+  - light.downstairs_living_room_speaker_right

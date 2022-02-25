@@ -62,9 +62,9 @@ trigger:
     entity_id: binary_sensor.downstairs_hallway_front_door_contact
     to: 'on'
 
-  - id: living_room_door_opened
+  - id: downstairs_living_room_door_opened
     platform: state
-    entity_id: binary_sensor.living_room_door_contact
+    entity_id: binary_sensor.downstairs_living_room_door_contact
     to: 'on'
 
   - id: automatic_lights_timer_finished
@@ -107,7 +107,7 @@ action:
                   - condition: trigger
                     id: front_door_opened
                   - condition: trigger
-                    id: living_room_door_opened
+                    id: downstairs_living_room_door_opened
         sequence:
           - choose:
               # Only set these scenes in the evening

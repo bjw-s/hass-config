@@ -1,8 +1,0 @@
----
-platform: template
-sensors:
-  living_room_motion_adjusted_for_vacuum:
-    friendly_name: 'Living Room - Motion adjusted for Vacuum'
-    value_template: >-
-      {{ false if not is_state('vacuum.valetudo_livingroom', 'docked') else states('binary_sensor.living_room_motion_sensor_occupancy') }}
-    device_class: motion
