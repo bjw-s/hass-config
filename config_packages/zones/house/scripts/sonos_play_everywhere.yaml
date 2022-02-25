@@ -7,14 +7,14 @@ sonos_play_everywhere:
       entity_id:
       - media_player.kitchen_sonos
       - media_player.living_room_sonos
-      - media_player.study_upstairs_sonos
+      - media_player.upstairs_office_sonos
 
   - service: sonos.unjoin
     data_template:
       entity_id:
       - media_player.kitchen_sonos
       - media_player.living_room_sonos
-      - media_player.study_upstairs_sonos
+      - media_player.upstairs_office_sonos
 
   - service: sonos.join
     entity_id: all    
@@ -26,7 +26,7 @@ sonos_play_everywhere:
       entity_id:
       - media_player.kitchen_sonos
       - media_player.living_room_sonos
-      - media_player.study_upstairs_sonos
+      - media_player.upstairs_office_sonos
       volume_level: '{{ volume }}'
     
   - service: media_player.play_media
@@ -42,5 +42,5 @@ sonos_play_everywhere:
       entity_id:
       - media_player.kitchen_sonos
       - media_player.living_room_sonos
-      - media_player.study_upstairs_sonos
+      - media_player.upstairs_office_sonos
     

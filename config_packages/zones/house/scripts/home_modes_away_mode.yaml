@@ -9,7 +9,7 @@ home_modes_away_mode:
       entity_id: media_player.kitchen_sonos
 
     - service: media_player.media_stop
-      entity_id: media_player.study_upstairs_sonos
+      entity_id: media_player.upstairs_office_sonos
 
     - service: media_player.media_stop
       entity_id: media_player.living_room_sonos

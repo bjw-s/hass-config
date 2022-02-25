@@ -1,0 +1,33 @@
+---
+id: upstairs_bedroom_ceiling_light_toggle
+alias: Upstairs Bedroom - Ceiling light toggle
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 16ddfbe0fa5d3d2f9839f22c06427b62
+    type: action
+    subtype: arrow_left_click
+    discovery_id: 0x90fd9ffffe9096ea action_arrow_left_click
+  - platform: device
+    domain: mqtt
+    device_id: 3c3de2878a774facced71f8d1df4fa75
+    type: action
+    subtype: arrow_right_click
+    discovery_id: 0x90fd9ffffed252a4 action_arrow_right_click
+action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.upstairs_bedroom_ceiling
+        state: 'off'
+      sequence:
+        - scene: scene.upstairs_bedroom_lights_ceiling_on
+    - conditions:
+      - condition: state
+        entity_id: light.upstairs_bedroom_ceiling
+        state: 'on'
+      sequence:
+        - scene: scene.upstairs_bedroom_lights_ceiling_off
+
+    # Default
+    default: []

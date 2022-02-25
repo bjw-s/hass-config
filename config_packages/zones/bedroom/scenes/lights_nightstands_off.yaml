@@ -1,7 +1,0 @@
----
-name: Bedroom - Lights - Nightstands - Off
-entities:
-  light.bedroom_nightstand_bernd:
-    state: 'off'
-  light.bedroom_nightstand_manyie:
-    state: 'off'

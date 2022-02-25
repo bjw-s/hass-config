@@ -1,7 +1,0 @@
----
-name: Bedroom - Lights - Nightstand Bernd - Dimmed
-entities:
-  light.bedroom_nightstand_bernd:
-    state: 'on'
-    brightness: 50
-    color_temp: 364

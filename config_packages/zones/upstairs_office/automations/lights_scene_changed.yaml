@@ -1,0 +1,11 @@
+---
+id: upstairs_office_lights_scene_changed
+alias: Upstairs office - Lights scene changed
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: input_select.upstairs_office_lights_scene
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.upstairs_office_lights_{{ trigger.to_state.state.replace(" ", "_") | lower }}

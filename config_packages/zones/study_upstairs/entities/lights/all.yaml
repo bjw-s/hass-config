@@ -1,6 +1,0 @@
----
-platform: group
-name: Study Upstairs
-entities:
-  - light.study_upstairs_desk
-  - light.study_upstairs_ceiling

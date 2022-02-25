@@ -1,0 +1,9 @@
+background: var(--background-image)
+button_card_templates: !include ../button_card_templates.yaml
+
+views:
+  - !include ../views/downstairs-hallway.yaml
+  - !include ../views/downstairs-living-room.yaml
+  - !include ../views/downstairs-dining-area.yaml
+  - !include ../views/downstairs-kitchen.yaml
+  - !include ../views/downstairs-outside.yaml

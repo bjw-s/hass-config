@@ -1,0 +1,20 @@
+---
+id: upstairs_bedroom_nightstand_bernd_automatic_on
+alias: Upstairs Bedroom - Nightstand Bernd automatic on
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_bedtime_mode
+    to: 'on'
+
+condition:
+  condition: or
+  conditions:
+    - condition: state
+      entity_id: input_boolean.upstairs_bedroom_bs_in_bed
+      state:  'off'
+
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.upstairs_bedroom_lights_nightstand_bernd_dimmed
+      transition: 2

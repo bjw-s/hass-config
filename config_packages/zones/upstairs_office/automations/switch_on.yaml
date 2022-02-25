@@ -1,0 +1,30 @@
+---
+id: upstairs_office_switch_on
+alias: Upstairs office - Switch - On
+max_exceeded: silent
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: d3d7eacc2f60052c0861c61f306afa52
+    type: action
+    subtype: press_1_and_3
+    discovery_id: 0x0000000001716c1d action_press_1_and_3
+  - platform: device
+    domain: mqtt
+    device_id: d3d7eacc2f60052c0861c61f306afa52
+    type: action
+    subtype: press_1
+    discovery_id: 0x0000000001716c1d action_press_1
+  - platform: device
+    domain: mqtt
+    device_id: d3d7eacc2f60052c0861c61f306afa52
+    type: action
+    subtype: press_3
+    discovery_id: 0x0000000001716c1d action_press_3
+
+action:
+  - service: script.input_select_next_with_skip
+    data:
+      entity_id: input_select.upstairs_office_lights_scene
+      skip_options:
+        - "Off"

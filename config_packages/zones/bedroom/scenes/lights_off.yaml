@@ -1,5 +1,0 @@
----
-name: Bedroom - Lights - Off
-entities:
-  light.bedroom:
-    state: 'off'

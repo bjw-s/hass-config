@@ -1,0 +1,9 @@
+---
+  name: Upstairs office - Lights - Work
+  entities:
+    light.upstairs_office_desk:
+      state: 'off'
+    light.upstairs_office_ceiling:
+      state: 'on'
+      brightness: 254
+      color_temp: 260

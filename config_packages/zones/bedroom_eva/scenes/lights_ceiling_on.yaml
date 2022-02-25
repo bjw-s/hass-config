@@ -1,6 +1,0 @@
----
-name: Bedroom Eva - Lights - Ceiling - On
-entities:
-  light.bedroom_eva_ceiling:
-    state: 'on'
-    brightness: 254

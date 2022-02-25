@@ -1,0 +1,11 @@
+---
+  name: Upstairs office - Lights - Chill
+  entities:
+    light.upstairs_office_desk:
+      state: 'on'
+      brightness: 80
+      rgb_color: [183, 112, 255]
+    light.upstairs_office_ceiling:
+      state: 'on'
+      brightness: 70
+      color_temp: 390

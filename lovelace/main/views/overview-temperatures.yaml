@@ -13,7 +13,7 @@ layout:
   grid-template-areas: |
     "header  header       header       header     header"
     ".       living_room  attic        .          ."
-    ".       bedroom      bedroom_eva  bathroom   ."
+    ".       bedroom      upstairs_bedroom_eva  bathroom   ."
     ".       garage       other        .          ."
     ".       .            .            .          ."
 
@@ -28,7 +28,7 @@ layout:
         ".       living_room   ."
         ".       garage        ."
         ".       bedroom       ."
-        ".       bedroom_eva   ."
+        ".       upstairs_bedroom_eva   ."
         ".       bathroom      ."
         ".       attic         ."
         ".       other         ."
@@ -42,7 +42,7 @@ layout:
       grid-template-areas: |
         "header  header       header       header"
         ".       living_room  garage       ."
-        ".       bedroom      bedroom_eva  ."
+        ".       bedroom      upstairs_bedroom_eva  ."
         ".       bathroom     .            ."
         ".       attic        other        ."
         ".       .            .            ."
@@ -102,14 +102,14 @@ cards:
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bedroom_multisensor_temperature
+          - entity: sensor.upstairs_bedroom_multisensor_temperature
             name: Temperature
         font_size: 75
         line_color: '#3498db'
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bedroom_multisensor_humidity
+          - entity: sensor.upstairs_bedroom_multisensor_humidity
             name: Humidity
         color_thresholds:
           - color: '#e74c3c'
@@ -127,20 +127,20 @@ cards:
   - type: grid
     title: Bedroom Eva
     view_layout:
-      grid-area: bedroom_eva
+      grid-area: upstairs_bedroom_eva
     columns: 2
     square: false
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bedroom_eva_multisensor_temperature
+          - entity: sensor.upstairs_bedroom_eva_multisensor_temperature
             name: Temperature
         font_size: 75
         line_color: '#3498db'
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.bedroom_eva_multisensor_humidity
+          - entity: sensor.upstairs_bedroom_eva_multisensor_humidity
             name: Humidity
         color_thresholds:
           - color: '#e74c3c'

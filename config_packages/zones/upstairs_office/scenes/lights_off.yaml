@@ -1,0 +1,5 @@
+---
+  name: Upstairs office - Lights - Off
+  entities:
+    light.upstairs_office:
+      state: 'off'

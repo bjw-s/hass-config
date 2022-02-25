@@ -1,0 +1,33 @@
+---
+id: upstairs_bedroom_nightstand_manyie_toggle
+alias: Upstairs Bedroom - Nightstand ManYie toggle
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 16ddfbe0fa5d3d2f9839f22c06427b62
+    type: action
+    subtype: toggle
+    discovery_id: 0x90fd9ffffe9096ea action_toggle
+  - platform: device
+    domain: mqtt
+    device_id: 3c3de2878a774facced71f8d1df4fa75
+    type: action
+    subtype: arrow_left_click
+    discovery_id: 0x90fd9ffffed252a4 action_arrow_left_click
+action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.upstairs_bedroom_nightstand_manyie
+        state: 'off'
+      sequence:
+        - scene: scene.upstairs_bedroom_lights_nightstand_manyie_dimmed
+    - conditions:
+      - condition: state
+        entity_id: light.upstairs_bedroom_nightstand_manyie
+        state: 'on'
+      sequence:
+        - scene: scene.upstairs_bedroom_lights_nightstand_manyie_off
+
+    # Default
+    default: []

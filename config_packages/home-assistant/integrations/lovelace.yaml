@@ -8,18 +8,18 @@ lovelace:
   mode: yaml
   resources: !include ../../../lovelace/resources.yaml
   dashboards:
-    1st-floor: # Needs to contain a hyphen (-)
+    dash-downstairs: # Needs to contain a hyphen (-)
       mode: yaml
-      filename: ui-lovelace-floor-1.yaml
-      title: 1st Floor
+      filename: ui-lovelace-downstairs.yaml
+      title: 1 - Downstairs
       icon: mdi:numeric-1-box-multiple-outline
       show_in_sidebar: true
       require_admin: false
 
-    2nd-floor: # Needs to contain a hyphen (-)
+    dash-upstairs: # Needs to contain a hyphen (-)
       mode: yaml
-      filename: ui-lovelace-floor-2.yaml
-      title: 2nd Floor
+      filename: ui-lovelace-upstairs.yaml
+      title: 2 - Upstairs
       icon: mdi:numeric-2-box-multiple-outline
       show_in_sidebar: true
       require_admin: false
@@ -27,7 +27,7 @@ lovelace:
     dash-attic: # Needs to contain a hyphen (-)
       mode: yaml
       filename: ui-lovelace-attic.yaml
-      title: 3rd Floor
+      title: 3 - Attic
       icon: mdi:numeric-3-box-multiple-outline
       show_in_sidebar: true
       require_admin: false

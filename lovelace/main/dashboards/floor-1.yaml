@@ -1,9 +1,0 @@
-background: var(--background-image)
-button_card_templates: !include ../button_card_templates.yaml
-
-views:
-  - !include ../views/floor-1-hallway.yaml
-  - !include ../views/floor-1-living-room.yaml
-  - !include ../views/floor-1-dining-area.yaml
-  - !include ../views/floor-1-kitchen.yaml
-  - !include ../views/floor-1-outside.yaml

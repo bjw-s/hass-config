@@ -1,0 +1,7 @@
+---
+name: Upstairs Bedroom - Lights - Nightstands - Off
+entities:
+  light.upstairs_bedroom_nightstand_bernd:
+    state: 'off'
+  light.upstairs_bedroom_nightstand_manyie:
+    state: 'off'

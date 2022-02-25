@@ -1,0 +1,6 @@
+---
+platform: group
+name: Upstairs Bedroom Nightstands
+entities:
+  - light.upstairs_bedroom_nightstand_manyie
+  - light.upstairs_bedroom_nightstand_bernd
