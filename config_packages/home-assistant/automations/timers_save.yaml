@@ -1,0 +1,37 @@
+---
+id: hass_timers_save
+alias: Hass - Timers save
+mode: queued
+
+trigger:
+  platform: state
+  entity_id:
+    - timer.driveway_automatic_lights
+    - timer.kitchen_automatic_lights
+    - timer.downstairs_hallway_automatic_lights
+
+action:
+  - variables:
+      timers:
+        - timer.driveway_automatic_lights
+        - timer.kitchen_automatic_lights
+        - timer.downstairs_hallway_automatic_lights
+      modes:
+        - active
+        - paused
+  - repeat:
+      count: 2
+      sequence:
+        - variables:
+            mode: "{{ modes[repeat.index-1] }}"
+        - service: input_text.set_value
+          data:
+            entity_id: "input_text.hass_timers_{{ mode }}"
+            value: >
+              {% set ns = namespace(timers = []) %}
+              {% for t in expand(timers) | selectattr('state', 'eq', mode) | list  %}
+                {% set d = t.attributes.remaining.split(':') | map('int') | list %}
+                {% set s = d[0]*3600 + d[1]*60 + d[2] + (t.last_changed.timestamp()|int if mode == 'active' else 0) %}
+                {% set ns.timers = ns.timers + ['{} {}'.format(t.object_id, s)] %}
+              {% endfor %}
+              {{ ns.timers | join(',')}}

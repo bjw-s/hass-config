@@ -1,0 +1,44 @@
+---
+id: hass_timers_restore
+alias: Hass - Timers restore
+mode: single
+
+trigger:
+  platform: homeassistant
+  event: start
+
+action:
+  - variables:
+      modes:
+        - active
+        - paused
+
+  - repeat:
+      count: 2
+      sequence:
+        - variables:
+            mode: "{{ modes[repeat.index-1] }}"
+            timers_text: "{{ states('input_text.hass_timers_' ~ mode) }}"
+        - choose:
+            - conditions: "{{ timers_text | length > 0 }}"
+              sequence:
+                - variables:
+                    timers: "{{ timers_text.split(',') }}"
+                - repeat:
+                    count: "{{ timers | count }}"
+                    sequence:
+                      - variables:
+                          t: "{{ timers[repeat.index-1].split() }}"
+                          id: "timer.{{t[0]}}"
+                          d: "{{ t[1]|int - (now().timestamp()|int if mode == 'active' else 0) }}"
+                      - condition: template
+                        value_template: "{{ d > 0 }}"
+                      - service: timer.start
+                        data:
+                          entity_id: "{{ id }}"
+                          duration: "{{ d }}"
+                      - condition: template
+                        value_template: "{{ mode == 'paused' }}"
+                      - service: timer.pause
+                        data:
+                          entity_id: "{{ id }}"
