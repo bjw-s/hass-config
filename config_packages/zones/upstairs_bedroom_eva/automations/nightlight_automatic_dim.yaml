@@ -1,6 +1,6 @@
 ---
 id: upstairs_bedroom_eva_nightlight_automatic_dim
-alias: Bedroom Eva - Nightlight automatic dim
+alias: Upstairs Bedroom Eva - Nightlight automatic dim
 max_exceeded: silent
 trigger:
   - platform: state

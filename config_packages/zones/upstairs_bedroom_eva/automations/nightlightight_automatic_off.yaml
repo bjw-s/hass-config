@@ -1,6 +1,6 @@
 ---
 id: upstairs_bedroom_eva_nightlight_automatic_off
-alias: Bedroom Eva - Nightlight Automatic off
+alias: Upstairs Bedroom Eva - Nightlight Automatic off
 max_exceeded: silent
 trigger:
   - platform: state

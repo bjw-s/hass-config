@@ -1,5 +1,5 @@
 ---
-name: Bedroom Eva - Lights - Nightlight - Dimmed
+name: Upstairs Bedroom Eva - Lights - Nightlight - Dimmed
 entities:
   light.upstairs_bedroom_eva_nightlight:
     state: 'on'

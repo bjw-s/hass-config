@@ -1,6 +1,6 @@
 ---
 id: upstairs_bedroom_eva_ceiling_light_on
-alias: Bedroom Eva - Ceiling light on
+alias: Upstairs Bedroom Eva - Ceiling light on
 max_exceeded: silent
 trigger:
   - platform: device

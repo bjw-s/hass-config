@@ -9,7 +9,7 @@ trigger:
 action:
   # Floor 1
   - service: input_boolean.turn_off
-    entity_id: input_boolean.hallway_lights_manual_mode
+    entity_id: input_boolean.downstairs_hallway_lights_manual_mode
 
   - service: input_boolean.turn_off
     entity_id: input_boolean.kitchen_lights_manual_mode

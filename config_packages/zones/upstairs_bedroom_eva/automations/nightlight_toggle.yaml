@@ -1,6 +1,6 @@
 ---
 id: upstairs_bedroom_eva_nightlight_toggle
-alias: Bedroom Eva - Nightlight toggle
+alias: Upstairs Bedroom Eva - Nightlight toggle
 max_exceeded: silent
 trigger:
   - platform: device
