@@ -7,12 +7,12 @@ variables:
   corresponding_entity: >
     {% if trigger.entity_id == 'sensor.dining_area_lights_stats' %}
       light.dining_area
-    {% elif trigger.entity_id == 'sensor.kitchen_lights_stats' %}
-     light.kitchen
+    {% elif trigger.entity_id == 'sensor.downstairs_kitchen_lights_stats' %}
+     light.downstairs_kitchen
     {% elif trigger.entity_id == 'sensor.downstairs_living_room_lights_stats' %}
       light.downstairs_living_room
-    {% elif trigger.entity_id == 'sensor.hallway_lights_stats' %}
-      light.hallway
+    {% elif trigger.entity_id == 'sensor.downstairs_hallway_lights_stats' %}
+      light.downstairs_hallway
     {% elif trigger.entity_id == 'sensor.upstairs_bedroom_lights_nightstands_stats' %}
       light.upstairs_bedroom_nightstands
     {% endif %}
@@ -21,9 +21,9 @@ trigger:
   - platform: state
     entity_id:
       - sensor.dining_area_lights_stats
-      - sensor.kitchen_lights_stats
+      - sensor.downstairs_kitchen_lights_stats
       - sensor.downstairs_living_room_lights_stats
-      - sensor.hallway_lights_stats
+      - sensor.downstairs_hallway_lights_stats
       - sensor.upstairs_bedroom_lights_nightstands_stats
 
 condition:

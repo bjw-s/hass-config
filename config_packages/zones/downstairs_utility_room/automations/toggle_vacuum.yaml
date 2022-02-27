@@ -1,0 +1,11 @@
+---
+id: downstairs_utility_room_toggle_vacuum
+alias: Downstairs Utility room - Toggle automatic vacuum
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: binary_sensor.downstairs_utility_room_door_contact
+action:
+  - service: |-
+      input_boolean.turn_{{ "off" if trigger.to_state.state == "on" else "on" }}
+    entity_id: input_boolean.downstairs_utility_room_vacuum

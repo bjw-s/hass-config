@@ -1,5 +1,5 @@
 ---
 name: Upstairs Bedroom - Lights - Off
 entities:
-  light.bedroom:
+  light.upstairs_bedroom:
     state: 'off'

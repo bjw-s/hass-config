@@ -1,7 +1,7 @@
 action: fire-dom-event
 browser_mod:
   command: popup
-  title: 'Kitchen'
+  title: 'Downstairs Kitchen'
   large: false
   card:
     type: 'vertical-stack'
@@ -16,40 +16,40 @@ browser_mod:
           - type: custom:text-divider-row
             text: Settings
 
-          - entity: input_select.kitchen_lights_scene
+          - entity: input_select.downstairs_kitchen_lights_scene
             name: Scene
 
-          - entity: binary_sensor.kitchen_automatic_lights
+          - entity: binary_sensor.downstairs_kitchen_automatic_lights
             name: Automatic?
 
           - type: conditional
             conditions:
-              - entity: timer.kitchen_automatic_lights
+              - entity: timer.downstairs_kitchen_automatic_lights
                 state_not: idle
             row:
-              entity: timer.kitchen_automatic_lights
+              entity: timer.downstairs_kitchen_automatic_lights
               name: Automatic duration
 
-          - entity: input_boolean.kitchen_lights_manual_mode
+          - entity: input_boolean.downstairs_kitchen_lights_manual_mode
             name: Manual mode
 
           - type: conditional
             conditions:
-              - entity: timer.kitchen_lights_manual_mode
+              - entity: timer.downstairs_kitchen_lights_manual_mode
                 state_not: idle
             row:
-              entity: timer.kitchen_lights_manual_mode
+              entity: timer.downstairs_kitchen_lights_manual_mode
               name: Manual mode duration
 
           - type: custom:text-divider-row
             text: Brightness
 
-          - entity: light.kitchen_ceiling_front
+          - entity: light.downstairs_kitchen_ceiling_front
             type: custom:slider-entity-row
             name: Ceiling front
             hide_when_off: true
 
-          - entity: light.kitchen_ceiling_rear
+          - entity: light.downstairs_kitchen_ceiling_rear
             type: custom:slider-entity-row
             name: Ceiling rear
             hide_when_off: true

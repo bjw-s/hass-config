@@ -5,5 +5,5 @@ entity_id: light.downstairs_hallway
 state: "on"
 type: count
 start: >
-  {{ as_timestamp(now()) - (7*86400) }}
-duration: 00:00:10
+  {{ as_timestamp(now()) - (1*86400) }}
+duration: 00:00:30

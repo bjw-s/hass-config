@@ -1,0 +1,9 @@
+---
+platform: history_stats
+name: "Downstairs Kitchen - Lights - Stats"
+entity_id: light.downstairs_kitchen
+state: "on"
+type: count
+start: >
+  {{ as_timestamp(now()) - (1*86400) }}
+duration: 00:00:30

@@ -7,14 +7,14 @@ trigger:
   platform: state
   entity_id:
     - timer.driveway_automatic_lights
-    - timer.kitchen_automatic_lights
+    - timer.downstairs_kitchen_automatic_lights
     - timer.downstairs_hallway_automatic_lights
 
 action:
   - variables:
       timers:
         - timer.driveway_automatic_lights
-        - timer.kitchen_automatic_lights
+        - timer.downstairs_kitchen_automatic_lights
         - timer.downstairs_hallway_automatic_lights
       modes:
         - active

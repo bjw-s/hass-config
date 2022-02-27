@@ -1,0 +1,6 @@
+---
+platform: group
+name: Downstairs Kitchen - Ceiling Front
+entities:
+  - light.downstairs_kitchen_ceiling_front_1
+  - light.downstairs_kitchen_ceiling_front_2

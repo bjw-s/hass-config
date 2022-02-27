@@ -1,6 +1,0 @@
----
-platform: group
-name: Kitchen - Ceiling Rear
-entities:
-  - light.kitchen_ceiling_rear_1
-  - light.kitchen_ceiling_rear_2

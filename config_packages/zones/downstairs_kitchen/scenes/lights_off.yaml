@@ -1,0 +1,5 @@
+---
+name: Downstairs Kitchen - Lights - Off
+entities:
+  light.downstairs_kitchen_ceiling:
+    state: 'off'

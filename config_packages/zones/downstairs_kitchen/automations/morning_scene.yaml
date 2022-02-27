@@ -1,0 +1,63 @@
+---
+id: downstairs_kitchen_morning_scene
+alias: Downstairs Kitchen - Morning scene
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_bedtime_mode
+    to: "off"
+
+condition:
+  condition: and
+  conditions:
+    - condition: time
+      after: "06:00:00"
+      before: "10:00:00"
+
+action:
+  # Turn on coffee maker in the morning
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: input_select.downstairs_kitchen_automatic_coffee_schedule
+            state: "Weekend"
+          - condition: state
+            entity_id: binary_sensor.workday_sensor
+            state: "off"
+        sequence:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.downstairs_kitchen_coffee_maker_power
+
+      - conditions:
+          - condition: state
+            entity_id: input_select.downstairs_kitchen_automatic_coffee_schedule
+            state: "Always"
+        sequence:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.downstairs_kitchen_coffee_maker_power
+
+  # Turn on Sonos
+  - choose:
+      - conditions:
+        # - condition: state
+        #   entity_id: binary_sensor.workday_sensor
+        #   state: 'off'
+        sequence:
+          - service: sonos.join
+            data:
+              entity_id: media_player.downstairs_living_room_sonos
+              master: media_player.downstairs_kitchen_sonos
+          - service: media_player.volume_set
+            data:
+              entity_id:
+                - media_player.downstairs_living_room_sonos
+                - media_player.downstairs_kitchen_sonos
+              volume_level: 0.04
+          - service: media_player.play_media
+            data:
+              entity_id:
+                - media_player.downstairs_kitchen_sonos
+              media_content_type: music
+              media_content_id: "x-rincon-mp3radio://http://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3"

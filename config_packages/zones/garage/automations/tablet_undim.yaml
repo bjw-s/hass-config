@@ -1,6 +1,6 @@
 ---
-id: garage_tablet_undim
-alias: Garage - Tablet undim
+id: downstairs_garage_tablet_undim
+alias: Downstairs Garage - Tablet undim
 trigger:
   - platform: time
     at: "06:00:00"

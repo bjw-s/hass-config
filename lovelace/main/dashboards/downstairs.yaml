@@ -5,5 +5,5 @@ views:
   - !include ../views/downstairs-hallway.yaml
   - !include ../views/downstairs-living-room.yaml
   - !include ../views/downstairs-dining-area.yaml
-  - !include ../views/downstairs-kitchen.yaml
+  - !include ../views/downstairs-downstairs_kitchen.yaml
   - !include ../views/downstairs-outside.yaml

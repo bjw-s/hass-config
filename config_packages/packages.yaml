@@ -9,20 +9,20 @@ notifications: !include notifications/package.yaml
 house: !include zones/house/package.yaml
 
 area_downstairs:  !include zones/downstairs/package.yaml
+area_downstairs_hallway: !include zones/downstairs_hallway/package.yaml
+area_downstairs_kitchen: !include zones/downstairs_kitchen/package.yaml
+area_downstairs_living_room: !include zones/downstairs_living_room/package.yaml
+area_downstairs_utility_room: !include zones/downstairs_utility_room/package.yaml
 
 area_backyard: !include zones/backyard/package.yaml
 area_dining_area: !include zones/dining_area/package.yaml
 area_driveway: !include zones/driveway/package.yaml
 area_garage: !include zones/garage/package.yaml
-area_downstairs_hallway: !include zones/downstairs_hallway/package.yaml
-area_upstairs_hallway: !include zones/upstairs_hallway/package.yaml
-area_kitchen: !include zones/kitchen/package.yaml
-area_downstairs_living_room: !include zones/downstairs_living_room/package.yaml
-area_upstairs_office: !include zones/upstairs_office/package.yaml
-area_utility_room: !include zones/utility_room/package.yaml
 
 area_upstairs_bedroom: !include zones/upstairs_bedroom/package.yaml
 area_upstairs_bedroom_eva: !include zones/upstairs_bedroom_eva/package.yaml
+area_upstairs_hallway: !include zones/upstairs_hallway/package.yaml
+area_upstairs_office: !include zones/upstairs_office/package.yaml
 
 area_attic_hallway: !include zones/attic_hallway/package.yaml
 area_attic_office: !include zones/attic_office/package.yaml

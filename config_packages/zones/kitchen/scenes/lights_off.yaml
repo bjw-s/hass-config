@@ -1,5 +1,0 @@
----
-name: Kitchen - Lights - Off
-entities:
-  light.kitchen_ceiling:
-    state: 'off'

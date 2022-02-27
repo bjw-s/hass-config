@@ -1,5 +1,0 @@
----
-platform: group
-name: Kitchen
-entities:
-  - light.kitchen_ceiling

@@ -14,7 +14,7 @@ layout:
     "header  header    header       header       ."
     ".       driveway  downstairs_living_room  hallway      ."
     ".       driveway  downstairs_living_room  dining_area  ."
-    ".       garage    study        utility_room ."
+    ".       garage    study        downstairs_utility_room ."
     ".       .         .        .            ."
 
   mediaquery:
@@ -29,7 +29,7 @@ layout:
         ".       hallway       ."
         ".       downstairs_living_room   ."
         ".       dining_area   ."
-        ".       utility_room  ."
+        ".       downstairs_utility_room  ."
         ".       garage        ."
         ".       study         ."
         ".       .             ."
@@ -44,7 +44,7 @@ layout:
         ".       driveway      garage       ."
         ".       driveway      hallway      ."
         ".       downstairs_living_room   dining_area  ."
-        ".       utility_room  study        ."
+        ".       downstairs_utility_room  study        ."
         ".       .             .            ."
 
 cards:
@@ -163,28 +163,28 @@ cards:
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.kitchen_motion_sensor_occupancy
-        name: Kitchen
+        entity: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
+        name: Downstairs Kitchen
         template: default_button
 
   #################################################
-  #                Utility Room                   #
+  #                Downstairs Utility room                   #
   #################################################
 
   - type: grid
-    title: Utility room
+    title: Downstairs Utility room
     view_layout:
-      grid-area: utility_room
+      grid-area: downstairs_utility_room
     columns: 3
     square: false
     cards:
       - type: 'custom:button-card'
-        entity: binary_sensor.utility_room_door_contact
+        entity: binary_sensor.downstairs_utility_room_door_contact
         name: Door
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.utility_room_garden_door_contact
+        entity: binary_sensor.downstairs_utility_room_garden_door_contact
         name: Garden door
         template: default_button
 
@@ -200,12 +200,12 @@ cards:
     square: false
     cards:
       - type: 'custom:button-card'
-        entity: binary_sensor.garage_entry_door_contact
+        entity: binary_sensor.downstairs_garage_entry_door_contact
         name: Entry door
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.garage_door_contact
+        entity: binary_sensor.downstairs_garage_door_contact
         name: Garage door
         template: default_button
 

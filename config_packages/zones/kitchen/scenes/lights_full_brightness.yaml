@@ -1,7 +1,0 @@
----
-name: Kitchen - Lights - Full Brightness
-entities:
-  light.kitchen_ceiling:
-    state: 'on'
-    brightness: 254
-    color_temp: 285

@@ -1,6 +1,6 @@
 ---
 platform: group
-name: Bedroom Eva
+name: Upstairs Bedroom Eva
 entities:
   - light.upstairs_bedroom_eva_ceiling
   - light.upstairs_bedroom_eva_nightlight

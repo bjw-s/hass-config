@@ -1,7 +1,7 @@
-title: Kitchen
+title: Downstairs Kitchen
 icon: 'mdi:pot-mix'
-id: kitchen
-path: kitchen
+id: downstairs_kitchen
+path: downstairs_kitchen
 badges: []
 type: 'custom:grid-layout'
 layout:
@@ -37,17 +37,17 @@ cards:
           - type: 'custom:button-card'
             template: default_button
             name: Dark?
-            entity: binary_sensor.kitchen_is_dark
+            entity: binary_sensor.downstairs_kitchen_is_dark
             tap_action: !include ../popups/light_levels.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Light level
             icon: 'mdi:theme-light-dark'
-            entity: sensor.kitchen_motion_sensor_illuminance_lux
+            entity: sensor.downstairs_kitchen_motion_sensor_illuminance_lux
 
           - type: 'custom:button-card'
-            entity: binary_sensor.kitchen_motion_sensor_occupancy
+            entity: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
             template: default_button
             name: Motion
 
@@ -68,7 +68,7 @@ cards:
             template: default_button
             name: Sonos
             icon: 'mdi:speaker'
-            entity: media_player.kitchen_sonos
+            entity: media_player.downstairs_kitchen_sonos
             show_state: true
 
   - type: 'custom:layout-card'
@@ -88,13 +88,13 @@ cards:
             template: default_button
             name: Coffee maker
             icon: 'mdi:coffee'
-            entity: switch.kitchen_coffee_maker_power
+            entity: switch.downstairs_kitchen_coffee_maker_power
 
           - type: 'custom:button-card'
             template: default_button
             name: Oven
             icon: 'mdi:microwave'
-            entity: switch.kitchen_oven_power
+            entity: switch.downstairs_kitchen_oven_power
 
   - type: 'custom:layout-card'
     view_layout:
@@ -103,7 +103,7 @@ cards:
       - type: 'custom:button-card'
         name: Lights
         template: header
-        tap_action: !include ../popups/floor-1-kitchen_lights.yaml
+        tap_action: !include ../popups/floor-1-downstairs_kitchen_lights.yaml
 
       - type: 'custom:layout-card'
         layout_type: grid
@@ -113,11 +113,11 @@ cards:
           - type: 'custom:button-card'
             template: default_button
             name: Front
-            entity: light.kitchen_ceiling_front
-            hold_action: !include ../popups/floor-1-kitchen_lights.yaml
+            entity: light.downstairs_kitchen_ceiling_front
+            hold_action: !include ../popups/floor-1-downstairs_kitchen_lights.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Rear
-            entity: light.kitchen_ceiling_rear
-            hold_action: !include ../popups/floor-1-kitchen_lights.yaml
+            entity: light.downstairs_kitchen_ceiling_rear
+            hold_action: !include ../popups/floor-1-downstairs_kitchen_lights.yaml

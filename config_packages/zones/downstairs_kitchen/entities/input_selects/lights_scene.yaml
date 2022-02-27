@@ -1,0 +1,8 @@
+---
+downstairs_kitchen_lights_scene:
+  name: Downstairs Kitchen - Lights scene
+  options:
+    - 'Off'
+    - Full brightness
+    - Relaxed
+  icon: mdi:movie-open

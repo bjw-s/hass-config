@@ -1,6 +1,6 @@
 ---
-id: garage_tablet_dim
-alias: Garage - Tablet dim
+id: downstairs_garage_tablet_dim
+alias: Downstairs Garage - Tablet dim
 trigger:
   - platform: time
     at: "20:00:00"

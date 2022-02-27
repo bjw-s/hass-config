@@ -1,7 +1,7 @@
 ---
 all_sonos:
   entities:
-  - media_player.kitchen_sonos
+  - media_player.downstairs_kitchen_sonos
   - media_player.upstairs_office_sonos
   - media_player.downstairs_living_room_sonos
   - media_player.attic_office_sonos

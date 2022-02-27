@@ -1,0 +1,23 @@
+# ---
+# id: downstairs_kitchen_automatic_lights_timer_restart
+# alias: Downstairs Kitchen - Automatic lights timer (re)start
+# max_exceeded: silent
+# trigger:
+#   - platform: state
+#     entity_id: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
+#     to: 'on'
+# condition:
+#   condition: and
+#   conditions:
+#     - condition: state
+#       entity_id: timer.downstairs_kitchen_automatic_lights
+#       state: 'active'
+#     - condition: state
+#       entity_id: binary_sensor.downstairs_kitchen_automatic_lights
+#       state: 'on'
+# action:
+#   - service: timer.start
+#     data:
+#       entity_id: timer.downstairs_kitchen_automatic_lights
+#       duration: "{{ (states('input_number.automatic_lights_duration_downstairs_kitchen') | float(0)) * 60 }}"
+  

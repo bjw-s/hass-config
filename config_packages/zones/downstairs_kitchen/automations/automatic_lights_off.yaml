@@ -1,0 +1,40 @@
+# ---
+# id: downstairs_kitchen_automatic_lights_off
+# alias: Downstairs Kitchen - Automatic lights off
+# trigger:
+#   - platform: event
+#     event_type: timer.finished
+#     event_data:
+#       entity_id: timer.downstairs_kitchen_automatic_lights
+# condition:
+#   condition: and
+#   conditions:
+#     - condition: state
+#       entity_id: binary_sensor.downstairs_kitchen_automatic_lights
+#       state: 'on'
+#     - condition: state
+#       entity_id: light.downstairs_kitchen
+#       state: 'on'
+# action:
+#   - choose:
+#     # No more motion, turn off the lights
+#     - conditions:
+#         - condition: state
+#           entity_id: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
+#           state: 'off'
+#       sequence:
+#         - service: scene.turn_on
+#           data:
+#             entity_id: scene.downstairs_kitchen_lights_off
+#             transition: 2
+    
+#     # Motion still detected, restart the timer
+#     - conditions:
+#         - condition: state
+#           entity_id: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
+#           state: 'on'
+#       sequence:
+#         - service: automation.trigger
+#           data:
+#             entity_id: automation.downstairs_kitchen_automatic_lights_timer_re_start
+      
