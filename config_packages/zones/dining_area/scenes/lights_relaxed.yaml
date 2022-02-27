@@ -1,7 +1,0 @@
----
-name: Dining Area - Lights - Relaxed
-entities:
-  light.dining_area_ceiling:
-    state: 'on'
-    brightness: 254
-    color_temp: 366

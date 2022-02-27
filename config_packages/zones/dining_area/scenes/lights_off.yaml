@@ -1,5 +1,0 @@
----
-name: Dining Area - Lights - Off
-entities:
-  light.dining_area_ceiling:
-    state: 'off'

@@ -1,0 +1,7 @@
+---
+platform: template
+sensors:
+  downstairs_dining_area_air_purifier_mode:
+    friendly_name: 'Air Purifier Mode'
+    value_template: |
+      {{ state_attr('fan.air_purifier', 'mode') | title }}

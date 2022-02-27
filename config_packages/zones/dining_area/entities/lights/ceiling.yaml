@@ -1,6 +1,0 @@
----
-platform: group
-name: Dining Area - Ceiling
-entities:
-  - light.dining_area_ceiling_1
-  - light.dining_area_ceiling_2

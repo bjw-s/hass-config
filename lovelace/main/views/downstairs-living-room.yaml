@@ -149,7 +149,7 @@ cards:
       - type: 'custom:button-card'
         name: Lights
         template: header
-        tap_action: !include ../popups/floor-1-living-room_lights.yaml
+        tap_action: !include ../popups/downstairs-living_room-lights.yaml
 
       - type: 'custom:layout-card'
         layout_type: grid
@@ -161,16 +161,16 @@ cards:
             name: Floor lamp
             icon: 'mdi:floor-lamp'
             entity: light.downstairs_living_room_floor_lamp
-            hold_action: !include ../popups/floor-1-living-room_lights.yaml
+            hold_action: !include ../popups/downstairs-living_room-lights.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Speaker right
             entity: light.downstairs_living_room_speaker_right
-            hold_action: !include ../popups/floor-1-living-room_lights.yaml
+            hold_action: !include ../popups/downstairs-living_room-lights.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Hue Go
             entity: light.downstairs_living_room_hue_go
-            hold_action: !include ../popups/floor-1-living-room_lights.yaml
+            hold_action: !include ../popups/downstairs-living_room-lights.yaml

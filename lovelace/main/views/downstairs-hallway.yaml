@@ -118,4 +118,4 @@ cards:
         name: Ceiling
         entity: light.downstairs_hallway_ceiling
         icon: 'mdi:ceiling-light'
-        hold_action: !include ../popups/floor-1-hallway_lights.yaml
+        hold_action: !include ../popups/downstairs-hallway-lights.yaml

@@ -1,0 +1,7 @@
+---
+name: Downstairs dining area - Lights - Movie Mode
+entities:
+  light.downstairs_dining_area_ceiling:
+    state: 'on'
+    brightness: 77
+    color_temp: 443

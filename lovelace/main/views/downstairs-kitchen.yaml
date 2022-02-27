@@ -103,7 +103,7 @@ cards:
       - type: 'custom:button-card'
         name: Lights
         template: header
-        tap_action: !include ../popups/floor-1-downstairs_kitchen_lights.yaml
+        tap_action: !include ../popups/downstairs-kitchen-lights.yaml
 
       - type: 'custom:layout-card'
         layout_type: grid
@@ -114,10 +114,10 @@ cards:
             template: default_button
             name: Front
             entity: light.downstairs_kitchen_ceiling_front
-            hold_action: !include ../popups/floor-1-downstairs_kitchen_lights.yaml
+            hold_action: !include ../popups/downstairs-kitchen-lights.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Rear
             entity: light.downstairs_kitchen_ceiling_rear
-            hold_action: !include ../popups/floor-1-downstairs_kitchen_lights.yaml
+            hold_action: !include ../popups/downstairs-kitchen-lights.yaml

@@ -1,0 +1,8 @@
+---
+platform: template
+sensors:
+  downstairs_dining_area_air_purifier_air_quality:
+    friendly_name: 'Air Purifier Air Quality'
+    value_template: |
+      {{ state_attr('fan.air_purifier', 'aqi') }}
+    unit_of_measurement: 'μ g/m³'

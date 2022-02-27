@@ -1,5 +1,0 @@
----
-platform: group
-name: Dining Area
-entities:
-  - light.dining_area_ceiling

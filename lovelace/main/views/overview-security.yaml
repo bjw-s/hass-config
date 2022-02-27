@@ -13,7 +13,7 @@ layout:
   grid-template-areas: |
     "header  header    header       header       ."
     ".       driveway  downstairs_living_room  hallway      ."
-    ".       driveway  downstairs_living_room  dining_area  ."
+    ".       driveway  downstairs_living_room  downstairs_dining_area  ."
     ".       garage    study        downstairs_utility_room ."
     ".       .         .        .            ."
 
@@ -28,7 +28,7 @@ layout:
         ".       driveway      ."
         ".       hallway       ."
         ".       downstairs_living_room   ."
-        ".       dining_area   ."
+        ".       downstairs_dining_area   ."
         ".       downstairs_utility_room  ."
         ".       garage        ."
         ".       study         ."
@@ -43,7 +43,7 @@ layout:
         "header  header        header       ."
         ".       driveway      garage       ."
         ".       driveway      hallway      ."
-        ".       downstairs_living_room   dining_area  ."
+        ".       downstairs_living_room   downstairs_dining_area  ."
         ".       downstairs_utility_room  study        ."
         ".       .             .            ."
 
@@ -142,24 +142,24 @@ cards:
         template: default_button
 
       - type: 'custom:button-card'
-        entity: binary_sensor.dining_area_garden_doors_contact
+        entity: binary_sensor.downstairs_dining_area_garden_doors_contact
         name: Garden doors
         template: default_button
 
   #################################################
-  #                 Dining Area                   #
+  #                 Downstairs dining area                   #
   #################################################
 
   - type: grid
-    title: Dining area
+    title: Downstairs dining area
     view_layout:
-      grid-area: dining_area
+      grid-area: downstairs_dining_area
     columns: 3
     square: false
     cards:
       - type: 'custom:button-card'
-        entity: binary_sensor.dining_area_motion_sensor_occupancy
-        name: Dining Area
+        entity: binary_sensor.downstairs_dining_area_motion_sensor_occupancy
+        name: Downstairs dining area
         template: default_button
 
       - type: 'custom:button-card'

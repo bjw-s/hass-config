@@ -1,0 +1,9 @@
+---
+platform: history_stats
+name: "Downstairs dining area - Lights - Stats"
+entity_id: light.downstairs_dining_area
+state: "on"
+type: count
+start: >
+  {{ as_timestamp(now()) - (1*86400) }}
+duration: 00:00:30

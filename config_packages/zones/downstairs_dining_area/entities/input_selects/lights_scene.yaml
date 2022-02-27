@@ -1,0 +1,9 @@
+---
+downstairs_dining_area_lights_scene:
+  name: Downstairs dining area - Lights scene
+  options:
+    - 'Off'
+    - Full brightness
+    - Relaxed
+    - Movie mode
+  icon: mdi:movie-open

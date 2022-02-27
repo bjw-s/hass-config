@@ -1,0 +1,7 @@
+---
+platform: template
+sensors:
+  downstairs_dining_area_air_purifier_motor_speed:
+    friendly_name: 'Air Purifier Motor Speed'
+    value_template: |
+      {{ state_attr('fan.air_purifier', 'motor_speed') }}

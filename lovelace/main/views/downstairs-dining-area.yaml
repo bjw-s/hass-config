@@ -1,4 +1,4 @@
-title: Dining area
+title: Downstairs dining area
 icon: 'mdi:silverware-fork-knife'
 id: dining-area
 path: dining-area
@@ -35,19 +35,19 @@ cards:
           - type: 'custom:button-card'
             template: default_button
             name: Dark?
-            entity: binary_sensor.dining_area_is_dark
+            entity: binary_sensor.downstairs_dining_area_is_dark
             tap_action: !include ../popups/light_levels.yaml
 
           - type: 'custom:button-card'
             template: default_button
             name: Light level
             icon: 'mdi:theme-light-dark'
-            entity: sensor.dining_area_motion_sensor_illuminance_lux
+            entity: sensor.downstairs_dining_area_motion_sensor_illuminance_lux
 
           - type: 'custom:button-card'
             template: default_button
             name: Motion
-            entity: binary_sensor.dining_area_motion_sensor_occupancy
+            entity: binary_sensor.downstairs_dining_area_motion_sensor_occupancy
 
   - type: 'custom:layout-card'
     view_layout:
@@ -56,7 +56,7 @@ cards:
       - type: 'custom:button-card'
         name: Lights
         template: header
-        tap_action: !include ../popups/floor-1-dining_area_lights.yaml
+        tap_action: !include ../popups/downstairs-dining_area-lights.yaml
 
       - type: 'custom:layout-card'
         layout_type: grid
@@ -67,5 +67,5 @@ cards:
             template: default_button
             name: Ceiling
             icon: 'mdi:globe-light'
-            entity: light.dining_area_ceiling
-            hold_action: !include ../popups/floor-1-dining_area_lights.yaml
+            entity: light.downstairs_dining_area_ceiling
+            hold_action: !include ../popups/downstairs-dining_area-lights.yaml

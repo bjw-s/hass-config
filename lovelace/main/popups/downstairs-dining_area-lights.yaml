@@ -1,0 +1,42 @@
+action: fire-dom-event
+browser_mod:
+  command: popup
+  title: 'Downstairs dining area'
+  large: false
+  card:
+    type: 'vertical-stack'
+    cards:
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+              box-shadow: none;
+            }
+        entities:
+          - type: custom:text-divider-row
+            text: Settings
+
+          - entity: input_select.downstairs_dining_area_lights_scene
+            name: Scene
+
+          - entity: binary_sensor.downstairs_dining_area_automatic_lights
+            name: Automatic?
+
+          - entity: input_boolean.downstairs_dining_area_lights_manual_mode
+            name: Manual mode
+
+          - type: conditional
+            conditions:
+              - entity: timer.downstairs_dining_area_lights_manual_mode
+                state_not: idle
+            row:
+              entity: timer.downstairs_dining_area_lights_manual_mode
+              name: Manual mode duration
+
+          - type: custom:text-divider-row
+            text: Brightness
+
+          - entity: light.downstairs_dining_area_ceiling
+            type: custom:slider-entity-row
+            name: Ceiling
+            hide_when_off: true

@@ -1,0 +1,8 @@
+---
+platform: template
+sensors:
+  downstairs_dining_area_air_purifier_filter_life_remaining:
+    friendly_name: 'Air Purifier Filter Life Remaining'
+    value_template: |
+      {{ state_attr('fan.air_purifier', 'filter_life_remaining') }}
+    unit_of_measurement: '%'
