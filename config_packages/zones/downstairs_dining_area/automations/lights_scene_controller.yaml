@@ -80,9 +80,16 @@ action:
           - choose:
               # Only set these scenes in the evening
               - conditions:
-                  - condition: time
-                    after: "20:00:00"
-                    before: "02:00:00"
+                  - condition: or
+                    conditions:
+                      - alias: "Late evening"
+                        condition: state
+                        entity_id: sensor.system_time_of_day
+                        state: "late_evening"
+                      - alias: "night"
+                        condition: state
+                        entity_id: sensor.system_time_of_day
+                        state: "night"
                 sequence:
                   - choose:
                       # Select "Movie mode"

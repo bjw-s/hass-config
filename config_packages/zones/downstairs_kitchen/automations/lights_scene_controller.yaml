@@ -67,9 +67,16 @@ action:
           - choose:
               # Only set these scenes in the evening
               - conditions:
-                  - condition: time
-                    after: "20:00:00"
-                    before: "02:00:00"
+                  - condition: or
+                    conditions:
+                      - alias: "Late evening"
+                        condition: state
+                        entity_id: sensor.system_time_of_day
+                        state: "late_evening"
+                      - alias: "night"
+                        condition: state
+                        entity_id: sensor.system_time_of_day
+                        state: "night"
                 sequence:
                   - service: input_select.select_option
                     data:
@@ -82,7 +89,7 @@ action:
                 data:
                   entity_id: "{{ scene_helper }}"
                   option: "Full brightness"
-          
+
           - service: timer.start
             data:
               entity_id: timer.downstairs_kitchen_automatic_lights

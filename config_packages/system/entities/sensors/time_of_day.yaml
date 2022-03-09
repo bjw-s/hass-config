@@ -1,0 +1,21 @@
+---
+platform: template
+sensors:
+  system_time_of_day:
+    friendly_name: "System - Time of day"
+    value_template: |
+      {%- if now().hour >= 0 and now().hour < 6 -%}
+        night
+      {%- elif now().hour >= 6 and now().hour < 10 -%}
+        early_morning
+      {%- elif now().hour >= 10 and now().hour < 12 -%}
+        late_morning
+      {%- elif now().hour >= 12 and now().hour < 15 -%}
+        early_afternoon
+      {%- elif now().hour >= 15 and now().hour < 18 -%}
+        late_afternoon
+      {%- elif now().hour >= 18 and now().hour < 20 -%}
+        early_evening
+      {%- elif now().hour >= 20 and now().hour <= 24 -%}
+        late_evening
+      {%- endif -%}

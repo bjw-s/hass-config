@@ -33,9 +33,10 @@ action:
         - condition: state
           entity_id: light.upstairs_bedroom_eva_nightlight
           state: 'off'
-        - condition: time
-          after: "06:00:00"
-          before: "08:30:00"
+        - alias: "Early morning"
+          condition: state
+          entity_id: sensor.system_time_of_day
+          state: "early_morning"
       sequence:
         - service: scene.turn_on
           data:

@@ -24,10 +24,11 @@ sidebar:
       icon: mdi:trash-can
   template: |
     <li>
-      {% if now().hour  < 5 %} Good night {{'\U0001F634'}}
-      {% elif now().hour < 12 %} Good morning {{'\u2615\uFE0F'}}
-      {% elif now().hour < 18 %} Good afternoon {{'\U0001F44B\U0001F3FB'}}
-      {% else %} Good evening {{'\U0001F44B\U0001F3FB'}}{% endif %}
+      {% if states('sensor.system_time_of_day').endswith('night') %} Good night {{'\U0001F634'}}
+      {% elif states('sensor.system_time_of_day').endswith('morning') %} Good morning {{'\u2615\uFE0F'}}
+      {% elif states('sensor.system_time_of_day').endswith('afternoon') %} Good afternoon {{'\U0001F44B\U0001F3FB'}}
+      {% elif states('sensor.system_time_of_day').endswith('evening') %} Good evening {{'\U0001F44B\U0001F3FB'}}
+      {% endif %}
     </li>
 
     {% if not is_state('sensor.afvalwijzer_today', 'Geen') %} <li>{{'\U0000267B'}} Trash today: {{ states('sensor.afvalwijzer_today') }} </li> {% endif %}

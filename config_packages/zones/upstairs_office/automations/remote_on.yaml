@@ -11,5 +11,5 @@ trigger:
 action:
   - service: input_select.select_option
     data:
-      entity_id: input_select.upstairs_office_active_lights_scene
+      entity_id: input_select.upstairs_office_lights_scene
       option: 'Chill'

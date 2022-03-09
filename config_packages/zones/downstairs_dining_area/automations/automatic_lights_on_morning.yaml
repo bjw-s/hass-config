@@ -5,31 +5,36 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: binary_sensor.downstairs_living_room_door_contact
-    to: 'on'
+    to: "on"
 condition:
   condition: and
   conditions:
-    - condition: state
+    - alias: "Automatic lights should be enabled"
+      condition: state
       entity_id: binary_sensor.downstairs_dining_area_automatic_lights
-      state: 'on'
-    - condition: state
+      state: "on"
+    - alias: "Area should be dark"
+      condition: state
       entity_id: binary_sensor.downstairs_dining_area_is_dark
-      state: 'on'
-    - condition: state
+      state: "on"
+    - alias: "Lights should be off"
+      condition: state
       entity_id: light.downstairs_dining_area
-      state: 'off'
-    - condition: time
-      after: "06:00:00"
-      before: "08:30:00"
-    - condition: template
+      state: "off"
+    - alias: "Early morning"
+      condition: state
+      entity_id: sensor.system_time_of_day
+      state: "early_morning"
+    - alias: "Recent motion detected in hallway"
+      condition: template
       value_template: |
-        {% set entity = 'binary_sensor.downstairs_hallway_motion' %}
+        {% set entity = "binary_sensor.downstairs_hallway_motion" %}
         {% if states[entity] %}
           {% set last_changed = as_timestamp(states[entity].last_changed) %}
         {% else %}
           {% set last_changed = 0 %}
         {% endif %}
-        {{ 
+        {{
           (as_timestamp(now()) - last_changed) < 180
         }}
 action:

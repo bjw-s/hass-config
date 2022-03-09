@@ -5,5 +5,5 @@ entity_id: light.downstairs_living_room
 state: "on"
 type: count
 start: >
-  {{ as_timestamp(now()) - (1*86400) }}
+  {{ as_timestamp(now()) - ((states('input_number.home_modes_vacation_mode_replay_days') | float) * 86400) }}
 duration: 00:00:30
