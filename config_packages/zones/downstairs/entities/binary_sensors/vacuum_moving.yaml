@@ -5,4 +5,4 @@ sensors:
     friendly_name: 'Downstairs - Vacuum is moving'
     device_class: motion
     value_template: >-
-      {{- states('vacuum.valetudo_livingroom') in ['cleaning', 'returning_to_dock'] -}}
+      {{- states('vacuum.valetudo_livingroom') in ['cleaning', 'returning'] -}}
