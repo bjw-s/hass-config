@@ -40,6 +40,12 @@ trigger:
     to: "off"
     for: "00:02:00"
 
+  - id: downstairs_no_presence_for_30_min
+    platform: state
+    entity_id: binary_sensor.downstairs_presence
+    to: "off"
+    for: "00:10:00"
+
 variables:
   scene_helper: input_select.downstairs_living_room_lights_scene
 
@@ -70,8 +76,13 @@ action:
                 state: "on"
               - condition: or
                 conditions:
-                  - condition: trigger
-                    id: downstairs_living_room_is_dark
+                  - condition: and
+                    conditions:
+                      - condition: trigger
+                        id: downstairs_living_room_is_dark
+                      - condition: state
+                        entity_id: binary_sensor.downstairs_presence
+                        state: "on"
                   - condition: trigger
                     id: downstairs_living_room_media_playing
                   - condition: trigger
@@ -131,11 +142,15 @@ action:
               # Turn off automatically
               - condition: and
                 conditions:
-                  - condition: trigger
-                    id: downstairs_living_room_no_longer_dark
                   - condition: state
                     entity_id: binary_sensor.downstairs_living_room_automatic_lights
                     state: "on"
+                  - condition: or
+                    conditions:
+                      - condition: trigger
+                        id: downstairs_no_presence_for_30_min
+                      - condition: trigger
+                        id: downstairs_living_room_no_longer_dark
         sequence:
           - service: input_select.select_option
             data:

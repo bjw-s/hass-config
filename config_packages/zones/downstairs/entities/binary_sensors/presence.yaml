@@ -1,0 +1,10 @@
+---
+platform: template
+sensors:
+  downstairs_presence:
+    friendly_name: 'Downstairs - Presence'
+    device_class: presence
+    value_template: >-
+      {%- set group = "group.home_room_presence_devices" -%}
+      {%- set rooms = ["downstairs-living_room"] -%}
+      {{- (expand(group) | selectattr("state","in",rooms) | list | count) > 0 -}}

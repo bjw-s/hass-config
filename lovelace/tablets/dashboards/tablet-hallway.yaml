@@ -8,17 +8,17 @@ sidebar:
   hideHassSidebar: true
   sidebarMenu:
     - action: navigate
-      navigation_path: "/tablet-hallway-new/overview"
+      navigation_path: "/tablet-hallway/overview"
       name: "Overview"
       active: true
       icon: mdi:home
     - action: navigate
-      navigation_path: "/tablet-hallway-new/lights"
+      navigation_path: "/tablet-hallway/lights"
       name: "Lights"
       active: true
       icon: mdi:lamps
     - action: navigate
-      navigation_path: "/tablet-hallway-new/trash"
+      navigation_path: "/tablet-hallway/trash"
       name: "Trash"
       active: false
       icon: mdi:trash-can
@@ -192,3 +192,90 @@ views:
   - title: Trash
     path: trash
     badges: []
+    type: custom:layout-card
+    layout_type: 'custom:grid-layout'
+    layout:
+      grid-template-columns: 100%
+      grid-template-rows: 6vh repeat(2, fit-content(100%)) 0fr
+      grid-template-areas: |
+        "."
+        "row1"
+        "row2"
+        "."
+    cards:
+      - type: custom:layout-card
+        layout_type: 'custom:grid-layout'
+        view_layout:
+          grid-area: row1
+        layout:
+          grid-template-columns: 15% 23.3% 23.3% 23.3% 15%
+          grid-template-rows: auto
+          grid-template-areas: |
+            ". row1_1 row1_2 row1_3 ."
+        cards:
+          - type: 'custom:button-card'
+            view_layout:
+              grid-area: row1_1
+            entity: sensor.afvalwijzer_restafval
+            icon: 'mdi:trash-can'
+            name: Restafval
+            template: trash_button
+            triggers_update:
+              - sensor.afvalwijzer_restafval
+              - input_boolean.trash_outside
+
+          - type: 'custom:button-card'
+            view_layout:
+              grid-area: row1_2
+            entity: sensor.afvalwijzer_gft
+            icon: 'mdi:leaf'
+            name: GFT
+            template: trash_button
+            triggers_update:
+              - sensor.afvalwijzer_gft
+              - input_boolean.trash_gft_afval_outside
+
+          - type: 'custom:button-card'
+            view_layout:
+              grid-area: row1_3
+            entity: sensor.afvalwijzer_pmd
+            icon: 'mdi:recycle'
+            name: PMD
+            template: trash_button
+            triggers_update:
+              - sensor.afvalwijzer_pmd
+              - input_boolean.trash_pmd_outside
+
+      - type: custom:layout-card
+        layout_type: 'custom:grid-layout'
+        view_layout:
+          grid-area: row2
+        layout:
+          grid-template-columns: 15% 23.3% 23.3% 23.3% 15%
+          grid-template-rows: auto
+          grid-template-areas: |
+            ". row2_1 row2_2 row2_3 ."
+        cards:
+          - type: 'custom:button-card'
+            view_layout:
+              grid-area: row2_1
+            entity: sensor.afvalwijzer_papier
+            icon: 'mdi:package-variant'
+            name: Papier
+            template: trash_button
+            triggers_update:
+              - sensor.afvalwijzer_papier
+              - input_boolean.trash_oud_papier_outside
+
+          - type: 'custom:button-card'
+            view_layout:
+              grid-area: row2_2
+            entity: sensor.afvalwijzer_takken
+            icon: 'mdi:sprout'
+            name: Snoeiafval
+            template: trash_button
+            triggers_update:
+              - sensor.afvalwijzer_takken
+              - input_boolean.trash_snoeiafval_outside
+            variables:
+              days_orange: 14

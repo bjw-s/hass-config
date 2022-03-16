@@ -1,7 +1,7 @@
 ---
 platform: template
 sensors:
-  bedroom_shock_sensor_left_motion:
+  upstairs_bedroom_shock_sensor_left_motion:
     friendly_name: "name: Upstairs Bedroom - Shock Sensor Left Motion"
     value_template:  >
       {% set entity = 'sensor.upstairs_bedroom_shock_sensor_left_action' %}

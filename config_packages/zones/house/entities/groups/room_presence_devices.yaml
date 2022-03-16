@@ -1,0 +1,5 @@
+---
+home_room_presence_devices:
+  entities:
+  - sensor.iphone_bernd_room_presence
+  - sensor.iphone_manyie_room_presence

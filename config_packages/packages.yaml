@@ -19,10 +19,12 @@ area_backyard: !include zones/backyard/package.yaml
 area_downstairs_dining_area: !include zones/downstairs_dining_area/package.yaml
 area_driveway: !include zones/driveway/package.yaml
 
+area_upstairs:  !include zones/upstairs/package.yaml
 area_upstairs_bedroom: !include zones/upstairs_bedroom/package.yaml
 area_upstairs_bedroom_eva: !include zones/upstairs_bedroom_eva/package.yaml
 area_upstairs_hallway: !include zones/upstairs_hallway/package.yaml
 area_upstairs_office: !include zones/upstairs_office/package.yaml
 
+area_attic: !include zones/attic/package.yaml
 area_attic_hallway: !include zones/attic_hallway/package.yaml
 area_attic_office: !include zones/attic_office/package.yaml
