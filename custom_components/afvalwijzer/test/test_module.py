@@ -11,11 +11,13 @@ python3 -m afvalwijzer.test.test_module
 
 """
 
+from ..collector.icalendar import IcalendarCollector
 from ..collector.mijnafvalwijzer import MijnAfvalWijzerCollector
 from ..collector.opzet import OpzetCollector
 from ..collector.ximmio import XimmioCollector
 from ..const.const import (
     SENSOR_COLLECTORS_AFVALWIJZER,
+    SENSOR_COLLECTORS_ICALENDAR,
     SENSOR_COLLECTORS_OPZET,
     SENSOR_COLLECTORS_XIMMIO,
 )
@@ -34,23 +36,34 @@ default_label = "Geen"
 exclude_list = ""
 
 # Afvalwijzer
-provider = "mijnafvalwijzer"
-postal_code = "5146EG"
-street_number = "6"
+# provider = "mijnafvalwijzer"
+# postal_code = "5146EG"
+# street_number = "6"
 
 # Ximmio
 # provider = "meerlanden"
 # postal_code = "2201XZ"
 # street_number = "38"
 
-# Twente
-provider = "twentemilieu"
-postal_code = "7642JH"
-street_number = "5"
+# Ximmio
+# provider = "acv"
+# postal_code = "6713CG"
+# street_number = "11"
 
-provider = "prezero"
-postal_code = "6665CN"
-street_number = "1"
+# Twente
+# provider = "twentemilieu"
+# postal_code = "7642JH"
+# street_number = "5"
+
+# provider = "prezero"
+# postal_code = "6665CN"
+# street_number = "1"
+
+# Icalendar
+provider = "eemsdelta"
+postal_code = "9991AB"
+street_number = "2"
+
 
 if provider in SENSOR_COLLECTORS_AFVALWIJZER:
     collector = MijnAfvalWijzerCollector(
@@ -82,7 +95,16 @@ elif provider in SENSOR_COLLECTORS_XIMMIO.keys():
         exclude_list,
         default_label,
     )
-
+elif provider in SENSOR_COLLECTORS_ICALENDAR.keys():
+    collector = IcalendarCollector(
+        provider,
+        postal_code,
+        street_number,
+        suffix,
+        exclude_pickup_today,
+        exclude_list,
+        default_label,
+    )
 
 # data = XimmioCollector().get_waste_data_provider("meerlanden", postal_code2, street_number2, suffix, default_label, exclude_list)
 # data2 = MijnAfvalWijzerCollector().get_waste_data_provider("mijnafvalwijzer", postal_code, street_number, suffix, default_label, exclude_list)

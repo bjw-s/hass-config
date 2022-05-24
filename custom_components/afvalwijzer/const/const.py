@@ -3,7 +3,7 @@ import logging
 
 API = "api"
 NAME = "afvalwijzer"
-VERSION = "2022.02.03"
+VERSION = "2022.05.01"
 ISSUE_URL = "https://github.com/xirixiz/homeassistant-afvalwijzer/issues"
 
 _LOGGER = logging.getLogger(__name__)
@@ -56,6 +56,9 @@ SENSOR_COLLECTORS_OPZET = {
     "zrd": "https://afvalkalender.zrd.nl",
 }
 
+SENSOR_COLLECTORS_ICALENDAR = {
+    "eemsdelta": "https://www.eemsdelta.nl/trash-calendar/download/{1}/{2}",
+}
 
 SENSOR_COLLECTORS_AFVALWIJZER = [
     "mijnafvalwijzer",
