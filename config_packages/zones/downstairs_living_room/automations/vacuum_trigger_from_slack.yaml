@@ -7,11 +7,9 @@ trigger:
 variables:
   payload: "{{ trigger.data.payload | from_json -}}"
 condition:
-  condition: and
-  conditions:
-    - condition: template
-      value_template: |
-        {{ "vacuum_not_run" in payload.actions[0].action_id }}
+  - condition: template
+    value_template: |
+      {{ "vacuum_not_run" in payload.actions[0].action_id }}
 action:
   - service: script.slack_update
     data:
@@ -25,12 +23,12 @@ action:
             text: "{{ payload.message.blocks[0].text.text }}"
 
   - choose:
-    # Start the vacuum
-    - conditions:
-      - condition: template
-        value_template: |
-          {{ payload.actions[0].action_id == "vacuum_not_run_start" }}
-      sequence:
-        - service: script.turn_on
-          data:
-            entity_id: script.vacuum_downstairs
+      # Start the vacuum
+      - conditions:
+          - condition: template
+            value_template: |
+              {{ payload.actions[0].action_id == "vacuum_not_run_start" }}
+        sequence:
+          - service: script.turn_on
+            data:
+              entity_id: script.vacuum_downstairs

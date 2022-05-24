@@ -9,8 +9,7 @@ trigger:
     entity_id: input_boolean.upstairs_bedroom_bs_in_bed
     to: "on"
 condition:
-  condition: and
-  conditions:
+  and:
     - condition: template
       value_template: |
         {{ is_state('input_boolean.upstairs_bedroom_mf_in_bed', 'on') and is_state('input_boolean.upstairs_bedroom_bs_in_bed', 'on') }}

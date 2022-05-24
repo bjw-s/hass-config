@@ -4,25 +4,23 @@ alias: Driveway - Automatic lights on
 trigger:
   - platform: state
     entity_id: binary_sensor.driveway_motion_sensor_occupancy
-    from: 'off'
-    to: 'on'
+    from: "off"
+    to: "on"
 condition:
-  condition: and
-  conditions:
+  and:
     - condition: state
       entity_id: binary_sensor.driveway_automatic_lights
-      state: 'on'
+      state: "on"
     - condition: state
       entity_id: light.driveway_wall
-      state: 'off'
-    - condition: or
-      conditions:
+      state: "off"
+    - or:
         - condition: state
           entity_id: binary_sensor.driveway_is_dusk
-          state: 'on'
+          state: "on"
         - condition: state
           entity_id: binary_sensor.driveway_is_dark
-          state: 'on'
+          state: "on"
 action:
   - service: automation.trigger
     data:

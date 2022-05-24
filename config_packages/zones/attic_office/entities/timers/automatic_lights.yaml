@@ -1,2 +1,3 @@
 ---
 attic_office_automatic_lights:
+  restore: true

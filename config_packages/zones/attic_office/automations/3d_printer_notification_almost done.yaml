@@ -6,14 +6,13 @@
 #     entity_id: sensor.attic_office_3d_printer_current_progress
 #     above: 90
 # condition:
-#   - condition: and
-#     conditions:
+#   - and:
 #       - condition: state
 #         entity_id: input_boolean.attic_office_3d_printer_notifications
 #         state: 'on'
 #       - condition: template
 #         value_template: |
-#           {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.attic_office_3d_printer_notification_almost_done', 'last_triggered') | default(0)) | int > 3600)}}    
+#           {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.attic_office_3d_printer_notification_almost_done', 'last_triggered') | default(0)) | int > 3600)}}
 # action:
 #   - service: notify.slack_bot
 #     data:

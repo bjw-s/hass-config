@@ -5,33 +5,31 @@ trigger:
   - platform: time
     at: "15:00:00"
 condition:
-  condition: and
-  conditions:
+  and:
     - condition: state
       entity_id: input_boolean.downstairs_living_room_vacuum_ran_today
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: input_boolean.downstairs_vacuum_automatic_cleaning_active
-      state:  'on'
-    - condition: not
-      conditions:
+      state: "on"
+    - not:
         - condition: state
           entity_id: vacuum.valetudo_livingroom
-          state: 'cleaning'
+          state: "cleaning"
 action:
   - choose:
-    # Start the vacuum automatically when vacation mode is on
-    - conditions:
-        - condition: state
-          entity_id: input_boolean.downstairs_vacuum_automatic_cleaning_active
-          state: 'on'
-        - condition: state
-          entity_id: input_boolean.home_modes_vacation_mode
-          state: 'on'
-      sequence:
-        - service: script.turn_on
-          data:
-            entity_id: script.vacuum_downstairs
+      # Start the vacuum automatically when vacation mode is on
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.downstairs_vacuum_automatic_cleaning_active
+            state: "on"
+          - condition: state
+            entity_id: input_boolean.home_modes_vacation_mode
+            state: "on"
+        sequence:
+          - service: script.turn_on
+            data:
+              entity_id: script.vacuum_downstairs
 
     # Default asks if vacuum should run
     default:

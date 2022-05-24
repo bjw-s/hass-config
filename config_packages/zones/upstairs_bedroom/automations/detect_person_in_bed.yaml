@@ -18,8 +18,7 @@ variables:
       input_boolean.upstairs_bedroom_bs_in_bed
     {%- endif %}
 condition:
-  condition: and
-  conditions:
+  and:
     - condition: time
       after: "21:00:00"
       before: "06:00:00"

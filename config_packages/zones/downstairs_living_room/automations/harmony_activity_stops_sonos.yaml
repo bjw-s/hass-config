@@ -6,8 +6,7 @@ trigger:
   - platform: state
     entity_id: sensor.downstairs_living_room_current_harmony_activity
 condition:
-  condition: not
-  conditions:
+  not:
     - condition: state
       entity_id: sensor.downstairs_living_room_current_harmony_activity
       state: Listen to Sonos
@@ -17,6 +16,6 @@ condition:
 action:
   - service: media_player.media_stop
     data:
-      entity_id: 
+      entity_id:
         - media_player.downstairs_kitchen_sonos
         - media_player.downstairs_living_room_sonos

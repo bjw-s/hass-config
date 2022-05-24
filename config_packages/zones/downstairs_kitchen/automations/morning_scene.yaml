@@ -8,12 +8,10 @@ trigger:
     to: "off"
 
 condition:
-  condition: and
-  conditions:
-    - alias: "Early morning"
-      condition: state
-      entity_id: sensor.system_time_of_day
-      state: "early_morning"
+  - alias: "Early morning"
+    condition: state
+    entity_id: sensor.system_time_of_day
+    state: "early_morning"
 
 action:
   # Turn on coffee maker in the morning

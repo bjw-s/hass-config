@@ -6,61 +6,121 @@ badges: []
 type: 'custom:grid-layout'
 layout:
   #default
-  grid-gap: var(--custom-layout-card-padding)
+  grid-column-gap: var(--custom-layout-card-padding)
   grid-template-columns: 0 repeat(3, 1fr) 0
-  grid-template-rows: 6vh repeat(2, fit-content(100%)) 0fr
+  grid-template-rows: auto
 
   grid-template-areas: |
-    "header   header   header   header   header"
-    ".        glance   modes    trash    ."
-    ".        presence .        trash    ."
-    ".        .        .        .        ."
+    ". presence  glance  trash ."
+    ". presence  modes   trash ."
 
   mediaquery:
     #phone
     "(max-width: 800px)":
-      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
       grid-template-columns: 0 repeat(1, 1fr) 0
-      grid-template-rows: 8vh repeat(4, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header      header"
-        ".       glance      ."
         ".       presence    ."
+        ".       glance      ."
         ".       modes       ."
         ".       trash       ."
-        ".       .           ."
 
     #tablet portrait
     "(max-width: 1000px)":
-      grid-gap: calc(var(--custom-layout-card-padding) * 1.8)
       grid-template-columns: 0 repeat(2, 1fr) 0
-      grid-template-rows: 6vh repeat(4, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header    header   header"
-        ".       glance    modes    ."
-        ".       presence  .        ."
-        ".       trash     .        ."
-        ".       .         .        ."
+        ".       presence  modes    ."
+        ".       glance    trash    ."
 
 cards:
   #################################################
   #                                               #
-  #                    Header                     #
+  #                   PRESENCE                    #
   #                                               #
   #################################################
 
-  - type: markdown
+  # Large variant
+  - type: vertical-stack
+    title: Presence
     view_layout:
-      grid-area: header
-    content: |
-      {%- set hour = now().hour -%}
-      {%- if hour > 0 and hour < 12 -%}
-        # Good morning
-      {%- elif hour >= 12 and hour < 18 -%}
-        # Good afternoon
-      {%- else -%}
-        # Good evening
-      {%- endif %}
+      grid-area: presence
+      show:
+          mediaquery: "(min-width: 800px)"
+    cards:
+      - type: custom:mushroom-alarm-control-panel-card
+        entity: alarm_control_panel.house
+        layout: vertical
+        states:
+          - armed_home
+          - armed_night
+          - armed_away
+        tap_action: !include ../popups/alarm.yaml
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-person-card
+            entity: person.bernd
+            use_entity_picture: true
+            layout: vertical
+
+          - type: custom:mushroom-person-card
+            entity: person.man_yie
+            use_entity_picture: true
+            layout: vertical
+
+  # Small variant
+  - type: vertical-stack
+    title: Presence
+    view_layout:
+      grid-area: presence
+      show:
+          mediaquery: "(max-width: 800px)"
+    cards:
+      - type: custom:mushroom-alarm-control-panel-card
+        entity: alarm_control_panel.house
+        layout: auto
+        show_keypad: false
+        states:
+          - armed_home
+          - armed_night
+          - armed_away
+        tap_action: !include ../popups/alarm.yaml
+
+      # - type: custom:mushroom-template-card
+      #   primary: Alarm
+      #   secondary: |-
+      #     {{ states(entity) | capitalize }}
+      #   icon: |-
+      #     {%- if is_state(entity, 'disarmed') %}
+      #     mdi:shield-off
+      #     {%- elif  is_state(entity, 'armed_home') %}
+      #     mdi:shield-home
+      #     {%- elif  is_state(entity, 'armed_night') %}
+      #     mdi:shield-moon
+      #     {%- elif  is_state(entity, 'armed_away') %}
+      #     mdi:shield-account
+      #     {% endif %}
+      #   icon_color: |-
+      #     {%- if is_state(entity, 'triggered') %}
+      #     red
+      #     {%- elif is_state(entity, 'disarmed') %}
+      #     green
+      #     {%- else %}
+      #     orange
+      #     {% endif %}
+      #   entity: alarm_control_panel.house
+      #   multiline_secondary: false
+
+      #   tap_action: !include ../popups/alarm.yaml
+
+      - type: custom:mushroom-person-card
+        entity: person.bernd
+        use_entity_picture: true
+        layout: horizontal
+
+      - type: custom:mushroom-person-card
+        entity: person.man_yie
+        use_entity_picture: true
+        layout: horizontal
 
   #################################################
   #                                               #
@@ -68,88 +128,25 @@ cards:
   #                                               #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: At a glance
     view_layout:
       grid-area: glance
-    columns: 3
     cards:
-      - type: 'custom:button-card'
+      - type: custom:mushroom-template-card
+        primary: Thermostat ({{ states(entity) | capitalize }})
+        secondary: |-
+          Current: {{ state_attr(entity, 'current_temperature') }} °C
+          {%- if is_state(entity, 'heat') %}
+          Target: {{ state_attr(entity, 'temperature') }} °C
+          {% endif %}
+        icon: mdi:thermostat
+        icon_color: |-
+          {%- if is_state(entity, 'heat') %}
+          orange
+          {% endif %}
         entity: climate.downstairs_living_room
-        label: '[[[ return `${entity.attributes.temperature} °C` ]]]'
-        name: Thermostat
-        template: temperature
-        triggers_update:
-          - climate.downstairs_living_room
-
-      - type: 'custom:button-card'
-        template: base_button
-        entity: alarm_control_panel.house
-        name: Alarm
-        show_label: true
-        show_state: true
-        size: 80%
-        state:
-          - icon: 'mdi:shield-check'
-            styles:
-              icon:
-                - color: var(--label-badge-green)
-            value: disarmed
-          - icon: 'mdi:shield-lock'
-            styles:
-              icon:
-                - color: var(--label-badge-red)
-            operator: regex
-            value: armed_.*
-          - icon: 'mdi:shield-lock'
-            styles:
-              icon:
-                - color: var(--label-badge-yellow)
-            value: pending
-          - icon: 'mdi:shield-lock'
-            styles:
-              icon:
-                - color: var(--label-badge-yellow)
-            value: arming
-        styles:
-          grid:
-            - grid-template-areas: '"i l" "n n" "s s"'
-            - grid-template-columns: 1fr 2fr
-            - grid-template-rows: 1fr min-content
-          img_cell:
-            - margin-bottom: 30%
-            - margin-left: 0%
-          name:
-            - justify-self: start
-            - margin-left: 10%
-          state:
-            - justify-self: start
-            - margin-left: 10%
-            - font-weight: lighter
-            - text-transform: capitalize
-            - white-space: nowrap
-            - overflow: visible
-        tap_action: !include ../popups/alarm.yaml
-
-  #################################################
-  #                                               #
-  #                   PRESENCE                    #
-  #                                               #
-  #################################################
-
-  - type: grid
-    title: Presence
-    view_layout:
-      grid-area: presence
-    columns: 3
-    cards:
-      - type: 'custom:button-card'
-        entity: person.bernd
-        template: person
-
-      - type: 'custom:button-card'
-        entity: person.man_yie
-        template: person
+        multiline_secondary: true
 
   #################################################
   #                                               #
@@ -157,29 +154,47 @@ cards:
   #                                               #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Modes
     view_layout:
       grid-area: modes
-    columns: 3
     cards:
-      - type: 'custom:button-card'
-        entity: input_boolean.home_modes_guest_mode
-        name: Guest
-        show_state: true
-        template: default_locked
+      - type: grid
+        columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:restriction-card
+                card:
+                  type: custom:mushroom-entity-card
+                  entity: input_boolean.home_modes_guest_mode
+                  name: Guest
+                  icon: mdi:human-handsup
+                  layout: horizontal
+                  tap_action:
+                    action: toggle
 
-      - type: 'custom:button-card'
-        entity: input_boolean.home_modes_bedtime_mode
-        name: Bedtime
-        show_state: true
-        template: default_locked
+              - type: custom:restriction-card
+                card:
+                  type: custom:mushroom-entity-card
+                  entity: input_boolean.home_modes_vacation_mode
+                  name: Vacation
+                  icon: mdi:airplane
+                  layout: horizontal
+                  tap_action:
+                    action: toggle
 
-      - type: 'custom:button-card'
-        entity: input_boolean.home_modes_vacation_mode
-        name: Vacation
-        show_state: true
-        template: default_locked
+          - type: vertical-stack
+            cards:
+              - type: custom:restriction-card
+                card:
+                  type: custom:mushroom-entity-card
+                  entity: input_boolean.home_modes_bedtime_mode
+                  name: Bedtime
+                  icon: mdi:sleep
+                  layout: horizontal
+                  tap_action:
+                    action: toggle
 
   #################################################
   #                                               #
@@ -187,44 +202,39 @@ cards:
   #                                               #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Trash
     view_layout:
       grid-area: trash
-    columns: 3
     cards:
-      - type: 'custom:button-card'
-        entity:  sensor.afvalwijzer_restafval
-        icon: 'mdi:trash-can'
+      - type: custom:mushroom-entity-card
+        entity: sensor.afvalwijzer_restafval
         name: Restafval
-        template: trash_button
-        triggers_update:
-          - sensor.afvalwijzer_restafval
-          - input_boolean.trash_outside
+        primary_info: name
+        secondary_info: state
+        icon: mdi:trash-can
+        layout: horizontal
 
-      - type: 'custom:button-card'
+      - type: custom:mushroom-entity-card
         entity: sensor.afvalwijzer_gft
-        icon: 'mdi:leaf'
         name: GFT
-        template: trash_button
-        triggers_update:
-          - sensor.afvalwijzer_gft
-          - input_boolean.trash_outside
+        primary_info: name
+        secondary_info: state
+        icon: mdi:leaf
+        layout: horizontal
 
-      - type: 'custom:button-card'
+      - type: custom:mushroom-entity-card
         entity: sensor.afvalwijzer_pmd
-        icon: 'mdi:recycle'
         name: PMD
-        template: trash_button
-        triggers_update:
-          - sensor.afvalwijzer_pmd
-          - input_boolean.trash_outside
+        primary_info: name
+        secondary_info: state
+        icon: mdi:recycle
+        layout: horizontal
 
-      - type: 'custom:button-card'
+      - type: custom:mushroom-entity-card
         entity: sensor.afvalwijzer_papier
-        icon: 'mdi:package-variant'
         name: Papier
-        template: trash_button
-        triggers_update:
-          - sensor.afvalwijzer_papier
-          - input_boolean.trash_outside
+        primary_info: name
+        secondary_info: state
+        icon: mdi:package-variant
+        layout: horizontal

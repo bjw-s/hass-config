@@ -7,11 +7,9 @@
 #     from: 'on'
 #     to: 'off'
 # condition:
-#   - condition: and
-#     conditions:
-#       - condition: state
-#         entity_id: input_boolean.attic_office_3d_printer_notifications
-#         state: 'on'
+#   - condition: state
+#     entity_id: input_boolean.attic_office_3d_printer_notifications
+#     state: 'on'
 # action:
 #   - service: notify.slack_bot
 #     data:

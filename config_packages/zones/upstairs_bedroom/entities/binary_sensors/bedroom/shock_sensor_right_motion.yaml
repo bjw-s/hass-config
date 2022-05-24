@@ -4,20 +4,18 @@ sensors:
   upstairs_bedroom_shock_sensor_right_motion:
     friendly_name: "name: Upstairs Bedroom - Shock Sensor Right Motion"
     value_template:  >
-      {% set entity = 'sensor.upstairs_bedroom_shock_sensor_right_action' %}
-      {% set action = state_attr(entity, 'action') %}
+      {% set entity = 'binary_sensor.upstairs_bedroom_shock_sensor_right_vibration' %}
+      {% set entity_state = states(entity) %}
       {% if states[entity] %}
         {% set last_changed = as_timestamp(states[entity].last_changed) %}
       {% else %}
         {% set last_changed = 0 %}
       {% endif %}
       {{-
-        action == 'tilt'
-        or
-        action == 'vibration'
+        entity_state == 'on'
         or
         (
-          action == None
+          entity_state == 'off'
           and
           (
             (as_timestamp(now()) - last_changed) | round(0)

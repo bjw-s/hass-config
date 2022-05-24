@@ -1,2 +1,3 @@
 ---
 attic_hallway_automatic_lights:
+  restore: true

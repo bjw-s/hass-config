@@ -6,58 +6,41 @@ badges: []
 type: 'custom:grid-layout'
 layout:
   #default
-  grid-gap: var(--custom-layout-card-padding)
+  grid-column-gap: var(--custom-layout-card-padding)
   grid-template-columns: 0 repeat(3, 1fr) 0
-  grid-template-rows: 6vh repeat(4, fit-content(100%)) 0fr
+  grid-template-rows: 17% 12% 17% 12%
 
   grid-template-areas: |
-    "header  header    header       header       ."
-    ".       driveway  downstairs_living_room  hallway      ."
-    ".       driveway  downstairs_living_room  downstairs_dining_area  ."
-    ".       garage    study        downstairs_utility_room ."
-    ".       .         .        .            ."
+    ".       driveway  living_room   hallway       ."
+    ".       driveway  dining_area   kitchen       ."
+    ".       driveway  attic_office  utility_room  ."
+    ".       .         garage        .             ."
 
   mediaquery:
     #phone
     "(max-width: 800px)":
-      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
       grid-template-columns: 0 repeat(1, 1fr) 0
-      grid-template-rows: 8vh repeat(7, fit-content(100%)) 0fr
+      grid-template-rows: 18% 7% 10% 7% 7% 7% 7% 7%
       grid-template-areas: |
-        "header  header        header"      
         ".       driveway      ."
         ".       hallway       ."
-        ".       downstairs_living_room   ."
-        ".       downstairs_dining_area   ."
-        ".       downstairs_utility_room  ."
+        ".       living_room   ."
+        ".       dining_area   ."
+        ".       kitchen       ."
+        ".       utility_room  ."
         ".       garage        ."
-        ".       study         ."
-        ".       .             ."
+        ".       attic_office  ."
 
     #tablet portrait
     "(max-width: 1000px)":
-      grid-gap: calc(var(--custom-layout-card-padding))
       grid-template-columns: 0 repeat(2, 1fr) 0
-      grid-template-rows: 6vh repeat(4, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header        header       ."
         ".       driveway      garage       ."
         ".       driveway      hallway      ."
         ".       downstairs_living_room   downstairs_dining_area  ."
         ".       downstairs_utility_room  study        ."
-        ".       .             .            ."
 
 cards:
-  #################################################
-  #                    Header                     #
-  #################################################
-
-  - type: markdown
-    view_layout:
-      grid-area: header
-    content: |
-      # Security overview
-
   #################################################
   #                   Driveway                    #
   #################################################
@@ -78,154 +61,184 @@ cards:
             show_name: false
             show_state: false
 
-          - type: grid
-            view_layout:
-            columns: 3
-            square: false
+          - type: horizontal-stack
             cards:
-              - type: 'custom:button-card'
+              - type: custom:mushroom-entity-card
                 entity: binary_sensor.doorbell_person_motion
-                name: Driveway person
-                template: default_button
+                name: Person
 
-              - type: 'custom:button-card'
+              - type: custom:mushroom-entity-card
                 entity: camera.doorbell_person
                 name: Last person
-                template: default_button
-                show_entity_picture: true
+                secondary_info: none
+                icon: mdi:camera
 
   #################################################
   #                   Hallway                     #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Hallway
     view_layout:
       grid-area: hallway
-    columns: 3
-    square: false
     cards:
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_hallway_front_door_contact
-        name: Front door
-        template: default_button
+      - type: grid
+        columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_hallway_front_door_contact
+                name: Front door
 
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_hallway_motion
-        name: Motion
-        template: default_button
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_hallway_motion
+                name: Motion
 
   #################################################
-  #                 Downstairs living room                   #
+  #                 Living room                   #
   #################################################
 
-  - type: grid
-    title: Downstairs living room
+  - type: vertical-stack
+    title: Living room
     view_layout:
-      grid-area: downstairs_living_room
-    columns: 3
-    square: false
+      grid-area: living_room
     cards:
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_living_room_door_contact
-        name: Door
-        template: default_button
+      - type: grid
+        columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_living_room_door_contact
+                name: Door
 
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_living_room_window_contact
-        name: Front window
-        template: default_button
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_living_room_motion_sensor_occupancy
+                name: Motion
 
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_living_room_motion_sensor_occupancy
-        name: Motion
-        template: default_button
-
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_dining_area_garden_doors_contact
-        name: Garden doors
-        template: default_button
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_living_room_window_contact
+                name: Front window
 
   #################################################
-  #                 Downstairs dining area                   #
+  #                 Dining area                   #
   #################################################
 
-  - type: grid
-    title: Downstairs dining area
+  - type: vertical-stack
+    title: Dining area
     view_layout:
-      grid-area: downstairs_dining_area
-    columns: 3
-    square: false
+      grid-area: dining_area
     cards:
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_dining_area_motion_sensor_occupancy
-        name: Downstairs dining area
-        template: default_button
+      - type: grid
+        columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_dining_area_motion_sensor_occupancy
+                name: Motion
 
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
-        name: Downstairs Kitchen
-        template: default_button
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_dining_area_garden_doors_contact
+                name: Garden doors
+
+  #################################################
+  #                   Kitchen                     #
+  #################################################
+
+  - type: vertical-stack
+    title: Kitchen
+    view_layout:
+      grid-area: kitchen
+    cards:
+      - type: grid
+        columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
+                name: Motion
 
   #################################################
   #                Downstairs Utility room                   #
   #################################################
 
-  - type: grid
-    title: Downstairs Utility room
+  - type: vertical-stack
+    title: Utility room
     view_layout:
-      grid-area: downstairs_utility_room
-    columns: 3
-    square: false
+      grid-area: utility_room
     cards:
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_utility_room_door_contact
-        name: Door
-        template: default_button
+      - type: grid
+        columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_utility_room_door_contact
+                name: Door
 
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_utility_room_garden_door_contact
-        name: Garden door
-        template: default_button
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_utility_room_garden_door_contact
+                name: Garden door
 
   #################################################
   #                   Garage                      #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Garage
     view_layout:
       grid-area: garage
-    columns: 3
-    square: false
     cards:
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_garage_entry_door_contact
-        name: Entry door
-        template: default_button
+      - type: grid
+        columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_garage_entry_door_contact
+                name: Entry door
 
-      - type: 'custom:button-card'
-        entity: binary_sensor.downstairs_garage_door_contact
-        name: Garage door
-        template: default_button
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.downstairs_garage_door_contact
+                name: Garage door
 
   #################################################
   #                   Study                      #
   #################################################
 
-  - type: grid
-    title: Study
+  - type: vertical-stack
+    title: Office (attic)
     view_layout:
-      grid-area: study
-    columns: 3
-    square: false
+      grid-area: attic_office
     cards:
-      - type: 'custom:button-card'
-        entity: binary_sensor.attic_office_balcony_door_contact
-        name: Balcony door
-        template: default_button
+      - type: grid
+        columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.attic_office_balcony_door_contact
+                name: Balcony door
 
-      - type: 'custom:button-card'
-        entity: binary_sensor.attic_office_window_contact
-        name: Window
-        template: default_button
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.attic_office_motion_sensor_occupancy
+                name: Motion
+
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.attic_office_window_contact
+                name: Balcony window

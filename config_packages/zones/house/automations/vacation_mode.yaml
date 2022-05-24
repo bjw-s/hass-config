@@ -27,47 +27,43 @@ trigger:
       - sensor.upstairs_bedroom_lights_nightstands_stats
 
 condition:
-  - condition: and
-    conditions:    
-    - condition: state
-      entity_id: input_boolean.home_modes_vacation_mode
-      state: 'on'
+  - condition: state
+    entity_id: input_boolean.home_modes_vacation_mode
+    state: "on"
 
 action:
- - choose:
-    # Replay turned on && entity_id is "LIGHT"
-    - conditions:
-        condition: and
-        conditions: 
-          - condition: template
-            value_template: '{{ trigger.to_state.state  == "1" }}'
-          - condition: template
-            value_template: '{{ corresponding_entity.split(".")[0] == "light" }}'
+  - choose:
+      # Replay turned on && entity_id is "LIGHT"
+      - conditions:
+          and:
+            - condition: template
+              value_template: '{{ trigger.to_state.state  == "1" }}'
+            - condition: template
+              value_template: '{{ corresponding_entity.split(".")[0] == "light" }}'
 
-      sequence:
-        - service: light.turn_on
-          data:
-            entity_id: '{{ corresponding_entity }}'
-            brightness_pct: 50
-        - service: system_log.write
-          data:
-            message: 'Vacation - Replay Lighting: {{trigger.to_state.entity_id}}: turning on: {{ corresponding_entity }}'
-            level: info
-    
-    # Replay turned on && entity_id is "LIGHT"
-    - conditions:
-        condition: and
-        conditions: 
-          - condition: template
-            value_template: '{{ trigger.to_state.state  == "0" }}'
-          - condition: template
-            value_template: '{{ corresponding_entity.split(".")[0] == "light" }}'
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id: "{{ corresponding_entity }}"
+              brightness_pct: 50
+          - service: system_log.write
+            data:
+              message: "Vacation - Replay Lighting: {{trigger.to_state.entity_id}}: turning on: {{ corresponding_entity }}"
+              level: info
 
-      sequence:
-        - service: light.turn_off
-          data:
-            entity_id: '{{ corresponding_entity }}'
-        - service: system_log.write
-          data:
-            message: 'Vacation - Replay Lighting: {{trigger.to_state.entity_id}}: turning off: {{ corresponding_entity }}'
-            level: info
+      # Replay turned on && entity_id is "LIGHT"
+      - conditions:
+          and:
+            - condition: template
+              value_template: '{{ trigger.to_state.state  == "0" }}'
+            - condition: template
+              value_template: '{{ corresponding_entity.split(".")[0] == "light" }}'
+
+        sequence:
+          - service: light.turn_off
+            data:
+              entity_id: "{{ corresponding_entity }}"
+          - service: system_log.write
+            data:
+              message: "Vacation - Replay Lighting: {{trigger.to_state.entity_id}}: turning off: {{ corresponding_entity }}"
+              level: info

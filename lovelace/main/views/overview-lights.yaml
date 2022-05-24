@@ -6,25 +6,20 @@ badges: []
 type: 'custom:grid-layout'
 layout:
   #default
-  grid-gap: var(--custom-layout-card-padding)
+  grid-column-gap: var(--custom-layout-card-padding)
   grid-template-columns: 0 repeat(3, 1fr) 0
-  grid-template-rows: 6vh repeat(3, fit-content(100%)) 0fr
+  grid-template-rows: auto
 
   grid-template-areas: |
-    "header  header               header            header         header"
     ".       living_area          downstairs_dining_area       downstairs_kitchen        ."
     ".       downstairs_hallway   upstairs_hallway  attic_hallway  ."
     ".       attic                driveway          backyard       ."
-    ".       .                    .                 .              ."
 
   mediaquery:
     #phone
     "(max-width: 800px)":
-      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
       grid-template-columns: 0 repeat(1, 1fr) 0
-      grid-template-rows: 8vh repeat(9, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header              header"
         ".       living_area         ."
         ".       downstairs_dining_area         ."
         ".       downstairs_kitchen             ."
@@ -34,324 +29,299 @@ layout:
         ".       attic               ."
         ".       driveway            ."
         ".       backyard            ."
-        ".       .                   ."
 
     #tablet portrait
     "(max-width: 1000px)":
-      grid-gap: calc(var(--custom-layout-card-padding))
       grid-template-columns: 0 repeat(2, 1fr) 0
-      grid-template-rows: 6vh 1vh repeat(5, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header            header              ."
-        ".       .                 .                   ."
         ".       living_area       downstairs_dining_area         ."
         ".       downstairs_kitchen           downstairs_hallway  ."
         ".       upstairs_hallway  attic_hallway       ."
         ".       attic             driveway            ."
         ".       backyard          .                   ."
-        ".       .                 .                   ."
 
 cards:
-  #################################################
-  #                    Header                     #
-  #################################################
-
-  - type: markdown
-    view_layout:
-      grid-area: header
-    content: |
-      # Lights overview
-
   #################################################
   #                 Downstairs living room                   #
   #################################################
 
-  - type: grid
-    title: Downstairs living room
+  - type: vertical-stack
+    title: Living room
     view_layout:
       grid-area: living_area
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: input_select.downstairs_living_room_lights_scene
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: input_select.downstairs_living_room_lights_scene
             name: Scene
 
-          - entity: binary_sensor.downstairs_living_room_automatic_lights
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.downstairs_living_room_automatic_lights
             name: Automatic lights?
 
-          - entity: input_boolean.downstairs_living_room_lights_manual_mode
-            name: Manual mode
-
-          - entity: input_number.downstairs_living_room_lights_manual_mode_duration
-            name: Manual mode duration
-
-          - type: conditional
-            conditions:
-              - entity: timer.downstairs_living_room_lights_manual_mode
-                state_not: idle
-            row:
-              entity: timer.downstairs_living_room_lights_manual_mode
-              name: Manual mode duration
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.downstairs_living_room_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle
 
   #################################################
   #                 Downstairs dining area                   #
   #################################################
 
-  - type: grid
-    title: Downstairs dining area
+  - type: vertical-stack
+    title: Dining area
     view_layout:
       grid-area: downstairs_dining_area
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: input_select.downstairs_dining_area_lights_scene
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: input_select.downstairs_dining_area_lights_scene
             name: Scene
 
-          - entity: binary_sensor.downstairs_dining_area_automatic_lights
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.downstairs_dining_area_automatic_lights
             name: Automatic lights?
 
-          - entity: input_boolean.downstairs_dining_area_lights_manual_mode
-            name: Manual mode
-
-          - entity: input_number.downstairs_dining_area_lights_manual_mode_duration
-            name: Manual mode duration
-
-          - type: conditional
-            conditions:
-              - entity: timer.downstairs_dining_area_lights_manual_mode
-                state_not: idle
-            row:
-              entity: timer.downstairs_dining_area_lights_manual_mode
-              name: Manual mode duration
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.downstairs_dining_area_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle
 
   #################################################
   #                   Downstairs Kitchen                     #
   #################################################
 
-  - type: grid
-    title: Downstairs Kitchen
+  - type: vertical-stack
+    title: Kitchen
     view_layout:
       grid-area: downstairs_kitchen
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: input_select.downstairs_kitchen_lights_scene
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: input_select.downstairs_kitchen_lights_scene
             name: Scene
 
-          - entity: binary_sensor.downstairs_kitchen_automatic_lights
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.downstairs_kitchen_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.automatic_lights_duration_downstairs_kitchen
-            name: Duration
+      - type: custom:mushroom-entity-card
+        entity: input_number.automatic_lights_duration_downstairs_kitchen
+        name: Automatic lights duration
 
-          - type: conditional
-            conditions:
-              - entity: timer.downstairs_kitchen_automatic_lights
-                state_not: idle
-            row:
-              entity: timer.downstairs_kitchen_automatic_lights
-              name: Automatic duration
+      - type: conditional
+        conditions:
+          - entity: timer.downstairs_kitchen_automatic_lights
+            state_not: idle
+        card:
+          type: custom:mushroom-entity-card
+          entity: timer.downstairs_kitchen_automatic_lights
+          name: Automatic lights timer
 
-          - entity: input_boolean.downstairs_kitchen_lights_manual_mode
-            name: Manual mode
-
-          - entity: input_number.downstairs_kitchen_lights_manual_mode_duration
-            name: Manual mode duration
-
-          - type: conditional
-            conditions:
-              - entity: timer.downstairs_kitchen_lights_manual_mode
-                state_not: idle
-            row:
-              entity: timer.downstairs_kitchen_lights_manual_mode
-              name: Manual mode duration
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.downstairs_kitchen_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle
 
   #################################################
   #             Downstairs hallway                #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Downstairs hallway
     view_layout:
       grid-area: downstairs_hallway
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: input_select.downstairs_hallway_lights_scene
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: input_select.downstairs_hallway_lights_scene
             name: Scene
 
-          - entity: binary_sensor.downstairs_hallway_automatic_lights
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.downstairs_hallway_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.downstairs_hallway_automatic_lights_duration
-            name: Duration
+      - type: custom:mushroom-entity-card
+        entity: input_number.downstairs_hallway_automatic_lights_duration
+        name: Automatic lights duration
 
-          - type: conditional
-            conditions:
-              - entity: timer.downstairs_hallway_automatic_lights
-                state_not: idle
-            row:
-              entity: timer.downstairs_hallway_automatic_lights
-              name: Automatic duration
+      - type: conditional
+        conditions:
+          - entity: timer.downstairs_hallway_automatic_lights
+            state_not: idle
+        card:
+          type: custom:mushroom-entity-card
+          entity: timer.downstairs_hallway_automatic_lights
+          name: Automatic lights timer
 
-          - entity: input_boolean.downstairs_hallway_lights_manual_mode
-            name: Manual mode
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.downstairs_hallway_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle
 
   #################################################
   #              Upstairs Hallway                 #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Upstairs Hallway
     view_layout:
       grid-area: upstairs_hallway
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: binary_sensor.upstairs_hallway_automatic_lights
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.upstairs_hallway_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.upstairs_hallway_automatic_lights_duration
-            name: Duration
+      - type: custom:mushroom-entity-card
+        entity: input_number.upstairs_hallway_automatic_lights_duration
+        name: Automatic lights duration
 
-          - type: conditional
-            conditions:
-              - entity: timer.upstairs_hallway_automatic_lights
-                state_not: idle
-            row:
-              entity: timer.upstairs_hallway_automatic_lights
-              name: Automatic duration
+      - type: conditional
+        conditions:
+          - entity: timer.upstairs_hallway_automatic_lights
+            state_not: idle
+        card:
+          type: custom:mushroom-entity-card
+          entity: timer.upstairs_hallway_automatic_lights
+          name: Automatic lights timer
 
-          - entity: input_boolean.upstairs_hallway_lights_manual_mode
-            name: Manual mode
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.upstairs_hallway_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle
 
   #################################################
   #                Attic hallway                  #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Attic hallway
     view_layout:
       grid-area: attic_hallway
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: binary_sensor.attic_hallway_automatic_lights
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.attic_hallway_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.attic_hallway_automatic_lights_duration
-            name: Duration
+      - type: custom:mushroom-entity-card
+        entity: input_number.attic_hallway_automatic_lights_duration
+        name: Automatic lights duration
 
-          - type: conditional
-            conditions:
-              - entity: timer.attic_hallway_automatic_lights
-                state_not: idle
-            row:
-              entity: timer.attic_hallway_automatic_lights
-              name: Automatic duration
+      - type: conditional
+        conditions:
+          - entity: timer.attic_hallway_automatic_lights
+            state_not: idle
+        card:
+          type: custom:mushroom-entity-card
+          entity: timer.attic_hallway_automatic_lights
+          name: Automatic lights timer
 
-          - entity: input_boolean.attic_hallway_lights_manual_mode
-            name: Manual mode
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.attic_hallway_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle
 
   #################################################
   #                 Attic office                  #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Attic office
     view_layout:
       grid-area: attic
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: input_select.attic_office_lights_scene
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: input_select.attic_office_lights_scene
             name: Scene
 
-          - entity: binary_sensor.attic_office_automatic_lights
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.attic_office_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.attic_office_automatic_lights_duration
-            name: Duration
+      - type: custom:mushroom-entity-card
+        entity: input_number.attic_office_automatic_lights_duration
+        name: Automatic lights duration
 
-          - type: conditional
-            conditions:
-              - entity: timer.attic_office_automatic_lights
-                state_not: idle
-            row:
-              entity: timer.attic_office_automatic_lights
-              name: Automatic duration
+      - type: conditional
+        conditions:
+          - entity: timer.attic_office_automatic_lights
+            state_not: idle
+        card:
+          type: custom:mushroom-entity-card
+          entity: timer.attic_office_automatic_lights
+          name: Automatic lights timer
 
-          - entity: input_boolean.attic_office_lights_manual_mode
-            name: Manual mode
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.attic_office_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle
 
   #################################################
   #                  Backyard                     #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Backyard
     view_layout:
       grid-area: backyard
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: binary_sensor.backyard_automatic_lights
-            name: Automatic lights?
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.backyard_automatic_lights
+        name: Automatic lights?
 
-          - entity: input_boolean.backyard_lights_manual_mode
-            name: Manual mode
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.backyard_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle
 
   #################################################
   #                 Driveway                      #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Driveway
     view_layout:
       grid-area: driveway
-    columns: 1
-    square: false
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: binary_sensor.driveway_automatic_lights
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.driveway_automatic_lights
             name: Automatic lights?
 
-          - entity: input_number.driveway_automatic_lights_duration
-            name: Duration
+      - type: custom:mushroom-entity-card
+        entity: input_number.driveway_automatic_lights_duration
+        name: Automatic lights duration
 
-          - type: conditional
-            conditions:
-              - entity: timer.driveway_automatic_lights
-                state_not: idle
-            row:
-              entity: timer.driveway_automatic_lights
-              name: Automatic duration
+      - type: conditional
+        conditions:
+          - entity: timer.driveway_automatic_lights
+            state_not: idle
+        card:
+          type: custom:mushroom-entity-card
+          entity: timer.driveway_automatic_lights
+          name: Automatic lights timer
 
-          - entity: input_boolean.driveway_lights_manual_mode
-            name: Manual mode
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.driveway_lights_manual_mode
+        name: Manual mode
+        tap_action:
+          action: toggle

@@ -3,9 +3,11 @@ id: home_guest_mode_automatic_off
 alias: Home - Guest mode automatic off
 trigger:
   - platform: state
-    entity_id: binary_sensor.house_presence
-    from: 'off'
-    to: 'on'
+    entity_id: person.bernd
+    to: 'home'
+  - platform: state
+    entity_id: person.man_yie
+    to: 'home'
 
 action:
   - service: input_boolean.turn_off

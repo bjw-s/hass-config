@@ -20,11 +20,10 @@ variables:
   label: "{{ trigger.payload_json['after']['label'] }}"
 
 condition:
-  - condition: or
-    conditions:
-      - "{{ type != 'end' }}"
+  - condition: template
+    value_template: "{{ type != 'end' }}"
 
-action: 
+action:
   - service: python_script.set_state
     data:
       entity_id: "sensor.frigate_{{ camera }}_event"

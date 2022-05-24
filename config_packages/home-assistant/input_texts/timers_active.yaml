@@ -1,4 +1,0 @@
----
-hass_timers_active:
-  name: Active Timers
-  max: 255

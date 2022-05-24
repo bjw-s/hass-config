@@ -8,8 +8,7 @@ trigger:
     entity_id: binary_sensor.driveway_is_dusk
     to: 'off'
 condition:
-  condition: and
-  conditions:
+  and:
     - condition: state
       entity_id: binary_sensor.backyard_automatic_lights
       state: 'on'

@@ -23,5 +23,6 @@ script: !include_dir_merge_named scripts
 sensor: !include_dir_list entities/sensors
 shell_command: !include_dir_merge_named shell_commands
 switch: !include_dir_list entities/switches
+template: !include_dir_list entities/templates
 timer: !include_dir_merge_named entities/timers
 zone: !include_dir_merge_list zones

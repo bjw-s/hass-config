@@ -4,16 +4,14 @@ alias: Home - Alarm - Arm Away automatically
 trigger:
   - platform: state
     entity_id: input_boolean.home_modes_away_mode
-    to: 'on'
+    to: "on"
 
 condition:
-  condition: and
-  conditions:
-    - condition: state
-      entity_id: alarm_control_panel.house
-      state: 'disarmed'
+  - condition: state
+    entity_id: alarm_control_panel.house
+    state: "disarmed"
 
-action: 
+action:
   - alias: Arm alarm
     service: alarm_control_panel.alarm_arm_away
     data:

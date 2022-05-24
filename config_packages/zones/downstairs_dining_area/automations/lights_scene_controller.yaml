@@ -66,18 +66,15 @@ action:
 
       # Turn on automatically to a specific scene
       - conditions:
-          - condition: and
-            conditions:
+          - and:
               - condition: state
                 entity_id: binary_sensor.downstairs_dining_area_automatic_lights
                 state: "on"
               - condition: state
                 entity_id: binary_sensor.downstairs_dining_area_is_dark
                 state: "on"
-              - condition: or
-                conditions:
-                  - condition: and
-                    conditions:
+              - or:
+                  - and:
                       - condition: trigger
                         id: downstairs_dining_area_is_dark
                       - condition: state
@@ -91,8 +88,7 @@ action:
           - choose:
               # Only set these scenes in the evening
               - conditions:
-                  - condition: or
-                    conditions:
+                  - or:
                       - alias: "Late evening"
                         condition: state
                         entity_id: sensor.system_time_of_day
@@ -134,19 +130,16 @@ action:
 
       # Select "off" scene
       - conditions:
-          - condition: or
-            conditions:
+          - or:
               # Turned off manually
               - condition: trigger
                 id: downstairs_dining_area_switch_bottom
               # Turn off automatically
-              - condition: and
-                conditions:
+              - and:
                   - condition: state
                     entity_id: binary_sensor.downstairs_dining_area_automatic_lights
                     state: "on"
-                  - condition: or
-                    conditions:
+                  - or:
                       - condition: trigger
                         id: downstairs_no_presence_for_30_min
                       - condition: trigger

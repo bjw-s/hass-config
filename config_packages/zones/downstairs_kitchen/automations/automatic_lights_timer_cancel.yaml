@@ -9,11 +9,9 @@
 #     entity_id: binary_sensor.downstairs_kitchen_automatic_lights
 #     to: 'off'
 # condition:
-#   condition: and
-#   conditions:
-#     - condition: state
-#       entity_id: timer.downstairs_kitchen_automatic_lights
-#       state: 'active'
+#   - condition: state
+#     entity_id: timer.downstairs_kitchen_automatic_lights
+#     state: 'active'
 # action:
 #   - service: timer.cancel
 #     data:

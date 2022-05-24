@@ -7,14 +7,12 @@ trigger:
     at: "20:00"
 
 condition:
-  condition: and
-  conditions:
+  and:
     - condition: state
       entity_id: input_boolean.trash_outside
       state: 'off'
-    
-    - condition: not
-      conditions:
+
+    - not:
         - condition: state
           entity_id: sensor.afvalwijzer_tomorrow
           state: 'Geen'

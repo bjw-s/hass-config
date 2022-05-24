@@ -7,8 +7,7 @@ trigger:
     event_data:
       entity_id: timer.attic_hallway_automatic_lights
 condition:
-  condition: and
-  conditions:
+  and:
     - condition: state
       entity_id: binary_sensor.attic_hallway_automatic_lights
       state: 'on'

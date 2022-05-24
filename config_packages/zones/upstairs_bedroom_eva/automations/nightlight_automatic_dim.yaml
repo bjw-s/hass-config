@@ -7,11 +7,9 @@ trigger:
     entity_id: light.upstairs_bedroom_eva_nightlight
     to: 'on'
 condition:
-  condition: and
-  conditions:
-    - condition: time
-      after: "18:30:00"
-      before: "07:00:00"
+  - condition: time
+    after: "18:30:00"
+    before: "07:00:00"
 action:
   - service: scene.turn_on
     data:

@@ -1,52 +1,67 @@
 ---
 id: upstairs_bedroom_nightstand_manyie_set_dimlevel
 alias: Upstairs Bedroom - Nightstand ManYie set dimlevel
+mode: restart
 trigger:
   - platform: device
     domain: mqtt
-    device_id: 16ddfbe0fa5d3d2f9839f22c06427b62
+    device_id: c2335c6b1dea91ea2cba80e7312e7f4a
     type: action
-    subtype: brightness_up_click
-    discovery_id: 0x90fd9ffffe9096ea action_brightness_up_click
+    subtype: brightness_move_up
+    discovery_id: 0x84ba20fffe54b545 action_brightness_move_up
+    id: "brightness_up"
   - platform: device
     domain: mqtt
-    device_id: 16ddfbe0fa5d3d2f9839f22c06427b62
+    device_id: c2335c6b1dea91ea2cba80e7312e7f4a
     type: action
-    subtype: brightness_down_click
-    discovery_id: 0x90fd9ffffe9096ea action_brightness_down_click
+    subtype: brightness_move_down
+    discovery_id: 0x84ba20fffe54b545 action_brightness_move_down
+    id: "brightness_down"
+  - platform: device
+    domain: mqtt
+    device_id: c2335c6b1dea91ea2cba80e7312e7f4a
+    type: action
+    subtype: brightness_stop
+    discovery_id: 0x84ba20fffe54b545 action_brightness_stop
+    id: "brightness_stop"
+
 variables:
   target: light.upstairs_bedroom_nightstand_manyie
   min_brightness: 0
   max_brightness: 254
   percentage: |
-    {% if trigger.payload == 'brightness_up_click' -%}
-      5
+    {% if trigger.id == 'brightness_up' -%}
+      10
     {%- else -%}
-      -5
+      -10
     {%- endif %}
-action:
-  - choose:
-    - conditions:
-      - condition: template
-        value_template: |
-          {{ is_state(target, 'off') }}
-      sequence:
-        - scene: scene.upstairs_bedroom_lights_nightstand_manyie_dimmed
-    - conditions:
-      - condition: template
-        value_template: |
-          {{ is_state(target, 'on') }}
-      - condition: template
-        value_template: |
-          {{ ((state_attr(target, 'brightness')/max_brightness * 100) | int ) + (percentage | int) > min_brightness }}
-      - condition: template
-        value_template: |
-          {{ ((state_attr(target, 'brightness')/max_brightness * 100) | int ) + (percentage | int) <= max_brightness }}
-      sequence:
-        - service: light.turn_on
-          data:
-            entity_id: "{{ target }}"
-            brightness_step_pct: "{{ percentage }}"
 
-    # Default
-    default: []
+action:
+  - alias: "choose brightness direction based on trigger"
+    choose:
+      - conditions:
+          - or:
+              - condition: trigger
+                id: brightness_up
+              - condition: trigger
+                id: brightness_down
+        sequence:
+          - repeat:
+              until:
+                - or:
+                    - condition: trigger
+                      id: "brightness_stop"
+                    - condition: template
+                      value_template: |
+                        {{ ((state_attr(target, 'brightness')/max_brightness * 100) | int ) + (percentage | int) <= min_brightness }}
+                    - condition: template
+                      value_template: |
+                        {{ ((state_attr(target, 'brightness')/max_brightness * 100) | int ) + (percentage | int) > max_brightness }}
+              sequence:
+                - service: light.turn_on
+                  target:
+                    entity_id: "{{ target }}"
+                  data:
+                    brightness_step_pct: "{{ percentage }}"
+                    transition: 1
+                - delay: "1"

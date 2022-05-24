@@ -1,0 +1,8 @@
+---
+# The Backup integration allow you to create and download backups for your
+# Home Assistant Core and Home Assistant Container installations.
+#
+# https://www.home-assistant.io/integrations/backup/
+#
+
+backup:

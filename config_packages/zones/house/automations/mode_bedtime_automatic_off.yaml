@@ -7,8 +7,7 @@ trigger:
     to: "on"
 
 condition:
-  condition: and
-  conditions:
+  and:
     - alias: "Bedtime mode should be on"
       condition: state
       entity_id: input_boolean.home_modes_bedtime_mode

@@ -1,4 +1,0 @@
----
-hass_timers_paused:
-  name: Paused Timers
-  max: 255

@@ -4,13 +4,11 @@ alias: Upstairs Hallway - Automatic lights timer start
 trigger:
   - platform: state
     entity_id: light.upstairs_hallway
-    to: 'on'
+    to: "on"
 condition:
-  condition: and
-  conditions:
-    - condition: state
-      entity_id: binary_sensor.upstairs_hallway_automatic_lights
-      state: 'on'
+  - condition: state
+    entity_id: binary_sensor.upstairs_hallway_automatic_lights
+    state: "on"
 action:
   - service: timer.start
     data:

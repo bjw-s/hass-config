@@ -4,20 +4,19 @@ alias: Downstairs living room - Vacuum runs when away
 trigger:
   - platform: state
     entity_id: input_boolean.home_modes_away_mode
-    from: 'off'
-    to: 'on'
+    from: "off"
+    to: "on"
 condition:
-  condition: and
-  conditions:
+  and:
     - condition: state
       entity_id: input_boolean.downstairs_living_room_vacuum_ran_today
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: vacuum.valetudo_livingroom
-      state: 'docked'
+      state: "docked"
     - condition: state
       entity_id: input_boolean.downstairs_vacuum_automatic_cleaning_active
-      state:  'on'
+      state: "on"
 action:
   - service: script.turn_on
     data:

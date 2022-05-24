@@ -1,0 +1,22 @@
+---
+trigger:
+  - id: media_playing
+    platform: state
+    entity_id: media_player.downstairs_living_room_nvidia_shield
+    to: playing
+
+  - id: media_not_playing
+    platform: state
+    entity_id: media_player.downstairs_living_room_nvidia_shield
+    from: playing
+    for: "00:00:15"
+
+  - id: media_playing
+    platform: state
+    entity_id: sensor.downstairs_living_room_current_harmony_activity
+    to: Play Switch
+
+binary_sensor:
+  - name: "Downstairs - Living room - Media playing"
+    state: >
+      {{ trigger.id == 'media_playing' }}

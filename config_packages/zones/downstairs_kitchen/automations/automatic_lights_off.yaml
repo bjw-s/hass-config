@@ -7,8 +7,7 @@
 #     event_data:
 #       entity_id: timer.downstairs_kitchen_automatic_lights
 # condition:
-#   condition: and
-#   conditions:
+#   and:
 #     - condition: state
 #       entity_id: binary_sensor.downstairs_kitchen_automatic_lights
 #       state: 'on'
@@ -27,7 +26,7 @@
 #           data:
 #             entity_id: scene.downstairs_kitchen_lights_off
 #             transition: 2
-    
+
 #     # Motion still detected, restart the timer
 #     - conditions:
 #         - condition: state
@@ -37,4 +36,3 @@
 #         - service: automation.trigger
 #           data:
 #             entity_id: automation.downstairs_kitchen_automatic_lights_timer_re_start
-      
