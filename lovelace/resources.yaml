@@ -4,9 +4,6 @@
 - url: /hacsfiles/button-card/button-card.js
   type: module
 
-- url: /hacsfiles/kiosk-mode/kiosk-mode.js
-  type: module
-
 - url: /hacsfiles/lovelace-layout-card/layout-card.js
   type: module
 
@@ -35,6 +32,9 @@
   type: module
 
 - url: /hacsfiles/lovelace-mushroom/mushroom.js
+  type: module
+
+- url: /local/js/kiosk-mode.js?v=1.7.2
   type: module
 
 - url: /local/css/font.css
