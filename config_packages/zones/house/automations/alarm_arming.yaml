@@ -7,10 +7,11 @@ trigger:
     to: 'arming'
 
 action:
-  # Warning beep wall panels
-  - event: wallpanels_publish_payload
-    event_data:
-      payload: |
-        {
-          "audio": "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-warning.mp3"
-        }
+  - alias: "Warning beep on tablets"
+    service: fullykiosk.play_audio
+    entity_id:
+      - media_player.downstairs_hallway_tablet_media_player
+      - media_player.downstairs_garage_tablet_media_player
+    data:
+      url: "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-warning.mp3"
+      stream: 1

@@ -14,9 +14,9 @@ action:
         - tablet-hallway
         - tablet-garage
 
-  - service: switch.turn_off
+  - service: siren.turn_off
     data:
-      entity_id: switch.upstairs_hallway_siren
+      entity_id: siren.upstairs_hallway_siren
 
   # OK beep
   - choose:
@@ -26,9 +26,11 @@ action:
           entity_id: input_boolean.home_modes_bedtime_mode
           state:  'off'
       sequence:
-        - event: wallpanels_publish_payload
-          event_data:
-            payload: |
-              {
-                "audio": "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-ok.mp3"
-              }
+        - alias: "OK beep on tablets"
+          service: fullykiosk.play_audio
+          entity_id:
+            - media_player.downstairs_hallway_tablet_media_player
+            - media_player.downstairs_garage_tablet_media_player
+          data:
+            url: "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-ok.mp3"
+            stream: 1

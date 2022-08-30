@@ -1,0 +1,25 @@
+---
+name : WlanThermo Channel 3
+device_class: temperature
+unit_of_measurement: "°C"
+state_topic: "WLanThermo/NANO-c1cec8/status/data"
+value_template: >
+  {% set channel_id = 2 %}
+  {%- if value_json.channel[channel_id].temp == 999.0 -%}
+    unavailable
+  {%- else -%}
+    {{ value_json.channel[channel_id].temp | float(0) }}
+  {%- endif -%}
+json_attributes_topic: "WLanThermo/NANO-c1cec8/status/data"
+json_attributes_template: >
+  {% set channel_id = 2 %}
+  {{-
+    {
+      'min': value_json.channel[channel_id].min | float(0),
+      'max': value_json.channel[channel_id].max | float(0),
+      'alarm': value_json.channel[channel_id].alarm,
+      'type': value_json.channel[channel_id].typ
+    } | tojson
+  -}}
+expire_after: 60
+unique_id: wlanthermo_channel_3

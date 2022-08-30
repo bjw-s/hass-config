@@ -82,7 +82,7 @@ cards:
         view_layout:
           grid-area: header
         template: header
-        name: Octoprint
+        name: 3D Printer
 
       - type: picture-entity
         view_layout:
@@ -99,55 +99,56 @@ cards:
         entities:
           - type: 'custom:restriction-card'
             card:
-              entity: switch.attic_office_3d_printer_power_switch
+              entity: switch.attic_office_3d_printer_power
               name: Printer power
             restrictions:
               block: true
             condition:
-              entity: binary_sensor.attic_office_3d_printer_lock_power
-              value: 'on'
+              or:
+                entity: sensor.attic_office_3d_printer_print_state
+                value: 'printing'
             row: true
             icon: mdi:power
-          - entity: automation.attic_office_3d_printer_automatic_off
-            name: Automatic power off
-            icon: mdi:power
+          # - entity: automation.attic_office_3d_printer_automatic_off
+          #   name: Automatic power off
+          #   icon: mdi:power
           - entity: input_boolean.attic_office_3d_printer_notifications
             name: Notifications
             icon: mdi:bell
-          - entity: sensor.attic_office_3d_printer_state
-            name: Printer state
+          - entity: sensor.attic_office_3d_printer_print_state
+            name: Print state
           - type: conditional
             conditions:
-              - entity: sensor.attic_office_3d_printer_state
+              - entity: sensor.attic_office_3d_printer_print_state
                 state: "printing"
             row:
-              entity: sensor.attic_office_3d_printer_current_progress
+              entity: sensor.attic_office_3d_printer_print_progress
               name: Print job percentage
               icon: mdi:progress-clock
           - type: conditional
             conditions:
-              - entity: sensor.attic_office_3d_printer_state
+              - entity: sensor.attic_office_3d_printer_print_state
                 state: "printing"
             row:
               entity: sensor.attic_office_3d_printer_eta_formatted
               name: ETA
-          - entity: sensor.attic_office_3d_printer_bed_actual
+          - entity: sensor.attic_office_3d_printer_heated_bed_temperature
             name: Bed temperature
           - type: conditional
             conditions:
-              - entity: sensor.attic_office_3d_printer_bed_target
+              - entity: sensor.attic_office_3d_printer_heated_bed_temperature_target
                 state_not: "0.0"
             row:
-              entity: sensor.attic_office_3d_printer_bed_target
+              entity: sensor.attic_office_3d_printer_heated_bed_temperature_target
               name: Target bed temperature
-          - entity: sensor.attic_office_3d_printer_hotend_actual
+          - entity: sensor.attic_office_3d_printer_extruder_temperature
             name: Hotend temperature
           - type: conditional
             conditions:
-              - entity: sensor.attic_office_3d_printer_hotend_target
+              - entity: sensor.attic_office_3d_printer_extruder_temperature_target
                 state_not: "0.0"
             row:
-              entity: sensor.attic_office_3d_printer_hotend_target
+              entity: sensor.attic_office_3d_printer_extruder_temperature_target
               name: Target hotend temperature
 
   - type: 'custom:layout-card'

@@ -3,24 +3,24 @@ id: downstairs_hallway_tablet_turn_on
 alias: Downstairs hallway - Tablet turn on
 max_exceeded: silent
 trigger:
-  - platform: state
+  - id: hallway_presence
+    platform: state
     entity_id: binary_sensor.downstairs_living_room_door_contact
     to: 'on'
-  - platform: state
+  - id: hallway_presence
+    platform: state
     entity_id: binary_sensor.downstairs_hallway_front_door_contact
     to: 'on'
-  - platform: state
+  - id: hallway_presence
+    platform: state
     entity_id: binary_sensor.downstairs_hallway_motion
     to: 'on'
-  - platform: state
+  - id: returned_home
+    platform: state
     entity_id: input_boolean.home_modes_away_mode
     from: 'on'
     to: 'off'
 action:
-  - service: mqtt.publish
-    data_template:
-      topic: wallpanel/hallway/command
-      payload: |
-        {
-          "wake": true
-        }
+  - alias: "Wake up hallway tablet"
+    service: switch.turn_off
+    entity_id: switch.downstairs_hallway_tablet_screensaver

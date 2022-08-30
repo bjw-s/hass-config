@@ -8,12 +8,19 @@ trigger:
 
 action:
   - alias: "Alert beep on tablets"
-    event: wallpanels_publish_payload
-    event_data:
-      payload: |
-        {
-          "audio": "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-alarm.mp3"
-        }
+    service: fullykiosk.play_audio
+    entity_id:
+      - media_player.downstairs_hallway_tablet_media_player
+      - media_player.downstairs_garage_tablet_media_player
+    data:
+      url: "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-alarm.mp3"
+      stream: 1
+
+  - alias: "Wake up tablets"
+    service: switch.turn_off
+    entity_id:
+      - switch.downstairs_hallway_tablet_screensaver
+      - switch.downstairs_garage_tablet_screensaver
 
   - alias: "Show alarm popup on tablets"
     service: browser_mod.popup
@@ -27,11 +34,3 @@ action:
         type: 'custom:alarmo-card'
         entity: alarm_control_panel.house
         keep_keypad_visible: true
-
-  - alias: "Wake up tablets"
-    event: wallpanels_publish_payload
-    event_data:
-      payload: |
-        {
-          "wake": true
-        }

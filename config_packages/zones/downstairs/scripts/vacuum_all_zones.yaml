@@ -22,4 +22,3 @@ vacuum_downstairs:
           "iterations": 1,
           "customOrder": true
         }
-  mode: single

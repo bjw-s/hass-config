@@ -38,19 +38,19 @@ action:
               entity_id: switch.downstairs_kitchen_coffee_maker_power
 
   # Turn on Sonos
-  - service: sonos.join
+  - service: media_player.join
     data:
-      entity_id: media_player.downstairs_living_room_sonos
-      master: media_player.downstairs_kitchen_sonos
+      entity_id: media_player.downstairs_kitchen_sonos
+      group_members:
+        media_player.downstairs_living_room_sonos
   - service: media_player.volume_set
     data:
       entity_id:
         - media_player.downstairs_living_room_sonos
         - media_player.downstairs_kitchen_sonos
       volume_level: 0.04
-  - service: media_player.play_media
+  - service: media_player.select_source
     data:
       entity_id:
         - media_player.downstairs_kitchen_sonos
-      media_content_type: music
-      media_content_id: "x-rincon-mp3radio://http://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3"
+      source: Qmusic

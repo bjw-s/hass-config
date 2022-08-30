@@ -50,21 +50,65 @@ cards:
     view_layout:
       grid-area: living_area
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: entity
             entity: input_select.downstairs_living_room_lights_scene
-            name: Scene
+            tap_action:
+              action: call-service
+              service: input_select.select_next
+              target:
+                entity_id: input_select.downstairs_living_room_lights_scene
+            hold_action:
+              action: call-service
+              service: input_select.select_option
+              service_data:
+                option: 'Off'
+              target:
+                entity_id: input_select.downstairs_living_room_lights_scene
 
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.downstairs_living_room_automatic_lights
-            name: Automatic lights?
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.downstairs_living_room_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.downstairs_living_room_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.downstairs_living_room_lights_manual_mode
 
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.downstairs_living_room_lights_manual_mode
-        name: Manual mode
-        tap_action:
-          action: toggle
+      - type: custom:mushroom-light-card
+        entity: light.downstairs_living_room_floor_lamp
+        name: Floor lamp
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_control: true
+
+      - type: custom:mushroom-light-card
+        entity: light.downstairs_living_room_speaker_right
+        name: Speaker right
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_control: true
+
+      - type: custom:mushroom-light-card
+        entity: light.downstairs_living_room_hue_go
+        name: Hue Go
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_control: true
 
   #################################################
   #                 Downstairs dining area                   #
@@ -75,21 +119,47 @@ cards:
     view_layout:
       grid-area: downstairs_dining_area
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: entity
             entity: input_select.downstairs_dining_area_lights_scene
-            name: Scene
+            tap_action:
+              action: call-service
+              service: input_select.select_next
+              target:
+                entity_id: input_select.downstairs_dining_area_lights_scene
+            hold_action:
+              action: call-service
+              service: input_select.select_option
+              service_data:
+                option: 'Off'
+              target:
+                entity_id: input_select.downstairs_dining_area_lights_scene
 
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.downstairs_dining_area_automatic_lights
-            name: Automatic lights?
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.downstairs_dining_area_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.downstairs_dining_area_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.downstairs_dining_area_lights_manual_mode
 
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.downstairs_dining_area_lights_manual_mode
-        name: Manual mode
-        tap_action:
-          action: toggle
+      - type: custom:mushroom-light-card
+        entity: light.downstairs_dining_area_ceiling
+        name: Ceiling
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_temperature_control: true
 
   #################################################
   #                   Downstairs Kitchen                     #
@@ -138,34 +208,52 @@ cards:
     view_layout:
       grid-area: downstairs_hallway
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: entity
             entity: input_select.downstairs_hallway_lights_scene
-            name: Scene
+            tap_action:
+              action: call-service
+              service: input_select.select_next
+              target:
+                entity_id: input_select.downstairs_hallway_lights_scene
+            hold_action:
+              action: call-service
+              service: input_select.select_option
+              service_data:
+                option: 'Off'
+              target:
+                entity_id: input_select.downstairs_hallway_lights_scene
 
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.downstairs_hallway_automatic_lights
-            name: Automatic lights?
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.downstairs_hallway_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.downstairs_hallway_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.downstairs_hallway_lights_manual_mode
 
-      - type: custom:mushroom-entity-card
-        entity: input_number.downstairs_hallway_automatic_lights_duration
-        name: Automatic lights duration
+          - type: entity
+            entity: input_number.downstairs_hallway_automatic_lights_duration
 
-      - type: conditional
-        conditions:
-          - entity: timer.downstairs_hallway_automatic_lights
-            state_not: idle
-        card:
-          type: custom:mushroom-entity-card
-          entity: timer.downstairs_hallway_automatic_lights
-          name: Automatic lights timer
+          - type: entity
+            entity: timer.downstairs_hallway_automatic_lights
 
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.downstairs_hallway_lights_manual_mode
-        name: Manual mode
-        tap_action:
-          action: toggle
+      - type: custom:mushroom-light-card
+        entity: light.downstairs_hallway_ceiling
+        name: Ceiling
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
 
   #################################################
   #              Upstairs Hallway                 #

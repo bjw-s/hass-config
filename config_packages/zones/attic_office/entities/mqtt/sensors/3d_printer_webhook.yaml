@@ -1,0 +1,34 @@
+---
+name : attic_office_3d_printer_webhook
+unique_id: attic_office_3d_printer_webhook
+state_topic: ender3s1/klipper/status
+value_template: |-
+  {% set default_value = states('sensor.attic_office_3d_printer_webhook') %}
+  {% if 'webhook' in value_json['status']  %}
+    {% if 'state' in value_json['status']['webhook'] %}
+      {{ value_json['status']['webhook']['state'] }}
+    {% else %}
+      {{ default_value }}
+    {% endif %}
+  {% else %}
+    {{ default_value }}
+  {% endif %}
+json_attributes_topic: ender3s1/klipper/status
+json_attributes_template: |-
+  {% set default_attributes = {'state_message': ''} %}
+  {% if 'webhook' in value_json['status']  %}
+    {% if 'state_message' in value_json['status']['webhook'] %}
+      {{ {'state_message': value_json['status']['print_stats']['state_message'] } | tojson }}
+    {% else %}
+      {{ default_attributes | tojson }}
+    {% endif %}
+  {% else %}
+      {{ default_attributes | tojson }}
+  {% endif %}
+availability_topic: ender3s1/klipper/status
+availability_template: |-
+  {% if 'status' in value_json %}
+    online
+  {% else %}
+    offline
+  {% endif %}

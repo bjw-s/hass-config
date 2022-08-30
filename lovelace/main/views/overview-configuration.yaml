@@ -6,69 +6,63 @@ badges: []
 type: 'custom:grid-layout'
 layout:
   #default
-  grid-gap: var(--custom-layout-card-padding)
+  grid-column-gap: var(--custom-layout-card-padding)
   grid-template-columns: 0 repeat(3, 1fr) 0
-  grid-template-rows: 6vh repeat(1, fit-content(100%)) 0fr
+  grid-template-rows: auto
 
   grid-template-areas: |
-    "header  header         header       header     header"
     ".       low_batteries  .            .          ."
-    ".       .            .            .          ."
 
   mediaquery:
     #phone
     "(max-width: 800px)":
-      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
       grid-template-columns: 0 repeat(1, 1fr) 0
-      grid-template-rows: 8vh repeat(7, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header         header"      
         ".       low_batteries  ."
         ".       .              ."
 
     #tablet portrait
     "(max-width: 1000px)":
-      grid-gap: calc(var(--custom-layout-card-padding))
       grid-template-columns: 0 repeat(2, 1fr) 0
-      grid-template-rows: 6vh repeat(4, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header         header       header"
         ".       low_batteries  .            ."
-        ".       .              .            ."
 cards:
-  #################################################
-  #                    Header                     #
-  #################################################
-
-  - type: markdown
-    view_layout:
-      grid-area: header
-    content: |
-      # Other stuff
-
   #################################################
   #                  Low batteries                #
   #################################################
-  - type: grid
-    title: Low batteries
+  - type: custom:auto-entities
     view_layout:
       grid-area: low_batteries
-    columns: 1
-    square: false
-    cards:
-      - type: 'custom:auto-entities'
-        card:
-          show_header_toggle: false
-          type: entities
-        show_empty: true
-        unique: true
-        filter:
-          exclude:
-            - attributes:
-                battery_report: false
-          include:
-            - entity_id: '/.*_battery(_level)?$/'
-              options:
-                icon: 'mdi:battery-alert'
-                secondary_info: last-changed
-              state: <= 30
+    show_empty: true
+    unique: true
+    card:
+      type: vertical-stack
+      title: Low batteries
+    card_param: cards
+    filter:
+      exclude:
+        - attributes:
+            battery_report: false
+      include:
+        - entity_id: '/.*_battery(_level)?$/'
+          state: <= 30
+          options:
+            type: custom:mushroom-template-card
+            entity_id: this.entity_id
+            primary: |
+              {{ state_attr('this.entity_id', 'friendly_name') }}
+            secondary: |
+              {{ states('this.entity_id') }} %
+            icon: |
+              {% if state_attr('this.entity_id', 'icon') %}
+                {{ state_attr('this.entity_id', 'icon') }}
+              {% else %}
+                {% set percentage = states('this.entity_id') | round(-1) | round %}
+                mdi:battery-{{percentage}}
+              {% endif %}
+            icon_color: |
+              {% if (states('this.entity_id') | int) <= 15 %}
+                red
+              {% else %}
+                orange
+              {% endif %}

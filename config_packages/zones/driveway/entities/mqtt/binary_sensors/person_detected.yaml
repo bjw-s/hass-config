@@ -1,0 +1,5 @@
+---
+name: driveway_person_detected
+state_topic: "frigate/frontdoor/person"
+device_class: motion
+availability_topic: "frigate/available"

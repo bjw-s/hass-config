@@ -1,0 +1,12 @@
+---
+name: Upstairs Hallway
+
+state_topic: "zigbee2mqtt/Upstairs Hallway - Siren/set"
+availability_topic: "zigbee2mqtt/bridge/state"
+
+command_topic: "zigbee2mqtt/Upstairs Hallway - Siren/set"
+command_template: "{{ value }}"
+payload_off: '{"warning": {"duration": 0, "mode": "stop", "strobe": false}}'
+payload_on: '{"warning": {"duration": 1800, "mode": "emergency", "strobe": true}}'
+
+unique_id: "0x000d6f00110885df_siren_zigbee2mqtt"

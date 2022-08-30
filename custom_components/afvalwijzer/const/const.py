@@ -3,7 +3,7 @@ import logging
 
 API = "api"
 NAME = "afvalwijzer"
-VERSION = "2022.05.03"
+VERSION = "2022.06.02"
 ISSUE_URL = "https://github.com/xirixiz/homeassistant-afvalwijzer/issues"
 
 _LOGGER = logging.getLogger(__name__)
@@ -84,6 +84,8 @@ SENSOR_COLLECTORS_XIMMIO = {
     "ximmio": "800bf8d7-6dd1-4490-ba9d-b419d6dc8a45",
     "reinis": "9dc25c8a-175a-4a41-b7a1-83f237a80b77",
 }
+
+SENSOR_COLLECTOR_RD4 = "rd4"
 
 CONF_COLLECTOR = "provider"
 CONF_API_TOKEN = "api_token"

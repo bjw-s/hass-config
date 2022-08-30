@@ -1,29 +1,29 @@
----
-id: home_trash_outside_notification_tomorrow
-alias: Home - Trash outside notification tomorrow
-mode: single
-trigger:
-  - platform: time
-    at: "20:00"
+# ---
+# id: home_trash_outside_notification_tomorrow
+# alias: Home - Trash outside notification tomorrow
+# mode: single
+# trigger:
+#   - platform: time
+#     at: "20:00"
 
-condition:
-  and:
-    - condition: state
-      entity_id: input_boolean.trash_outside
-      state: 'off'
+# condition:
+#   and:
+#     - condition: state
+#       entity_id: input_boolean.trash_outside
+#       state: 'off'
 
-    - not:
-        - condition: state
-          entity_id: sensor.afvalwijzer_tomorrow
-          state: 'Geen'
+#     - not:
+#         - condition: state
+#           entity_id: sensor.afvalwijzer_tomorrow
+#           state: 'Geen'
 
-action:
-  - service: notify.slack_bot
-    data:
-      message: "♻️ Remember to take out the trash!"
-      data:
-        blocks:
-          - type: section
-            text:
-              type: mrkdwn
-              text: "♻️ Remember: trash type(s) *{{ states('sensor.afvalwijzer_tomorrow') }}* will be picked up tomorrow!"
+# action:
+#   - service: notify.slack_bot
+#     data:
+#       message: "♻️ Remember to take out the trash!"
+#       data:
+#         blocks:
+#           - type: section
+#             text:
+#               type: mrkdwn
+#               text: "♻️ Remember: trash type(s) *{{ states('sensor.afvalwijzer_tomorrow') }}* will be picked up tomorrow!"

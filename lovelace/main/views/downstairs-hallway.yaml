@@ -1,121 +1,136 @@
 title: Hallway
-icon: 'mdi:floor-plan'
+icon: "mdi:floor-plan"
 id: hallway
 path: hallway
 badges: []
-type: 'custom:grid-layout'
+type: "custom:grid-layout"
 layout:
   #default
-  grid-gap: var(--custom-layout-card-padding)
+  grid-column-gap: var(--custom-layout-card-padding)
   grid-template-columns: 0 repeat(3, 1fr) 0
-  grid-template-rows: 6vh repeat(2, fit-content(100%)) 0fr
+  grid-template-rows: auto
 
   grid-template-areas: |
-    "header   header   header   header   header"
-    ".        status   devices  .        ."
-    ".        lights   .        .        ."
-    ".        .        .        .        ."
+    ". status    devices   lights ."
 
   mediaquery:
     #phone
     "(max-width: 800px)":
-      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
       grid-template-columns: 0 repeat(1, 1fr) 0
-      grid-template-rows: 8vh repeat(3, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header      header"
-        ".       status      ."
-        ".       devices     ."
-        ".       lights      ."
-        ".       .           ."
+        ".       status    ."
+        ".       devices   ."
+        ".       lights    ."
 
     #tablet portrait
     "(max-width: 1000px)":
-      grid-gap: calc(var(--custom-layout-card-padding) * 1.8)
       grid-template-columns: 0 repeat(2, 1fr) 0
-      grid-template-rows: 6vh repeat(2, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header    header   header"
-        ".       status    devices  ."
-        ".       lights    .        ."
-        ".       .         .        ."
+        ".       status  devices  ."
+        ".       lights  .        ."
 
 cards:
   #################################################
-  #                    Header                     #
-  #################################################
-
-  - type: markdown
-    view_layout:
-      grid-area: header
-    content: |
-      # Hallway
-
-  #################################################
   #                    Status                     #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Status
     view_layout:
       grid-area: status
-    columns: 3
     cards:
-      - type: 'custom:button-card'
-        template: default_button
-        name: Dark?
+      - type: custom:mushroom-entity-card
         entity: binary_sensor.downstairs_hallway_is_dark
+        name: Dark?
         tap_action: !include ../popups/light_levels.yaml
 
-      - type: 'custom:button-card'
-        template: default_button
-        name: Light level
-        icon: 'mdi:theme-light-dark'
-        entity: sensor.downstairs_hallway_illuminance_lux
-
-      - type: 'custom:button-card'
+      - type: custom:mushroom-entity-card
         entity: binary_sensor.downstairs_hallway_motion
-        template: default_button
         name: Motion
 
   #################################################
-  #                    Status                     #
+  #                   Devices                     #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Devices
     view_layout:
       grid-area: devices
-    columns: 3
     cards:
-      - type: 'custom:button-card'
+      - type: custom:mushroom-template-card
         entity: switch.doorbell_chime_muted
-        template: default_button
-        name: Doorbell
-        icon: 'mdi:bell'
-        show_state: false
-        state:
-          - color: var(--disabled-text-color)
-            icon: 'mdi:volume-off'
-            label: Silent
-            value: 'on'
-          - icon: 'mdi:volume-high'
-            label: 'On'
-            value: 'off'
+        name: Doorbell?
+        icon: |
+          {% if is_state('switch.doorbell_chime_muted', 'on') %}
+            mdi:bell-cancel
+          {% else %}
+            mdi:bell
+          {% endif %}
+        icon_color: |
+          {% if is_state('switch.doorbell_chime_muted', 'on') %}
+            orange
+          {% endif %}
+        primary: Doorbell
+        secondary: |
+          {% if is_state('switch.doorbell_chime_muted', 'on') %}
+            Silent
+          {% else %}
+            On
+          {% endif %}
+        layout: horizontal
 
   #################################################
-  #                    Status                     #
+  #                    Lights                     #
   #################################################
 
-  - type: grid
+  - type: vertical-stack
     title: Lights
     view_layout:
       grid-area: lights
-    columns: 3
     cards:
-      - type: 'custom:button-card'
-        template: default_button
-        name: Ceiling
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: entity
+            entity: input_select.downstairs_hallway_lights_scene
+            tap_action:
+              action: call-service
+              service: input_select.select_next
+              target:
+                entity_id: input_select.downstairs_hallway_lights_scene
+            hold_action:
+              action: call-service
+              service: input_select.select_option
+              service_data:
+                option: 'Off'
+              target:
+                entity_id: input_select.downstairs_hallway_lights_scene
+
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.downstairs_hallway_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.downstairs_hallway_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.downstairs_hallway_lights_manual_mode
+
+          - type: entity
+            entity: input_number.downstairs_hallway_automatic_lights_duration
+
+          - type: entity
+            entity: timer.downstairs_hallway_automatic_lights
+
+      - type: custom:mushroom-light-card
         entity: light.downstairs_hallway_ceiling
-        icon: 'mdi:ceiling-light'
-        hold_action: !include ../popups/downstairs-hallway-lights.yaml
+        name: Ceiling
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true

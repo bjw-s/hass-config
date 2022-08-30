@@ -1,0 +1,24 @@
+---
+name : attic_office_3d_printer_heated_bed_temperature
+unique_id: attic_office_3d_printer_heated_bed_temperature
+device_class: temperature
+unit_of_measurement: "°C"
+state_topic: ender3s1/klipper/status
+value_template: |-
+  {% set default_value = states('sensor.attic_office_3d_printer_heated_bed_temperature') %}
+  {% if 'heater_bed' in value_json['status']  %}
+    {% if 'temperature' in value_json['status']['heater_bed'] %}
+      {{ value_json['status']['heater_bed']['temperature'] | round(1) }}
+    {% else %}
+      {{ default_value }}
+    {% endif %}
+  {% else %}
+    {{ default_value }}
+  {% endif %}
+availability_topic: ender3s1/klipper/status
+availability_template: |-
+  {% if 'status' in value_json %}
+    online
+  {% else %}
+    offline
+  {% endif %}

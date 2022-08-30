@@ -8,6 +8,6 @@ trigger:
 
 action:
   # Sound the alarm
-  - service: switch.turn_on
+  - service: siren.turn_on
     data:
-      entity_id: switch.upstairs_hallway_siren
+      entity_id: siren.upstairs_hallway_siren

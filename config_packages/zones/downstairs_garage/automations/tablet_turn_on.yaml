@@ -3,25 +3,25 @@ id: downstairs_garage_tablet_turn_on
 alias: Downstairs Garage - Tablet turn on
 max_exceeded: silent
 trigger:
-  - platform: state
+  - id: garage_presence
+    platform: state
     entity_id: binary_sensor.downstairs_garage_door_contact
     to: 'on'
-  - platform: state
+  - id: garage_presence
+    platform: state
     entity_id: binary_sensor.downstairs_garage_entry_door_contact
     to: 'on'
-  - platform: state
+  - id: garage_presence
+    platform: state
     entity_id: binary_sensor.downstairs_garage_motion
     to: 'on'
-  - platform: state
+  - id: returned_home
+    platform: state
     entity_id: input_boolean.home_modes_away_mode
     from: 'on'
     to: 'off'
 
 action:
-  - service: mqtt.publish
-    data_template:
-      topic: wallpanel/garage/command
-      payload: |
-        {
-          "wake": true
-        }
+  - alias: "Wake up garage tablet"
+    service: switch.turn_off
+    entity_id: switch.downstairs_garage_tablet_screensaver

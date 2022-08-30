@@ -133,20 +133,13 @@ cards:
     view_layout:
       grid-area: glance
     cards:
-      - type: custom:mushroom-template-card
-        primary: Thermostat ({{ states(entity) | capitalize }})
-        secondary: |-
-          Current: {{ state_attr(entity, 'current_temperature') }} °C
-          {%- if is_state(entity, 'heat') %}
-          Target: {{ state_attr(entity, 'temperature') }} °C
-          {% endif %}
-        icon: mdi:thermostat
-        icon_color: |-
-          {%- if is_state(entity, 'heat') %}
-          orange
-          {% endif %}
-        entity: climate.downstairs_living_room
-        multiline_secondary: true
+      - type: custom:mushroom-climate-card
+        name: Thermostat
+        entity: climate.downstairs_living_room_thermostat
+        hvac_modes:
+          - heat
+          - "off"
+        show_temperature_control: true
 
   #################################################
   #                                               #

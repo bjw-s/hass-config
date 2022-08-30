@@ -6,25 +6,20 @@ badges: []
 type: 'custom:grid-layout'
 layout:
   #default
-  grid-gap: var(--custom-layout-card-padding)
+  grid-column-gap: var(--custom-layout-card-padding)
   grid-template-columns: 0 repeat(3, 1fr) 0
-  grid-template-rows: 6vh repeat(3, fit-content(100%)) 0fr
+  grid-template-rows: auto
 
   grid-template-areas: |
-    "header  header       header       header     header"
     ".       downstairs_living_room  attic        .          ."
     ".       bedroom      upstairs_bedroom_eva  bathroom   ."
     ".       garage       other        .          ."
-    ".       .            .            .          ."
 
   mediaquery:
     #phone
     "(max-width: 800px)":
-      grid-gap: calc(var(--custom-layout-card-padding) * 1.5)
       grid-template-columns: 0 repeat(1, 1fr) 0
-      grid-template-rows: 8vh repeat(7, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header        header"      
         ".       downstairs_living_room   ."
         ".       garage        ."
         ".       bedroom       ."
@@ -32,32 +27,18 @@ layout:
         ".       bathroom      ."
         ".       attic         ."
         ".       other         ."
-        ".       .             ."
 
     #tablet portrait
     "(max-width: 1000px)":
       grid-gap: calc(var(--custom-layout-card-padding))
       grid-template-columns: 0 repeat(2, 1fr) 0
-      grid-template-rows: 6vh repeat(4, fit-content(100%)) 0fr
       grid-template-areas: |
-        "header  header       header       header"
         ".       downstairs_living_room  garage       ."
         ".       bedroom      upstairs_bedroom_eva  ."
         ".       bathroom     .            ."
         ".       attic        other        ."
-        ".       .            .            ."
 
 cards:
-  #################################################
-  #                    Header                     #
-  #################################################
-
-  - type: markdown
-    view_layout:
-      grid-area: header
-    content: |
-      # Temperature overview
-
   #################################################
   #                 Downstairs living room                   #
   #################################################
@@ -71,14 +52,14 @@ cards:
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.downstairs_living_room_temperature
+          - entity: sensor.downstairs_living_room_thermostat_temperature
             name: Temperature
         font_size: 75
         line_color: '#3498db'
 
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.downstairs_living_room_humidity
+          - entity: sensor.downstairs_living_room_thermostat_humidity
             name: Humidity
         color_thresholds:
           - color: '#e74c3c'

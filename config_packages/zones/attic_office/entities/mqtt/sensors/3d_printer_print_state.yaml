@@ -1,0 +1,34 @@
+---
+name : attic_office_3d_printer_print_state
+unique_id: attic_office_3d_printer_print_state
+state_topic: ender3s1/klipper/status
+value_template: |-
+  {% set default_value = states('sensor.attic_office_3d_printer_print_state') %}
+  {% if 'print_stats' in value_json['status']  %}
+    {% if 'state' in value_json['status']['print_stats'] %}
+      {{ value_json['status']['print_stats']['state'] }}
+    {% else %}
+      {{ default_value }}
+    {% endif %}
+  {% else %}
+    {{ default_value }}
+  {% endif %}
+json_attributes_topic: ender3s1/klipper/status
+json_attributes_template: |-
+  {% set default_attributes = {'message': ''} %}
+  {% if 'print_stats' in value_json['status']  %}
+    {% if 'message' in value_json['status']['print_stats'] %}
+      {{ {'message': value_json['status']['print_stats']['message'] } | tojson }}
+    {% else %}
+      {{ default_attributes | tojson }}
+    {% endif %}
+  {% else %}
+      {{ default_attributes | tojson }}
+  {% endif %}
+availability_topic: ender3s1/klipper/status
+availability_template: |-
+  {% if 'status' in value_json %}
+    online
+  {% else %}
+    offline
+  {% endif %}

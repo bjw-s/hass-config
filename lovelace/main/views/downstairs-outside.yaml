@@ -66,11 +66,6 @@ cards:
         cards:
           - type: 'custom:button-card'
             template: default_button
-            name: Sunscreen
-            entity: cover.backyard_sunscreen
-
-          - type: 'custom:button-card'
-            template: default_button
             name: WLANThermo
             icon: 'mdi:grill'
             entity: binary_sensor.backyard_wlanthermo_on_off

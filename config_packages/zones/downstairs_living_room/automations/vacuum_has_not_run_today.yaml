@@ -1,58 +1,58 @@
----
-id: downstairs_living_room_vacuum_has_not_run_today
-alias: Downstairs living room - Vacuum has not run today
-trigger:
-  - platform: time
-    at: "15:00:00"
-condition:
-  and:
-    - condition: state
-      entity_id: input_boolean.downstairs_living_room_vacuum_ran_today
-      state: "off"
-    - condition: state
-      entity_id: input_boolean.downstairs_vacuum_automatic_cleaning_active
-      state: "on"
-    - not:
-        - condition: state
-          entity_id: vacuum.valetudo_livingroom
-          state: "cleaning"
-action:
-  - choose:
-      # Start the vacuum automatically when vacation mode is on
-      - conditions:
-          - condition: state
-            entity_id: input_boolean.downstairs_vacuum_automatic_cleaning_active
-            state: "on"
-          - condition: state
-            entity_id: input_boolean.home_modes_vacation_mode
-            state: "on"
-        sequence:
-          - service: script.turn_on
-            data:
-              entity_id: script.vacuum_downstairs
+# ---
+# id: downstairs_living_room_vacuum_has_not_run_today
+# alias: Downstairs living room - Vacuum has not run today
+# trigger:
+#   - platform: time
+#     at: "15:00:00"
+# condition:
+#   and:
+#     - condition: state
+#       entity_id: input_boolean.downstairs_living_room_vacuum_ran_today
+#       state: "off"
+#     - condition: state
+#       entity_id: input_boolean.downstairs_vacuum_automatic_cleaning_active
+#       state: "on"
+#     - not:
+#         - condition: state
+#           entity_id: vacuum.valetudo_livingroom
+#           state: "cleaning"
+# action:
+#   - choose:
+#       # Start the vacuum automatically when vacation mode is on
+#       - conditions:
+#           - condition: state
+#             entity_id: input_boolean.downstairs_vacuum_automatic_cleaning_active
+#             state: "on"
+#           - condition: state
+#             entity_id: input_boolean.home_modes_vacation_mode
+#             state: "on"
+#         sequence:
+#           - service: script.turn_on
+#             data:
+#               entity_id: script.vacuum_downstairs
 
-    # Default asks if vacuum should run
-    default:
-      - service: notify.slack_bot
-        data:
-          message: "🧹 Vacuum has not run today!"
-          data:
-            blocks:
-              - type: section
-                text:
-                  type: mrkdwn
-                  text: "🧹 Vacuum has not run today!"
-              - type: actions
-                elements:
-                  - type: button
-                    text:
-                      type: plain_text
-                      text: "Run now"
-                    value: vacuum_start
-                    action_id: vacuum_not_run_start
-                  - type: button
-                    text:
-                      type: plain_text
-                      text: "Ignore"
-                    value: vacuum_ignore
-                    action_id: vacuum_not_run_ignore
+#     # Default asks if vacuum should run
+#     default:
+#       - service: notify.slack_bot
+#         data:
+#           message: "🧹 Vacuum has not run today!"
+#           data:
+#             blocks:
+#               - type: section
+#                 text:
+#                   type: mrkdwn
+#                   text: "🧹 Vacuum has not run today!"
+#               - type: actions
+#                 elements:
+#                   - type: button
+#                     text:
+#                       type: plain_text
+#                       text: "Run now"
+#                     value: vacuum_start
+#                     action_id: vacuum_not_run_start
+#                   - type: button
+#                     text:
+#                       type: plain_text
+#                       text: "Ignore"
+#                     value: vacuum_ignore
+#                     action_id: vacuum_not_run_ignore
