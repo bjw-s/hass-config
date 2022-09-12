@@ -25,12 +25,13 @@ action:
   - alias: "Show alarm popup on tablets"
     service: browser_mod.popup
     data:
-      deviceID:
-        - tablet-hallway
-        - tablet-garage
+      browser_id:
+        - hallway-fullykiosk
+        - garage-fullykiosk
       title: Alarm
-      large: false
-      card:
-        type: 'custom:alarmo-card'
+      content:
+        type: custom:alarmo-card
         entity: alarm_control_panel.house
         keep_keypad_visible: true
+      size: wide
+      dismissable: false

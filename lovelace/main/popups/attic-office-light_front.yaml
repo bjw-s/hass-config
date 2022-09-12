@@ -1,40 +1,40 @@
 action: fire-dom-event
 browser_mod:
-  command: popup
-  title: 'Front ceiling'
-  large: false
-  card:
-    type: 'vertical-stack'
-    cards:
-      - type: 'custom:button-card'
-        template: header
-        name: Brightness
+  service: browser_mod.popup
+  data:
+    title: 'Front ceiling'
+    content:
+      type: 'vertical-stack'
+      cards:
+        - type: 'custom:button-card'
+          template: header
+          name: Brightness
 
-      - type: entities
-        show_header_toggle: false
-        style: |
-          ha-card {
-            box-shadow: none;
-          }
-        entities:
-          - entity: light.attic_office_front_ceiling
-            type: custom:slider-entity-row
-            name: Ceiling front
-            hide_when_off: true
+        - type: entities
+          show_header_toggle: false
+          style: |
+            ha-card {
+              box-shadow: none;
+            }
+          entities:
+            - entity: light.attic_office_front_ceiling
+              type: custom:slider-entity-row
+              name: Ceiling front
+              hide_when_off: true
 
-      - type: 'custom:button-card'
-        template: header
-        name: Scenes
+        - type: 'custom:button-card'
+          template: header
+          name: Scenes
 
-      - type: entities
-        show_header_toggle: false
-        style: |
-          ha-card {
-            box-shadow: none;
-          }
-        entities:
-          - entity: scene.attic_office_lights_front_full_brightness
-            name: Full brightness
+        - type: entities
+          show_header_toggle: false
+          style: |
+            ha-card {
+              box-shadow: none;
+            }
+          entities:
+            - entity: scene.attic_office_lights_front_full_brightness
+              name: Full brightness
 
-          - entity: scene.attic_office_lights_front_dimmed
-            name: Dimmed
+            - entity: scene.attic_office_lights_front_dimmed
+              name: Dimmed

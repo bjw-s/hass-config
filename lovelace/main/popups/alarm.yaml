@@ -1,18 +1,18 @@
 action: fire-dom-event
 browser_mod:
-  command: popup
-  title: Alarm
-  large: false
-  card:
-    type: alarm-panel
-    entity: alarm_control_panel.house
-    name: ' '
-    states:
-      - arm_home
-      - arm_night
-      - arm_away
-    style:
-      .: |
-        .card-header {
-          height: 50px;
-        }
+  service: browser_mod.popup
+  data:
+    title: Alarm
+    content:
+      type: alarm-panel
+      entity: alarm_control_panel.house
+      name: ' '
+      states:
+        - arm_home
+        - arm_night
+        - arm_away
+      style:
+        .: |
+          .card-header {
+            height: 50px;
+          }

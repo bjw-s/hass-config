@@ -10,9 +10,9 @@ action:
   - alias: "Close alarm popup on tablets"
     service: browser_mod.close_popup
     data:
-      deviceID:
-        - tablet-hallway
-        - tablet-garage
+      browser_id:
+        - hallway-fullykiosk
+        - garage-fullykiosk
 
   - service: siren.turn_off
     data:

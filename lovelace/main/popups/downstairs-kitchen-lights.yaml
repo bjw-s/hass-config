@@ -1,55 +1,55 @@
 action: fire-dom-event
 browser_mod:
-  command: popup
-  title: 'Downstairs Kitchen'
-  large: false
-  card:
-    type: 'vertical-stack'
-    cards:
-      - type: entities
-        show_header_toggle: false
-        style: |
-          ha-card {
-              box-shadow: none;
-            }
-        entities:
-          - type: custom:text-divider-row
-            text: Settings
+  service: browser_mod.popup
+  data:
+    title: 'Downstairs Kitchen'
+    content:
+      type: 'vertical-stack'
+      cards:
+        - type: entities
+          show_header_toggle: false
+          style: |
+            ha-card {
+                box-shadow: none;
+              }
+          entities:
+            - type: custom:text-divider-row
+              text: Settings
 
-          - entity: input_select.downstairs_kitchen_lights_scene
-            name: Scene
+            - entity: input_select.downstairs_kitchen_lights_scene
+              name: Scene
 
-          - entity: binary_sensor.downstairs_kitchen_automatic_lights
-            name: Automatic?
+            - entity: binary_sensor.downstairs_kitchen_automatic_lights
+              name: Automatic?
 
-          - type: conditional
-            conditions:
-              - entity: timer.downstairs_kitchen_automatic_lights
-                state_not: idle
-            row:
-              entity: timer.downstairs_kitchen_automatic_lights
-              name: Automatic duration
+            - type: conditional
+              conditions:
+                - entity: timer.downstairs_kitchen_automatic_lights
+                  state_not: idle
+              row:
+                entity: timer.downstairs_kitchen_automatic_lights
+                name: Automatic duration
 
-          - entity: input_boolean.downstairs_kitchen_lights_manual_mode
-            name: Manual mode
+            - entity: input_boolean.downstairs_kitchen_lights_manual_mode
+              name: Manual mode
 
-          - type: conditional
-            conditions:
-              - entity: timer.downstairs_kitchen_lights_manual_mode
-                state_not: idle
-            row:
-              entity: timer.downstairs_kitchen_lights_manual_mode
-              name: Manual mode duration
+            - type: conditional
+              conditions:
+                - entity: timer.downstairs_kitchen_lights_manual_mode
+                  state_not: idle
+              row:
+                entity: timer.downstairs_kitchen_lights_manual_mode
+                name: Manual mode duration
 
-          - type: custom:text-divider-row
-            text: Brightness
+            - type: custom:text-divider-row
+              text: Brightness
 
-          - entity: light.downstairs_kitchen_ceiling_front
-            type: custom:slider-entity-row
-            name: Ceiling front
-            hide_when_off: true
+            - entity: light.downstairs_kitchen_ceiling_front
+              type: custom:slider-entity-row
+              name: Ceiling front
+              hide_when_off: true
 
-          - entity: light.downstairs_kitchen_ceiling_rear
-            type: custom:slider-entity-row
-            name: Ceiling rear
-            hide_when_off: true
+            - entity: light.downstairs_kitchen_ceiling_rear
+              type: custom:slider-entity-row
+              name: Ceiling rear
+              hide_when_off: true
