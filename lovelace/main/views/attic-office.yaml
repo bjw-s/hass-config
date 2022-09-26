@@ -97,18 +97,8 @@ cards:
         grid-area: main
         show_header_toggle: false
         entities:
-          - type: 'custom:restriction-card'
-            card:
-              entity: switch.attic_office_3d_printer_power
-              name: Printer power
-            restrictions:
-              block: true
-            condition:
-              or:
-                entity: sensor.attic_office_3d_printer_print_state
-                value: 'printing'
-            row: true
-            icon: mdi:power
+          - entity: switch.attic_office_3d_printer_power
+            name: Printer power
           # - entity: automation.attic_office_3d_printer_automatic_off
           #   name: Automatic power off
           #   icon: mdi:power

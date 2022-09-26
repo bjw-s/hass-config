@@ -64,7 +64,7 @@ cards:
           - type: horizontal-stack
             cards:
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.doorbell_person_motion
+                entity: binary_sensor.doorbell_person_occupancy
                 name: Person
 
               - type: custom:mushroom-entity-card

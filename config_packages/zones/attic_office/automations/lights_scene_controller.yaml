@@ -18,6 +18,20 @@ trigger:
     subtype: hold_left
     discovery_id: 0x00158d0002fcea27 action_hold_left
     id: switch-left-hold
+  - platform: device
+    domain: mqtt
+    device_id: df0f3d49be139fa0b32df312af3d9bf8
+    type: action
+    subtype: on-press
+    discovery_id: 0x0017880110493d0c action_on-press
+    id: remote-on-click
+  - platform: device
+    domain: mqtt
+    device_id: df0f3d49be139fa0b32df312af3d9bf8
+    type: action
+    subtype: off-press
+    discovery_id: 0x0017880110493d0c action_off-press
+    id: remote-off-click
 
 action:
   - alias: "choose scene based on trigger"
@@ -31,10 +45,25 @@ action:
             data:
               entity_id: input_select.attic_office_lights_scene
 
-      # Select "off" scene
+      # Select "on" scene
       - conditions:
           - condition: trigger
-            id: switch-left-hold
+            id: remote-on-click
+        sequence:
+          - service: input_select.select_option
+            data:
+              entity_id: input_select.attic_office_lights_scene
+              option: 'Work'
+
+      # Select "off" scene
+      - conditions:
+          - or:
+              - alias: "Wall switch hold"
+                condition: trigger
+                id: switch-left-hold
+              - alias: "Remote Off button"
+                condition: trigger
+                id: remote-off-click
         sequence:
           - service: input_select.select_option
             data:

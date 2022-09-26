@@ -54,12 +54,12 @@ cards:
           - type: 'custom:button-card'
             template: default_button
             name: Temperature
-            entity: sensor.downstairs_living_room_temperature
+            entity: sensor.downstairs_living_room_thermostat_temperature
 
           - type: 'custom:button-card'
             template: default_button
             name: Humidity
-            entity: sensor.downstairs_living_room_humidity
+            entity: sensor.downstairs_living_room_thermostat_humidity
 
   - type: 'custom:layout-card'
     view_layout:

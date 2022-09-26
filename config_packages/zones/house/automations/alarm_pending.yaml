@@ -8,13 +8,13 @@ trigger:
 
 action:
   - alias: "Alert beep on tablets"
-    service: fullykiosk.play_audio
+    service: media_player.play_media
     entity_id:
-      - media_player.downstairs_hallway_tablet_media_player
-      - media_player.downstairs_garage_tablet_media_player
+      - media_player.downstairs_garage_tablet
+      - media_player.downstairs_hallway_tablet
     data:
-      url: "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-alarm.mp3"
-      stream: 1
+      media_content_id: "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-alarm.mp3"
+      media_content_type: music
 
   - alias: "Wake up tablets"
     service: switch.turn_off

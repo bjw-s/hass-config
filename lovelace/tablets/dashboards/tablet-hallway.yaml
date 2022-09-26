@@ -4,8 +4,6 @@ button_card_templates: !include ../button_card_templates.yaml
 sidebar:
   digitalClock: true
   date: true
-  hideTopMenu: true
-  hideHassSidebar: true
   sidebarMenu:
     - action: navigate
       navigation_path: "/tablet-hallway/overview"
