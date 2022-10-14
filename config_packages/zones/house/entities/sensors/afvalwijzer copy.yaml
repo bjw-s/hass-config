@@ -1,0 +1,9 @@
+---
+platform: template
+sensors:
+  dsmr_reading_electricity_currently_delivered_watt:
+    friendly_name: Current power usage
+    device_class: power
+    unit_of_measurement: W
+    value_template: |
+      {{ ((states("sensor.dsmr_reading_electricity_currently_delivered") | float) * 1000) | int }}

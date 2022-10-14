@@ -1,8 +1,0 @@
-background: var(--background-image)
-button_card_templates: !include ../button_card_templates.yaml
-
-views:
-  - !include ../views/upstairs-hallway.yaml
-  - !include ../views/upstairs-bathroom.yaml
-  - !include ../views/upstairs-bedroom.yaml
-  - !include ../views/upstairs-bedroom-eva.yaml

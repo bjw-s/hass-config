@@ -73,6 +73,12 @@ trigger:
     event_data:
       entity_id: timer.downstairs_hallway_automatic_lights
 
+  - id: lights_turned_off
+    platform: state
+    entity_id: light.downstairs_hallway_ceiling
+    from: 'on'
+    to: 'off'
+
 variables:
   scene_helper: input_select.downstairs_hallway_lights_scene
   automatic_lights_duration: "{{ (states('input_number.downstairs_hallway_automatic_lights_duration') | float(0)) * 60 }}"
@@ -143,6 +149,8 @@ action:
               # Turned off manually
               - condition: trigger
                 id: downstairs_hallway_switch_bottom
+              - condition: trigger
+                id: lights_turned_off
               # Turn off automatically
               - condition: trigger
                 id: automatic_lights_timer_finished

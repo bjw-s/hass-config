@@ -40,11 +40,17 @@ trigger:
     to: "off"
     for: "00:02:00"
 
-  - id: downstairs_no_presence_for_30_min
+  - id: downstairs_no_presence_for_60_min
     platform: state
     entity_id: binary_sensor.downstairs_presence
     to: "off"
-    for: "00:30:00"
+    for: "01:00:00"
+
+  - id: lights_turned_off
+    platform: state
+    entity_id: light.downstairs_dining_area
+    from: 'on'
+    to: 'off'
 
 variables:
   scene_helper: input_select.downstairs_dining_area_lights_scene
@@ -134,6 +140,8 @@ action:
               # Turned off manually
               - condition: trigger
                 id: downstairs_dining_area_switch_bottom
+              - condition: trigger
+                id: lights_turned_off
               # Turn off automatically
               - and:
                   - condition: state
@@ -141,7 +149,7 @@ action:
                     state: "on"
                   - or:
                       - condition: trigger
-                        id: downstairs_no_presence_for_30_min
+                        id: downstairs_no_presence_for_60_min
                       - condition: trigger
                         id: downstairs_dining_area_no_longer_dark
         sequence:

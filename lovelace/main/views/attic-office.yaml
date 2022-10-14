@@ -27,49 +27,6 @@ layout:
 cards:
   - type: 'custom:layout-card'
     view_layout:
-      grid-area: status
-    cards:
-      - type: 'custom:button-card'
-        template: header
-        name: Status
-
-      - type: glance
-        columns: 3
-        entities:
-          - entity: binary_sensor.attic_office_is_dark
-            name: Dark?
-            tap_action: !include ../popups/light_levels.yaml
-
-          - entity: sensor.attic_office_motion_sensor_illuminance_lux
-            name: Light level
-            icon: "mdi:theme-light-dark"
-
-          - entity: binary_sensor.attic_office_motion_sensor_occupancy
-            name: Motion
-
-          - entity: sensor.attic_office_multisensor_temperature
-            name: Temperature
-
-          - entity: sensor.attic_office_multisensor_humidity
-            name: Humidity
-
-  - type: 'custom:layout-card'
-    view_layout:
-      grid-area: audio_video
-    cards:
-      - type: 'custom:button-card'
-        template: header
-        name: Audio / Video
-
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: media_player.attic_office_sonos
-            name: Sonos
-            icon: "mdi:speaker"
-
-  - type: 'custom:layout-card'
-    view_layout:
       grid-area: octoprint
     layout_type: grid
     layout:
@@ -140,25 +97,3 @@ cards:
             row:
               entity: sensor.attic_office_3d_printer_extruder_temperature_target
               name: Target hotend temperature
-
-  - type: 'custom:layout-card'
-    view_layout:
-      grid-area: lights
-    cards:
-      - type: 'custom:button-card'
-        template: header
-        name: Lights
-
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: input_select.attic_office_lights_scene
-            name: Scene
-
-          - entity: light.attic_office_front_ceiling
-            name: Front ceiling
-            hold_action: !include ../popups/attic-office-light_front.yaml
-
-          - entity: light.attic_office_rear_ceiling
-            name: Rear ceiling
-            hold_action: !include ../popups/attic-office-light_rear.yaml

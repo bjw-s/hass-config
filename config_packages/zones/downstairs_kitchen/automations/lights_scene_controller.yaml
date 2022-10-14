@@ -31,6 +31,12 @@ trigger:
     event_data:
       entity_id: timer.downstairs_kitchen_automatic_lights
 
+  - id: lights_turned_off
+    platform: state
+    entity_id: light.downstairs_kitchen
+    from: 'on'
+    to: 'off'
+
 variables:
   scene_helper: input_select.downstairs_kitchen_lights_scene
   automatic_lights_duration: "{{ (states('input_number.automatic_lights_duration_downstairs_kitchen') | float(0)) * 60 }}"
@@ -98,6 +104,8 @@ action:
               # Turned off manually
               - condition: trigger
                 id: downstairs_kitchen_switch_bottom
+              - condition: trigger
+                id: lights_turned_off
               # Turn off automatically
               - and:
                   - condition: trigger

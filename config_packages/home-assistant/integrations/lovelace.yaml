@@ -8,22 +8,6 @@ lovelace:
   mode: yaml
   resources: !include ../../../lovelace/resources.yaml
   dashboards:
-    dash-downstairs: # Needs to contain a hyphen (-)
-      mode: yaml
-      filename: ui-lovelace-downstairs.yaml
-      title: 1 - Downstairs
-      icon: mdi:numeric-1-box-multiple-outline
-      show_in_sidebar: true
-      require_admin: false
-
-    dash-upstairs: # Needs to contain a hyphen (-)
-      mode: yaml
-      filename: ui-lovelace-upstairs.yaml
-      title: 2 - Upstairs
-      icon: mdi:numeric-2-box-multiple-outline
-      show_in_sidebar: true
-      require_admin: false
-
     dash-attic: # Needs to contain a hyphen (-)
       mode: yaml
       filename: ui-lovelace-attic.yaml

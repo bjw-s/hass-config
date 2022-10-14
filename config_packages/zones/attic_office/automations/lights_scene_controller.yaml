@@ -32,6 +32,11 @@ trigger:
     subtype: off-press
     discovery_id: 0x0017880110493d0c action_off-press
     id: remote-off-click
+  - id: lights_turned_off
+    platform: state
+    entity_id: light.attic
+    from: "on"
+    to: "off"
 
 action:
   - alias: "choose scene based on trigger"
@@ -39,33 +44,45 @@ action:
       # Loop through scenes
       - conditions:
           - condition: trigger
-            id: switch-left-click
+            id: remote-on-click
         sequence:
-          - service: input_select.select_next
+          - service: script.input_select_next_with_skip
             data:
               entity_id: input_select.attic_office_lights_scene
+              skip_options:
+                - "Off"
 
       # Select "on" scene
       - conditions:
-          - condition: trigger
-            id: remote-on-click
+          - and:
+              - condition: trigger
+                id: switch-left-click
+              - condition: state
+                entity_id: light.attic_office_rear_ceiling
+                state: "off"
         sequence:
           - service: input_select.select_option
             data:
               entity_id: input_select.attic_office_lights_scene
-              option: 'Work'
+              option: "Work"
 
       # Select "off" scene
       - conditions:
           - or:
-              - alias: "Wall switch hold"
-                condition: trigger
-                id: switch-left-hold
+              - and:
+                  - condition: trigger
+                    id: switch-left-click
+                  - condition: state
+                    entity_id: light.attic_office_rear_ceiling
+                    state: "on"
               - alias: "Remote Off button"
                 condition: trigger
                 id: remote-off-click
+              - alias: "Lights turned off otherwise"
+                condition: trigger
+                id: lights_turned_off
         sequence:
           - service: input_select.select_option
             data:
               entity_id: input_select.attic_office_lights_scene
-              option: 'Off'
+              option: "Off"

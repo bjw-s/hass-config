@@ -2,5 +2,4 @@ background: var(--background-image)
 button_card_templates: !include ../button_card_templates.yaml
 
 views:
-  - !include ../views/attic-hallway.yaml
   - !include ../views/attic-office.yaml

@@ -1,9 +1,9 @@
 title: Home
-icon: 'mdi:home'
+icon: "mdi:home"
 id: home
 path: home
 badges: []
-type: 'custom:grid-layout'
+type: "custom:grid-layout"
 layout:
   #default
   grid-column-gap: var(--custom-layout-card-padding)
@@ -44,7 +44,7 @@ cards:
     view_layout:
       grid-area: presence
       show:
-          mediaquery: "(min-width: 800px)"
+        mediaquery: "(min-width: 800px)"
     cards:
       - type: custom:mushroom-alarm-control-panel-card
         entity: alarm_control_panel.house
@@ -73,7 +73,7 @@ cards:
     view_layout:
       grid-area: presence
       show:
-          mediaquery: "(max-width: 800px)"
+        mediaquery: "(max-width: 800px)"
     cards:
       - type: custom:mushroom-alarm-control-panel-card
         entity: alarm_control_panel.house
@@ -84,33 +84,6 @@ cards:
           - armed_night
           - armed_away
         tap_action: !include ../popups/alarm.yaml
-
-      # - type: custom:mushroom-template-card
-      #   primary: Alarm
-      #   secondary: |-
-      #     {{ states(entity) | capitalize }}
-      #   icon: |-
-      #     {%- if is_state(entity, 'disarmed') %}
-      #     mdi:shield-off
-      #     {%- elif  is_state(entity, 'armed_home') %}
-      #     mdi:shield-home
-      #     {%- elif  is_state(entity, 'armed_night') %}
-      #     mdi:shield-moon
-      #     {%- elif  is_state(entity, 'armed_away') %}
-      #     mdi:shield-account
-      #     {% endif %}
-      #   icon_color: |-
-      #     {%- if is_state(entity, 'triggered') %}
-      #     red
-      #     {%- elif is_state(entity, 'disarmed') %}
-      #     green
-      #     {%- else %}
-      #     orange
-      #     {% endif %}
-      #   entity: alarm_control_panel.house
-      #   multiline_secondary: false
-
-      #   tap_action: !include ../popups/alarm.yaml
 
       - type: custom:mushroom-person-card
         entity: person.bernd
@@ -133,13 +106,69 @@ cards:
     view_layout:
       grid-area: glance
     cards:
-      - type: custom:mushroom-climate-card
-        name: Thermostat
-        entity: climate.downstairs_living_room_thermostat
-        hvac_modes:
-          - heat
-          - "off"
-        show_temperature_control: true
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-climate-card
+            name: Thermostat
+            entity: climate.downstairs_living_room_thermostat
+            hvac_modes:
+              - heat
+              - "off"
+            show_temperature_control: true
+
+          - type: 'custom:vertical-stack-in-card'
+            cards:
+              - type: custom:mushroom-template-card
+                primary: Power usage
+                secondary: |-
+                  {{ states(entity) }} W
+                icon: mdi:home-lightning-bolt
+                entity: sensor.dsmr_reading_electricity_currently_delivered_watt
+
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.dsmr_reading_electricity_currently_delivered_watt
+                    color: orange
+                group: true
+                show:
+                  icon: false
+                  name: false
+                  state: false
+                  graph: bar
+                hours_to_show: 3
+                points_per_hour: 12
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            entity: switch.hallway_doorbell_chime_muted
+            name: Doorbell?
+            icon: |
+              {% if is_state('switch.hallway_doorbell_chime_muted', 'on') %}
+                mdi:bell-cancel
+              {% else %}
+                mdi:bell
+              {% endif %}
+            icon_color: |
+              {% if is_state('switch.hallway_doorbell_chime_muted', 'on') %}
+                orange
+              {% endif %}
+            primary: Doorbell
+            secondary: |
+              {% if is_state('switch.hallway_doorbell_chime_muted', 'on') %}
+                Silent
+              {% else %}
+                On
+              {% endif %}
+            layout: horizontal
+
+          - type: custom:mushroom-vacuum-card
+            entity: vacuum.valetudo_livingroom
+            name: MiMi
+
+          - type: custom:mushroom-vacuum-card
+            entity: vacuum.valetudo_upstairs
+            name: Mickey
 
   #################################################
   #                                               #

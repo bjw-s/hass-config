@@ -11,38 +11,42 @@ layout:
   grid-template-rows: auto
 
   grid-template-areas: |
-    ".       living_area          downstairs_dining_area       downstairs_kitchen        ."
-    ".       downstairs_hallway   upstairs_hallway  attic_hallway  ."
-    ".       attic                driveway          backyard       ."
+    ".  living_area         downstairs_dining_area  downstairs_kitchen  ."
+    ".  downstairs_hallway  upstairs_hallway        attic_hallway       ."
+    ".  upstairs_bedroom    upstairs_bedroom_eva    attic               ."
+    ".  driveway            backyard                .                   ."
 
   mediaquery:
     #phone
     "(max-width: 800px)":
       grid-template-columns: 0 repeat(1, 1fr) 0
       grid-template-areas: |
-        ".       living_area         ."
-        ".       downstairs_dining_area         ."
-        ".       downstairs_kitchen             ."
-        ".       downstairs_hallway  ."
-        ".       upstairs_hallway    ."
-        ".       attic_hallway       ."
-        ".       attic               ."
-        ".       driveway            ."
-        ".       backyard            ."
+        ".  living_area             ."
+        ".  downstairs_dining_area  ."
+        ".  downstairs_kitchen      ."
+        ".  downstairs_hallway      ."
+        ".  upstairs_hallway        ."
+        ".  upstairs_bedroom        ."
+        ".  upstairs_bedroom_eva    ."
+        ".  attic_hallway           ."
+        ".  attic                   ."
+        ".  driveway                ."
+        ".  backyard                ."
 
     #tablet portrait
     "(max-width: 1000px)":
       grid-template-columns: 0 repeat(2, 1fr) 0
       grid-template-areas: |
-        ".       living_area       downstairs_dining_area         ."
-        ".       downstairs_kitchen           downstairs_hallway  ."
-        ".       upstairs_hallway  attic_hallway       ."
-        ".       attic             driveway            ."
-        ".       backyard          .                   ."
+        ".  living_area         downstairs_dining_area  ."
+        ".  downstairs_kitchen  downstairs_hallway      ."
+        ".  upstairs_hallway    attic_hallway           ."
+        ".  upstairs_bedroom    upstairs_bedroom_eva    ."
+        ".  attic               driveway                ."
+        ".  backyard            .                       ."
 
 cards:
   #################################################
-  #                 Downstairs living room                   #
+  #            Downstairs living room             #
   #################################################
 
   - type: vertical-stack
@@ -66,6 +70,23 @@ cards:
                 option: 'Off'
               target:
                 entity_id: input_select.downstairs_living_room_lights_scene
+
+          - type: template
+            content: |
+              {{ states.sensor.downstairs_living_room_motion_sensor_illuminance_lux.state_with_unit }}
+            icon: |
+              {% if is_state('binary_sensor.downstairs_living_room_is_dark', 'on') %}
+                mdi:brightness-4
+              {% else %}
+                mdi:brightness-5
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.downstairs_living_room_is_dark', 'on') %}
+                grey
+              {% else %}
+                orange
+              {% endif %}
+            entity: sensor.downstairs_living_room_motion_sensor_illuminance_lux
 
           - type: template
             content: |
@@ -138,6 +159,23 @@ cards:
 
           - type: template
             content: |
+              {{ states.sensor.downstairs_dining_area_motion_sensor_illuminance_lux.state_with_unit }}
+            icon: |
+              {% if is_state('binary_sensor.downstairs_dining_area_is_dark', 'on') %}
+                mdi:brightness-4
+              {% else %}
+                mdi:brightness-5
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.downstairs_dining_area_is_dark', 'on') %}
+                grey
+              {% else %}
+                orange
+              {% endif %}
+            entity: sensor.downstairs_dining_area_motion_sensor_illuminance_lux
+
+          - type: template
+            content: |
               {% if is_state('binary_sensor.downstairs_dining_area_automatic_lights', 'on') %}
                 Automatic mode enabled
               {% else %}
@@ -159,7 +197,7 @@ cards:
         secondary_info: state
         layout: horizontal
         show_brightness_control: true
-        show_color_temperature_control: true
+        show_color_temp_control: true
 
   #################################################
   #               Downstairs Kitchen              #
@@ -186,6 +224,23 @@ cards:
                 option: 'Off'
               target:
                 entity_id: input_select.downstairs_kitchen_lights_scene
+
+          - type: template
+            content: |
+              {{ states.sensor.downstairs_kitchen_motion_sensor_illuminance_lux.state_with_unit }}
+            icon: |
+              {% if is_state('binary_sensor.downstairs_kitchen_is_dark', 'on') %}
+                mdi:brightness-4
+              {% else %}
+                mdi:brightness-5
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.downstairs_kitchen_is_dark', 'on') %}
+                grey
+              {% else %}
+                orange
+              {% endif %}
+            entity: sensor.downstairs_kitchen_motion_sensor_illuminance_lux
 
           - type: template
             content: |
@@ -218,7 +273,7 @@ cards:
         show_brightness_control: true
 
       - type: custom:mushroom-light-card
-        entity: light.downstairs_kitchen_ceiling_front
+        entity: light.downstairs_kitchen_ceiling_rear
         name: Rear
         primary_info: name
         secondary_info: state
@@ -250,6 +305,23 @@ cards:
                 option: 'Off'
               target:
                 entity_id: input_select.downstairs_hallway_lights_scene
+
+          - type: template
+            content: |
+              {{ states.sensor.downstairs_hallway_illuminance_lux.state_with_unit }}
+            icon: |
+              {% if is_state('binary_sensor.downstairs_hallway_is_dark', 'on') %}
+                mdi:brightness-4
+              {% else %}
+                mdi:brightness-5
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.downstairs_hallway_is_dark', 'on') %}
+                grey
+              {% else %}
+                orange
+              {% endif %}
+            entity: sensor.downstairs_hallway_illuminance_lux
 
           - type: template
             content: |
@@ -286,34 +358,101 @@ cards:
   #################################################
 
   - type: vertical-stack
-    title: Upstairs Hallway
+    title: Upstairs hallway
     view_layout:
       grid-area: upstairs_hallway
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.upstairs_hallway_automatic_lights
-            name: Automatic lights?
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.upstairs_hallway_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.upstairs_hallway_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.upstairs_hallway_lights_manual_mode
 
-      - type: custom:mushroom-entity-card
-        entity: input_number.upstairs_hallway_automatic_lights_duration
-        name: Automatic lights duration
+          - type: entity
+            entity: input_number.upstairs_hallway_automatic_lights_duration
 
-      - type: conditional
-        conditions:
-          - entity: timer.upstairs_hallway_automatic_lights
-            state_not: idle
-        card:
-          type: custom:mushroom-entity-card
-          entity: timer.upstairs_hallway_automatic_lights
-          name: Automatic lights timer
+          - type: entity
+            entity: timer.upstairs_hallway_automatic_lights
 
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.upstairs_hallway_lights_manual_mode
-        name: Manual mode
-        tap_action:
-          action: toggle
+      - type: custom:mushroom-light-card
+        entity: light.upstairs_hallway_ceiling
+        name: Ceiling
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+
+  #################################################
+  #              Upstairs Bedroom                 #
+  #################################################
+
+  - type: vertical-stack
+    title: Bedroom
+    view_layout:
+      grid-area: upstairs_bedroom
+    cards:
+      - type: custom:mushroom-light-card
+        entity: light.upstairs_bedroom_ceiling
+        name: Ceiling
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+
+      - type: custom:mushroom-light-card
+        entity: light.upstairs_bedroom_nightstand_manyie
+        name: Nightstand Man-Yie
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_control: true
+
+      - type: custom:mushroom-light-card
+        entity: light.upstairs_bedroom_nightstand_bernd
+        name: Nightstand Bernd
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_control: true
+
+  #################################################
+  #             Upstairs Bedroom Eva              #
+  #################################################
+
+  - type: vertical-stack
+    title: Bedroom Eva
+    view_layout:
+      grid-area: upstairs_bedroom_eva
+    cards:
+      - type: custom:mushroom-light-card
+        entity: light.upstairs_bedroom_eva_ceiling
+        name: Ceiling
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+
+      - type: custom:mushroom-light-card
+        entity: light.upstairs_bedroom_eva_nightlight
+        name: Nightlight
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
 
   #################################################
   #                Attic hallway                  #
@@ -324,30 +463,37 @@ cards:
     view_layout:
       grid-area: attic_hallway
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.attic_hallway_automatic_lights
-            name: Automatic lights?
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.attic_hallway_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.attic_hallway_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.attic_hallway_lights_manual_mode
 
-      - type: custom:mushroom-entity-card
-        entity: input_number.attic_hallway_automatic_lights_duration
-        name: Automatic lights duration
+          - type: entity
+            entity: input_number.attic_hallway_automatic_lights_duration
 
-      - type: conditional
-        conditions:
-          - entity: timer.attic_hallway_automatic_lights
-            state_not: idle
-        card:
-          type: custom:mushroom-entity-card
-          entity: timer.attic_hallway_automatic_lights
-          name: Automatic lights timer
+          - type: entity
+            entity: timer.attic_hallway_automatic_lights
 
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.attic_hallway_lights_manual_mode
-        name: Manual mode
-        tap_action:
-          action: toggle
+      - type: custom:mushroom-light-card
+        entity: light.attic_hallway_ceiling
+        name: Ceiling
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
 
   #################################################
   #                 Attic office                  #
@@ -358,53 +504,78 @@ cards:
     view_layout:
       grid-area: attic
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: entity
             entity: input_select.attic_office_lights_scene
-            name: Scene
+            tap_action:
+              action: call-service
+              service: input_select.select_next
+              target:
+                entity_id: input_select.attic_office_lights_scene
+            hold_action:
+              action: call-service
+              service: input_select.select_option
+              service_data:
+                option: 'Off'
+              target:
+                entity_id: input_select.attic_office_lights_scene
 
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.attic_office_automatic_lights
-            name: Automatic lights?
+          - type: template
+            content: |
+              {{ states.sensor.attic_office_motion_sensor_illuminance_lux.state_with_unit }}
+            icon: |
+              {% if is_state('binary_sensor.attic_office_is_dark', 'on') %}
+                mdi:brightness-4
+              {% else %}
+                mdi:brightness-5
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.attic_office_is_dark', 'on') %}
+                grey
+              {% else %}
+                orange
+              {% endif %}
+            entity: sensor.attic_office_motion_sensor_illuminance_lux
 
-      - type: custom:mushroom-entity-card
-        entity: input_number.attic_office_automatic_lights_duration
-        name: Automatic lights duration
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.attic_office_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.attic_office_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.attic_office_lights_manual_mode
 
-      - type: conditional
-        conditions:
-          - entity: timer.attic_office_automatic_lights
-            state_not: idle
-        card:
-          type: custom:mushroom-entity-card
-          entity: timer.attic_office_automatic_lights
-          name: Automatic lights timer
+          - type: entity
+            entity: input_number.attic_office_automatic_lights_duration
 
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.attic_office_lights_manual_mode
-        name: Manual mode
-        tap_action:
-          action: toggle
+          - type: entity
+            entity: timer.attic_office_automatic_lights
 
-  #################################################
-  #                  Backyard                     #
-  #################################################
+      - type: custom:mushroom-light-card
+        entity: light.attic_office_front_ceiling
+        name: Front
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
 
-  - type: vertical-stack
-    title: Backyard
-    view_layout:
-      grid-area: backyard
-    cards:
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.backyard_automatic_lights
-        name: Automatic lights?
-
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.backyard_lights_manual_mode
-        name: Manual mode
-        tap_action:
-          action: toggle
+      - type: custom:mushroom-light-card
+        entity: light.attic_office_rear_ceiling
+        name: Rear
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_temp_control: true
 
   #################################################
   #                 Driveway                      #
@@ -415,27 +586,99 @@ cards:
     view_layout:
       grid-area: driveway
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.driveway_automatic_lights
-            name: Automatic lights?
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            content: |
+              {{ states.sensor.driveway_motion_sensor_illuminance_lux.state_with_unit }}
+            icon: |
+              {% if is_state('binary_sensor.driveway_is_dark', 'on') %}
+                mdi:brightness-4
+              {% elif is_state('binary_sensor.driveway_is_dusk', 'on') %}
+                mdi:brightness-6
+              {% else %}
+                mdi:brightness-5
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.driveway_is_dark', 'on') %}
+                grey
+              {% elif is_state('binary_sensor.driveway_is_dusk', 'on') %}
+                yellow
+              {% else %}
+                orange
+              {% endif %}
+            entity: sensor.driveway_motion_sensor_illuminance_lux
 
-      - type: custom:mushroom-entity-card
-        entity: input_number.driveway_automatic_lights_duration
-        name: Automatic lights duration
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.driveway_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.driveway_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.driveway_lights_manual_mode
 
-      - type: conditional
-        conditions:
-          - entity: timer.driveway_automatic_lights
-            state_not: idle
-        card:
-          type: custom:mushroom-entity-card
-          entity: timer.driveway_automatic_lights
-          name: Automatic lights timer
+          - type: entity
+            entity: input_number.driveway_automatic_lights_duration
 
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.driveway_lights_manual_mode
-        name: Manual mode
-        tap_action:
-          action: toggle
+          - type: entity
+            entity: timer.driveway_automatic_lights
+
+      - type: custom:mushroom-light-card
+        entity: light.driveway_wall
+        name: Wall
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_temp_control: true
+
+  #################################################
+  #                  Backyard                     #
+  #################################################
+
+  - type: vertical-stack
+    title: Backyard
+    view_layout:
+      grid-area: backyard
+    cards:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            content: |
+              {% if is_state('binary_sensor.backyard_automatic_lights', 'on') %}
+                Automatic mode enabled
+              {% else %}
+                Manual override active
+              {% endif %}
+            icon_color: |
+              {% if is_state('binary_sensor.backyard_automatic_lights', 'on') %}
+                green
+              {% else %}
+                orange
+              {% endif %}
+            icon: mdi:lightbulb-auto
+            entity: input_boolean.backyard_lights_manual_mode
+
+      - type: custom:mushroom-light-card
+        entity: light.backyard_shed
+        name: Shed
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+
+      - type: custom:mushroom-light-card
+        entity: light.backyard_wall
+        name: Wall
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
