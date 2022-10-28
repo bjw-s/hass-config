@@ -7,6 +7,13 @@ trigger:
     to: 'off'
 
 action:
+  # Turn the heat back on
+  - service: climate.set_preset_mode
+    data:
+      entity_id:
+        - climate.downstairs_living_room
+      preset_mode: home
+
   # Reset automation.home_alarm_arm_automatically
   - service: automation.turn_off
     data:

@@ -6,18 +6,32 @@ max_exceeded: silent
 trigger:
   - platform: device
     domain: mqtt
-    device_id: 50905b5ed0f10f4c253b254088525b7f
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
     type: action
-    subtype: single_left
-    discovery_id: 0x00158d0002fcea27 action_single_left
-    id: switch-left-click
+    subtype: press_1
+    discovery_id: 0x00000000017611a7 action_press_1
+    id: switch-left-top-click
   - platform: device
     domain: mqtt
-    device_id: 50905b5ed0f10f4c253b254088525b7f
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
     type: action
-    subtype: hold_left
-    discovery_id: 0x00158d0002fcea27 action_hold_left
-    id: switch-left-hold
+    subtype: press_2
+    discovery_id: 0x00000000017611a7 action_press_2
+    id: switch-left-bottom-click
+  - platform: device
+    domain: mqtt
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
+    type: action
+    subtype: press_3
+    discovery_id: 0x00000000017611a7 action_press_3
+    id: switch-right-top-click
+  - platform: device
+    domain: mqtt
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
+    type: action
+    subtype: press_4
+    discovery_id: 0x00000000017611a7 action_press_4
+    id: switch-right-bottom-click
   - platform: device
     domain: mqtt
     device_id: df0f3d49be139fa0b32df312af3d9bf8
@@ -41,22 +55,14 @@ trigger:
 action:
   - alias: "choose scene based on trigger"
     choose:
-      # Loop through scenes
-      - conditions:
-          - condition: trigger
-            id: remote-on-click
-        sequence:
-          - service: script.input_select_next_with_skip
-            data:
-              entity_id: input_select.attic_office_lights_scene
-              skip_options:
-                - "Off"
-
-      # Select "on" scene
+      # Select "Work" scene
       - conditions:
           - and:
-              - condition: trigger
-                id: switch-left-click
+              - or:
+                  - condition: trigger
+                    id: switch-left-top-click
+                  - condition: trigger
+                    id: remote-on-click
               - condition: state
                 entity_id: light.attic_office_rear_ceiling
                 state: "off"
@@ -66,15 +72,29 @@ action:
               entity_id: input_select.attic_office_lights_scene
               option: "Work"
 
+      # Loop through "On" scenes
+      - conditions:
+          - and:
+              - or:
+                  - condition: trigger
+                    id: switch-left-top-click
+                  - condition: trigger
+                    id: remote-on-click
+              - condition: state
+                entity_id: light.attic_office_rear_ceiling
+                state: "on"
+        sequence:
+          - service: script.input_select_next_with_skip
+            data:
+              entity_id: input_select.attic_office_lights_scene
+              skip_options:
+                - "Off"
+
       # Select "off" scene
       - conditions:
           - or:
-              - and:
-                  - condition: trigger
-                    id: switch-left-click
-                  - condition: state
-                    entity_id: light.attic_office_rear_ceiling
-                    state: "on"
+              - condition: trigger
+                id: switch-left-bottom-click
               - alias: "Remote Off button"
                 condition: trigger
                 id: remote-off-click
@@ -86,3 +106,17 @@ action:
             data:
               entity_id: input_select.attic_office_lights_scene
               option: "Off"
+
+      # Turn on front lights
+      - conditions:
+          - condition: trigger
+            id: switch-right-top-click
+        sequence:
+          - scene: scene.attic_office_lights_front_full_brightness
+
+      # Turn off front lights
+      - conditions:
+          - condition: trigger
+            id: switch-right-bottom-click
+        sequence:
+          - scene: scene.attic_office_lights_front_off

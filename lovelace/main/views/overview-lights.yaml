@@ -13,8 +13,8 @@ layout:
   grid-template-areas: |
     ".  living_area         downstairs_dining_area  downstairs_kitchen  ."
     ".  downstairs_hallway  upstairs_hallway        attic_hallway       ."
-    ".  upstairs_bedroom    upstairs_bedroom_eva    attic               ."
-    ".  driveway            backyard                .                   ."
+    ".  upstairs_bedroom    upstairs_bedroom_eva    upstairs_office     ."
+    ".  attic               driveway                backyard            ."
 
   mediaquery:
     #phone
@@ -28,6 +28,7 @@ layout:
         ".  upstairs_hallway        ."
         ".  upstairs_bedroom        ."
         ".  upstairs_bedroom_eva    ."
+        ".  upstairs_office         ."
         ".  attic_hallway           ."
         ".  attic                   ."
         ".  driveway                ."
@@ -41,8 +42,8 @@ layout:
         ".  downstairs_kitchen  downstairs_hallway      ."
         ".  upstairs_hallway    attic_hallway           ."
         ".  upstairs_bedroom    upstairs_bedroom_eva    ."
-        ".  attic               driveway                ."
-        ".  backyard            .                       ."
+        ".  upstairs_office     attic                   ."
+        ".  driveway            backyard                ."
 
 cards:
   #################################################
@@ -494,6 +495,50 @@ cards:
         secondary_info: state
         layout: horizontal
         show_brightness_control: true
+
+  #################################################
+  #               Upstairs office                 #
+  #################################################
+
+  - type: vertical-stack
+    title: Upstairs office
+    view_layout:
+      grid-area: upstairs_office
+    cards:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: entity
+            entity: input_select.upstairs_office_lights_scene
+            tap_action:
+              action: call-service
+              service: input_select.select_next
+              target:
+                entity_id: input_select.upstairs_office_lights_scene
+            hold_action:
+              action: call-service
+              service: input_select.select_option
+              service_data:
+                option: 'Off'
+              target:
+                entity_id: input_select.upstairs_office_lights_scene
+
+      - type: custom:mushroom-light-card
+        entity: light.upstairs_office_ceiling
+        name: Ceiling
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_temp_control: true
+
+      - type: custom:mushroom-light-card
+        entity: light.upstairs_office_desk
+        name: Desk
+        primary_info: name
+        secondary_info: state
+        layout: horizontal
+        show_brightness_control: true
+        show_color_control: true
 
   #################################################
   #                 Attic office                  #

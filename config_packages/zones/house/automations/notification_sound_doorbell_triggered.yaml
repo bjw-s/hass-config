@@ -1,0 +1,35 @@
+---
+id: notifications_sound_doorbell_triggered
+alias: Notifications - Sound Doorbell triggered
+
+mode: single
+max_exceeded: silent
+
+trigger:
+  platform: state
+  entity_id: binary_sensor.front_door_doorbell
+  from: "off"
+  to: "on"
+
+variables:
+  # The external url for the Home Assistant instance
+  base_url: "{{ states('sensor.system_url_external') }}"
+  # Rate limit the automation to once per 30 seconds
+  cooldown: 10
+  # Audio to play
+  audio_url: "{{base_url}}/local/audio/doorbell.mp3"
+
+action:
+  - service: media_player.play_media
+    data:
+      entity_id:
+        - media_player.living_room
+        - media_player.kitchen
+      media_content_id: "{{ audio_url }}"
+      media_content_type: music
+      extra:
+        volume: 20
+        play_on_bonded: true
+
+  - delay:
+      seconds: "{{ cooldown }}"

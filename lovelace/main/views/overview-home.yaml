@@ -110,8 +110,9 @@ cards:
         cards:
           - type: custom:mushroom-climate-card
             name: Thermostat
-            entity: climate.downstairs_living_room_thermostat
+            entity: climate.downstairs_living_room
             hvac_modes:
+              - auto
               - heat
               - "off"
             show_temperature_control: true

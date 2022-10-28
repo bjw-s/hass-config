@@ -9,5 +9,11 @@ trigger:
     type: action
     subtype: press_1
     discovery_id: 0x0000000001716b46 action_press_1
+  - platform: device
+    domain: mqtt
+    device_id: ac295e311ee3c53531cb01757bec6180
+    type: action
+    subtype: press_1
+    discovery_id: 0x00000000017611b0 action_press_1
 action:
   - scene: scene.attic_hallway_lights_on

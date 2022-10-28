@@ -7,24 +7,31 @@ trigger:
     to: 'on'
 
 action:
+  # Turn off the heat
+  - service: climate.set_preset_mode
+    data:
+      entity_id:
+        - climate.downstairs_living_room
+      preset_mode: away
+
   # Turn off lights 1st floor
   - service: input_select.select_option
-    data:  
+    data:
       entity_id: input_select.downstairs_hallway_lights_scene
       option: 'Off'
 
   - service: input_select.select_option
-    data:  
+    data:
       entity_id: input_select.downstairs_living_room_lights_scene
       option: 'Off'
 
   - service: input_select.select_option
-    data:  
+    data:
       entity_id: input_select.downstairs_dining_area_lights_scene
       option: 'Off'
 
   - service: input_select.select_option
-    data:  
+    data:
       entity_id: input_select.downstairs_kitchen_lights_scene
       option: 'Off'
 

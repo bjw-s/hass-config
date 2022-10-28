@@ -11,6 +11,7 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.util import Throttle
 import voluptuous as vol
 
+from .collector.deafvalapp import DeAfvalappCollector
 from .collector.icalendar import IcalendarCollector
 from .collector.mijnafvalwijzer import MijnAfvalWijzerCollector
 from .collector.opzet import OpzetCollector
@@ -30,10 +31,11 @@ from .const.const import (
     PARALLEL_UPDATES,
     SCAN_INTERVAL,
     SENSOR_COLLECTORS_AFVALWIJZER,
+    SENSOR_COLLECTORS_DEAFVALAPP,
     SENSOR_COLLECTORS_ICALENDAR,
     SENSOR_COLLECTORS_OPZET,
+    SENSOR_COLLECTORS_RD4,
     SENSOR_COLLECTORS_XIMMIO,
-    SENSOR_COLLECTOR_RD4,
     STARTUP_MESSAGE,
 )
 from .sensor_custom import CustomSensor
@@ -123,7 +125,20 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
                     default_label,
                 )
             )
-        elif provider == SENSOR_COLLECTOR_RD4:
+        elif provider == SENSOR_COLLECTORS_DEAFVALAPP:
+            collector = await hass.async_add_executor_job(
+                partial(
+                    DeAfvalappCollector,
+                    provider,
+                    postal_code,
+                    street_number,
+                    suffix,
+                    exclude_pickup_today,
+                    exclude_list,
+                    default_label,
+                )
+            )
+        elif provider == SENSOR_COLLECTORS_RD4:
             collector = await hass.async_add_executor_job(
                 partial(
                     Rd4Collector,
@@ -220,7 +235,17 @@ class AfvalwijzerData(object):
                     exclude_list,
                     default_label,
                 )
-            elif provider == SENSOR_COLLECTOR_RD4:
+            elif provider == SENSOR_COLLECTORS_DEAFVALAPP:
+                collector = DeAfvalappCollector(
+                    provider,
+                    postal_code,
+                    street_number,
+                    suffix,
+                    exclude_pickup_today,
+                    exclude_list,
+                    default_label,
+                )
+            elif provider == SENSOR_COLLECTORS_RD4:
                 collector = Rd4Collector(
                     provider,
                     postal_code,

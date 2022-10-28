@@ -10,6 +10,11 @@ from ..const.const import (
     SENSOR_COLLECTORS_AFVALWIJZER,
 )
 
+# import sys
+# def excepthook(type, value, traceback):
+#     _LOGGER.error(value)
+# sys.excepthook = excepthook
+
 
 class MijnAfvalWijzerCollector(object):
     def __init__(
@@ -69,7 +74,7 @@ class MijnAfvalWijzerCollector(object):
         try:
             json_response = raw_response.json()
         except ValueError:
-            raise ValueError("No JSON data received from " + url)
+            raise ValueError("Invalid and/or no JSON data received from " + url)
 
         if not json_response:
             _LOGGER.error("Address not found!")
@@ -80,8 +85,8 @@ class MijnAfvalWijzerCollector(object):
                 json_response["ophaaldagen"]["data"]
                 + json_response["ophaaldagenNext"]["data"]
             )
-        except ValueError:
-            raise ValueError("Invalid and/or no JSON data received from " + url)
+        except KeyError:
+            raise KeyError("Invalid and/or no JSON data received from " + url)
 
         try:
             waste_data_with_today = {}

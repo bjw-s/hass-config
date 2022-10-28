@@ -1,23 +1,48 @@
 ---
 sonos_say:
   alias: "Sonos TTS script"
+  description: "Send a TTS message to Sonos speakers"
+  fields:
+    sonos_entity:
+      name: Sonos Entity
+      description: The entity / entities to send the command to
+      required: true
+      selector:
+        entity:
+          multiple: true
+          domain: media_player
+          integration: sonos_cloud
+    message:
+      name: Message
+      description: The message to play
+      required: true
+      selector:
+        text:
+    language:
+      name: Language
+      description: The language of the message
+      required: true
+      selector:
+        select:
+          mode: list
+          options:
+            - label: Dutch
+              value: nl
+            - label: English
+              value: en
+    volume:
+      name: Volume
+      description: The volume of the message
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
   sequence:
-    - service: sonos.snapshot
-      data_template:
+    - service: media_player.play_media
+      data:
         entity_id: "{{ sonos_entity }}"
-    - service: media_player.unjoin
-      data_template:
-        entity_id: "{{ sonos_entity }}"
-    - service: media_player.volume_set
-      data_template:
-        entity_id: "{{ sonos_entity }}"
-        volume_level: "{{ volume }}"
-    - service: tts.google_translate_say
-      data_template:
-        entity_id: "{{ sonos_entity }}"
-        message: "{{ message }}"
-        language: "{{ language }}"
-    - delay: "{{ delay }}"
-    - service: sonos.restore
-      data_template:
-        entity_id: "{{ sonos_entity }}"
+        media_content_id: media-source://tts/google_translate?language={{ language }}&message={{ message }}
+        media_content_type: music
+        extra:
+          volume: "{{ volume }}"
