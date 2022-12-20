@@ -1,6 +1,0 @@
----
-name: Upstairs Bedroom - Lights - Ceiling - On
-entities:
-  light.upstairs_bedroom_ceiling:
-    state: 'on'
-    brightness: 254

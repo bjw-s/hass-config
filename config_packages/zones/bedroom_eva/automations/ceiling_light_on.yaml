@@ -1,0 +1,48 @@
+---
+id: bedroom_eva_ceiling_light_on
+alias: Bedroom Eva - Ceiling light on
+max_exceeded: silent
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_1_and_3
+    discovery_id: 0x00000000017579ae action_press_1_and_3
+  - platform: device
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_1
+    discovery_id: 0x00000000017579ae action_press_1
+  - platform: device
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_3
+    discovery_id: 0x00000000017579ae action_press_3
+action:
+  - choose:
+      - conditions:
+          - alias: "Early morning"
+            condition: state
+            entity_id: sensor.system_time_of_day
+            state: "early_morning"
+        sequence:
+          - service: scene.turn_on
+            data:
+              entity_id: scene.bedroom_eva_lights_ceiling_on
+              transition: 60
+
+    # - conditions:
+    #     - condition: state
+    #       entity_id: light.bedroom_eva_ceiling
+    #       state: 'on'
+    #   sequence:
+    #     - scene: scene.bedroom_eva_lights_ceiling_off
+
+    # Default
+    default:
+      - service: scene.turn_on
+        data:
+          entity_id: scene.bedroom_eva_lights_ceiling_on

@@ -1,0 +1,16 @@
+---
+id: bedroom_nightstands_off_when_ceiling_light_on_in_morning
+alias: Bedroom - Nightstands off when ceiling light on in morning
+trigger:
+  - platform: state
+    entity_id: light.bedroom_ceiling
+    from: "off"
+    to: "on"
+condition:
+  - alias: "Early morning"
+    condition: state
+    entity_id: sensor.system_time_of_day
+    state: "early_morning"
+action:
+  - service: scene.turn_on
+    entity_id: scene.bedroom_lights_nightstands_off

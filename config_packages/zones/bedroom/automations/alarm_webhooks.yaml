@@ -1,0 +1,29 @@
+---
+id: bedroom_alarm_webhooks
+alias: Bedroom - Alarm Webhooks
+trigger:
+  - platform: webhook
+    webhook_id: alarm
+variables:
+  payload: "{{ trigger.json }}"
+action:
+  - choose:
+    # Handle alarm_snoozed
+    - conditions:
+        - condition: template
+          value_template: |
+            {{ payload.event_type == 'alarm_snoozed' }}
+      sequence:
+        - service: counter.increment
+          data:
+            entity_id: counter.alarm_{{ payload.event_details.alarm }}_snoozecount
+
+    # Handle alarm_stopped
+    - conditions:
+        - condition: template
+          value_template: |
+            {{ payload.event_type == 'alarm_stopped' }}
+      sequence:
+        - service: counter.reset
+          data:
+            entity_id: counter.alarm_{{ payload.event_details.alarm }}_snoozecount

@@ -1,0 +1,41 @@
+---
+id: bedroom_nightstand_manyie_toggle
+alias: Bedroom - Nightstand ManYie toggle
+trigger:
+  # Bernd
+  - platform: device
+    domain: mqtt
+    device_id: 1094c233895936fce0eedd6693f8361e
+    type: action
+    subtype: arrow_left_click
+    discovery_id: 0x84ba20fffe80b4cf action_arrow_left_click
+  # ManYie
+  - platform: device
+    domain: mqtt
+    device_id: c2335c6b1dea91ea2cba80e7312e7f4a
+    type: action
+    subtype: "on"
+    discovery_id: 0x84ba20fffe54b545 action_on
+  - platform: device
+    domain: mqtt
+    device_id: c2335c6b1dea91ea2cba80e7312e7f4a
+    type: action
+    subtype: "off"
+    discovery_id: 0x84ba20fffe54b545 action_off
+action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.bedroom_nightstand_manyie
+        state: 'off'
+      sequence:
+        - scene: scene.bedroom_lights_nightstand_manyie_dimmed
+    - conditions:
+      - condition: state
+        entity_id: light.bedroom_nightstand_manyie
+        state: 'on'
+      sequence:
+        - scene: scene.bedroom_lights_nightstand_manyie_off
+
+    # Default
+    default: []

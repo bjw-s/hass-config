@@ -1,5 +1,0 @@
----
-platform: group
-name: Downstairs dining area
-entities:
-  - light.downstairs_dining_area_ceiling

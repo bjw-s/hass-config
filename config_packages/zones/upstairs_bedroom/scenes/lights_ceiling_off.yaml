@@ -1,5 +1,0 @@
----
-name: Upstairs Bedroom - Lights - Ceiling - Off
-entities:
-  light.upstairs_bedroom_ceiling:
-    state: 'off'

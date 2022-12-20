@@ -1,0 +1,6 @@
+---
+name: Bedroom Eva - Lights - Ceiling - Dimmed
+entities:
+  light.bedroom_eva_ceiling:
+    state: 'on'
+    brightness: 100

@@ -1,0 +1,21 @@
+---
+id: bedroom_trigger_bedtime_mode
+alias: Bedroom - Trigger bedtime mode
+trigger:
+  - platform: state
+    entity_id: input_boolean.bedroom_mf_in_bed
+    to: "on"
+  - platform: state
+    entity_id: input_boolean.bedroom_bs_in_bed
+    to: "on"
+condition:
+  and:
+    - condition: template
+      value_template: |
+        {{ is_state('input_boolean.bedroom_mf_in_bed', 'on') and is_state('input_boolean.bedroom_bs_in_bed', 'on') }}
+    - condition: state
+      entity_id: input_boolean.home_modes_bedtime_mode
+      state: 'off'
+action:
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.home_modes_bedtime_mode

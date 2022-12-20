@@ -3,7 +3,7 @@ platform: template
 sensors:
   downstairs_kitchen_is_dark:
     icon_template: >
-      {%- if (states('sensor.downstairs_kitchen_motion_sensor_illuminance_lux') | float(0)) < (states('input_number.downstairs_kitchen_is_dark_lux') | float(0)) -%} 
+      {%- if (states('sensor.downstairs_kitchen_illuminance') | float(0)) < (states('input_number.downstairs_kitchen_is_dark_lux') | float(0)) -%}
         mdi:brightness-4
       {%- else -%}
         mdi:brightness-5
@@ -11,6 +11,6 @@ sensors:
     value_template: >
       {{
         (states('input_number.downstairs_kitchen_is_dark_lux') | float(0)) > 0
-        and 
-        (states('sensor.downstairs_kitchen_motion_sensor_illuminance_lux') | float(0)) < (states('input_number.downstairs_kitchen_is_dark_lux') | float(0)) 
+        and
+        (states('sensor.downstairs_kitchen_illuminance') | float(0)) < (states('input_number.downstairs_kitchen_is_dark_lux') | float(0))
       }}

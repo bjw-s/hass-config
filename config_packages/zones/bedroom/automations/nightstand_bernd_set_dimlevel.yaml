@@ -1,0 +1,67 @@
+---
+id: bedroom_nightstand_bernd_set_dimlevel
+alias: Bedroom - Nightstand Bernd set dimlevel
+mode: restart
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 1094c233895936fce0eedd6693f8361e
+    type: action
+    subtype: brightness_move_up
+    discovery_id: 0x84ba20fffe80b4cf action_brightness_move_up
+    id: "brightness_up"
+  - platform: device
+    domain: mqtt
+    device_id: 1094c233895936fce0eedd6693f8361e
+    type: action
+    subtype: brightness_move_down
+    discovery_id: 0x84ba20fffe80b4cf action_brightness_move_down
+    id: "brightness_down"
+  - platform: device
+    domain: mqtt
+    device_id: 1094c233895936fce0eedd6693f8361e
+    type: action
+    subtype: brightness_stop
+    discovery_id: 0x84ba20fffe80b4cf action_brightness_stop
+    id: "brightness_stop"
+
+variables:
+  target: light.bedroom_nightstand_bernd
+  min_brightness: 0
+  max_brightness: 254
+  percentage: |
+    {% if trigger.id == 'brightness_up' -%}
+      10
+    {%- else -%}
+      -10
+    {%- endif %}
+
+action:
+  - alias: "choose brightness direction based on trigger"
+    choose:
+      - conditions:
+          - or:
+              - condition: trigger
+                id: brightness_up
+              - condition: trigger
+                id: brightness_down
+        sequence:
+          - repeat:
+              until:
+                - or:
+                    - condition: trigger
+                      id: "brightness_stop"
+                    - condition: template
+                      value_template: |
+                        {{ ((state_attr(target, 'brightness')/max_brightness * 100) | int ) + (percentage | int) <= min_brightness }}
+                    - condition: template
+                      value_template: |
+                        {{ ((state_attr(target, 'brightness')/max_brightness * 100) | int ) + (percentage | int) > max_brightness }}
+              sequence:
+                - service: light.turn_on
+                  target:
+                    entity_id: "{{ target }}"
+                  data:
+                    brightness_step_pct: "{{ percentage }}"
+                    transition: 1
+                - delay: "1"

@@ -1,0 +1,24 @@
+---
+platform: template
+sensors:
+  bedroom_shock_sensor_right_motion:
+    friendly_name: "name: Bedroom - Shock Sensor Right Motion"
+    value_template:  >
+      {% set entity = 'binary_sensor.bedroom_shock_sensor_right_vibration' %}
+      {% set entity_state = states(entity) %}
+      {% if states[entity] %}
+        {% set last_changed = as_timestamp(states[entity].last_changed) %}
+      {% else %}
+        {% set last_changed = 0 %}
+      {% endif %}
+      {{-
+        entity_state == 'on'
+        or
+        (
+          entity_state == 'off'
+          and
+          (
+            (as_timestamp(now()) - last_changed) | round(0)
+          ) < 300
+        )
+      -}}

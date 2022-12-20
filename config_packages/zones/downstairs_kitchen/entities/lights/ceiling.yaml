@@ -1,8 +1,0 @@
----
-platform: group
-name: Downstairs Kitchen - Ceiling
-entities:
-  - light.downstairs_kitchen_ceiling_front_1
-  - light.downstairs_kitchen_ceiling_front_2
-  - light.downstairs_kitchen_ceiling_rear_1
-  - light.downstairs_kitchen_ceiling_rear_2

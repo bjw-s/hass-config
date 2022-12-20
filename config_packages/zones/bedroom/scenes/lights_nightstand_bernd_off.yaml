@@ -1,0 +1,5 @@
+---
+name: Bedroom - Lights - Nightstand Bernd - Off
+entities:
+  light.bedroom_nightstand_bernd:
+    state: 'off'

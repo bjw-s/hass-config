@@ -1,0 +1,6 @@
+---
+name: Bedroom - Lights - Ceiling - Dimmed
+entities:
+  light.bedroom_ceiling:
+    state: 'on'
+    brightness: 120

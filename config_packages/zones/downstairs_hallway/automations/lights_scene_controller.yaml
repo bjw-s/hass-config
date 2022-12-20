@@ -50,11 +50,11 @@ trigger:
 
   - id: downstairs_hallway_motion_detected
     platform: state
-    entity_id: binary_sensor.downstairs_hallway_motion_sensor_1_occupancy
+    entity_id: binary_sensor.downstairs_hallway_1_motion
     to: 'on'
   - id: downstairs_hallway_motion_detected
     platform: state
-    entity_id: binary_sensor.downstairs_hallway_motion_sensor_2_occupancy
+    entity_id: binary_sensor.downstairs_hallway_2_motion
     to: 'on'
 
   - id: front_door_opened

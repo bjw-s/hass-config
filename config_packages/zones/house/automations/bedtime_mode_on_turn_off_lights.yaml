@@ -12,22 +12,22 @@ action:
       entity_id: scene.backyard_lights_off
 
   - service: input_select.select_option
-    data:  
+    data:
       entity_id: input_select.downstairs_kitchen_lights_scene
       option: 'Off'
 
   - service: input_select.select_option
-    data:  
+    data:
       entity_id: input_select.downstairs_living_room_lights_scene
       option: 'Off'
 
   - service: input_select.select_option
-    data:  
+    data:
       entity_id: input_select.downstairs_dining_area_lights_scene
       option: 'Off'
 
   - service: input_select.select_option
-    data:  
+    data:
       entity_id: input_select.attic_office_lights_scene
       option: 'Off'
 
@@ -36,4 +36,4 @@ action:
       entity_id: scene.attic_hallway_lights_off
 
   - service: light.turn_off
-    entity_id: light.upstairs_bedroom_ceiling
+    entity_id: light.bedroom_ceiling

@@ -7,246 +7,200 @@ type: 'custom:grid-layout'
 layout:
   #default
   grid-column-gap: var(--custom-layout-card-padding)
-  grid-template-columns: 0 repeat(3, 1fr) 0
+  grid-template-columns: 0 repeat(4, 1fr) 0
   grid-template-rows: auto
 
   grid-template-areas: |
-    ".       downstairs_living_room  attic        .          ."
-    ".       bedroom      upstairs_bedroom_eva  bathroom   ."
-    ".       garage       other        .          ."
+    ".       downstairs_living_room  .                     attic_office     ."
+    ".       bedroom                 bedroom_eva  upstairs_office  ."
+    ".       bathroom                garage                other            ."
 
   mediaquery:
     #phone
     "(max-width: 800px)":
       grid-template-columns: 0 repeat(1, 1fr) 0
       grid-template-areas: |
-        ".       downstairs_living_room   ."
-        ".       garage        ."
-        ".       bedroom       ."
-        ".       upstairs_bedroom_eva   ."
-        ".       bathroom      ."
-        ".       attic         ."
-        ".       other         ."
+        ".       downstairs_living_room  ."
+        ".       upstairs_office         ."
+        ".       bedroom                 ."
+        ".       bedroom_eva    ."
+        ".       attic_office            ."
+        ".       bathroom                ."
+        ".       garage                  ."
+        ".       other                   ."
 
     #tablet portrait
     "(max-width: 1000px)":
       grid-gap: calc(var(--custom-layout-card-padding))
       grid-template-columns: 0 repeat(2, 1fr) 0
       grid-template-areas: |
-        ".       downstairs_living_room  garage       ."
-        ".       bedroom      upstairs_bedroom_eva  ."
-        ".       bathroom     .            ."
-        ".       attic        other        ."
+        ".       downstairs_living_room  upstairs_office       ."
+        ".       bedroom                 bedroom_eva  ."
+        ".       attic_office            bathroom              ."
+        ".       garage                  other                 ."
 
 cards:
   #################################################
   #                 Downstairs living room                   #
   #################################################
 
-  - type: grid
-    title: Downstairs living room
+  - type: 'custom:vertical-stack-in-card'
+    title: Living room
     view_layout:
       grid-area: downstairs_living_room
-    columns: 2
-    square: false
     cards:
-      - type: 'custom:mini-graph-card'
-        entities:
-          - entity: sensor.downstairs_living_room_thermostat_temperature
-            name: Temperature
-        font_size: 75
-        line_color: '#3498db'
+      - type: custom:mushroom-climate-card
+        name: Thermostat
+        entity: climate.living_room
+        hvac_modes:
+          - auto
+          - heat
+          - 'off'
+        show_temperature_control: true
 
-      - type: 'custom:mini-graph-card'
+      - type: entities
         entities:
-          - entity: sensor.downstairs_living_room_thermostat_humidity
+          - entity: sensor.living_room_humidity
             name: Humidity
-        color_thresholds:
-          - color: '#e74c3c'
-            value: 40
-          - color: '#29AB87'
-            value: 50
-          - color: '#e74c3c'
-            value: 51
-        font_size: 75
 
   #################################################
   #                   Bedroom                     #
   #################################################
 
-  - type: grid
+  - type: 'custom:vertical-stack-in-card'
     title: Bedroom
     view_layout:
       grid-area: bedroom
-    columns: 2
-    square: false
     cards:
-      - type: 'custom:mini-graph-card'
-        entities:
-          - entity: sensor.upstairs_bedroom_multisensor_temperature
-            name: Temperature
-        font_size: 75
-        line_color: '#3498db'
+      - type: custom:mushroom-climate-card
+        name: Thermostat
+        entity: climate.bedroom
+        hvac_modes:
+          - auto
+          - heat
+          - 'off'
+        show_temperature_control: true
 
-      - type: 'custom:mini-graph-card'
+      - type: entities
         entities:
-          - entity: sensor.upstairs_bedroom_multisensor_humidity
+          - entity: sensor.bedroom_humidity
             name: Humidity
-        color_thresholds:
-          - color: '#e74c3c'
-            value: 40
-          - color: '#29AB87'
-            value: 50
-          - color: '#e74c3c'
-            value: 51
-        font_size: 75
 
   #################################################
   #                Bedroom Eva                    #
   #################################################
 
-  - type: grid
+  - type: 'custom:vertical-stack-in-card'
     title: Bedroom Eva
     view_layout:
-      grid-area: upstairs_bedroom_eva
-    columns: 2
-    square: false
+      grid-area: bedroom_eva
     cards:
-      - type: 'custom:mini-graph-card'
-        entities:
-          - entity: sensor.upstairs_bedroom_eva_multisensor_temperature
-            name: Temperature
-        font_size: 75
-        line_color: '#3498db'
+      - type: custom:mushroom-climate-card
+        name: Thermostat
+        entity: climate.bedroom_eva
+        hvac_modes:
+          - auto
+          - heat
+          - 'off'
+        show_temperature_control: true
 
-      - type: 'custom:mini-graph-card'
+      - type: entities
         entities:
-          - entity: sensor.upstairs_bedroom_eva_multisensor_humidity
+          - entity: sensor.bedroom_eva_humidity
             name: Humidity
-        color_thresholds:
-          - color: '#e74c3c'
-            value: 40
-          - color: '#29AB87'
-            value: 50
-          - color: '#e74c3c'
-            value: 51
-        font_size: 75
 
   #################################################
   #                  Bathroom                     #
   #################################################
 
-  - type: grid
+  - type: 'custom:vertical-stack-in-card'
     title: Bathroom
     view_layout:
       grid-area: bathroom
-    columns: 2
-    square: false
     cards:
-      - type: 'custom:mini-graph-card'
+      - type: entities
         entities:
           - entity: sensor.upstairs_bathroom_multisensor_temperature
             name: Temperature
-        font_size: 75
-        line_color: '#3498db'
-
-      - type: 'custom:mini-graph-card'
-        entities:
           - entity: sensor.upstairs_bathroom_multisensor_humidity
             name: Humidity
-        color_thresholds:
-          - color: '#e74c3c'
-            value: 40
-          - color: '#29AB87'
-            value: 50
-          - color: '#e74c3c'
-            value: 51
-        font_size: 75
+
+  #################################################
+  #               Upstairs Office                 #
+  #################################################
+
+  - type: 'custom:vertical-stack-in-card'
+    title: Upstairs office
+    view_layout:
+      grid-area: upstairs_office
+    cards:
+      - type: custom:mushroom-climate-card
+        name: Thermostat
+        entity: climate.upstairs_office
+        hvac_modes:
+          - auto
+          - heat
+          - 'off'
+        show_temperature_control: true
+
+      - type: entities
+        entities:
+          - entity: sensor.upstairs_office_humidity
+            name: Humidity
+
 
   #################################################
   #                 Attic Office                  #
   #################################################
 
-  - type: grid
+  - type: 'custom:vertical-stack-in-card'
     title: Attic office
     view_layout:
-      grid-area: attic
-    columns: 2
-    square: false
+      grid-area: attic_office
     cards:
-      - type: 'custom:mini-graph-card'
-        entities:
-          - entity: sensor.attic_office_multisensor_temperature
-            name: Temperature
-        font_size: 75
-        line_color: '#3498db'
+      - type: custom:mushroom-climate-card
+        name: Thermostat
+        entity: climate.attic_office
+        hvac_modes:
+          - auto
+          - heat
+          - 'off'
+        show_temperature_control: true
 
-      - type: 'custom:mini-graph-card'
+      - type: entities
         entities:
-          - entity: sensor.attic_office_multisensor_humidity
+          - entity: sensor.attic_office_humidity
             name: Humidity
-        color_thresholds:
-          - color: '#e74c3c'
-            value: 40
-          - color: '#29AB87'
-            value: 50
-          - color: '#e74c3c'
-            value: 51
-        font_size: 75
 
   #################################################
   #                    Garage                     #
   #################################################
 
-  - type: grid
+  - type: 'custom:vertical-stack-in-card'
     title: Garage
     view_layout:
       grid-area: garage
-    columns: 2
-    square: false
     cards:
-      - type: 'custom:mini-graph-card'
+      - type: entities
         entities:
           - entity: sensor.downstairs_garage_multisensor_temperature
             name: Temperature
-        font_size: 75
-        line_color: '#3498db'
-
-      - type: 'custom:mini-graph-card'
-        entities:
           - entity: sensor.downstairs_garage_multisensor_humidity
             name: Humidity
-        color_thresholds:
-          - color: '#e74c3c'
-            value: 40
-          - color: '#29AB87'
-            value: 50
-          - color: '#e74c3c'
-            value: 51
-        font_size: 75
 
   #################################################
   #                     Other                     #
   #################################################
 
-  - type: grid
+  - type: 'custom:vertical-stack-in-card'
     title: Other
     view_layout:
       grid-area: other
-    columns: 2
-    square: false
     cards:
-      - type: 'custom:mini-graph-card'
-        icon: mdi:thermometer
+      - type: entities
         entities:
           - entity: sensor.downstairs_hallway_temperature
             name: Hallway temperature
-        font_size: 75
-        line_color: '#3498db'
-
-      - type: 'custom:mini-graph-card'
-        entities:
+            icon: mdi:thermometer
           - entity: sensor.driveway_motion_sensor_temperature
             name: Outside temperature
-        font_size: 75
-        line_color: '#3498db'

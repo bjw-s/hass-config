@@ -1,0 +1,35 @@
+---
+id: bedroom_ceiling_light_toggle
+alias: Bedroom - Ceiling light toggle
+trigger:
+  # Bernd
+  - platform: device
+    domain: mqtt
+    device_id: 1094c233895936fce0eedd6693f8361e
+    type: action
+    subtype: arrow_right_click
+    discovery_id: 0x84ba20fffe80b4cf action_arrow_right_click
+  # ManYie
+  - platform: device
+    domain: mqtt
+    device_id: c2335c6b1dea91ea2cba80e7312e7f4a
+    type: action
+    subtype: arrow_left_click
+    discovery_id: 0x84ba20fffe54b545 action_arrow_left_click
+action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.bedroom_ceiling
+        state: 'off'
+      sequence:
+        - scene: scene.bedroom_lights_ceiling_on
+    - conditions:
+      - condition: state
+        entity_id: light.bedroom_ceiling
+        state: 'on'
+      sequence:
+        - scene: scene.bedroom_lights_ceiling_off
+
+    # Default
+    default: []

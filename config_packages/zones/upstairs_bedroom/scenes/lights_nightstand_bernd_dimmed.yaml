@@ -1,7 +1,0 @@
----
-name: Upstairs Bedroom - Lights - Nightstand Bernd - Dimmed
-entities:
-  light.upstairs_bedroom_nightstand_bernd:
-    state: 'on'
-    brightness: 50
-    color_temp: 364

@@ -5,4 +5,4 @@ all_sonos:
   - media_player.upstairs_office_sonos
   - media_player.downstairs_living_room_sonos
   - media_player.attic_office_sonos
-  - media_player.upstairs_bedroom_eva_sonos
+  - media_player.bedroom_eva_sonos

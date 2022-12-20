@@ -1,0 +1,7 @@
+---
+name: Bedroom - Lights - Nightstand ManYie - Dimmed
+entities:
+  light.bedroom_nightstand_manyie:
+    state: 'on'
+    brightness: 50
+    color_temp: 364

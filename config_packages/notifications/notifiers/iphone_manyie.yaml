@@ -8,4 +8,4 @@
 platform: group
 name: iphone_manyie
 services:
-  - service: mobile_app_iphone_man_yie_ios
+  - service: mobile_app_iphone_12_my

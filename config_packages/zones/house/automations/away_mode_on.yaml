@@ -11,7 +11,7 @@ action:
   - service: climate.set_preset_mode
     data:
       entity_id:
-        - climate.downstairs_living_room
+        - climate.living_room
       preset_mode: away
 
   # Turn off lights 1st floor
@@ -42,11 +42,11 @@ action:
 
   - service: scene.turn_on
     data:
-      entity_id: scene.upstairs_bedroom_lights_off
+      entity_id: scene.bedroom_lights_off
 
   - service: scene.turn_on
     data:
-      entity_id: scene.upstairs_bedroom_eva_lights_off
+      entity_id: scene.bedroom_eva_lights_off
 
   # Turn off lights 3rd floor
   - service: scene.turn_on

@@ -1,0 +1,59 @@
+---
+id: bedroom_eva_nightlight_toggle
+alias: Bedroom Eva - Nightlight toggle
+max_exceeded: silent
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 77f07464c254b4d982d95b91063ab43e
+    type: action
+    subtype: 'on'
+    discovery_id: 0xcc86ecfffe8cc6fa action_on
+  - platform: device
+    domain: mqtt
+    device_id: 77f07464c254b4d982d95b91063ab43e
+    type: action
+    subtype: 'off'
+    discovery_id: 0xcc86ecfffe8cc6fa action_off
+  - platform: device
+    domain: mqtt
+    device_id: 77f07464c254b4d982d95b91063ab43e
+    type: action
+    subtype: arrow_right_click
+    discovery_id: 0xcc86ecfffe8cc6fa action_arrow_right_click
+  - platform: device
+    domain: mqtt
+    device_id: 77f07464c254b4d982d95b91063ab43e
+    type: action
+    subtype: arrow_left_click
+    discovery_id: 0xcc86ecfffe8cc6fa action_arrow_left_click
+action:
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: light.bedroom_eva_nightlight
+          state: 'off'
+        - alias: "Early morning"
+          condition: state
+          entity_id: sensor.system_time_of_day
+          state: "early_morning"
+      sequence:
+        - service: scene.turn_on
+          data:
+            entity_id: scene.bedroom_eva_lights_nightlight_dimmed
+            transition: 120
+    - conditions:
+        - condition: state
+          entity_id: light.bedroom_eva_nightlight
+          state: 'off'
+      sequence:
+        - scene: scene.bedroom_eva_lights_nightlight_dimmed
+    - conditions:
+        - condition: state
+          entity_id: light.bedroom_eva_nightlight
+          state: 'on'
+      sequence:
+        - scene: scene.bedroom_eva_lights_nightlight_off
+
+    # Default
+    default: []

@@ -19,7 +19,7 @@
 #     # No more motion, turn off the lights
 #     - conditions:
 #         - condition: state
-#           entity_id: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
+#           entity_id: binary_sensor.downstairs_kitchen_motion
 #           state: 'off'
 #       sequence:
 #         - service: scene.turn_on
@@ -30,7 +30,7 @@
 #     # Motion still detected, restart the timer
 #     - conditions:
 #         - condition: state
-#           entity_id: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
+#           entity_id: binary_sensor.downstairs_kitchen_motion
 #           state: 'on'
 #       sequence:
 #         - service: automation.trigger

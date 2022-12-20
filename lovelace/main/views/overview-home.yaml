@@ -108,39 +108,6 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - type: custom:mushroom-climate-card
-            name: Thermostat
-            entity: climate.downstairs_living_room
-            hvac_modes:
-              - auto
-              - heat
-              - "off"
-            show_temperature_control: true
-
-          - type: 'custom:vertical-stack-in-card'
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Power usage
-                secondary: |-
-                  {{ states(entity) }} W
-                icon: mdi:home-lightning-bolt
-                entity: sensor.dsmr_reading_electricity_currently_delivered_watt
-
-              - type: custom:mini-graph-card
-                entities:
-                  - entity: sensor.dsmr_reading_electricity_currently_delivered_watt
-                    color: orange
-                group: true
-                show:
-                  icon: false
-                  name: false
-                  state: false
-                  graph: bar
-                hours_to_show: 3
-                points_per_hour: 12
-
-      - type: horizontal-stack
-        cards:
           - type: custom:mushroom-template-card
             entity: switch.hallway_doorbell_chime_muted
             name: Doorbell?
@@ -170,6 +137,40 @@ cards:
           - type: custom:mushroom-vacuum-card
             entity: vacuum.valetudo_upstairs
             name: Mickey
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-climate-card
+            name: Thermostat living room
+            entity: climate.living_room
+            hvac_modes: []
+            show_temperature_control: false
+            fill_container: true
+            tap_action:
+              action: navigate
+              navigation_path: temperatures
+
+          - type: 'custom:vertical-stack-in-card'
+            cards:
+              - type: custom:mushroom-template-card
+                primary: Power usage
+                secondary: |-
+                  {{ states(entity) }} W
+                icon: mdi:home-lightning-bolt
+                entity: sensor.dsmr_reading_electricity_currently_delivered_watt
+
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.dsmr_reading_electricity_currently_delivered_watt
+                    color: orange
+                group: true
+                show:
+                  icon: false
+                  name: false
+                  state: false
+                  graph: bar
+                hours_to_show: 3
+                points_per_hour: 12
 
   #################################################
   #                                               #

@@ -1,0 +1,7 @@
+---
+name: Bedroom - Lights - Nightstands - Dimmed
+entities:
+  light.bedroom_nightstands:
+    state: 'on'
+    brightness: 50
+    color_temp: 364

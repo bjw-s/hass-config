@@ -9,7 +9,15 @@ entities:
     state: 'on'
     brightness: 150
     color_temp: 366
-  light.downstairs_living_room_speaker_right:
-    state: 'on'
+  light.downstairs_living_room_speaker_left:
+    # TODO: Revert when Christmas is over
+    # state: 'on'
+    state: 'off'
     brightness: 150
     color_temp: 366
+  light.downstairs_living_room_speaker_right:
+    state: 'off'
+
+  # TODO: Remove when Christmas is over
+  switch.spare_p1eu_1:
+    state: 'on'

@@ -67,7 +67,7 @@ cards:
           - play_pause_stop
 
       - type: custom:mushroom-media-player-card
-        entity: media_player.upstairs_bedroom_eva_sonos
+        entity: media_player.bedroom_eva_sonos
         name: Bedroom Eva
         icon_type: entity-picture
         media_controls:
@@ -107,7 +107,7 @@ cards:
               {% else %}
                 grey
               {% endif %}
-            entity: sensor.downstairs_living_room_motion_sensor_illuminance_lux
+            entity: sensor.downstairs_living_room_illuminance
 
       - type: custom:mushroom-media-player-card
         entity: media_player.downstairs_living_room_lg_tv

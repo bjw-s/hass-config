@@ -13,7 +13,7 @@ class DaySensorData(object):
         waste_data_formatted,
         default_label,
     ):
-        TODAY = datetime.today().strftime("%d-%m-%Y")
+        TODAY = datetime.now().strftime("%d-%m-%Y")
 
         self.waste_data_formatted = sorted(
             waste_data_formatted, key=lambda d: d["date"]
@@ -32,33 +32,33 @@ class DaySensorData(object):
         self.data = self._gen_day_sensor_data()
 
     ##########################################################################
-    #  CREATE TODAY, TOMORROW, DOT SENSOR(S)
+    #  GENERATE TODAY, TOMORROW, DOT SENSOR(S)
     ##########################################################################
 
     # Generate sensor data per date
     def __gen_day_sensor(self, date):
-        day = list()
+        day = []
         try:
             for waste in self.waste_data_formatted:
                 item_date = waste["date"]
-                item_name = waste["type"]
                 if item_date == date:
+                    item_name = waste["type"]
                     day.append(item_name)
             if not day:
                 day.append(self.default_label)
         except Exception as err:
-            _LOGGER.error("Other error occurred __gen_day_sensor: %s", err)
+            _LOGGER.error(f"Other error occurred __gen_day_sensor: {err}")
         return day
 
     # Generate sensor data for today, tomorrow, day after tomorrow
     def _gen_day_sensor_data(self):
-        day_sensor = dict()
+        day_sensor = {}
         try:
             day_sensor["today"] = ", ".join(self.waste_data_today)
             day_sensor["tomorrow"] = ", ".join(self.waste_data_tomorrow)
             day_sensor["day_after_tomorrow"] = ", ".join(self.waste_data_dot)
         except Exception as err:
-            _LOGGER.error("Other error occurred _gen_day_sensor_data: %s", err)
+            _LOGGER.error(f"Other error occurred _gen_day_sensor_data: {err}")
         return day_sensor
 
     @property

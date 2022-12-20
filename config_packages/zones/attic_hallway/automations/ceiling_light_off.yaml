@@ -15,5 +15,12 @@ trigger:
     type: action
     subtype: press_2
     discovery_id: 0x00000000017611b0 action_press_2
+  - id: upstairs_hallway_switch_button_2_press
+    platform: device
+    domain: hue
+    device_id: fb2e69655f5862ce3a7c9f4dabc2e086
+    type: initial_press
+    subtype: 2
+    unique_id: f06bfeaf-300a-4094-ab63-823d6d810cc1
 action:
   - scene: scene.attic_hallway_lights_off

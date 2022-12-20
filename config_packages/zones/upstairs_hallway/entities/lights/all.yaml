@@ -1,5 +1,0 @@
----
-platform: group
-name: Upstairs Hallway
-entities:
-  - light.upstairs_hallway_ceiling

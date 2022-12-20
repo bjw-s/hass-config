@@ -1,0 +1,15 @@
+---
+id: bedroom_reset_persons_in_bed
+alias: Bedroom - Reset persons in bed
+trigger:
+  - platform: state
+    entity_id: sensor.system_time_of_day
+    from: "night"
+    to: "early_morning"
+action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.bedroom_mf_in_bed
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.bedroom_bs_in_bed

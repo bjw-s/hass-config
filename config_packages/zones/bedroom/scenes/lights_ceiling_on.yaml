@@ -1,0 +1,6 @@
+---
+name: Bedroom - Lights - Ceiling - On
+entities:
+  light.bedroom_ceiling:
+    state: 'on'
+    brightness: 254

@@ -1,0 +1,16 @@
+---
+id: bedroom_eva_nightlight_automatic_dim
+alias: Bedroom Eva - Nightlight automatic dim
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: light.bedroom_eva_nightlight
+    to: 'on'
+condition:
+  - condition: time
+    after: "18:30:00"
+    before: "07:00:00"
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_eva_lights_nightlight_dimmed

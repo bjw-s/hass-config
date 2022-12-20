@@ -116,7 +116,7 @@ cards:
                 name: Door
 
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.downstairs_living_room_motion_sensor_occupancy
+                entity: binary_sensor.downstairs_living_room_motion
                 name: Motion
 
           - type: vertical-stack
@@ -140,7 +140,7 @@ cards:
           - type: vertical-stack
             cards:
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.downstairs_dining_area_motion_sensor_occupancy
+                entity: binary_sensor.downstairs_dining_area_motion
                 name: Motion
 
           - type: vertical-stack
@@ -164,7 +164,7 @@ cards:
           - type: vertical-stack
             cards:
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.downstairs_kitchen_motion_sensor_occupancy
+                entity: binary_sensor.downstairs_kitchen_motion
                 name: Motion
 
   #################################################
@@ -234,7 +234,7 @@ cards:
                 name: Balcony door
 
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.attic_office_motion_sensor_occupancy
+                entity: binary_sensor.attic_office_motion
                 name: Motion
 
           - type: vertical-stack

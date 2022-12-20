@@ -7,7 +7,7 @@ sensors:
       {%- if states('light.downstairs_dining_area_ceiling') == "on" -%}
         {% set is_dark_lux = is_dark_lux + 10 %}
       {%- endif -%}
-      {%- if (states('sensor.downstairs_dining_area_motion_sensor_illuminance_lux') | float(0)) < is_dark_lux -%}
+      {%- if (states('sensor.downstairs_dining_area_illuminance') | float(0)) < is_dark_lux -%}
         mdi:brightness-4
       {%- else -%}
         mdi:brightness-5
@@ -18,5 +18,5 @@ sensors:
         {% set is_dark_lux = is_dark_lux + 10 %}
       {%- endif -%}
       {{
-        (states('sensor.downstairs_dining_area_motion_sensor_illuminance_lux') | float(0)) < is_dark_lux
+        (states('sensor.downstairs_dining_area_illuminance') | float(0)) < is_dark_lux
       }}

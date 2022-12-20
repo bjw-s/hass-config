@@ -11,7 +11,7 @@ action:
   - service: climate.set_preset_mode
     data:
       entity_id:
-        - climate.downstairs_living_room
+        - climate.living_room
       preset_mode: home
 
   # Reset automation.home_alarm_arm_automatically

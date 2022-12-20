@@ -1,7 +1,7 @@
 ---
 name: Downstairs Kitchen - Lights - Full Brightness
 entities:
-  light.downstairs_kitchen_ceiling:
+  light.downstairs_kitchen:
     state: 'on'
     brightness: 254
     color_temp: 285

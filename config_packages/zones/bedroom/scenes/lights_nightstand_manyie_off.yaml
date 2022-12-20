@@ -1,0 +1,5 @@
+---
+name: Bedroom - Lights - Nightstand ManYie - Off
+entities:
+  light.bedroom_nightstand_manyie:
+    state: 'off'

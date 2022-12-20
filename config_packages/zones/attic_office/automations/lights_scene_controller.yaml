@@ -33,18 +33,18 @@ trigger:
     discovery_id: 0x00000000017611a7 action_press_4
     id: switch-right-bottom-click
   - platform: device
-    domain: mqtt
-    device_id: df0f3d49be139fa0b32df312af3d9bf8
-    type: action
-    subtype: on-press
-    discovery_id: 0x0017880110493d0c action_on-press
+    domain: hue
+    device_id: 9917ddec2ef16af8b855f70b76332092
+    type: initial_press
+    subtype: 1
+    unique_id: df6ae429-d35b-453e-a11d-7c34109a4000
     id: remote-on-click
   - platform: device
-    domain: mqtt
-    device_id: df0f3d49be139fa0b32df312af3d9bf8
-    type: action
-    subtype: off-press
-    discovery_id: 0x0017880110493d0c action_off-press
+    domain: hue
+    device_id: 9917ddec2ef16af8b855f70b76332092
+    type: initial_press
+    subtype: 4
+    unique_id: 07167d34-d914-4efd-b7c3-3d8a3cc0481c
     id: remote-off-click
   - id: lights_turned_off
     platform: state

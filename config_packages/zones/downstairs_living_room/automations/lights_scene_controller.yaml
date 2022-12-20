@@ -6,19 +6,19 @@ max_exceeded: silent
 trigger:
   - id: downstairs_living_room_switch_top
     platform: device
-    domain: mqtt
-    device_id: 030ecf5d6e97435dfceeffb7c5e0d5b0
-    type: action
-    subtype: press_1
-    discovery_id: 0x0000000001715691 action_press_1
+    domain: hue
+    device_id: 3edece83f587e6ea9a3943faf8ba29f8
+    type: initial_press
+    subtype: 1
+    unique_id: fe1b1157-c89c-47d7-83f5-b457252948fb
 
   - id: downstairs_living_room_switch_bottom
     platform: device
-    domain: mqtt
-    device_id: 030ecf5d6e97435dfceeffb7c5e0d5b0
-    type: action
-    subtype: press_2
-    discovery_id: 0x0000000001715691 action_press_2
+    domain: hue
+    device_id: 3edece83f587e6ea9a3943faf8ba29f8
+    type: initial_press
+    subtype: 2
+    unique_id: 32367223-1912-4de9-8a2c-8e9063ce66f9
 
   - id: downstairs_living_room_is_dark
     platform: state
@@ -27,7 +27,7 @@ trigger:
 
   - id: downstairs_living_room_motion_detected
     platform: state
-    entity_id: binary_sensor.downstairs_living_room_motion_sensor_occupancy
+    entity_id: binary_sensor.downstairs_living_room_motion
     to: "on"
 
   - id: downstairs_living_room_media_playing

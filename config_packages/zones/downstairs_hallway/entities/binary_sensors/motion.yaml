@@ -4,9 +4,9 @@ sensors:
   downstairs_hallway_motion:
     friendly_name: "Downstairs hallway - Motion"
     value_template:  >
-      {{- 
-        states('binary_sensor.downstairs_hallway_motion_sensor_1_occupancy')  == 'on'
-        or 
-        states('binary_sensor.downstairs_hallway_motion_sensor_2_occupancy')  == 'on'
+      {{-
+        states('binary_sensor.downstairs_hallway_1_motion')  == 'on'
+        or
+        states('binary_sensor.downstairs_hallway_2_motion')  == 'on'
       -}}
     device_class: motion

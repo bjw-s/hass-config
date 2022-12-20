@@ -1,0 +1,5 @@
+---
+name: Bedroom Eva - Lights - Nightlight - Off
+entities:
+  light.bedroom_eva_nightlight:
+    state: 'off'

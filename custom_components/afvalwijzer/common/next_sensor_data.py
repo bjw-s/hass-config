@@ -13,7 +13,7 @@ class NextSensorData(object):
             waste_data_after_date_selected, key=lambda d: d["date"]
         )
 
-        TODAY = datetime.today().strftime("%d-%m-%Y")
+        TODAY = datetime.now().strftime("%d-%m-%Y")
         self.today_date = datetime.strptime(TODAY, "%d-%m-%Y")
         self.default_label = default_label
 
@@ -24,7 +24,7 @@ class NextSensorData(object):
         self.data = self._gen_next_sensor_data()
 
     ##########################################################################
-    #  CREATE NEXT SENSOR(S)
+    #  GENERATE NEXT SENSOR(S)
     ##########################################################################
 
     # Generate sensor next_waste_date
@@ -33,42 +33,42 @@ class NextSensorData(object):
         try:
             next_waste_date = self.waste_data_after_date_selected[0]["date"]
         except Exception as err:
-            _LOGGER.error("Other error occurred _get_next_waste_date: %s", err)
+            _LOGGER.error(f"Other error occurred _get_next_waste_date: {err}")
         return next_waste_date
 
     # Generate sensor next_waste_in_days
     def __get_next_waste_in_days(self):
         next_waste_in_days = self.default_label
         try:
-            next_waste_in_days = abs(self.today_date - self.next_waste_date).days
+            next_waste_in_days = abs(self.today_date - self.next_waste_date).days  # type: ignore
         except Exception as err:
-            _LOGGER.error("Other error occurred _get_next_waste_in_days: %s", err)
+            _LOGGER.error(f"Other error occurred _get_next_waste_in_days: {err}")
         return next_waste_in_days
 
     # Generate sensor next_waste_type
     def __get_next_waste_type(self):
-        next_waste_type = list()
+        next_waste_type = []
         try:
             for waste in self.waste_data_after_date_selected:
                 item_date = waste["date"]
-                item_name = waste["type"]
                 if item_date == self.next_waste_date:
+                    item_name = waste["type"]
                     next_waste_type.append(item_name)
             if not next_waste_type:
                 next_waste_type.append(self.default_label)
         except Exception as err:
-            _LOGGER.error("Other error occurred _get_next_waste_type: %s", err)
+            _LOGGER.error(f"Other error occurred _get_next_waste_type: {err}")
         return next_waste_type
 
     # Generate sensor data for custom sensors
     def _gen_next_sensor_data(self):
-        next_sensor = dict()
+        next_sensor = {}
         try:
             next_sensor["next_date"] = self.next_waste_date
             next_sensor["next_in_days"] = self.next_waste_in_days
             next_sensor["next_type"] = ", ".join(self.next_waste_type)
         except Exception as err:
-            _LOGGER.error("Other error occurred _gen_next_sensor_data: %s", err)
+            _LOGGER.error(f"Other error occurred _gen_next_sensor_data: {err}")
         return next_sensor
 
     @property

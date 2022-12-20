@@ -12,6 +12,7 @@ homeassistant:
   elevation: !env_var SECRET_ZONE_HOME_ELEVATION
   unit_system: metric
   time_zone: Europe/Amsterdam
+  country: NL
 
   external_url: !env_var SECRET_EXTERNAL_URL
   internal_url: !env_var SECRET_INTERNAL_URL

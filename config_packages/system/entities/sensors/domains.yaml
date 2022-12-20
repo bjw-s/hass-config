@@ -1,5 +1,0 @@
----
-platform: template
-sensors:
-  system_domain_hardware:
-    value_template: !env_var SECRET_HARDWARE_DOMAIN
