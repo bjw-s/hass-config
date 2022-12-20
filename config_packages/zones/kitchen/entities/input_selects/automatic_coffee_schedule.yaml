@@ -1,5 +1,5 @@
 ---
-downstairs_kitchen_automatic_coffee_schedule:
+kitchen_automatic_coffee_schedule:
   name: Automatic coffee schedule
   options:
     - 'Off'

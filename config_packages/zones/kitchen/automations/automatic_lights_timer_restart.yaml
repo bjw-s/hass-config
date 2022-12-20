@@ -1,0 +1,21 @@
+# ---
+# id: kitchen_automatic_lights_timer_restart
+# alias: Kitchen - Automatic lights timer (re)start
+# max_exceeded: silent
+# trigger:
+#   - platform: state
+#     entity_id: binary_sensor.kitchen_motion
+#     to: 'on'
+# condition:
+#   and:
+#     - condition: state
+#       entity_id: timer.kitchen_automatic_lights
+#       state: 'active'
+#     - condition: state
+#       entity_id: binary_sensor.kitchen_automatic_lights
+#       state: 'on'
+# action:
+#   - service: timer.start
+#     data:
+#       entity_id: timer.kitchen_automatic_lights
+#       duration: "{{ (states('input_number.automatic_lights_duration_kitchen') | float(0)) * 60 }}"

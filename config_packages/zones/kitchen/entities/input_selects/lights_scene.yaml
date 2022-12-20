@@ -1,6 +1,6 @@
 ---
-downstairs_kitchen_lights_scene:
-  name: Downstairs Kitchen - Lights scene
+kitchen_lights_scene:
+  name: Kitchen - Lights scene
   options:
     - 'Off'
     - Full brightness

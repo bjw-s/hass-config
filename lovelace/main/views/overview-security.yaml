@@ -164,7 +164,7 @@ cards:
           - type: vertical-stack
             cards:
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.downstairs_kitchen_motion
+                entity: binary_sensor.kitchen_motion
                 name: Motion
 
   #################################################

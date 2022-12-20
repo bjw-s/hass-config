@@ -28,9 +28,9 @@ browser_mod:
           type: custom:slider-entity-row
           hide_state: false
 
-        - label: Downstairs Kitchen
+        - label: Kitchen
           type: section
-        - entity: input_number.downstairs_kitchen_is_dark_lux
+        - entity: input_number.kitchen_is_dark_lux
           name: Is dark lux
           type: custom:slider-entity-row
           hide_state: false

@@ -1,5 +1,0 @@
----
-name: Downstairs Kitchen - Lights - Off
-entities:
-  light.downstairs_kitchen:
-    state: 'off'

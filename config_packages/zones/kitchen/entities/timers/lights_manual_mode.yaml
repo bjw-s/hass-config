@@ -1,0 +1,3 @@
+---
+kitchen_lights_manual_mode:
+  restore: true

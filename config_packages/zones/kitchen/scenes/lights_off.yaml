@@ -1,0 +1,5 @@
+---
+name: Kitchen - Lights - Off
+entities:
+  light.kitchen:
+    state: 'off'

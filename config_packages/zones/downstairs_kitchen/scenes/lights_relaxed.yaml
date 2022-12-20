@@ -1,9 +1,0 @@
----
-name: Downstairs Kitchen - Lights - Relaxed
-entities:
-  light.downstairs_kitchen_front:
-    state: 'on'
-    brightness: 100
-    color_temp: 366
-  light.downstairs_kitchen_rear:
-    state: 'off'

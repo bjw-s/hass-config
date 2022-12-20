@@ -32,7 +32,7 @@ action:
 
   - service: input_select.select_option
     data:
-      entity_id: input_select.downstairs_kitchen_lights_scene
+      entity_id: input_select.kitchen_lights_scene
       option: 'Off'
 
   # Turn off lights 2nd floor

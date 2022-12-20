@@ -1,0 +1,11 @@
+---
+platform: template
+sensors:
+  kitchen_automatic_lights:
+    friendly_name: "Kitchen - Automatic Lights"
+    value_template:  >
+      {{-
+        states('input_boolean.kitchen_lights_manual_mode')  == 'off'
+        and
+        states('input_boolean.home_modes_bedtime_mode')  == 'off'
+      -}}

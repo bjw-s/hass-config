@@ -1,0 +1,18 @@
+# ---
+# id: kitchen_automatic_lights_timer_cancel
+# alias: Kitchen - Automatic lights timer cancel
+# trigger:
+#   - platform: state
+#     entity_id: light.kitchen
+#     to: 'off'
+#   - platform: state
+#     entity_id: binary_sensor.kitchen_automatic_lights
+#     to: 'off'
+# condition:
+#   - condition: state
+#     entity_id: timer.kitchen_automatic_lights
+#     state: 'active'
+# action:
+#   - service: timer.cancel
+#     data:
+#       entity_id: timer.kitchen_automatic_lights

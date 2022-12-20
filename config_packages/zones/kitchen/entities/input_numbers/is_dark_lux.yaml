@@ -1,5 +1,5 @@
 ---
-downstairs_kitchen_is_dark_lux:
+kitchen_is_dark_lux:
   min: 0
   max: 250
   step: 5

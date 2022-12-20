@@ -17,5 +17,5 @@ action:
   - service: media_player.media_stop
     data:
       entity_id:
-        - media_player.downstairs_kitchen_sonos
+        - media_player.kitchen_sonos
         - media_player.downstairs_living_room_sonos

@@ -53,7 +53,7 @@ cards:
           - play_pause_stop
 
       - type: custom:mushroom-media-player-card
-        entity: media_player.downstairs_kitchen_sonos
+        entity: media_player.kitchen_sonos
         name: Kitchen
         icon_type: entity-picture
         media_controls:

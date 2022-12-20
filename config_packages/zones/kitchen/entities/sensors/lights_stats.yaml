@@ -1,7 +1,7 @@
 ---
 platform: history_stats
-name: "Downstairs Kitchen - Lights - Stats"
-entity_id: light.downstairs_kitchen
+name: "Kitchen - Lights - Stats"
+entity_id: light.kitchen
 state: "on"
 type: count
 start: >

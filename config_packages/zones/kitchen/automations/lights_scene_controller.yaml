@@ -1,10 +1,10 @@
 ---
-id: downstairs_kitchen_lights_scene_controller
-alias: Downstairs Kitchen - Lights - Scene controller
+id: kitchen_lights_scene_controller
+alias: Kitchen - Lights - Scene controller
 max_exceeded: silent
 
 trigger:
-  - id: downstairs_kitchen_switch_top
+  - id: kitchen_switch_top
     platform: device
     domain: hue
     device_id: e2c68b8b1646561244951cc00dc50d84
@@ -12,7 +12,7 @@ trigger:
     subtype: 1
     unique_id: 7a1b2a96-6cb8-48d1-8265-7897b676c176
 
-  - id: downstairs_kitchen_switch_bottom
+  - id: kitchen_switch_bottom
     platform: device
     domain: hue
     device_id: e2c68b8b1646561244951cc00dc50d84
@@ -20,26 +20,26 @@ trigger:
     subtype: 2
     unique_id: 54f06d73-0bf8-4e2d-93a5-c8a65de6de48
 
-  - id: downstairs_kitchen_motion_detected
+  - id: kitchen_motion_detected
     platform: state
-    entity_id: binary_sensor.downstairs_kitchen_motion
+    entity_id: binary_sensor.kitchen_motion
     to: "on"
 
   - id: automatic_lights_timer_finished
     platform: event
     event_type: timer.finished
     event_data:
-      entity_id: timer.downstairs_kitchen_automatic_lights
+      entity_id: timer.kitchen_automatic_lights
 
   - id: lights_turned_off
     platform: state
-    entity_id: light.downstairs_kitchen
+    entity_id: light.kitchen
     from: 'on'
     to: 'off'
 
 variables:
-  scene_helper: input_select.downstairs_kitchen_lights_scene
-  automatic_lights_duration: "{{ (states('input_number.automatic_lights_duration_downstairs_kitchen') | float(0)) * 60 }}"
+  scene_helper: input_select.kitchen_lights_scene
+  automatic_lights_duration: "{{ (states('input_number.automatic_lights_duration_kitchen') | float(0)) * 60 }}"
 
 action:
   - alias: "choose scene based on trigger"
@@ -47,7 +47,7 @@ action:
       # Turn on with switch
       - conditions:
           - condition: trigger
-            id: downstairs_kitchen_switch_top
+            id: kitchen_switch_top
         sequence:
           - service: input_select.select_option
             data:
@@ -58,14 +58,14 @@ action:
       - conditions:
           - and:
               - condition: state
-                entity_id: binary_sensor.downstairs_kitchen_automatic_lights
+                entity_id: binary_sensor.kitchen_automatic_lights
                 state: "on"
               - condition: state
-                entity_id: binary_sensor.downstairs_kitchen_is_dark
+                entity_id: binary_sensor.kitchen_is_dark
                 state: "on"
               - or:
                   - condition: trigger
-                    id: downstairs_kitchen_motion_detected
+                    id: kitchen_motion_detected
 
         sequence:
           - choose:
@@ -95,7 +95,7 @@ action:
 
           - service: timer.start
             data:
-              entity_id: timer.downstairs_kitchen_automatic_lights
+              entity_id: timer.kitchen_automatic_lights
               duration: "{{ automatic_lights_duration }}"
 
       # Select "off" scene
@@ -103,7 +103,7 @@ action:
           - or:
               # Turned off manually
               - condition: trigger
-                id: downstairs_kitchen_switch_bottom
+                id: kitchen_switch_bottom
               - condition: trigger
                 id: lights_turned_off
               # Turn off automatically
@@ -111,7 +111,7 @@ action:
                   - condition: trigger
                     id: automatic_lights_timer_finished
                   - condition: state
-                    entity_id: binary_sensor.downstairs_kitchen_automatic_lights
+                    entity_id: binary_sensor.kitchen_automatic_lights
                     state: "on"
 
         sequence:

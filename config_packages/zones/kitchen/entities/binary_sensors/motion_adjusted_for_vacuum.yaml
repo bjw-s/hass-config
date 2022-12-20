@@ -1,0 +1,8 @@
+---
+platform: template
+sensors:
+  kitchen_motion_adjusted_for_vacuum:
+    friendly_name: 'Kitchen - Motion adjusted for Vacuum'
+    value_template: >-
+      {{ false if is_state('binary_sensor.downstairs_vacuum_moving', 'on') else states('binary_sensor.kitchen_motion') }}
+    device_class: motion

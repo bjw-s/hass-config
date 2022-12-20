@@ -1,6 +1,6 @@
 ---
-id: downstairs_kitchen_morning_scene
-alias: Downstairs Kitchen - Morning scene
+id: kitchen_morning_scene
+alias: Kitchen - Morning scene
 max_exceeded: silent
 trigger:
   - platform: state
@@ -18,7 +18,7 @@ action:
   - choose:
       - conditions:
           - condition: state
-            entity_id: input_select.downstairs_kitchen_automatic_coffee_schedule
+            entity_id: input_select.kitchen_automatic_coffee_schedule
             state: "Weekend"
           - condition: state
             entity_id: binary_sensor.workday_sensor
@@ -26,31 +26,31 @@ action:
         sequence:
           - service: switch.turn_on
             data:
-              entity_id: switch.downstairs_kitchen_coffee_maker_power
+              entity_id: switch.kitchen_coffee_maker_power
 
       - conditions:
           - condition: state
-            entity_id: input_select.downstairs_kitchen_automatic_coffee_schedule
+            entity_id: input_select.kitchen_automatic_coffee_schedule
             state: "Always"
         sequence:
           - service: switch.turn_on
             data:
-              entity_id: switch.downstairs_kitchen_coffee_maker_power
+              entity_id: switch.kitchen_coffee_maker_power
 
   # Turn on Sonos
   - service: media_player.join
     data:
-      entity_id: media_player.downstairs_kitchen_sonos
+      entity_id: media_player.kitchen_sonos
       group_members:
         media_player.downstairs_living_room_sonos
   - service: media_player.volume_set
     data:
       entity_id:
         - media_player.downstairs_living_room_sonos
-        - media_player.downstairs_kitchen_sonos
+        - media_player.kitchen_sonos
       volume_level: 0.04
   - service: media_player.select_source
     data:
       entity_id:
-        - media_player.downstairs_kitchen_sonos
+        - media_player.kitchen_sonos
       source: Qmusic

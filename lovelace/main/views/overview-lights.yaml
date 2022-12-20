@@ -11,7 +11,7 @@ layout:
   grid-template-rows: auto
 
   grid-template-areas: |
-    ".  living_area         downstairs_dining_area  downstairs_kitchen  ."
+    ".  living_area         downstairs_dining_area  kitchen  ."
     ".  downstairs_hallway  upstairs_hallway        attic_hallway       ."
     ".  bedroom    bedroom_eva    upstairs_office     ."
     ".  attic               driveway                backyard            ."
@@ -23,7 +23,7 @@ layout:
       grid-template-areas: |
         ".  living_area             ."
         ".  downstairs_dining_area  ."
-        ".  downstairs_kitchen      ."
+        ".  kitchen      ."
         ".  downstairs_hallway      ."
         ".  upstairs_hallway        ."
         ".  bedroom        ."
@@ -39,7 +39,7 @@ layout:
       grid-template-columns: 0 repeat(2, 1fr) 0
       grid-template-areas: |
         ".  living_area         downstairs_dining_area  ."
-        ".  downstairs_kitchen  downstairs_hallway      ."
+        ".  kitchen  downstairs_hallway      ."
         ".  upstairs_hallway    attic_hallway           ."
         ".  bedroom    bedroom_eva    ."
         ".  upstairs_office     attic                   ."
@@ -201,72 +201,72 @@ cards:
         show_color_temp_control: true
 
   #################################################
-  #               Downstairs Kitchen              #
+  #               Kitchen              #
   #################################################
 
   - type: vertical-stack
     title: Kitchen
     view_layout:
-      grid-area: downstairs_kitchen
+      grid-area: kitchen
     cards:
       - type: custom:mushroom-chips-card
         chips:
           - type: entity
-            entity: input_select.downstairs_kitchen_lights_scene
+            entity: input_select.kitchen_lights_scene
             tap_action:
               action: call-service
               service: input_select.select_next
               target:
-                entity_id: input_select.downstairs_kitchen_lights_scene
+                entity_id: input_select.kitchen_lights_scene
             hold_action:
               action: call-service
               service: input_select.select_option
               service_data:
                 option: 'Off'
               target:
-                entity_id: input_select.downstairs_kitchen_lights_scene
+                entity_id: input_select.kitchen_lights_scene
 
           - type: template
             content: |
-              {{ states.sensor.downstairs_kitchen_illuminance.state_with_unit }}
+              {{ states.sensor.kitchen_illuminance.state_with_unit }}
             icon: |
-              {% if is_state('binary_sensor.downstairs_kitchen_is_dark', 'on') %}
+              {% if is_state('binary_sensor.kitchen_is_dark', 'on') %}
                 mdi:brightness-4
               {% else %}
                 mdi:brightness-5
               {% endif %}
             icon_color: |
-              {% if is_state('binary_sensor.downstairs_kitchen_is_dark', 'on') %}
+              {% if is_state('binary_sensor.kitchen_is_dark', 'on') %}
                 grey
               {% else %}
                 orange
               {% endif %}
-            entity: sensor.downstairs_kitchen_illuminance
+            entity: sensor.kitchen_illuminance
 
           - type: template
             content: |
-              {% if is_state('binary_sensor.downstairs_kitchen_automatic_lights', 'on') %}
+              {% if is_state('binary_sensor.kitchen_automatic_lights', 'on') %}
                 Automatic mode enabled
               {% else %}
                 Manual override active
               {% endif %}
             icon_color: |
-              {% if is_state('binary_sensor.downstairs_kitchen_automatic_lights', 'on') %}
+              {% if is_state('binary_sensor.kitchen_automatic_lights', 'on') %}
                 green
               {% else %}
                 orange
               {% endif %}
             icon: mdi:lightbulb-auto
-            entity: input_boolean.downstairs_kitchen_lights_manual_mode
+            entity: input_boolean.kitchen_lights_manual_mode
 
           - type: entity
-            entity: input_number.automatic_lights_duration_downstairs_kitchen
+            entity: input_number.automatic_lights_duration_kitchen
 
           - type: entity
-            entity: timer.downstairs_kitchen_automatic_lights
+            entity: timer.kitchen_automatic_lights
 
       - type: custom:mushroom-light-card
-        entity: light.downstairs_kitchen_front
+        entity: light.kitchen_front
         name: Front
         primary_info: name
         secondary_info: state
@@ -274,7 +274,7 @@ cards:
         show_brightness_control: true
 
       - type: custom:mushroom-light-card
-        entity: light.downstairs_kitchen_rear
+        entity: light.kitchen_rear
         name: Rear
         primary_info: name
         secondary_info: state

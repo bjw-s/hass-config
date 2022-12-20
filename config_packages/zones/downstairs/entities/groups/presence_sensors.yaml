@@ -2,5 +2,5 @@
 downstairs_presence_sensors:
   entities:
   - binary_sensor.downstairs_dining_area_motion
-  - binary_sensor.downstairs_kitchen_motion
+  - binary_sensor.kitchen_motion
   - binary_sensor.downstairs_living_room_motion

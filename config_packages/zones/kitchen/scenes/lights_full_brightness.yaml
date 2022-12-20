@@ -1,0 +1,7 @@
+---
+name: Kitchen - Lights - Full Brightness
+entities:
+  light.kitchen:
+    state: 'on'
+    brightness: 254
+    color_temp: 285

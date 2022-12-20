@@ -1,0 +1,16 @@
+---
+platform: template
+sensors:
+  kitchen_is_dark:
+    icon_template: >
+      {%- if (states('sensor.kitchen_illuminance') | float(0)) < (states('input_number.kitchen_is_dark_lux') | float(0)) -%}
+        mdi:brightness-4
+      {%- else -%}
+        mdi:brightness-5
+      {%- endif -%}
+    value_template: >
+      {{
+        (states('input_number.kitchen_is_dark_lux') | float(0)) > 0
+        and
+        (states('sensor.kitchen_illuminance') | float(0)) < (states('input_number.kitchen_is_dark_lux') | float(0))
+      }}
