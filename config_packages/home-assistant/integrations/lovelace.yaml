@@ -8,24 +8,9 @@ lovelace:
   mode: yaml
   resources: !include ../../../lovelace/resources.yaml
   dashboards:
-    dash-attic: # Needs to contain a hyphen (-)
+    tablet-ui: # Needs to contain a hyphen (-)
       mode: yaml
-      filename: ui-lovelace-attic.yaml
-      title: 3 - Attic
-      icon: mdi:numeric-3-box-multiple-outline
-      show_in_sidebar: true
-      require_admin: false
-
-    tablet-garage: # Needs to contain a hyphen (-)
-      mode: yaml
-      filename: ui-lovelace-tablet-garage.yaml
-      title: Tablet Garage
-      show_in_sidebar: false
-      require_admin: false
-
-    tablet-hallway: # Needs to contain a hyphen (-)
-      mode: yaml
-      filename: ui-lovelace-tablet-hallway.yaml
-      title: Tablet Hallway
+      filename: ui-lovelace-tablet.yaml
+      title: Tablet
       show_in_sidebar: false
       require_admin: false

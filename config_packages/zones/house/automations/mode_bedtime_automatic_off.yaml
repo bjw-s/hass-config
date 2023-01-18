@@ -14,7 +14,7 @@ condition:
       state:  "on"
     - alias: "Early morning"
       condition: state
-      entity_id: sensor.system_time_of_day
+      entity_id: sensor.system_time_of_day_detailed
       state: "early_morning"
 
 action:

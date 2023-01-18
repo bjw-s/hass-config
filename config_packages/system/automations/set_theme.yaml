@@ -4,34 +4,27 @@ alias: System - Set theme
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: input_boolean.hass_maintenance_enabled
-  - platform: state
     entity_id: binary_sensor.driveway_is_dark
 action:
   - service: frontend.set_theme
     data:
-      name: |
-        {%- if is_state("input_boolean.hass_maintenance_enabled", "on") -%}
-          darkorange
-        {%- elif is_state("binary_sensor.driveway_is_dark", "on") -%}
-          Google Dark Theme
+      name: Fluent Orange
+      mode: |
+        {%- if is_state("binary_sensor.driveway_is_dark", "on") -%}
+          dark
         {%- else -%}
-          Google Light Theme
+          light
         {%- endif -%}
-      mode: light
-  - service: frontend.set_theme
-    data:
-      name: |
-        {%- if is_state("input_boolean.hass_maintenance_enabled", "on") -%}
-          darkorange
-        {%- else -%}
-          Google Dark Theme
-        {%- endif -%}
-      mode: dark
 
-  - event: wallpanels_publish_payload
-    event_data:
-      payload: |
-        {
-          "reload": true
-        }
+  - service: browser_mod.set_theme
+    data:
+      dark: |
+        {%- if is_state("binary_sensor.driveway_is_dark", "on") -%}
+          dark
+        {%- else -%}
+          light
+        {%- endif -%}
+    target:
+      device_id:
+        - a9b108458722d36184c61fbc91b650ff
+        - c3295fe15acc7e0192ef86cd2f6b7221

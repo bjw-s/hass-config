@@ -1,5 +1,6 @@
 ---
 name: Downstairs hallway - Lights - Full brightness
+icon: mdi:lightbulb-on
 entities:
   light.downstairs_hallway_ceiling:
     state: 'on'

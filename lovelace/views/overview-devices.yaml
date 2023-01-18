@@ -1,0 +1,212 @@
+title: devices
+id: devices
+path: devices
+
+type: 'custom:grid-layout'
+layout: !include snippets/layout-page-margin.yaml
+
+cards:
+  - type: 'custom:layout-card'
+    layout_type: 'custom:grid-layout'
+    layout: !include snippets/layout-page-columns.yaml
+    view_layout:
+      grid-area: cc
+    cards:
+
+      # [Header] Summary
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout: !include snippets/layout-page-title.yaml
+        view_layout:
+          grid-column: 1/-1
+        cards:
+
+          - type: markdown
+            style: !include snippets/style-markdown-page-title.yaml
+            content: >
+              # Devices
+
+      # [Column] Sonos
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: SONOS
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - view_layout:
+                  grid-column: span 3
+                type: "custom:button-card"
+                template:
+                  - live_tile_media_player
+                show_name: true
+                entity: media_player.downstairs_living_room_sonos
+                name: Living Room
+
+              - view_layout:
+                  grid-column: span 3
+                type: "custom:button-card"
+                template:
+                  - live_tile_media_player
+                show_name: true
+                entity: media_player.downstairs_living_room_sonos_receiver
+                name: Living Room Receiver
+
+              - view_layout:
+                  grid-column: span 3
+                type: "custom:button-card"
+                template:
+                  - live_tile_media_player
+                show_name: true
+                entity: media_player.kitchen_sonos
+                name: Kitchen
+
+              - view_layout:
+                  grid-column: span 3
+                type: "custom:button-card"
+                template:
+                  - live_tile_media_player
+                show_name: true
+                entity: media_player.upstairs_office_sonos
+                name: Upstairs Office
+
+              - view_layout:
+                  grid-column: span 3
+                type: "custom:button-card"
+                template:
+                  - live_tile_media_player
+                show_name: true
+                entity: media_player.bedroom_eva_sonos
+                name: Bedroom Eva
+
+      # [Column] Other media
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: OTHER MEDIA
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                  - live_tile_with_long_state
+                show_name: true
+                name: Harmony activity
+                icon: mdi:remote
+                entity: sensor.downstairs_living_room_current_harmony_activity
+                state:
+                  - value: 'PowerOff'
+                    styles:
+                      card:
+                        - background-color: var(--ha-card-background)
+                          color: var(--primary-text-color)
+
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                  - live_tile_with_long_state
+                show_name: true
+                name: Media playback
+                icon: >-
+                  [[[ return (entity.state == "on" ? 'mdi:play-circle' : 'mdi:stop-circle') ]]]
+                entity: binary_sensor.downstairs_living_room_media_playing
+
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                  - live_tile_with_long_state
+                show_name: true
+                name: Receiver
+                # icon: mdi:remote
+                entity: media_player.downstairs_living_room_denon_avr_x1500h
+
+              - view_layout:
+                  grid-column: span 3
+                type: "custom:button-card"
+                template:
+                  - live_tile_media_player
+                show_name: true
+                entity: media_player.downstairs_living_room_nvidia_shield
+                name: Nvidia Shield
+
+      # [Column] Low battery
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: LOW BATTERY
+
+          - type: custom:auto-entities
+            show_empty: true
+            unique: true
+            card:
+              type: vertical-stack
+            card_param: cards
+            sort:
+              method: friendly_name
+            filter:
+              exclude:
+                - attributes:
+                    battery_report: false
+              include:
+                - domain: sensor
+                  attributes:
+                    device_class: battery
+                  state: <= 30
+                  options:
+                    type: custom:mushroom-template-card
+                    entity_id: this.entity_id
+                    primary: |
+                      {{ state_attr('this.entity_id', 'friendly_name') }}
+                    secondary: |
+                      {{ states('this.entity_id') }} %
+                    icon: |
+                      {% if state_attr('this.entity_id', 'icon') %}
+                        {{ state_attr('this.entity_id', 'icon') }}
+                      {% else %}
+                        {% set percentage = states('this.entity_id') | round(-1) | round %}
+                        mdi:battery-{{percentage}}
+                      {% endif %}
+                    icon_color: |
+                      {% if (states('this.entity_id') | int) <= 15 %}
+                        red
+                      {% else %}
+                        orange
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                - domain: binary_sensor
+                  attributes:
+                    device_class: battery
+                  state: 'on'
+                  options:
+                    type: custom:mushroom-template-card
+                    entity_id: this.entity_id
+                    primary: |
+                      {{ state_attr('this.entity_id', 'friendly_name') }}
+                    icon: |
+                      {% if state_attr('this.entity_id', 'icon') %}
+                        {{ state_attr('this.entity_id', 'icon') }}
+                      {% else %}
+                        mdi:battery-10
+                      {% endif %}
+                    icon_color: red

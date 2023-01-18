@@ -1,7 +1,7 @@
 ---
 platform: history_stats
 name: "Downstairs dining area - Lights - Stats"
-entity_id: light.downstairs_dining_area
+entity_id: light.dining_area
 state: "on"
 type: count
 start: >

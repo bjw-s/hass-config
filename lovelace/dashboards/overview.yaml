@@ -1,0 +1,10 @@
+background: var(--background-image)
+button_card_templates: !include_dir_merge_named ../templates/button-card/
+decluttering_templates: !include ../templates/decluttering-card.yaml
+
+views:
+  - !include ../views/overview-home.yaml
+  - !include ../views/overview-security.yaml
+  - !include ../views/overview-lights.yaml
+  - !include ../views/overview-devices.yaml
+  - !include ../views/overview-climate.yaml

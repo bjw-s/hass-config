@@ -1,0 +1,8 @@
+---
+platform: min_max
+name: Downstairs Hallway - Illuminance
+type: mean
+round_digits: 1
+entity_ids:
+  - sensor.downstairs_hallway_1_illuminance
+  - sensor.downstairs_hallway_2_illuminance

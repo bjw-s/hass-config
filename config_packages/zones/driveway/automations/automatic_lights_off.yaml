@@ -2,17 +2,15 @@
 id: driveway_automatic_lights_off
 alias: Driveway - Automatic lights off
 trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.driveway_automatic_lights
+  - platform: state
+    entity_id: light.driveway_wall
+    to: "on"
+    for:
+      minutes: 10
 condition:
   and:
     - condition: state
       entity_id: binary_sensor.driveway_automatic_lights
-      state: 'on'
-    - condition: state
-      entity_id: light.driveway_wall
       state: 'on'
 action:
   - scene: scene.driveway_lights_off

@@ -3,7 +3,7 @@ id: bedroom_reset_persons_in_bed
 alias: Bedroom - Reset persons in bed
 trigger:
   - platform: state
-    entity_id: sensor.system_time_of_day
+    entity_id: sensor.system_time_of_day_detailed
     from: "night"
     to: "early_morning"
 action:

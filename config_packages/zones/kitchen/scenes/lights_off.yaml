@@ -1,5 +1,6 @@
 ---
 name: Kitchen - Lights - Off
+icon: mdi:lightbulb-off
 entities:
   light.kitchen:
     state: 'off'

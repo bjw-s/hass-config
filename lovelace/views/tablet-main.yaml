@@ -1,0 +1,212 @@
+title: Main
+path: main
+id: main
+
+type: "custom:grid-layout"
+layout: !include snippets/layout-page-margin.yaml
+
+cards:
+  - type: "custom:layout-card"
+    layout_type: "custom:grid-layout"
+    layout: !include snippets/layout-page-columns.yaml
+    view_layout:
+      grid-area: cc
+    cards:
+      # [Header] Summary
+      - type: markdown
+        style: !include snippets/style-markdown-page-title.yaml
+        view_layout:
+          grid-column: 1/-1
+        content: >
+          # Good {{ states.sensor.system_time_of_day.state }}
+
+      # [Column] Security
+      - type: "custom:layout-card"
+        layout_type: "custom:grid-layout"
+        layout:
+          margin: 0
+          card_margin: 1px
+        cards:
+          - type: "custom:layout-card"
+            layout_type: "custom:grid-layout"
+            layout:
+              grid-template-columns: >-
+                repeat(auto-fill, [col-start] minmax(112px, 1fr)
+                [col-end])
+              margin: 0
+              card_margin: 1px
+            cards:
+              - type: "custom:button-card"
+                template: header_card_no_link
+                variables:
+                  name: SECURITY
+                view_layout:
+                  grid-column: 1/-1
+
+              - type: "custom:button-card"
+                template:
+                  - alarm_status_tile
+                entity: alarm_control_panel.house
+                tap_action: !include popups/alarm.yaml
+
+              - type: "custom:button-card"
+                template: live_tile_with_camera
+                entity: camera.driveway_doorbell
+                name: Front Door
+
+              - type: "custom:button-card"
+                template: header_card_no_link
+                variables:
+                  name: MODES
+                view_layout:
+                  grid-column: 1/-1
+
+              - type: "custom:button-card"
+                template:
+                  - live_tile_mini
+                  - require_confirmation
+                show_name: true
+                entity: input_boolean.home_modes_bedtime_mode
+                name: Bedtime
+                icon: mdi:sleep
+
+      # [Column] Trash
+      - type: "custom:layout-card"
+        layout_type: "custom:grid-layout"
+        layout:
+          margin: 0
+          card_margin: 1px
+        cards:
+          - type: "custom:layout-card"
+            layout_type: "custom:grid-layout"
+            layout:
+              grid-template-columns: >-
+                repeat(auto-fill, [col-start] minmax(112px, 1fr)
+                [col-end])
+              margin: 0
+              card_margin: 1px
+            cards:
+              - type: "custom:button-card"
+                template: header_card_no_link
+                variables:
+                  name: TRASH
+                view_layout:
+                  grid-column: 1/-1
+
+              - type: "custom:button-card"
+                template:
+                  - trash_collection_tile
+                entity: sensor.afvalwijzer_restafval
+                name: Restafval
+
+              - type: "custom:button-card"
+                template:
+                  - trash_collection_tile
+                entity: sensor.afvalwijzer_gft
+                name: GFT
+
+              - type: "custom:button-card"
+                template:
+                  - trash_collection_tile
+                entity: sensor.afvalwijzer_pmd
+                name: PMD
+
+              - type: "custom:button-card"
+                template:
+                  - trash_collection_tile
+                entity: sensor.afvalwijzer_papier
+                name: Papier
+
+      # [Column] Devices
+      - type: "custom:layout-card"
+        layout_type: "custom:grid-layout"
+        layout:
+          margin: 0
+          card_margin: 1px
+        cards:
+          - type: "custom:layout-card"
+            layout_type: "custom:grid-layout"
+            layout:
+              grid-template-columns: >-
+                repeat(auto-fill, [col-start] minmax(112px, 1fr)
+                [col-end])
+              margin: 0
+              card_margin: 1px
+            cards:
+              - type: "custom:button-card"
+                template: header_card_no_link
+                variables:
+                  name: DEVICES
+                view_layout:
+                  grid-column: 1/-1
+
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                  - live_tile_with_long_state
+                  - require_confirmation
+                entity: switch.doorbell_muted
+                show_name: true
+                name: Doorbell
+                icon: mdi:bell
+                state_display: |
+                  [[[
+                    var output = ''
+                    if (entity.state == 'on') {
+                      output = 'Muted'
+                    } else {
+                      output = 'On'
+                    }
+                    return output
+                  ]]]
+                state:
+                  - value: "on"
+                    icon: mdi:bell-cancel
+                    styles:
+                      card:
+                        - background: var(--primary-color)
+                  - value: "off"
+                    styles:
+                      card:
+                        - background: var(--ha-card-background)
+                        - color: var(--primary-text-color)
+                variables:
+                  aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"
+
+              - type: "custom:button-card"
+                view_layout:
+                  grid-column: 1/-2
+                template:
+                  - live_tile_card
+                  - live_tile_with_long_state
+                entity: vacuum.valetudo_livingroom
+                state:
+                  - value: "cleaning"
+                    styles:
+                      card:
+                        - background: var(--primary-color)
+                  - operator: default
+                    styles:
+                      card:
+                        - background: var(--ha-card-background)
+                        - color: var(--primary-text-color)
+                variables:
+                  aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"
+
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                  - live_tile_with_long_state
+                entity: vacuum.valetudo_upstairs
+                state:
+                  - value: "cleaning"
+                    styles:
+                      card:
+                        - background: var(--primary-color)
+                  - operator: default
+                    styles:
+                      card:
+                        - background: var(--ha-card-background)
+                        - color: var(--primary-text-color)
+                variables:
+                  aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"

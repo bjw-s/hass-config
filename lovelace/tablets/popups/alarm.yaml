@@ -1,9 +1,0 @@
-action: fire-dom-event
-browser_mod:
-  service: browser_mod.popup
-  data:
-    title: Alarm
-    content:
-      type: 'custom:alarmo-card'
-      entity: alarm_control_panel.house
-      keep_keypad_visible: true

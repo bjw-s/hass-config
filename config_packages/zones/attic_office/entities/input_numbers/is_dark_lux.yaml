@@ -1,5 +1,6 @@
 ---
 attic_office_is_dark_lux:
+  name: Attic office darkness threshold
   min: 0
   max: 250
   step: 5

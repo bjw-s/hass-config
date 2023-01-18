@@ -1,5 +1,6 @@
 ---
 name: Attic office - Lights - Chill
+icon: mdi:beach
 entities:
   light.attic_office_rear_ceiling:
     state: 'on'

@@ -1,5 +1,6 @@
 ---
 name: Downstairs hallway - Lights - Dimmed
+icon: mdi:lightbulb-on-30
 entities:
   light.downstairs_hallway_ceiling:
     state: 'on'

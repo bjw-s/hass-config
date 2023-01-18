@@ -1,5 +1,6 @@
 ---
 downstairs_dining_area_is_dark_lux:
+  name: Dining area darkness threshold
   min: 0
   max: 250
   step: 5

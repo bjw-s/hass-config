@@ -1,5 +1,6 @@
 ---
   name: Upstairs office - Lights - Off
+  icon: mdi:lightbulb-off
   entities:
     light.upstairs_office:
       state: 'off'

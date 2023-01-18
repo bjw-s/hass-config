@@ -24,12 +24,12 @@ trigger:
     platform: state
     entity_id: binary_sensor.kitchen_motion
     to: "on"
-
-  - id: automatic_lights_timer_finished
-    platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.kitchen_automatic_lights
+  - id: kitchen_motion_cleared
+    platform: state
+    entity_id: binary_sensor.kitchen_motion
+    to: 'off'
+    for:
+      minutes: 5
 
   - id: lights_turned_off
     platform: state
@@ -74,11 +74,11 @@ action:
                   - or:
                       - alias: "Late evening"
                         condition: state
-                        entity_id: sensor.system_time_of_day
+                        entity_id: sensor.system_time_of_day_detailed
                         state: "late_evening"
                       - alias: "night"
                         condition: state
-                        entity_id: sensor.system_time_of_day
+                        entity_id: sensor.system_time_of_day_detailed
                         state: "night"
                 sequence:
                   - service: input_select.select_option
@@ -93,11 +93,6 @@ action:
                   entity_id: "{{ scene_helper }}"
                   option: "Full brightness"
 
-          - service: timer.start
-            data:
-              entity_id: timer.kitchen_automatic_lights
-              duration: "{{ automatic_lights_duration }}"
-
       # Select "off" scene
       - conditions:
           - or:
@@ -109,7 +104,7 @@ action:
               # Turn off automatically
               - and:
                   - condition: trigger
-                    id: automatic_lights_timer_finished
+                    id: kitchen_motion_cleared
                   - condition: state
                     entity_id: binary_sensor.kitchen_automatic_lights
                     state: "on"

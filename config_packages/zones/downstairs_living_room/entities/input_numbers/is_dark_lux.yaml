@@ -1,5 +1,6 @@
 ---
 downstairs_living_room_is_dark_lux:
+  name: Living room darkness threshold
   min: 0
   max: 250
   step: 5

@@ -26,7 +26,7 @@ action:
       - conditions:
           - alias: "Early morning"
             condition: state
-            entity_id: sensor.system_time_of_day
+            entity_id: sensor.system_time_of_day_detailed
             state: "early_morning"
         sequence:
           - service: scene.turn_on

@@ -1,5 +1,6 @@
 ---
-name: Downstairs living room - Lights - Full Brightness
+name: Downstairs living room - Lights - Full brightness
+icon: mdi:lightbulb-on
 entities:
   light.downstairs_living_room_floor_lamp:
    state: 'on'
@@ -9,17 +10,9 @@ entities:
     state: 'on'
     brightness: 254
     color_temp: 285
-  light.downstairs_living_room_speaker_on:
-    # TODO: Revert when Christmas is over
-    # state: 'on'
-    state: 'off'
+  light.downstairs_living_room_speaker_left:
+    state: 'on'
     brightness: 254
     color_temp: 285
   light.downstairs_living_room_speaker_right:
     state: 'off'
-    brightness: 254
-    color_temp: 285
-
-  # TODO: Remove when Christmas is over
-  switch.spare_p1eu_1:
-    state: 'on'

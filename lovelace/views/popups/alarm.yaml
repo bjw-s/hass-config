@@ -1,0 +1,16 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: Alarm
+    size: normal
+    content:
+      type: 'custom:alarmo-card'
+      entity: alarm_control_panel.house
+      name: ' '
+      keep_keypad_visible: true
+      use_clear_icon: true
+      states:
+        - arm_home
+        - arm_night
+        - arm_away

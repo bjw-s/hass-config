@@ -1,0 +1,30 @@
+type: custom:popup-card
+entity: popup.downstairs_hallway_scenes
+title: Downstairs Hallway Scenes
+card:
+  type: 'custom:auto-entities'
+  filter:
+    template: |
+      {% for state in states.scene -%}
+        {%- if state.entity_id | regex_match('scene.downstairs_hallway_',ignorecase=False) -%}
+          {%- set NAME = state_attr(state.entity_id,"friendly_name") | regex_replace(find='Downstairs hallway - Lights - ', replace='') -%}
+          {{
+            { 'entity': state.entity_id,
+              'type': 'custom:button-card',
+              'template': 'light_scene_card_mini',
+              'variables': {
+                'name': NAME,
+                'controller': 'input_select.downstairs_hallway_lights_scene'
+              },
+            }
+          }},
+        {%- endif -%}
+      {%- endfor %}
+  sort:
+    method: friendly_name
+  card:
+    type: 'custom:layout-card'
+    layout_type: 'custom:grid-layout'
+    layout_options: !include ../snippets/layout-live-tile.yaml
+  view_layout:
+    grid-column: 1/-1

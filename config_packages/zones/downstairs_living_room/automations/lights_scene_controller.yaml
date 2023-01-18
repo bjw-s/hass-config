@@ -1,7 +1,7 @@
 ---
 id: downstairs_living_room_lights_scene_controller
 alias: Downstairs living room - Lights - Scene controller
-max_exceeded: silent
+mode: restart
 
 trigger:
   - id: downstairs_living_room_switch_top
@@ -9,7 +9,7 @@ trigger:
     domain: hue
     device_id: 3edece83f587e6ea9a3943faf8ba29f8
     type: initial_press
-    subtype: 1
+    subtype: 3
     unique_id: fe1b1157-c89c-47d7-83f5-b457252948fb
 
   - id: downstairs_living_room_switch_bottom
@@ -17,7 +17,7 @@ trigger:
     domain: hue
     device_id: 3edece83f587e6ea9a3943faf8ba29f8
     type: initial_press
-    subtype: 2
+    subtype: 4
     unique_id: 32367223-1912-4de9-8a2c-8e9063ce66f9
 
   - id: downstairs_living_room_is_dark
@@ -97,11 +97,11 @@ action:
                   - or:
                       - alias: "Late evening"
                         condition: state
-                        entity_id: sensor.system_time_of_day
+                        entity_id: sensor.system_time_of_day_detailed
                         state: "late_evening"
                       - alias: "night"
                         condition: state
-                        entity_id: sensor.system_time_of_day
+                        entity_id: sensor.system_time_of_day_detailed
                         state: "night"
                 sequence:
                   - choose:

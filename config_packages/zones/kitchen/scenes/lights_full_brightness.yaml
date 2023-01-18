@@ -1,5 +1,6 @@
 ---
-name: Kitchen - Lights - Full Brightness
+name: Kitchen - Lights - Full brightness
+icon: mdi:lightbulb-on
 entities:
   light.kitchen:
     state: 'on'

@@ -48,7 +48,7 @@ trigger:
 
   - id: lights_turned_off
     platform: state
-    entity_id: light.downstairs_dining_area
+    entity_id: light.dining_area
     from: 'on'
     to: 'off'
 
@@ -97,11 +97,11 @@ action:
                   - or:
                       - alias: "Late evening"
                         condition: state
-                        entity_id: sensor.system_time_of_day
+                        entity_id: sensor.system_time_of_day_detailed
                         state: "late_evening"
                       - alias: "night"
                         condition: state
-                        entity_id: sensor.system_time_of_day
+                        entity_id: sensor.system_time_of_day_detailed
                         state: "night"
                 sequence:
                   - choose:

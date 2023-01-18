@@ -14,12 +14,10 @@ trigger:
 variables:
   # The external url for the Home Assistant instance
   base_url: "{{ states('sensor.system_url_external') }}"
-  # Event sensor
-  check_entity: sensor.frigate_doorbell_event
-  # Frigate event ID
-  id: "{{ state_attr(check_entity, 'id') }}"
-  # Camera name in Frigate
-  camera: doorbell
+  # Person count
+  person_count: "{{ states('sensor.doorbell_person_count') }}"
+  # Camera entity
+  camera: camera.driveway_doorbell
   # Notification target
   notify_device: adults
   # Rate limit the automation to once per 30 seconds
@@ -27,47 +25,23 @@ variables:
 
 condition:
   - condition: template
-    value_template: "{{ state_attr(check_entity, 'active') == true }}"
+    value_template: "{{ person_count > 0 }}"
 
 action:
-  - choose:
-      - conditions: "{{ state_attr(check_entity, 'active') == true }}"
-        sequence:
-          - service: "notify.{{ notify_device }}"
-            data:
-              message: "There is somebody at the door"
-              data:
-                tag: "{{ camera }}_{{ id }}"
-                group: "frigate-notification-{{ camera }}"
-                attachment:
-                  url: "{{ base_url }}/api/frigate/notifications/{{id}}/thumbnail.jpg"
+  - service: camera.snapshot
+    data:
+      entity_id: "{{ camera }}"
+      filename: /config/www/images/snapshots/driveway.jpg
 
-  - choose:
-      - conditions: "{{ state_attr(check_entity, 'active') != false }}"
-        sequence:
-          - wait_template: "{{ state_attr(check_entity, 'active') == false }}"
-            timeout:
-              minutes: 5
-
-  - condition: template
-    value_template: "{{ state_attr(check_entity, 'active') == false }}"
+  - delay: '00:00:01'
 
   - service: "notify.{{ notify_device }}"
     data:
-      message: "There was somebody at the door"
+      title: "Doorbell"
+      message: "There is somebody at the door"
       data:
-        tag: "{{ camera }}_{{ id }}"
-        group: "frigate-notification-{{ camera }}"
-        sound: none
-        attachment:
-          url: "{{ base_url }}/api/frigate/notifications/{{id}}/thumbnail.jpg"
-        actions:
-          - action: URI
-            title: View Clip
-            uri: "{{base_url}}/api/frigate/notifications/{{id}}/{{camera}}/clip.mp4"
-          - action: URI
-            title: View Snapshot
-            uri: "{{base_url}}/api/frigate/notifications/{{id}}/snapshot.jpg"
+        image: >-
+          {{ base_url }}/local/images/snapshots/driveway.jpg
 
   - delay:
       seconds: "{{ cooldown }}"

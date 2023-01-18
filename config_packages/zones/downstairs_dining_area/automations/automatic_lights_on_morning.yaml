@@ -18,11 +18,11 @@ condition:
       state: "on"
     - alias: "Lights should be off"
       condition: state
-      entity_id: light.downstairs_dining_area
+      entity_id: light.dining_area
       state: "off"
     - alias: "Early morning"
       condition: state
-      entity_id: sensor.system_time_of_day
+      entity_id: sensor.system_time_of_day_detailed
       state: "early_morning"
     - alias: "Recent motion detected in hallway"
       condition: template

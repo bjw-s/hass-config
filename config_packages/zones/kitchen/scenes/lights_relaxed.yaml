@@ -1,5 +1,6 @@
 ---
 name: Kitchen - Lights - Relaxed
+icon: mdi:lightbulb-on-50
 entities:
   light.kitchen_front:
     state: 'on'

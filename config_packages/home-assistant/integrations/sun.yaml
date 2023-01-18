@@ -1,0 +1,7 @@
+---
+# The sun integration will use the location as configured in your
+# Home Assistant configuration to track if the sun is above or below the horizon
+#
+# https://www.home-assistant.io/integrations/sun/
+#
+sun:

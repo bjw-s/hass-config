@@ -6,7 +6,7 @@ mode: parallel
 variables:
   corresponding_entity: >
     {% if trigger.entity_id == 'sensor.downstairs_dining_area_lights_stats' %}
-      light.downstairs_dining_area
+      light.dining_area
     {% elif trigger.entity_id == 'sensor.kitchen_lights_stats' %}
      light.kitchen
     {% elif trigger.entity_id == 'sensor.downstairs_living_room_lights_stats' %}

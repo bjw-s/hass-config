@@ -1,0 +1,601 @@
+title: Lights
+path: lights
+id: lights
+
+type: 'custom:grid-layout'
+layout: !include snippets/layout-page-margin.yaml
+
+cards:
+  - type: 'custom:layout-card'
+    layout_type: 'custom:grid-layout'
+    layout: !include snippets/layout-page-columns.yaml
+    view_layout:
+      grid-area: cc
+    cards:
+      # [Header] Summary
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout: !include snippets/layout-page-title.yaml
+        view_layout:
+          grid-column: 1/-1
+        cards:
+
+          - type: markdown
+            style: !include snippets/style-markdown-page-title.yaml
+            content: >
+              # Lights
+
+              {% set daylight = ( state_attr('sun.sun', 'next_rising') | as_timestamp(0) - state_attr('sun.sun', 'next_setting') | as_timestamp(0) ) | abs / 60 / 60 %}
+              {% set all_lights = states.light|rejectattr('attributes.is_hue_group', 'defined') | list %}
+              {% set on_lights = all_lights|selectattr('state', 'equalto', 'on') | list %}
+              You have {{ all_lights|count }} lights and {{ on_lights|count }} of them {{ iif((on_lights|count == 1), 'is', 'are') }} turned on.
+              There are {{ daylight | round(1) }} hours of daylight and {{ 24 - daylight | round(1) }} hours of nighttime today.
+
+      # [Column] Daylight
+      - !include popups/light_levels.yaml
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: DAYLIGHT
+              label: Levels
+              action: more-info
+              link: popup.light_levels
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:vertical-layout'
+            cards:
+
+              - type: 'custom:decluttering-card'
+                template: multi_graph_card
+                variables:
+                  - entities:
+                      - entity: sensor.driveway_illuminance
+                        name: Driveway
+                      - entity: input_number.driveway_is_dark_lux
+                        name: Darkness threshold
+                        color: "#039be5"
+                        show_fill: false
+                      - entity: input_number.driveway_is_dusk_lux
+                        name: Dusk threshold
+                        color: "#FF4400"
+                        show_fill: false
+                  - title: Light Level
+                  - line_width: 1
+
+      # [Column] Living Room
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - !include popups/living_room_scenes.yaml
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: LIVING ROOM
+              label: Scenes
+              action: more-info
+              link: popup.living_room_scenes
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - view_layout:
+                  grid-column: span 2
+                type: 'custom:button-card'
+                template:
+                  - light_scene_controller_button_card
+                entity: input_select.downstairs_living_room_lights_scene
+                variables:
+                  aspect_ratio: 2/1
+                  manual_override_controller: &livingroom_manual_override_controller input_boolean.downstairs_living_room_lights_manual_mode
+                  scenes_popup: popup.living_room_scenes
+                triggers_update:
+                  - *livingroom_manual_override_controller
+
+              - type: 'custom:decluttering-card'
+                template: mini_graph_tile
+                variables:
+                  - entities:
+                      - entity: sensor.downstairs_living_room_illuminance
+                        name: Living room
+                      - entity: input_number.downstairs_living_room_is_dark_lux
+                        name: Darkness threshold
+                        color: "#039be5"
+                        show_fill: false
+                  - title: Light Level
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                view_layout:
+                  grid-column: 1/-3
+                variables:
+                  - entity: light.downstairs_living_room_speaker_left
+                  - name: Speaker left
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.downstairs_living_room_speaker_right
+                  - name: Speaker right
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.downstairs_living_room_floor_lamp
+                  - name: Floor Lamp
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.downstairs_living_room_hue_go
+                  - name: Hue Go
+
+      # [Column] Dining Area
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - !include popups/dining_area_scenes.yaml
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: DINING AREA
+              label: Scenes
+              action: more-info
+              link: popup.dining_area_scenes
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - view_layout:
+                  grid-column: span 2
+                type: 'custom:button-card'
+                template:
+                  - light_scene_controller_button_card
+                entity: input_select.downstairs_dining_area_lights_scene
+                variables:
+                  aspect_ratio: 2/1
+                  manual_override_controller: &dining_area_manual_override_controller input_boolean.downstairs_dining_area_lights_manual_mode
+                  scenes_popup: popup.dining_area_scenes
+                triggers_update:
+                  - *dining_area_manual_override_controller
+
+              - type: 'custom:decluttering-card'
+                template: mini_graph_tile
+                variables:
+                  - entities:
+                      - entity: sensor.downstairs_dining_area_illuminance
+                        name: Dining Area
+                      - entity: input_number.downstairs_dining_area_is_dark_lux
+                        name: Darkness threshold
+                        color: "#039be5"
+                        show_fill: false
+                  - title: Light Level
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                view_layout:
+                  grid-column: 1/-3
+                variables:
+                  - entity: light.downstairs_dining_area_ceiling
+                  - name: Ceiling
+
+      # [Column] Kitchen
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - !include popups/kitchen_scenes.yaml
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: KITCHEN
+              label: Scenes
+              action: more-info
+              link: popup.kitchen_scenes
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - view_layout:
+                  grid-column: span 2
+                type: 'custom:button-card'
+                template:
+                  - light_scene_controller_button_card
+                entity: input_select.kitchen_lights_scene
+                variables:
+                  aspect_ratio: 2/1
+                  manual_override_controller: &kitchen_manual_override_controller input_boolean.kitchen_lights_manual_mode
+                  scenes_popup: popup.kitchen_scenes
+                triggers_update:
+                  - *kitchen_manual_override_controller
+
+              - type: 'custom:decluttering-card'
+                template: mini_graph_tile
+                variables:
+                  - entities:
+                      - entity: sensor.kitchen_illuminance
+                        name: Kitchen
+                      - entity: input_number.kitchen_is_dark_lux
+                        name: Darkness threshold
+                        color: "#039be5"
+                        show_fill: false
+                  - title: Light Level
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                view_layout:
+                  grid-column: 1/-3
+                variables:
+                  - entity: light.kitchen_front
+                  - name: Ceiling front
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.kitchen_rear
+                  - name: Ceiling rear
+
+      # [Column] Bedroom
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - !include popups/bedroom_scenes.yaml
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: BEDROOM
+              label: Scenes
+              action: more-info
+              link: popup.bedroom_scenes
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.bedroom_ceiling
+                  - name: Ceiling
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.bedroom_nightstand_manyie
+                  - name: Nightstand Man-Yie
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.bedroom_nightstand_bernd
+                  - name: Nightstand Bernd
+
+      # [Column] Bedroom Eva
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - !include popups/bedroom_eva_scenes.yaml
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: BEDROOM EVA
+              label: Scenes
+              action: more-info
+              link: popup.bedroom_eva_scenes
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.bedroom_eva_ceiling
+                  - name: Ceiling
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.bedroom_eva_nightlight
+                  - name: Nightlight
+
+      # [Column] Upstairs Office
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - !include popups/upstairs_office_scenes.yaml
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: UPSTAIRS OFFICE
+              label: Scenes
+              action: more-info
+              link: popup.upstairs_office_scenes
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - view_layout:
+                  grid-column: span 2
+                type: 'custom:button-card'
+                template:
+                  - light_scene_controller_button_card
+                entity: input_select.upstairs_office_lights_scene
+                variables:
+                  aspect_ratio: 2/1
+                  scenes_popup: popup.upstairs_office_scenes
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                view_layout:
+                  grid-column: 1/-3
+                variables:
+                  - entity: light.upstairs_office_ceiling
+                  - name: Ceiling
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.upstairs_office_desk
+                  - name: Desk
+
+      # [Column] Attic Office
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - !include popups/attic_office_scenes.yaml
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: ATTIC OFFICE
+              label: Scenes
+              action: more-info
+              link: popup.attic_office_scenes
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - view_layout:
+                  grid-column: span 2
+                type: 'custom:button-card'
+                template:
+                  - light_scene_controller_button_card
+                entity: input_select.attic_office_lights_scene
+                variables:
+                  aspect_ratio: 2/1
+                  scenes_popup: popup.attic_office_scenes
+
+              - type: 'custom:decluttering-card'
+                template: mini_graph_tile
+                variables:
+                  - entities:
+                      - entity: sensor.attic_office_illuminance
+                        name: Attic office
+                      - entity: input_number.attic_office_is_dark_lux
+                        name: Darkness threshold
+                        color: "#039be5"
+                        show_fill: false
+                  - title: Light Level
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                view_layout:
+                  grid-column: 1/-3
+                variables:
+                  - entity: light.attic_office_front_ceiling
+                  - name: Ceiling front
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.attic_office_rear_ceiling
+                  - name: Ceiling rear
+
+      # [Column] Downstairs hallway
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - !include popups/downstairs_hallway_scenes.yaml
+          - type: 'custom:button-card'
+            template: header_card
+            variables:
+              name: DOWNSTAIRS HALLWAY
+              label: Scenes
+              action: more-info
+              link: popup.downstairs_hallway_scenes
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - view_layout:
+                  grid-column: span 2
+                type: 'custom:button-card'
+                template:
+                  - light_scene_controller_button_card
+                entity: input_select.downstairs_hallway_lights_scene
+                variables:
+                  aspect_ratio: 2/1
+                  manual_override_controller: &downstairs_hallway_manual_override_controller input_boolean.downstairs_hallway_lights_manual_mode
+                  scenes_popup: popup.downstairs_hallway_scenes
+                triggers_update:
+                  - *downstairs_hallway_manual_override_controller
+
+              - type: 'custom:decluttering-card'
+                template: mini_graph_tile
+                variables:
+                  - entities:
+                      - entity: sensor.downstairs_hallway_illuminance
+                        name: Downstairs hallway
+                      - entity: input_number.downstairs_hallway_is_dark_lux
+                        name: Darkness threshold
+                        color: "#039be5"
+                        show_fill: false
+                  - title: Light Level
+                  - icon: mdi:brightness-5
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                view_layout:
+                  grid-column: 1/-3
+                variables:
+                  - entity: light.downstairs_hallway_ceiling
+                  - name: Ceiling
+
+      # [Column] Upstairs hallway
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: UPSTAIRS HALLWAY
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                show_name: true
+                entity: input_boolean.upstairs_hallway_lights_manual_mode
+                name: Manual mode
+                icon: mdi:car-shift-pattern
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.upstairs_hallway_ceiling
+                  - name: Ceiling
+
+      # [Column] Attic hallway
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: ATTIC HALLWAY
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                show_name: true
+                entity: input_boolean.attic_hallway_lights_manual_mode
+                name: Manual mode
+                icon: mdi:car-shift-pattern
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.attic_hallway_ceiling
+                  - name: Ceiling
+
+      # [Column] Driveway
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: DRIVEWAY
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                show_name: true
+                entity: input_boolean.driveway_lights_manual_mode
+                name: Manual mode
+                icon: mdi:car-shift-pattern
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.driveway_wall
+                  - name: Wall
+
+      # [Column] Backyard
+
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: BACKYARD
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-live-tile.yaml
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                show_name: true
+                entity: input_boolean.backyard_lights_manual_mode
+                name: Manual mode
+                icon: mdi:car-shift-pattern
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.backyard_wall
+                  - name: Wall
+
+              - type: 'custom:decluttering-card'
+                template: light_card
+                variables:
+                  - entity: light.backyard_shed
+                  - name: Shed

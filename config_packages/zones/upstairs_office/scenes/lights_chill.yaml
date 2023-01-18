@@ -1,5 +1,6 @@
 ---
   name: Upstairs office - Lights - Chill
+  icon: mdi:beach
   entities:
     light.upstairs_office_desk:
       state: 'on'

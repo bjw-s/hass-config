@@ -1,5 +1,6 @@
 ---
 kitchen_is_dark_lux:
+  name: Kitchen darkness threshold
   min: 0
   max: 250
   step: 5

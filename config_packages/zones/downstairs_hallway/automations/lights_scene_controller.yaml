@@ -1,7 +1,7 @@
 ---
 id: downstairs_hallway_lights_scene_controller
 alias: Downstairs hallway - Lights - Scene controller
-max_exceeded: silent
+mode: restart
 
 trigger:
   - id: downstairs_hallway_switch_top
@@ -50,12 +50,14 @@ trigger:
 
   - id: downstairs_hallway_motion_detected
     platform: state
-    entity_id: binary_sensor.downstairs_hallway_1_motion
+    entity_id: binary_sensor.downstairs_hallway_motion
     to: 'on'
-  - id: downstairs_hallway_motion_detected
+  - id: downstairs_hallway_motion_cleared
     platform: state
-    entity_id: binary_sensor.downstairs_hallway_2_motion
-    to: 'on'
+    entity_id: binary_sensor.downstairs_hallway_motion
+    to: 'off'
+    for:
+      minutes: 2
 
   - id: front_door_opened
     platform: state
@@ -66,12 +68,6 @@ trigger:
     platform: state
     entity_id: binary_sensor.downstairs_living_room_door_contact
     to: 'on'
-
-  - id: automatic_lights_timer_finished
-    platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.downstairs_hallway_automatic_lights
 
   - id: lights_turned_off
     platform: state
@@ -102,9 +98,11 @@ action:
               - condition: state
                 entity_id: binary_sensor.downstairs_hallway_automatic_lights
                 state: "on"
+                alias: Hallway autmatic lights enabled
               - condition: state
                 entity_id: binary_sensor.downstairs_hallway_is_dark
                 state: "on"
+                alias: Hallway is dark
               - or:
                   - condition: trigger
                     id: downstairs_hallway_motion_detected
@@ -119,11 +117,11 @@ action:
                   - or:
                       - alias: "Late evening"
                         condition: state
-                        entity_id: sensor.system_time_of_day
+                        entity_id: sensor.system_time_of_day_detailed
                         state: "late_evening"
                       - alias: "night"
                         condition: state
-                        entity_id: sensor.system_time_of_day
+                        entity_id: sensor.system_time_of_day_detailed
                         state: "night"
                 sequence:
                   - service: input_select.select_option
@@ -138,11 +136,6 @@ action:
                   entity_id: "{{ scene_helper }}"
                   option: "Full brightness"
 
-          - service: timer.start
-            data:
-              entity_id: timer.downstairs_hallway_automatic_lights
-              duration: "{{ automatic_lights_duration }}"
-
       # Select "off" scene
       - conditions:
           - or:
@@ -154,6 +147,8 @@ action:
               # Turn off automatically
               - condition: trigger
                 id: automatic_lights_timer_finished
+              - condition: trigger
+                id: downstairs_hallway_motion_cleared
 
         sequence:
           - service: input_select.select_option

@@ -1,0 +1,21 @@
+type: custom:popup-card
+entity: popup.light_levels
+title: Light levels
+card:
+  type: 'custom:auto-entities'
+  filter:
+    template: |
+      {% for state in states.input_number -%}
+        {%- if state.entity_id | regex_match('input_number\..*lux',ignorecase=False) -%}
+        {{
+          { 'entity': state.entity_id,
+            'type': 'custom:slider-entity-row'
+          }
+        }},
+        {%- endif -%}
+      {%- endfor %}
+  sort:
+    method: friendly_name
+  card:
+    type: vertical-stack
+  card_param: cards

@@ -22,5 +22,5 @@ trigger:
     to: 'off'
 action:
   - alias: "Wake up hallway tablet"
-    service: switch.turn_off
-    entity_id: switch.downstairs_hallway_tablet_screensaver
+    service: switch.turn_on
+    entity_id: switch.downstairs_hallway_tablet_screen

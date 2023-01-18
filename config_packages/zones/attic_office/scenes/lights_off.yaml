@@ -1,5 +1,6 @@
 ---
   name: Attic office - Lights - Off
+  icon: mdi:lightbulb-off
   entities:
     light.attic:
       state: 'off'

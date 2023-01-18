@@ -1,0 +1,30 @@
+type: custom:popup-card
+entity: popup.attic_office_scenes
+title: Attic Office Scenes
+card:
+  type: 'custom:auto-entities'
+  filter:
+    template: |
+      {% for state in states.scene -%}
+        {%- if state.entity_id | regex_match('scene.attic_office_',ignorecase=False) -%}
+          {%- set NAME = state_attr(state.entity_id,"friendly_name") | regex_replace(find='Attic office - Lights - ', replace='') -%}
+          {{
+            { 'entity': state.entity_id,
+              'type': 'custom:button-card',
+              'template': 'light_scene_card_mini',
+              'variables': {
+                'name': NAME,
+                'controller': 'input_select.attic_office_lights_scene'
+              },
+            }
+          }},
+        {%- endif -%}
+      {%- endfor %}
+  sort:
+    method: friendly_name
+  card:
+    type: 'custom:layout-card'
+    layout_type: 'custom:grid-layout'
+    layout_options: !include ../snippets/layout-live-tile.yaml
+  view_layout:
+    grid-column: 1/-1

@@ -44,7 +44,7 @@ recorder:
       - sensor.doorbell_skipped_fps
       - sensor.time
       - sensor.time_utc
-      - sensor.system_time_of_day
+      - sensor.system_time_of_day_detailed
       - sensor.living_area_vacuum_map
 
     entity_globs:
