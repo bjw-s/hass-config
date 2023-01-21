@@ -93,10 +93,10 @@ cards:
             cards:
               - type: markdown
                 content: >
-                  {%- set batterySensors = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown']) | list -%}
+                  {%- set batterySensors = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
                   {%- set lowBatterySensors = batterySensors | map(attribute='state') | map('int') | select('<=', 30) | map('string') | list -%}
 
-                  {%- set batteryBinarySensors = states.binary_sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown']) | list -%}
+                  {%- set batteryBinarySensors = states.binary_sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
                   {%- set lowBatteryBinarySensors = batteryBinarySensors | selectattr('state', 'equalto', 'on') | list -%}
 
                   {%- set lowBatteryDevicesCount = (lowBatterySensors | count) + (lowBatteryBinarySensors | count) -%}

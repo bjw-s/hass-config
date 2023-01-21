@@ -5,7 +5,7 @@ max_exceeded: silent
 trigger:
   - id: hallway_presence
     platform: state
-    entity_id: binary_sensor.downstairs_living_room_door_contact
+    entity_id: binary_sensor.living_room_door_contact
     to: 'on'
   - id: hallway_presence
     platform: state

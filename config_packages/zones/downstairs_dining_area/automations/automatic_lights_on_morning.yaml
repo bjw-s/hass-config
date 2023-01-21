@@ -4,7 +4,7 @@ alias: Downstairs dining area - Automatic lights on morning
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: binary_sensor.downstairs_living_room_door_contact
+    entity_id: binary_sensor.living_room_door_contact
     to: "on"
 condition:
   and:

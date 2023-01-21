@@ -18,7 +18,9 @@ cards:
         view_layout:
           grid-column: 1/-1
         content: >
-          # Good {{ states.sensor.system_time_of_day.state }}
+          # {{ now().timestamp() | timestamp_custom('%H:%M, %B %-d %Y') }}
+
+          ## Good {{ states.sensor.system_time_of_day.state }}
 
       # [Column] Security
       - type: "custom:layout-card"

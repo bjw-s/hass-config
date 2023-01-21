@@ -3,24 +3,21 @@ id: attic_hallway_ceiling_light_off
 alias: Attic hallway - Ceiling light off
 max_exceeded: silent
 trigger:
-  - platform: device
-    domain: mqtt
-    device_id: 4b41fc02c4f375ddbe1c405fe173600d
-    type: action
-    subtype: press_2
-    discovery_id: 0x0000000001716b46 action_press_2
-  - platform: device
-    domain: mqtt
-    device_id: ac295e311ee3c53531cb01757bec6180
-    type: action
-    subtype: press_2
-    discovery_id: 0x00000000017611b0 action_press_2
-  - id: upstairs_hallway_switch_button_2_press
+  - id: attic_hallway_switch_bottom_right
+    platform: device
+    domain: hue
+    device_id: 954467dbce353343339b518d31a2dfdd
+    type: initial_press
+    subtype: 4
+    unique_id: 64b1d08b-8416-4335-96dc-9653b9ff1d76
+
+  - id: upstairs_hallway_switch_bottom_left
     platform: device
     domain: hue
     device_id: fb2e69655f5862ce3a7c9f4dabc2e086
     type: initial_press
     subtype: 2
     unique_id: f06bfeaf-300a-4094-ab63-823d6d810cc1
+
 action:
   - scene: scene.attic_hallway_lights_off

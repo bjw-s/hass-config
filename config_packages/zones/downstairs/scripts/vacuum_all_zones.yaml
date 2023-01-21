@@ -7,7 +7,7 @@ vacuum_downstairs:
     segments: |
       {%- set data = namespace(segments=[]) -%}
       {%- set data.segments = data.segments + [18,19,20] -%}
-      {% if is_state('binary_sensor.downstairs_utility_room_door_contact', 'on') %}
+      {% if is_state('binary_sensor.utility_room_door_contact', 'on') %}
       {%- set data.segments = data.segments + [16] -%}
       {% endif %}
       {{- data.segments -}}

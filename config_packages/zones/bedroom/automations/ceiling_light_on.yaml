@@ -2,24 +2,13 @@
 id: bedroom_ceiling_light_on
 alias: Bedroom - Ceiling light on
 trigger:
-  - platform: device
-    domain: mqtt
-    device_id: 1eb8a1cbd7e1baf762316b075b3be5c0
-    type: action
-    subtype: press_1_and_3
-    discovery_id: 0x00000000017579b6 action_press_1_and_3
-  - platform: device
-    domain: mqtt
-    device_id: 1eb8a1cbd7e1baf762316b075b3be5c0
-    type: action
-    subtype: press_1
-    discovery_id: 0x00000000017579b6 action_press_1
-  - platform: device
-    domain: mqtt
-    device_id: 1eb8a1cbd7e1baf762316b075b3be5c0
-    type: action
-    subtype: press_3
-    discovery_id: 0x00000000017579b6 action_press_3
+  - id: bedroom_switch_top
+    platform: device
+    domain: hue
+    device_id: 5dd7987abfcc60204c7752b0ad06fdd6
+    type: initial_press
+    subtype: 3
+    unique_id: 57387348-dc48-484d-b6df-882e68adee7c
 action:
   - service: scene.turn_on
     data:

@@ -13,7 +13,7 @@ area_downstairs_garage: !include zones/downstairs_garage/package.yaml
 area_downstairs_hallway: !include zones/downstairs_hallway/package.yaml
 area_kitchen: !include zones/kitchen/package.yaml
 area_downstairs_living_room: !include zones/downstairs_living_room/package.yaml
-# area_downstairs_utility_room: !include zones/downstairs_utility_room/package.yaml
+# area_utility_room: !include zones/utility_room/package.yaml
 
 area_backyard: !include zones/backyard/package.yaml
 area_downstairs_dining_area: !include zones/downstairs_dining_area/package.yaml

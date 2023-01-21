@@ -4,34 +4,35 @@ alias: Attic office - Lights - Scene controller
 max_exceeded: silent
 
 trigger:
-  - platform: device
-    domain: mqtt
-    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
-    type: action
-    subtype: press_1
-    discovery_id: 0x00000000017611a7 action_press_1
-    id: switch-left-top-click
-  - platform: device
-    domain: mqtt
-    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
-    type: action
-    subtype: press_2
-    discovery_id: 0x00000000017611a7 action_press_2
-    id: switch-left-bottom-click
-  - platform: device
-    domain: mqtt
-    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
-    type: action
-    subtype: press_3
-    discovery_id: 0x00000000017611a7 action_press_3
-    id: switch-right-top-click
-  - platform: device
-    domain: mqtt
-    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
-    type: action
-    subtype: press_4
-    discovery_id: 0x00000000017611a7 action_press_4
-    id: switch-right-bottom-click
+  - id: attic_office_switch_top_left
+    platform: device
+    domain: hue
+    device_id: 5fe0720b32b486172c92638045ca1617
+    type: initial_press
+    subtype: 1
+    unique_id: 22296b02-232c-48e3-8513-861d88a9e785
+  - id: attic_office_switch_bottom_left
+    platform: device
+    domain: hue
+    device_id: 5fe0720b32b486172c92638045ca1617
+    type: initial_press
+    subtype: 2
+    unique_id: c1461518-4e7d-43d1-84b1-8c553d7e5f65
+  - id: attic_office_switch_top_right
+    platform: device
+    domain: hue
+    device_id: 5fe0720b32b486172c92638045ca1617
+    type: initial_press
+    subtype: 3
+    unique_id: 8baca6a0-e173-4609-89df-dea50e956fef
+  - id: attic_office_switch_bottom_right
+    platform: device
+    domain: hue
+    device_id: 5fe0720b32b486172c92638045ca1617
+    type: initial_press
+    subtype: 4
+    unique_id: 29af5843-83df-4d03-ad99-cf0e4e3e3bb6
+
   - platform: device
     domain: hue
     device_id: 9917ddec2ef16af8b855f70b76332092
@@ -46,6 +47,7 @@ trigger:
     subtype: 4
     unique_id: 07167d34-d914-4efd-b7c3-3d8a3cc0481c
     id: remote-off-click
+
   - id: lights_turned_off
     platform: state
     entity_id: light.attic
@@ -60,7 +62,7 @@ action:
           - and:
               - or:
                   - condition: trigger
-                    id: switch-left-top-click
+                    id: attic_office_switch_top_left
                   - condition: trigger
                     id: remote-on-click
               - condition: state
@@ -77,7 +79,7 @@ action:
           - and:
               - or:
                   - condition: trigger
-                    id: switch-left-top-click
+                    id: attic_office_switch_top_left
                   - condition: trigger
                     id: remote-on-click
               - condition: state
@@ -94,7 +96,7 @@ action:
       - conditions:
           - or:
               - condition: trigger
-                id: switch-left-bottom-click
+                id: attic_office_switch_bottom_left
               - alias: "Remote Off button"
                 condition: trigger
                 id: remote-off-click
@@ -110,13 +112,13 @@ action:
       # Turn on front lights
       - conditions:
           - condition: trigger
-            id: switch-right-top-click
+            id: attic_office_switch_top_right
         sequence:
           - scene: scene.attic_office_lights_front_full_brightness
 
       # Turn off front lights
       - conditions:
           - condition: trigger
-            id: switch-right-bottom-click
+            id: attic_office_switch_bottom_right
         sequence:
           - scene: scene.attic_office_lights_front_off

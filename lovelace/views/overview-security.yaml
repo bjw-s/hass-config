@@ -78,16 +78,16 @@ cards:
                 state_color: true
 
           - type: 'custom:multiple-entity-row'
-            entity: binary_sensor.downstairs_living_room_door_contact
+            entity: binary_sensor.living_room_door_contact
             name: Living Room
             icon: mdi:sofa
             show_state: false
             entities:
-              - entity: binary_sensor.downstairs_living_room_door_contact
+              - entity: binary_sensor.living_room_door_contact
                 name: Door
                 icon: true
                 state_color: true
-              - entity: binary_sensor.downstairs_living_room_window_contact
+              - entity: binary_sensor.living_room_window_contact
                 name: Window
                 icon: true
                 state_color: true
@@ -123,16 +123,16 @@ cards:
                 state_color: true
 
           - type: 'custom:multiple-entity-row'
-            entity: binary_sensor.downstairs_utility_room_door_contact
+            entity: binary_sensor.utility_room_door_contact
             name: Utility Room
             icon: mdi:washing-machine
             show_state: false
             entities:
-              - entity: binary_sensor.downstairs_utility_room_door_contact
+              - entity: binary_sensor.utility_room_door_contact
                 name: Door
                 icon: true
                 state_color: true
-              - entity: binary_sensor.downstairs_utility_room_garden_door_contact
+              - entity: binary_sensor.utility_room_garden_door_contact
                 name: Garden door
                 icon: true
                 state_color: true
