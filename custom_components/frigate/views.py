@@ -32,6 +32,7 @@ from homeassistant.components.http.const import KEY_HASS
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_URL
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 
@@ -94,6 +95,20 @@ def get_frigate_instance_id_for_config_entry(
 
     config = hass.data[DOMAIN].get(config_entry.entry_id, {}).get(ATTR_CONFIG, {})
     return get_frigate_instance_id(config) if config else None
+
+
+def async_setup(hass: HomeAssistant) -> None:
+    """Set up the views."""
+    session = async_get_clientsession(hass)
+    hass.http.register_view(JSMPEGProxyView(session))
+    hass.http.register_view(MSEProxyView(session))
+    hass.http.register_view(WebRTCProxyView(session))
+    hass.http.register_view(NotificationsProxyView(session))
+    hass.http.register_view(SnapshotsProxyView(session))
+    hass.http.register_view(RecordingProxyView(session))
+    hass.http.register_view(ThumbnailsProxyView(session))
+    hass.http.register_view(VodProxyView(session))
+    hass.http.register_view(VodSegmentProxyView(session))
 
 
 # These proxies are inspired by:
@@ -209,6 +224,24 @@ class SnapshotsProxyView(ProxyView):
     def _create_path(self, **kwargs: Any) -> str | None:
         """Create path."""
         return f"api/events/{kwargs['eventid']}/snapshot.jpg"
+
+
+class RecordingProxyView(ProxyView):
+    """A proxy for recordings."""
+
+    url = "/api/frigate/{frigate_instance_id:.+}/recording/{camera:.+}/start/{start:[.0-9]+}/end/{end:[.0-9]*}"
+    extra_urls = [
+        "/api/frigate/recording/{camera:.+}/start/{start:[.0-9]+}/end/{end:[.0-9]*}"
+    ]
+
+    name = "api:frigate:recording"
+
+    def _create_path(self, **kwargs: Any) -> str | None:
+        """Create path."""
+        return (
+            f"api/{kwargs['camera']}/start/{kwargs['start']}"
+            + f"/end/{kwargs['end']}/clip.mp4"
+        )
 
 
 class ThumbnailsProxyView(ProxyView):
@@ -430,8 +463,8 @@ class WebsocketProxyView(ProxyView):
         ) as ws_to_frigate:
             await asyncio.wait(
                 [
-                    self._proxy_msgs(ws_to_frigate, ws_to_user),
-                    self._proxy_msgs(ws_to_user, ws_to_frigate),
+                    asyncio.create_task(self._proxy_msgs(ws_to_frigate, ws_to_user)),
+                    asyncio.create_task(self._proxy_msgs(ws_to_user, ws_to_frigate)),
                 ],
                 return_when=asyncio.tasks.FIRST_COMPLETED,
             )
@@ -448,7 +481,33 @@ class JSMPEGProxyView(WebsocketProxyView):
 
     def _create_path(self, **kwargs: Any) -> str | None:
         """Create path."""
-        return f"live/{kwargs['path']}"
+        return f"live/jsmpeg/{kwargs['path']}"
+
+
+class MSEProxyView(WebsocketProxyView):
+    """A proxy for MSE websocket."""
+
+    url = "/api/frigate/{frigate_instance_id:.+}/mse/{path:.+}"
+    extra_urls = ["/api/frigate/mse/{path:.+}"]
+
+    name = "api:frigate:mse"
+
+    def _create_path(self, **kwargs: Any) -> str | None:
+        """Create path."""
+        return f"live/mse/{kwargs['path']}"
+
+
+class WebRTCProxyView(WebsocketProxyView):
+    """A proxy for WebRTC websocket."""
+
+    url = "/api/frigate/{frigate_instance_id:.+}/webrtc/{path:.+}"
+    extra_urls = ["/api/frigate/webrtc/{path:.+}"]
+
+    name = "api:frigate:webrtc"
+
+    def _create_path(self, **kwargs: Any) -> str | None:
+        """Create path."""
+        return f"live/webrtc/{kwargs['path']}"
 
 
 def _init_header(request: web.Request) -> CIMultiDict | dict[str, str]:

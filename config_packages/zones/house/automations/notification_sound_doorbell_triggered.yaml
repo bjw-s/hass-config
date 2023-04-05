@@ -8,7 +8,7 @@ max_exceeded: silent
 trigger:
   platform: state
   entity_id: binary_sensor.front_door_doorbell
-  from: "off"
+  # from: "off"
   to: "on"
 
 variables:

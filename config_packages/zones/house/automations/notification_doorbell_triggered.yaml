@@ -8,7 +8,6 @@ max_exceeded: silent
 trigger:
   platform: state
   entity_id: binary_sensor.front_door_doorbell
-  from: "off"
   to: "on"
 
 variables:
@@ -17,15 +16,15 @@ variables:
   # Person count
   person_count: "{{ states('sensor.doorbell_person_count') }}"
   # Camera entity
-  camera: camera.driveway_doorbell
+  camera: camera.doorbell
   # Notification target
   notify_device: adults
   # Rate limit the automation to once per 30 seconds
   cooldown: 30
 
 condition:
-  - condition: template
-    value_template: "{{ person_count > 0 }}"
+  # - condition: template
+  #   value_template: "{{ person_count > 0 }}"
 
 action:
   - service: camera.snapshot

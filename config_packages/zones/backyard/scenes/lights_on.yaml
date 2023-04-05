@@ -1,5 +1,9 @@
 ---
 name: Backyard - Lights - On
 entities:
-  light.backyard:
+  light.backyard_shed:
     state: 'on'
+  light.backyard_wall:
+    state: 'on'
+    brightness: 255
+    color_temp: 400

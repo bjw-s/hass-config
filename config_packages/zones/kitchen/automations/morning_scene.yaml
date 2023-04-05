@@ -39,18 +39,19 @@ action:
 
   # Turn on Sonos
   - service: media_player.join
+    target:
+      device_id: 2826348595450dea784b9ad8cfc88135
     data:
-      entity_id: media_player.kitchen_sonos
       group_members:
-        media_player.downstairs_living_room_sonos
+        media_player.living_room_sonos
   - service: media_player.volume_set
     data:
       entity_id:
-        - media_player.downstairs_living_room_sonos
+        - media_player.living_room_sonos
         - media_player.kitchen_sonos
       volume_level: 0.04
   - service: media_player.select_source
+    target:
+      device_id: 2826348595450dea784b9ad8cfc88135
     data:
-      entity_id:
-        - media_player.kitchen_sonos
       source: Qmusic

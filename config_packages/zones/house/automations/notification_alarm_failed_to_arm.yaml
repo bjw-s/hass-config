@@ -53,10 +53,3 @@ action:
     timeout:
       minutes: 5
     continue_on_timeout: true
-
-  - event: wallpanels_publish_payload
-    event_data:
-      payload: |
-        {
-          "reload": true
-        }

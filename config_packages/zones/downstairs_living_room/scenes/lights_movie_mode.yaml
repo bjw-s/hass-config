@@ -3,7 +3,7 @@ name: Downstairs living room - Lights - Movie mode
 icon: mdi:filmstrip
 entities:
   light.downstairs_living_room_floor_lamp:
-   state: 'on'
+   state: 'off'
    brightness: 150
    color_temp: 443
   light.downstairs_living_room_hue_go:

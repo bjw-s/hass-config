@@ -31,25 +31,25 @@ def get_waste_data_raw(
             datetime.now().strftime("%Y-%m-%d"),
         )
 
-        raw_response = requests.get(url)
+        raw_response = requests.get(url, timeout=60)
     except requests.exceptions.RequestException as err:
         raise ValueError(err) from err
 
     try:
         response = raw_response.json()
-    except ValueError as e:
-        raise ValueError(f"Invalid and/or no data received from {url}") from e
 
-    if not response:
-        _LOGGER.error("Address not found!")
-        return
+        if not response["ophaaldagen"]:
+            _LOGGER.error("Address not found or no data available!")
+            raise KeyError
+    except KeyError as err:
+        raise KeyError(f"Invalid and/or no data received from {url}") from err
 
     try:
         waste_data_raw = (
             response["ophaaldagen"]["data"] + response["ophaaldagenNext"]["data"]
         )
-    except KeyError as exc:
-        raise KeyError(f"Invalid and/or no data received from {url}") from exc
+    except KeyError as err:
+        raise KeyError(f"Invalid and/or no data received from {url}") from err
 
     return waste_data_raw
 

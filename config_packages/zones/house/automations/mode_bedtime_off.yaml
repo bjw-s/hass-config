@@ -6,11 +6,6 @@ trigger:
     entity_id: input_boolean.home_modes_bedtime_mode
     to: 'off'
 
-action:
+action: []
   # Undim tablet audio
-  - event: wallpanels_publish_payload
-    event_data:
-      payload: |
-        {
-          "volume": 80
-        }
+  # TODO: Refactor to use fullykiosk automation

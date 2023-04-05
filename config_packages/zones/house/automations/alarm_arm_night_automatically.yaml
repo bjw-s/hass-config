@@ -13,12 +13,7 @@ condition:
 
 action:
   # Dim tablet audio
-  - event: wallpanels_publish_payload
-    event_data:
-      payload: |
-        {
-          "volume": 20
-        }
+  # TODO: Refactor to use fullykiosk automation
 
   - delay:
       seconds: 2

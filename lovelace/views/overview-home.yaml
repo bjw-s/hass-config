@@ -208,7 +208,7 @@ cards:
 
               - type: "custom:button-card"
                 template: live_tile_with_camera
-                entity: camera.driveway_doorbell
+                entity: camera.doorbell
                 name: Front Door
 
           - type: "custom:layout-card"

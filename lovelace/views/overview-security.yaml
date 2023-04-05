@@ -30,9 +30,9 @@ cards:
               grid-column: 1/-1
 
           - type: picture-entity
-            camera_image: camera.driveway_doorbell
+            camera_image: camera.doorbell
             camera_view: live
-            entity: camera.driveway_doorbell
+            entity: camera.doorbell
             name: Doorbell
             show_name: false
             show_state: false
@@ -97,12 +97,12 @@ cards:
                 state_color: true
 
           - type: 'custom:multiple-entity-row'
-            entity: binary_sensor.downstairs_dining_area_garden_doors_contact
+            entity: binary_sensor.dining_area_garden_doors_contact
             name: Dining Area
             icon: mdi:table-furniture
             show_state: false
             entities:
-              - entity: binary_sensor.downstairs_dining_area_garden_doors_contact
+              - entity: binary_sensor.dining_area_garden_doors_contact
                 name: Garden Doors
                 icon: true
                 state_color: true
@@ -138,22 +138,22 @@ cards:
                 state_color: true
 
           - type: 'custom:multiple-entity-row'
-            entity: binary_sensor.downstairs_garage_entry_door_contact
+            entity: binary_sensor.utility_room_garage_entry_door_contact
             name: Garage
             icon: mdi:car
             show_state: false
             entities:
-              - entity: binary_sensor.downstairs_garage_entry_door_contact
+              - entity: binary_sensor.utility_room_garage_entry_door_contact
                 name: Entry door
                 icon: true
                 state_color: true
-              - entity: binary_sensor.downstairs_garage_door_contact
+              - entity: binary_sensor.garage_door_contact
                 name: Garage door
                 icon: true
                 state_color: true
 
           - type: 'custom:multiple-entity-row'
-            entity: binary_sensor.downstairs_garage_entry_door_contact
+            entity: binary_sensor.utility_room_garage_entry_door_contact
             name: Attic office
             icon: mdi:desk
             show_state: false
@@ -170,55 +170,3 @@ cards:
                 name: Motion
                 icon: true
                 state_color: true
-
-#   #################################################
-#   #                   Garage                      #
-#   #################################################
-
-#   - type: vertical-stack
-#     title: Garage
-#     view_layout:
-#       grid-area: garage
-#     cards:
-#       - type: grid
-#         columns: 2
-#         cards:
-#           - type: vertical-stack
-#             cards:
-#               - type: custom:mushroom-entity-card
-#                 entity: binary_sensor.downstairs_garage_entry_door_contact
-#                 name: Entry door
-
-#           - type: vertical-stack
-#             cards:
-#               - type: custom:mushroom-entity-card
-#                 entity: binary_sensor.downstairs_garage_door_contact
-#                 name: Garage door
-
-#   #################################################
-#   #                   Study                      #
-#   #################################################
-
-#   - type: vertical-stack
-#     title: Office (attic)
-#     view_layout:
-#       grid-area: attic_office
-#     cards:
-#       - type: grid
-#         columns: 2
-#         cards:
-#           - type: vertical-stack
-#             cards:
-#               - type: custom:mushroom-entity-card
-#                 entity: binary_sensor.attic_office_balcony_door_contact
-#                 name: Balcony door
-
-#               - type: custom:mushroom-entity-card
-#                 entity: binary_sensor.attic_office_motion
-#                 name: Motion
-
-#           - type: vertical-stack
-#             cards:
-#               - type: custom:mushroom-entity-card
-#                 entity: binary_sensor.attic_office_window_contact
-#                 name: Balcony window

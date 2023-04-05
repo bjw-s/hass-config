@@ -40,8 +40,9 @@ cards:
             cards:
               - type: "custom:button-card"
                 template: header_card_no_link
+                show_name: true
                 variables:
-                  name: SECURITY
+                  name: '‎'
                 view_layout:
                   grid-column: 1/-1
 
@@ -53,17 +54,12 @@ cards:
 
               - type: "custom:button-card"
                 template: live_tile_with_camera
-                entity: camera.driveway_doorbell
+                entity: camera.doorbell
                 name: Front Door
 
               - type: "custom:button-card"
-                template: header_card_no_link
-                variables:
-                  name: MODES
                 view_layout:
-                  grid-column: 1/-1
-
-              - type: "custom:button-card"
+                  grid-column: 1/-3
                 template:
                   - live_tile_mini
                   - require_confirmation
@@ -177,7 +173,7 @@ cards:
 
               - type: "custom:button-card"
                 view_layout:
-                  grid-column: 1/-2
+                  grid-column: 1/-3
                 template:
                   - live_tile_card
                   - live_tile_with_long_state

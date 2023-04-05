@@ -3,11 +3,12 @@ id: backyard_lights_on
 alias: Backyard - Lights on
 max_exceeded: silent
 trigger:
-  - platform: device
-    domain: mqtt
-    device_id: dd81282b220b5523490be40a8cb92b6e
-    type: action
-    subtype: press_3
-    discovery_id: 0x000000000171680f action_press_3
+  - id: utility_room_switch_top
+    platform: device
+    domain: hue
+    device_id: 17b4abf9c9be5049601d8c59995a94c1
+    type: initial_press
+    subtype: 3
+    unique_id: 916b37bf-4936-4acd-a901-82bad7be82ab
 action:
   - scene: scene.backyard_lights_on

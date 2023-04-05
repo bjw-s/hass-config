@@ -18,4 +18,4 @@ action:
     data:
       entity_id:
         - media_player.kitchen_sonos
-        - media_player.downstairs_living_room_sonos
+        - media_player.living_room_sonos

@@ -1,0 +1,29 @@
+---
+id: bedroom_eva_lights_state_controller
+alias: Bedroom Eva - Lights - State controller
+max_exceeded: silent
+
+trigger:
+  - id: bedroom_eva_nightlight_on_for_duration
+    platform: state
+    entity_id: light.bedroom_eva_nightlight
+    to: "off"
+    for: "00:05:00"
+
+action:
+  - alias: "manage state based on trigger"
+    choose:
+      # Automatically turn off nightlight
+      - conditions:
+          - and:
+              - or:
+                  - condition: trigger
+                    id: bedroom_eva_nightlight_on_for_duration
+              - alias: "Time between 8PM and 6AM"
+                condition: time
+                after: "20:00:00"
+                before: "06:00:00"
+        sequence:
+          - service: scene.turn_on
+            data:
+              entity_id: scene.bedroom_eva_lights_nightlight_off
