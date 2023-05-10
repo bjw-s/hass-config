@@ -42,6 +42,11 @@ exclude_list = ""
 # postal_code = "5146eg"
 # street_number = "1"
 
+# Afvalstoffendienstkalender
+# provider = "afvalstoffendienstkalender"
+# postal_code = "4266NB"
+# street_number = "1"
+
 # provider = "rmn"
 # postal_code = "3701XK"
 # street_number = "24"
@@ -52,15 +57,23 @@ exclude_list = ""
 # postal_code = "6665CN"
 # street_number = "1"
 
+provider = "prezero"
+postal_code = "6822NG"
+street_number = "1"
+
 # RD4
 # provider = "rd4"
 # postal_code = "6301ET"
 # street_number = "24"
 # suffix = "C"
 
-provider = "rova"
-postal_code = "8021CC"
-street_number = "1"
+# provider = "rova"
+# postal_code = "8021CC"
+# street_number = "1"
+
+# provider = "rmn"
+# postal_code = "3402TA"
+# street_number = "1"
 
 # Ximmio
 # provider = "meerlanden"

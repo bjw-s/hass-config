@@ -2,9 +2,6 @@
 home_modes_away_mode:
   sequence:
     # A/V
-    - service: switch.turn_off
-      entity_id: switch.downstairs_living_room_subwoofer
-
     - service: media_player.media_stop
       entity_id: media_player.kitchen_sonos
 

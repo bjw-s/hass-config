@@ -10,6 +10,7 @@
 *.pyc
 ._*
 __pycache__
+/tmp
 
 # Directory (contents) ignores
 /*.conf
@@ -30,4 +31,3 @@ __pycache__
 
 # Specific keeps
 !.gitkeep
-

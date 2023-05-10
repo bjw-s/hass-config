@@ -2,7 +2,6 @@
 # Button Card Templates
 # Made by Madelena Mak 2022
 
-
 # LIVE TILES
 
 # Live Tile Card
@@ -16,7 +15,7 @@ live_tile_card:
   show_state: true
   show_label: true
   state:
-    - value: 'off'
+    - value: "off"
       styles:
         card:
           - background-color: var(--ha-card-background)
@@ -49,7 +48,7 @@ live_tile_card:
       - grid-template-columns: 1fr min-content
       - grid-template-rows: min-content auto min-content
     card:
-      - aspect-ratio: '[[[ return variables.aspect_ratio ]]]'
+      - aspect-ratio: "[[[ return variables.aspect_ratio ]]]"
       - padding: 0
     name:
       - font-size: var(--body-font-size)
@@ -82,7 +81,6 @@ live_tile_card:
       - white-space: normal
       - text-align: left
       - height: 100%
-
 
 # Live Tile
 
@@ -126,7 +124,6 @@ live_tile:
       - justify-self: end
       - align-self: end
 
-
 # Live Tile Mini
 
 live_tile_mini:
@@ -148,14 +145,13 @@ live_tile_mini:
       - font-weight: var(--h2-font-weight)
       - padding: 0 0 4px 4px
 
-
 # Live Tile with Unit
 
 live_tile_with_unit:
   template:
     - live_tile
   custom_fields:
-    unit: ''
+    unit: ""
   styles:
     grid:
       - grid-template-areas: '". i s ." ". i unit ." "n n l l"'
@@ -174,13 +170,12 @@ live_tile_with_unit:
         - color: var(--primary-text-color)
         - opacity: .6
 
-
 # Live Tile (with Camera)
 # Uses the entire tile background for image.
 
 live_tile_with_camera:
   variables:
-    camera: '[[[ return entity.attributes.entity_picture ]]]'
+    camera: "[[[ return entity.attributes.entity_picture ]]]"
   template:
     - live_tile_card
     - live_tile_with_long_state
@@ -196,20 +191,19 @@ live_tile_with_camera:
       - background-position: center center
       - color: var(--text-accent-color)
 
-
 # Live Tile (with Round Picture)
 # Places the image inside a circle. Good for things like displaying a person.
 
 live_tile_with_picture:
   variables:
-    picture: '[[[ return entity.attributes.entity_picture ]]]'
+    picture: "[[[ return entity.attributes.entity_picture ]]]"
   template: live_tile_card
   show_icon: false
   custom_fields:
-    picture: ''
+    picture: ""
   state:
-    - value: 'idle'
-      color: 'off'
+    - value: "idle"
+      color: "off"
   styles:
     grid:
       - grid-template-areas: '"picture picture" "n s"'
@@ -234,11 +228,10 @@ live_tile_with_picture:
         - padding: 0
         - aspect-ratio: 1/1
         - border-radius: 50%
-        - border: '4px solid rgba(0,0,0,.25)'
+        - border: "4px solid rgba(0,0,0,.25)"
         - background: '[[[ return "url(" + variables.picture + ")" ]]]'
         - background-size: cover
         - background-position: center center
-
 
 # Live Tile (with Last Changed Label)
 
@@ -254,7 +247,6 @@ live_tile_with_last_changed_label:
       else { return moment(entity.last_changed).fromNow() }
     ]]]
 
-
 # Live Tile (with State Countdown)
 
 live_tile_with_state_countdown:
@@ -262,7 +254,7 @@ live_tile_with_state_countdown:
     duration: 60
   template: live_tile_with_last_changed_label
   state:
-    - value: 'off'
+    - value: "off"
       styles:
         card: null
   styles:
@@ -274,7 +266,6 @@ live_tile_with_state_countdown:
             if (diff > variables.duration) { return '' }
             return 'linear-gradient( to top, rgba(var(--rgb-primary-color),' + opacity + ') 0%, rgba(var(--rgb-primary-color),' + opacity + ') 100%)'
           ]]]
-
 
 # Live Tile (with Long State)
 
@@ -288,7 +279,6 @@ live_tile_with_long_state:
       - text-align: left
       - line-height: 24px
 
-
 # Live Tile (with Longer State)
 
 live_tile_with_longer_state:
@@ -300,7 +290,6 @@ live_tile_with_longer_state:
       - white-space: normal
       - text-align: left
       - line-height: 20px
-
 
 # Live Tile (with Percent Bar)
 
@@ -328,7 +317,6 @@ live_tile_with_accent_percent_bar:
           ]]]
         color: var(--accent-text-color)
 
-
 # Media Player Live Tile
 
 live_tile_media_player:
@@ -336,12 +324,12 @@ live_tile_media_player:
     - live_tile_card
     - live_tile_with_long_state
   variables:
-    aspect_ratio: 3/1
+    aspect_ratio: 1/1
   icon: >-
     [[[ if (entity.state == "playing") { return "mdi:play" } else if
     (entity.state == "paused") { return "mdi:pause" } else { return
     entity.attributes.icon } ]]]
-  state_display: '[[[ return entity.attributes.media_title ]]]'
+  state_display: "[[[ return (entity.state[0].toUpperCase() + entity.state.substring(1)) ]]]"
   label: |-
     [[[
       if (entity.attributes.media_content_type != undefined) {
@@ -354,8 +342,6 @@ live_tile_media_player:
         }
       }
     ]]]
-  custom_fields:
-    picture: ''
   color: var(--primary-color)
   state:
     - operator: regex
@@ -377,18 +363,18 @@ live_tile_media_player:
       - grid-template-columns: auto min-content
     state:
       - padding-right: |-
-            [[[
-              if ((entity.attributes.entity_picture != undefined) || (entity.attributes.entity_picture_local != undefined)) {
-                return "50%"
-              } else { return 0 }
-            ]]]
+          [[[
+            if ((entity.attributes.entity_picture != undefined) || (entity.attributes.entity_picture_local != undefined)) {
+              return "50%"
+            } else { return 0 }
+          ]]]
     label:
       - padding-right: |-
-            [[[
-              if ((entity.attributes.entity_picture != undefined) || (entity.attributes.entity_picture_local != undefined)) {
-                return "50%"
-              } else { return 0 }
-            ]]]
+          [[[
+            if ((entity.attributes.entity_picture != undefined) || (entity.attributes.entity_picture_local != undefined)) {
+              return "50%"
+            } else { return 0 }
+          ]]]
     img_cell:
       - place-self: end end
       - width: 24px
@@ -418,7 +404,6 @@ live_tile_media_player:
         - border-radius: 50%
         - aspect-ratio: 1/1
 
-
 # Large Tile Card
 
 large_tile_card:
@@ -442,17 +427,15 @@ large_tile_card:
     label:
       - padding: 0
 
-
 # Light Button Card
 
 light_button_card:
   template: live_tile_card
   state:
-    - value: 'on'
+    - value: "on"
       styles:
         card:
           - background: var(--ha-card-background)
-
 
 # Light Group Button Card
 
@@ -460,7 +443,7 @@ light_button_card_group:
   template: live_tile_card
   group_expand: true
   state:
-    - value: 'on'
+    - value: "on"
       label: |
         [[[
           var lightsOn = entity.attributes.entity_id.filter(e => states[e].state == "on").length
@@ -525,9 +508,9 @@ light_scene_controller_button_card:
     action: call-service
     service: input_boolean.toggle
     service_data:
-      entity_id: '[[[ return variables.manual_override_controller ]]]'
+      entity_id: "[[[ return variables.manual_override_controller ]]]"
   state:
-    - value: 'Off'
+    - value: "Off"
       styles:
         card:
           - background: var(--ha-card-background)
@@ -541,11 +524,11 @@ light_scene_controller_button_card:
 
 light_scene_card:
   variables:
-    name: ''
-    color: ''
-    controller: ''
-  type: 'custom:button-card'
-  name: '[[[ return variables.name ]]]'
+    name: ""
+    color: ""
+    controller: ""
+  type: "custom:button-card"
+  name: "[[[ return variables.name ]]]"
   aspect_ratio: 1/1
   styles:
     name:
@@ -557,8 +540,8 @@ light_scene_card:
     action: call-service
     service: input_select.select_option
     service_data:
-      entity_id: '[[[ return variables.controller ]]]'
-      option: '[[[ return variables.name ]]]'
+      entity_id: "[[[ return variables.controller ]]]"
+      option: "[[[ return variables.name ]]]"
 
 # Light Scene Tile (Mini)
 
@@ -583,7 +566,7 @@ trash_collection_tile:
         var trash_type = entity.entity_id.replace("sensor.afvalwijzer_", "")
         return (states["sensor.afvalwijzer_today"].state == trash_type)
       ]]]
-    is_tomorrow:  |
+    is_tomorrow: |
       [[[
         var trash_type = entity.entity_id.replace("sensor.afvalwijzer_", "")
         return (states["sensor.afvalwijzer_tomorrow"].state == trash_type)
@@ -615,7 +598,7 @@ trash_collection_tile:
           - background: var(--info-color)
     - operator: default
       styles:
-          card:
+        card:
           - background: var(--ha-card-background)
           - color: var(--primary-text-color)
 

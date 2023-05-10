@@ -332,7 +332,7 @@ cards:
                   - icon: "mdi:home-lightning-bolt"
                   - line_width: 2
 
-      # [Column] Trash / Network
+      # [Column] Trash
       - type: "custom:layout-card"
         layout_type: "custom:grid-layout"
         layout:
@@ -410,83 +410,12 @@ cards:
                     return output
                   ]]]
                 state:
-                  - value: 'on'
+                  - value: "on"
                     icon: mdi:bell-cancel
                     styles:
                       card:
                         - background: var(--primary-color)
-                  - value: 'off'
-                    styles:
-                      card:
-                        - background: var(--ha-card-background)
-                        - color: var(--primary-text-color)
-                variables:
-                  aspect_ratio: '[[[ return Math.round(this.offsetWidth / 112) ]]]'
-
-              - type: "custom:button-card"
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                entity: vacuum.valetudo_livingroom
-                state:
-                  - value: 'cleaning'
-                    styles:
-                      card:
-                        - background: var(--primary-color)
-                  - operator: default
-                    styles:
-                      card:
-                        - background: var(--ha-card-background)
-                        - color: var(--primary-text-color)
-                variables:
-                  aspect_ratio: '[[[ return Math.round(this.offsetWidth / 112) ]]]'
-
-              - type: "custom:button-card"
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                entity: vacuum.valetudo_upstairs
-                state:
-                  - value: 'cleaning'
-                    styles:
-                      card:
-                        - background: var(--primary-color)
-                  - operator: default
-                    styles:
-                      card:
-                        - background: var(--ha-card-background)
-                        - color: var(--primary-text-color)
-                variables:
-                  aspect_ratio: '[[[ return Math.round(this.offsetWidth / 112) ]]]'
-
-          - type: "custom:layout-card"
-            layout_type: "custom:grid-layout"
-            layout:
-              grid-template-columns: >-
-                repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])
-              margin: 0
-              card_margin: 1px
-            cards: &summary-column-network-cards
-              - type: "custom:button-card"
-                template: header_card_no_link
-                view_layout:
-                  grid-column: 1/-1
-                variables:
-                  name: NETWORK
-
-              - type: "custom:button-card"
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                  - live_tile_with_state_countdown
-                entity: binary_sensor.cloudflare_ping
-                name: WAN
-                state:
                   - value: "off"
-                    styles:
-                      card:
-                        - background: var(--primary-color)
-                  - value: "on"
                     styles:
                       card:
                         - background: var(--ha-card-background)
@@ -494,16 +423,38 @@ cards:
                 variables:
                   aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"
 
-              - type: "custom:decluttering-card"
-                template: mini_graph_tile
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                  - live_tile_with_long_state
+                entity: vacuum.valetudo_livingroom
+                state:
+                  - value: "cleaning"
+                    styles:
+                      card:
+                        - background: var(--primary-color)
+                  - operator: default
+                    styles:
+                      card:
+                        - background: var(--ha-card-background)
+                        - color: var(--primary-text-color)
                 variables:
-                  - entities:
-                      - entity: sensor.speedtest_download
-                  - title: Download Speed
+                  aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"
 
-              - type: "custom:decluttering-card"
-                template: mini_graph_tile
+              - type: "custom:button-card"
+                template:
+                  - live_tile_card
+                  - live_tile_with_long_state
+                entity: vacuum.valetudo_upstairs
+                state:
+                  - value: "cleaning"
+                    styles:
+                      card:
+                        - background: var(--primary-color)
+                  - operator: default
+                    styles:
+                      card:
+                        - background: var(--ha-card-background)
+                        - color: var(--primary-text-color)
                 variables:
-                  - entities:
-                      - entity: sensor.speedtest_upload
-                  - title: Upload Speed
+                  aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"

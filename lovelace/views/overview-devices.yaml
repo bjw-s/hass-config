@@ -2,84 +2,79 @@ title: devices
 id: devices
 path: devices
 
-type: 'custom:grid-layout'
+type: "custom:grid-layout"
 layout: !include snippets/layout-page-margin.yaml
 
 cards:
-  - type: 'custom:layout-card'
-    layout_type: 'custom:grid-layout'
+  - type: "custom:layout-card"
+    layout_type: "custom:grid-layout"
     layout: !include snippets/layout-page-columns.yaml
     view_layout:
       grid-area: cc
     cards:
-
       # [Header] Summary
-      - type: 'custom:layout-card'
-        layout_type: 'custom:grid-layout'
+      - type: "custom:layout-card"
+        layout_type: "custom:grid-layout"
         layout: !include snippets/layout-page-title.yaml
         view_layout:
           grid-column: 1/-1
         cards:
-
           - type: markdown
             style: !include snippets/style-markdown-page-title.yaml
             content: >
               # Devices
 
       # [Column] Sonos
-      - type: 'custom:layout-card'
-        layout_type: 'custom:grid-layout'
+      - type: "custom:layout-card"
+        layout_type: "custom:grid-layout"
         layout:
           margin: -1
         cards:
-          - type: 'custom:button-card'
+          - type: "custom:button-card"
             template: header_card_no_link
             variables:
               name: SONOS
 
-          - type: 'custom:layout-card'
-            layout_type: 'custom:grid-layout'
+          - type: "custom:layout-card"
+            layout_type: "custom:grid-layout"
             layout: !include snippets/layout-live-tile.yaml
             cards:
-              - view_layout:
-                  grid-column: span 3
-                type: "custom:button-card"
+              - type: "custom:button-card"
                 template:
                   - live_tile_media_player
                 show_name: true
                 entity: media_player.living_room_sonos
                 name: Living Room
 
-              - view_layout:
-                  grid-column: span 3
-                type: "custom:button-card"
+              - type: "custom:button-card"
+                template:
+                  - live_tile_media_player
+                show_name: true
+                entity: media_player.living_room_sonos_move
+                name: Living Room Move
+
+              - type: "custom:button-card"
                 template:
                   - live_tile_media_player
                 show_name: true
                 entity: media_player.living_room_sonos_receiver
                 name: Living Room Receiver
 
-              - view_layout:
-                  grid-column: span 3
-                type: "custom:button-card"
+              - type: "custom:button-card"
                 template:
                   - live_tile_media_player
                 show_name: true
                 entity: media_player.kitchen_sonos
                 name: Kitchen
 
-              - view_layout:
-                  grid-column: span 3
-                type: "custom:button-card"
+              - type: "custom:button-card"
                 template:
                   - live_tile_media_player
                 show_name: true
                 entity: media_player.upstairs_office_sonos
                 name: Upstairs Office
 
-              - view_layout:
-                  grid-column: span 3
-                type: "custom:button-card"
+              - type: "custom:button-card"
                 template:
                   - live_tile_media_player
                 show_name: true
@@ -87,18 +82,18 @@ cards:
                 name: Bedroom Eva
 
       # [Column] Other media
-      - type: 'custom:layout-card'
-        layout_type: 'custom:grid-layout'
+      - type: "custom:layout-card"
+        layout_type: "custom:grid-layout"
         layout:
           margin: -1
         cards:
-          - type: 'custom:button-card'
+          - type: "custom:button-card"
             template: header_card_no_link
             variables:
               name: OTHER MEDIA
 
-          - type: 'custom:layout-card'
-            layout_type: 'custom:grid-layout'
+          - type: "custom:layout-card"
+            layout_type: "custom:grid-layout"
             layout: !include snippets/layout-live-tile.yaml
             cards:
               - type: "custom:button-card"
@@ -110,7 +105,7 @@ cards:
                 icon: mdi:remote
                 entity: sensor.downstairs_living_room_current_harmony_activity
                 state:
-                  - value: 'PowerOff'
+                  - value: "PowerOff"
                     styles:
                       card:
                         - background-color: var(--ha-card-background)
@@ -135,9 +130,7 @@ cards:
                 # icon: mdi:remote
                 entity: media_player.downstairs_living_room_denon_avr_x1500h
 
-              - view_layout:
-                  grid-column: span 3
-                type: "custom:button-card"
+              - type: "custom:button-card"
                 template:
                   - live_tile_media_player
                 show_name: true
@@ -145,12 +138,12 @@ cards:
                 name: Nvidia Shield
 
       # [Column] Low battery
-      - type: 'custom:layout-card'
-        layout_type: 'custom:grid-layout'
+      - type: "custom:layout-card"
+        layout_type: "custom:grid-layout"
         layout:
           margin: -1
         cards:
-          - type: 'custom:button-card'
+          - type: "custom:button-card"
             template: header_card_no_link
             variables:
               name: LOW BATTERY
@@ -197,7 +190,7 @@ cards:
                 - domain: binary_sensor
                   attributes:
                     device_class: battery
-                  state: 'on'
+                  state: "on"
                   options:
                     type: custom:mushroom-template-card
                     entity_id: this.entity_id

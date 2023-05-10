@@ -7,7 +7,7 @@ max_exceeded: silent
 
 trigger:
   platform: state
-  entity_id: binary_sensor.front_door_doorbell
+  entity_id: binary_sensor.doorbell_visitor
   to: "on"
 
 variables:
@@ -32,7 +32,7 @@ action:
       entity_id: "{{ camera }}"
       filename: /config/www/images/snapshots/driveway.jpg
 
-  - delay: '00:00:01'
+  - delay: "00:00:01"
 
   - service: "notify.{{ notify_device }}"
     data:
