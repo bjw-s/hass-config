@@ -3,16 +3,11 @@ id: bedroom_trigger_bedtime_mode
 alias: Bedroom - Trigger bedtime mode
 trigger:
   - platform: state
-    entity_id: input_boolean.bedroom_mf_in_bed
+    entity_id: binary_sensor.bedroom_both_in_bed
     to: "on"
-  - platform: state
-    entity_id: input_boolean.bedroom_bs_in_bed
-    to: "on"
+    for: '00:00:30'
 condition:
   and:
-    - condition: template
-      value_template: |
-        {{ is_state('input_boolean.bedroom_mf_in_bed', 'on') and is_state('input_boolean.bedroom_bs_in_bed', 'on') }}
     - condition: state
       entity_id: input_boolean.home_modes_bedtime_mode
       state: 'off'

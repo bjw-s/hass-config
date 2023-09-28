@@ -78,6 +78,10 @@ PW_PLATFORM = "pw_platform"
 PW_PREVPLATFORM = "pw_prevplatform"
 PW_ROUND = "pw_round" 
 
+ATTR_FORECAST_CLOUD_COVERAGE = "cloud_coverage"
+ATTR_FORECAST_HUMIDITY = "humidity"
+ATTR_FORECAST_NATIVE_VISIBILITY = "native_visibility"
+
 FORECAST_MODE_HOURLY = "hourly"
 FORECAST_MODE_DAILY = "daily"
 
@@ -114,7 +118,7 @@ ALL_CONDITIONS = {'summary': 'Summary',
                    'daily_summary': 'Daily Summary',
                    'temperature_high': 'Temperature High',
                    'temperature_low': 'Temperature Low',
-                   'apparent_temperature_high': 'Apparent Temperatur High',
+                   'apparent_temperature_high': 'Apparent Temperature High',
                    'apparent_temperature_low': 'Apparent Temperature Low',
                    'precip_intensity_max': 'Precip Intensity Max',
                    'uv_index': 'UV Index',

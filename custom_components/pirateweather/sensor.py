@@ -48,6 +48,7 @@ from homeassistant.const import (
     LENGTH_INCHES,
     LENGTH_KILOMETERS,
     LENGTH_MILES,
+    LENGTH_MILLIMETERS,
     PERCENTAGE,
     PRECIPITATION_INCHES,
     PRECIPITATION_MILLIMETERS_PER_HOUR,
@@ -261,6 +262,7 @@ SENSOR_TYPES: dict[str, PirateWeatherSensorEntityDescription] = {
     "wind_speed": PirateWeatherSensorEntityDescription(
         key="wind_speed",
         name="Wind Speed",
+        device_class=SensorDeviceClass.WIND_SPEED,
         si_unit=SPEED_METERS_PER_SECOND,
         us_unit=SPEED_MILES_PER_HOUR,
         ca_unit=SPEED_KILOMETERS_PER_HOUR,
@@ -319,6 +321,7 @@ SENSOR_TYPES: dict[str, PirateWeatherSensorEntityDescription] = {
         key="pressure",
         name="Pressure",
         device_class=SensorDeviceClass.PRESSURE,
+        state_class=SensorStateClass.MEASUREMENT,
         si_unit=PRESSURE_MBAR,
         us_unit=PRESSURE_MBAR,
         ca_unit=PRESSURE_MBAR,
@@ -340,7 +343,7 @@ SENSOR_TYPES: dict[str, PirateWeatherSensorEntityDescription] = {
     "ozone": PirateWeatherSensorEntityDescription(
         key="ozone",
         name="Ozone",
-        device_class=SensorDeviceClass.OZONE,
+        state_class=SensorStateClass.MEASUREMENT,
         si_unit="DU",
         us_unit="DU",
         ca_unit="DU",
@@ -594,7 +597,7 @@ ALLOWED_UNITS = ["auto", "si", "us", "ca", "uk", "uk2"]
 
 ALERTS_ATTRS = ["time", "description", "expires", "severity", "uri", "regions", "title"]
    
-HOURS = [i for i in range(49)]
+HOURS = [i for i in range(168)]
 DAYS = [i for i in range(7)]     
  
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
@@ -961,6 +964,21 @@ class PirateWeatherSensor(SensorEntity):
               "apparent_temperature_low",     
           ]:
               state = ((state * 9 / 5) + 32)
+
+        # Precipitation Accumilation (cm in SI) to inches 
+        if self.requestUnits in ["us"]:
+          if self.type in [
+              "precip_accumulation", 
+          ]:
+              state = (state * 0.393701)
+              
+        # Precipitation Intensity (mm/h in SI) to inches 
+        if self.requestUnits in ["us"]:
+          if self.type in [
+              "precip_intensity", 
+          ]:
+              state = (state * 0.0393701)              
+              
               
         # Km to Miles      
         if self.requestUnits in ["us", "uk", "uk2"]:

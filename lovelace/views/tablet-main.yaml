@@ -42,7 +42,7 @@ cards:
                 template: header_card_no_link
                 show_name: true
                 variables:
-                  name: '‎'
+                  name: "‎"
                 view_layout:
                   grid-column: 1/-1
 
@@ -52,10 +52,10 @@ cards:
                 entity: alarm_control_panel.house
                 tap_action: !include popups/alarm.yaml
 
-              - type: "custom:button-card"
-                template: live_tile_with_camera
-                entity: camera.doorbell
-                name: Front Door
+              # - type: "custom:button-card"
+              #   template: live_tile_with_camera
+              #   entity: camera.doorbell_main
+              #   name: Front Door
 
               - type: "custom:button-card"
                 view_layout:

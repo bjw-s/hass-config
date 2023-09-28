@@ -12,20 +12,27 @@ trigger:
   to: "on"
 
 variables:
-  # The external url for the Home Assistant instance
-  base_url: "{{ states('sensor.system_url_external') }}"
+  external_url: "{{ states('sensor.system_url_external') }}"
+  internal_url: "{{ states('sensor.system_url_internal_direct') }}"
   # Rate limit the automation to once per 30 seconds
   cooldown: 10
-  # Audio to play
-  audio_url: "{{base_url}}/local/audio/doorbell.mp3"
 
 action:
+  - alias: "Play doorbell on ESP speakers"
+    service: media_player.play_media
+    entity_id:
+      - media_player.attic_office_speaker
+      - media_player.upstairs_office_speaker
+    data:
+      media_content_id: "{{internal_url}}/local/audio/doorbell.mp3"
+      media_content_type: music
+
   - service: media_player.play_media
     data:
       entity_id:
         - media_player.living_room
         - media_player.kitchen
-      media_content_id: "{{ audio_url }}"
+      media_content_id: "{{external_url}}/local/audio/doorbell.mp3"
       media_content_type: music
       extra:
         volume: 20

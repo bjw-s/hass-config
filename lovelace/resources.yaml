@@ -43,6 +43,9 @@
 - url: /hacsfiles/slider-button-card/slider-button-card.js
   type: module
 
+- url: /hacsfiles/scheduler-card/scheduler-card.js
+  type: module
+
 - url: /local/css/font.css
   type: css
 

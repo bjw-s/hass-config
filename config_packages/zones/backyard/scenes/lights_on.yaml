@@ -1,8 +1,6 @@
 ---
 name: Backyard - Lights - On
 entities:
-  light.backyard_shed:
-    state: 'on'
   light.backyard_wall:
     state: 'on'
     brightness: 255

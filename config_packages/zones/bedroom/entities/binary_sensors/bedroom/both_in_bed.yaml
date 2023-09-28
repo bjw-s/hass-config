@@ -1,0 +1,8 @@
+---
+platform: group
+name: Bedroom - Both in bed
+device_class: occupancy
+all: true
+entities:
+  - binary_sensor.bedroom_bed_occupancy_left
+  - binary_sensor.bedroom_bed_occupancy_right

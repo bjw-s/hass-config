@@ -593,9 +593,3 @@ cards:
                 variables:
                   - entity: light.backyard_wall
                   - name: Wall
-
-              - type: 'custom:decluttering-card'
-                template: light_card
-                variables:
-                  - entity: light.backyard_shed
-                  - name: Shed

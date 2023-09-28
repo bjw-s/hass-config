@@ -206,10 +206,10 @@ cards:
                 entity: alarm_control_panel.house
                 tap_action: !include popups/alarm.yaml
 
-              - type: "custom:button-card"
-                template: live_tile_with_camera
-                entity: camera.doorbell
-                name: Front Door
+              # - type: "custom:button-card"
+              #   template: live_tile_with_camera
+              #   entity: camera.doorbell_main
+              #   name: Front Door
 
           - type: "custom:layout-card"
             layout_type: "custom:grid-layout"

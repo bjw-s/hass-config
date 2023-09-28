@@ -1,7 +1,5 @@
 ---
 name: Backyard - Lights - Off
 entities:
-  light.backyard_shed:
-    state: 'off'
   light.backyard_wall:
     state: 'off'

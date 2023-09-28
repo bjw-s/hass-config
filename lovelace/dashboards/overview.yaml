@@ -8,3 +8,4 @@ views:
   - !include ../views/overview-lights.yaml
   - !include ../views/overview-devices.yaml
   - !include ../views/overview-climate.yaml
+  - !include ../views/overview-schedules.yaml

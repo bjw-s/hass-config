@@ -8,7 +8,7 @@ trigger:
 
 condition:
   - condition: state
-    entity_id: input_boolean.bedroom_mf_in_bed
+    entity_id: binary_sensor.bedroom_bed_occupancy_left
     state: "off"
 
 action:

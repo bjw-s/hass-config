@@ -3,7 +3,6 @@ from datetime import timedelta
 import logging
 
 import async_timeout
-from pyowm.commons.exceptions import APIRequestError, UnauthorizedError
 import forecastio
 from forecastio.models import Forecast
 import json
@@ -13,7 +12,7 @@ import asyncio
 from requests.exceptions import ConnectionError as ConnectError, HTTPError, Timeout
 import voluptuous as vol
 
-from homeassistant.helpers import sun
+from homeassistant.helpers import sun, aiohttp_client
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeassistant.util import dt
 
@@ -53,28 +52,29 @@ class WeatherUpdateCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self):
         """Update the data."""
         data = {}
-        async with async_timeout.timeout(30):
+        async with async_timeout.timeout(60):
             try:
                 data = await self._get_pw_weather()
-            except (APIRequestError, UnauthorizedError) as error:
-                raise UpdateFailed(error) from error
+                _LOGGER.info('Pirate Weather data update for ' + str(self.latitude) + ',' + str(self.longitude))
+            except Exception as err:
+                raise UpdateFailed(f"Error communicating with API: {err}")                
         return data
 
 
     async def _get_pw_weather(self):
         """Poll weather data from PW."""   
-        
+
              
-        forecastString = "https://api.pirateweather.net/forecast/" +  self._api_key + "/" + str(self.latitude) + "," + str(self.longitude) + "?units=" + self.requested_units
+        forecastString = "https://api.pirateweather.net/forecast/" +  self._api_key + "/" + str(self.latitude) + "," + str(self.longitude) + "?units=" + self.requested_units + "&extend=hourly"
         
         async with aiohttp.ClientSession(raise_for_status=True) as session:
           async with session.get(forecastString) as resp:
+          
             resptext = await resp.text()
             jsonText = json.loads(resptext)
             headers = resp.headers
             status = resp.raise_for_status()
             
             data = Forecast(jsonText, status, headers)
-                
         return data
 

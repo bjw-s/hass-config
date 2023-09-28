@@ -3,4 +3,3 @@ platform: group
 name: Backyard
 entities:
   - light.backyard_wall
-  - light.backyard_shed

@@ -9,4 +9,3 @@ action:
   - service: scene.turn_on
     data:
       entity_id: scene.downstairs_living_room_lights_{{ trigger.to_state.state.replace(" ", "_") | lower }}
-      transition: 1

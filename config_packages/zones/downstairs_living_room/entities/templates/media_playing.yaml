@@ -2,12 +2,12 @@
 trigger:
   - id: media_playing
     platform: state
-    entity_id: media_player.downstairs_living_room_nvidia_shield
+    entity_id: media_player.living_room_apple_tv
     to: playing
 
   - id: media_not_playing
     platform: state
-    entity_id: media_player.downstairs_living_room_nvidia_shield
+    entity_id: media_player.living_room_apple_tv
     from: playing
     for: "00:00:15"
 

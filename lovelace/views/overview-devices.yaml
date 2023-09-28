@@ -134,8 +134,8 @@ cards:
                 template:
                   - live_tile_media_player
                 show_name: true
-                entity: media_player.downstairs_living_room_nvidia_shield
-                name: Nvidia Shield
+                entity: media_player.living_room_apple_tv
+                name: Apple TV
 
       # [Column] Low battery
       - type: "custom:layout-card"

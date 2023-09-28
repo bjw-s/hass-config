@@ -5,7 +5,7 @@ _LOGGER = logging.getLogger(__name__)
 
 API = "api"
 NAME = "afvalwijzer"
-VERSION = "2023.04.02"
+VERSION = "2023.06.01"
 ISSUE_URL = "https://github.com/xirixiz/homeassistant-afvalwijzer/issues"
 
 SENSOR_COLLECTOR_TO_URL = {
@@ -52,7 +52,7 @@ SENSOR_COLLECTORS_OPZET = {
     "venray": "https://afvalkalender.venray.nl",
     "voorschoten": "https://afvalkalender.voorschoten.nl",
     "waalre": "https://afvalkalender.waalre.nl",
-    "zrd": "https://afvalkalender.zrd.nl",
+    "zrd": "https://www.zrd.nl",
 }
 
 SENSOR_COLLECTORS_ICALENDAR = {
