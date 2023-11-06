@@ -2,459 +2,281 @@ title: Summary
 path: summary
 id: summary
 
-type: "custom:grid-layout"
-layout:
-  grid-template-rows: auto 32px
-  grid-template-columns: 8px 1fr 8px
-  grid-template-areas: |
-    ". cc ."
-    ". . ."
-  margin: 0
-  card_margin: 0
-  mediaquery:
-    "(min-width: 1704px)":
-      grid-template-columns: auto 1600px auto
-      grid-template-areas: |
-        ". cc ."
-        ". . ."
-    "(min-width: 1200px)":
-      grid-template-columns: 0 auto 0
-      grid-template-areas: |
-        ". cc ."
-      grid-column-gap: 32px
+type: custom:grid-layout
+layout: !include snippets/layout-4-column.yaml
 
 cards:
-  - type: "custom:layout-card"
-    layout_type: "custom:grid-layout"
-
-    layout:
-      grid-template-columns: >-
-        calc(25% - 24px) calc(25% - 24px) calc(25% - 24px) calc(25% - 24px)
-      grid-column-gap: 32px
-      grid-template-areas: |
-        "h h h h"
-        "c1 c2 c3 c4"
-      mediaquery:
-        "(max-width: 512px)":
-          grid-template-columns: 1fr
-          grid-template-areas: |
-            "h"
-            "c1"
-            "c2"
-            "c3"
-            "c4"
-            "c5"
-          margin: 0
-        "(max-width: 800px)":
-          grid-template-columns: 1fr 1fr
-          grid-template-areas: |
-            "h h"
-            "c1 c2"
-            "c3 c4"
-            "c5 none"
-          margin: 0
-        "(max-width: 1128px)":
-          grid-template-columns: 1fr 1fr 1fr
-          grid-template-areas: |
-            "h h h"
-            "c1 c2 c3"
-            "c4 c5 none"
-          margin: 0
-        "(max-width: 1440px)":
-          grid-template-columns: >-
-            calc( 25% - 24px ) calc( 25% - 24px ) calc( 25% - 24px ) calc(
-            25% - 24px )
-          grid-template-areas: |
-            "h h h h"
-            "c1 c2 c3 c4"
-          margin: 0
-      margin: 0
-
+  # Header
+  - type: markdown
+    style: !include snippets/style-markdown-titles.yaml
     view_layout:
-      grid-area: cc
+      grid-column: 1/-1
+    content: >
+      {%- set batterySensors = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
+      {%- set lowBatterySensors = batterySensors | map(attribute='state') | map('int') | select('<=', 30) | map('string') | list -%}
 
+      {%- set batteryBinarySensors = states.binary_sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
+      {%- set lowBatteryBinarySensors = batteryBinarySensors | selectattr('state', 'equalto', 'on') | list -%}
+
+      {%- set lowBatteryDevicesCount = (lowBatterySensors | count) + (lowBatteryBinarySensors | count) -%}
+      # Good {{ states.sensor.system_time_of_day.state }}, {{ user }}.
+
+      {% if lowBatteryDevicesCount > 0 -%}
+      🚨 There {{ iif((lowBatteryDevicesCount == 1), 'is', 'are') }} {{ lowBatteryDevicesCount }} devices reporting low battery. Check the [Devices](/lovelace/devices) tab for more details! 🚨
+      {%- endif %}
+
+  # Security / Modes
+  - type: vertical-stack
     cards:
-      # [Header] Greetings
+      - type: markdown
+        style: !include snippets/style-markdown-titles.yaml
+        content: >
+          ### Security
 
-      - type: custom:state-switch
-        entity: user
-        default: default
-        view_layout:
-          grid-area: h
-        states:
-          default:
-            type: "custom:layout-card"
-            layout_type: "custom:grid-layout"
-            layout:
-              grid-template-columns: auto min-content
-              grid-template-rows: auto
-              margin: -1px -1px -1px -1px
-              padding: 0
-            cards:
-              - type: markdown
-                content: >
-                  {%- set batterySensors = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
-                  {%- set lowBatterySensors = batterySensors | map(attribute='state') | map('int') | select('<=', 30) | map('string') | list -%}
-
-                  {%- set batteryBinarySensors = states.binary_sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
-                  {%- set lowBatteryBinarySensors = batteryBinarySensors | selectattr('state', 'equalto', 'on') | list -%}
-
-                  {%- set lowBatteryDevicesCount = (lowBatterySensors | count) + (lowBatteryBinarySensors | count) -%}
-                  # Good {{ states.sensor.system_time_of_day.state }}, Bernd.
-
-                  {% if lowBatteryDevicesCount > 0 -%}
-                  🚨 There {{ iif((lowBatteryDevicesCount == 1), 'is', 'are') }} {{ lowBatteryDevicesCount }} devices reporting low battery. Check the [Devices](/lovelace/devices) tab for more details! 🚨
-                  {%- endif %}
-
-                style:
-                  .: |
-                    ha-card {
-                      background: none;
-                      margin-bottom: -16px;
-                    }
-                  ha-markdown$: |
-                    h1 {
-                      font-size: var(--title-font-size);
-                      font-weight: 500;
-                      line-height: 1.1;
-                      margin-left: -2px;
-                      margin-top: -12px !important;
-                    }
-
-              - type: "custom:layout-card"
-                layout_type: "custom:horizontal-layout"
-                cards:
-                  - type: "custom:mushroom-person-card"
-                    entity: person.bernd
-                    style: "ha-card {background: none;}"
-                    use_entity_picture: true
-                    view_layout: null
-
-                  - type: "custom:mushroom-person-card"
-                    entity: person.man_yie
-                    style: "ha-card {background: none;}"
-                    use_entity_picture: true
-                    view_layout: null
-                layout:
-                  width: 160
-                  margin: -1
-                view_layout:
-                  place-self: center
-                  show:
-                    mediaquery: "(min-width: 800px)"
-
-              - type: "custom:layout-card"
-                layout_type: "custom:horizontal-layout"
-                cards:
-                  - type: "custom:mushroom-person-card"
-                    entity: person.bernd
-                    use_entity_picture: true
-                    hide_state: true
-                    hide_name: true
-                    style: |
-                      ha-card {background: none;
-                        margin-top: 16px;
-                        transform: scale(1.5) translate(-8px);
-                      }
-
-                  - type: "custom:mushroom-person-card"
-                    entity: person.man_yie
-                    use_entity_picture: true
-                    hide_state: true
-                    hide_name: true
-                    style: |
-                      ha-card {background: none;
-                        margin-top: 16px;
-                        transform: scale(1.5) translate(-8px);
-                      }
-                layout:
-                  width: 72
-                view_layout:
-                  place-self: start
-                  show:
-                    mediaquery: "(max-width: 799.99px)"
-
-      # [Column] Security / Modes
-      - type: "custom:layout-card"
-        layout_type: "custom:grid-layout"
-        layout:
-          margin: 0
-          card_margin: 1px
-        view_layout:
-          grid-area: c1
+      - type: grid
+        columns: 3
+        square: true
         cards:
-          - type: "custom:layout-card"
-            layout_type: "custom:grid-layout"
-            layout:
-              grid-template-columns: >-
-                repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])
-              margin: 0
-              card_margin: 1px
-            cards:
-              - type: "custom:button-card"
-                template: header_card
-                variables:
-                  name: SECURITY
-                  label: More
-                  link: /lovelace/security
-                view_layout:
-                  grid-column: 1/-1
+          - type: "custom:mushroom-template-card"
+            entity: alarm_control_panel.house
+            layout: vertical
+            icon: >
+              {{ state_attr(entity, "icon") }}
+            icon_color: >
+              {% if is_state(entity, 'disarmed') %}
+                var(--rgb-success-color)
+              {% elif is_state(entity, 'arming') %}
+                var(--rgb-warning-color)
+              {% elif is_state(entity, ['armed_away', 'armed_night', 'armed_home']) %}
+                var(--rgb-error-color)
+              {% endif %}
+            primary: Alarm
+            secondary: >
+              {{ states(entity) | capitalize }}
+            fill_container: true
+            tap_action: !include popups/alarm.yaml
+            # tap_action:
+            #   action: more-info
 
-              - type: "custom:button-card"
-                template:
-                  - alarm_status_tile
-                entity: alarm_control_panel.house
-                tap_action: !include popups/alarm.yaml
+          - type: "custom:mushroom-person-card"
+            entity: person.bernd
+            layout: vertical
+            fill_container: true
+            use_entity_picture: true
 
-              # - type: "custom:button-card"
-              #   template: live_tile_with_camera
-              #   entity: camera.doorbell_main
-              #   name: Front Door
+          - type: "custom:mushroom-person-card"
+            entity: person.man_yie
+            layout: vertical
+            fill_container: true
+            use_entity_picture: true
 
-          - type: "custom:layout-card"
-            layout_type: "custom:grid-layout"
-            layout:
-              grid-template-columns: >-
-                repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])
-              margin: 0
-              card_margin: 1px
-            cards:
-              - type: "custom:button-card"
-                template: header_card_no_link
-                variables:
-                  name: MODES
-                view_layout:
-                  grid-column: 1/-1
+      - type: markdown
+        style: !include snippets/style-markdown-titles.yaml
+        content: >
+          ### Modes
 
-              - type: "custom:button-card"
-                template:
-                  - live_tile_mini
-                  - require_confirmation
-                show_name: true
-                entity: input_boolean.home_modes_away_mode
-                name: Away
-                icon: mdi:home
-
-              - type: "custom:button-card"
-                template:
-                  - live_tile_mini
-                  - require_confirmation
-                show_name: true
-                entity: input_boolean.home_modes_guest_mode
-                name: Guest
-                icon: mdi:human-handsup
-
-              - type: "custom:button-card"
-                template:
-                  - live_tile_mini
-                  - require_confirmation
-                show_name: true
-                entity: input_boolean.home_modes_bedtime_mode
-                name: Bedtime
-                icon: mdi:sleep
-
-              - type: "custom:button-card"
-                template:
-                  - live_tile_mini
-                  - require_confirmation
-                show_name: true
-                entity: input_boolean.home_modes_vacation_mode
-                name: Vacation
-                icon: mdi:airplane
-
-      # [Column] Climate / Energy
-      - type: "custom:layout-card"
-        layout_type: "custom:grid-layout"
-        layout:
-          margin: 0
-          card_margin: 1px
-        view_layout:
-          grid-area: c2
+      - type: grid
+        columns: 3
+        square: true
         cards:
-          - type: "custom:layout-card"
-            layout_type: "custom:grid-layout"
-            layout:
-              grid-template-columns: >-
-                repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])
-              margin: 0
-              card_margin: 1px
-            cards:
-              - type: "custom:button-card"
-                template: header_card
-                variables:
-                  name: CLIMATE
-                  label: More
-                  link: /lovelace/climate
-                view_layout:
-                  grid-column: 1/-1
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.home_modes_away_mode
+            name: Away
+            icon: mdi:home
+            layout: vertical
+            secondary_info: state
+            fill_container: true
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Are you sure you want to toggle Away Mode?
 
-              - type: custom:mushroom-climate-card
-                view_layout:
-                  grid-column: span 3
-                name: Thermostat living room
-                entity: climate.living_room
-                hvac_modes: []
-                show_temperature_control: false
-                fill_container: true
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.home_modes_guest_mode
+            name: Guest
+            icon: mdi:human-handsup
+            layout: vertical
+            secondary_info: state
+            fill_container: true
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Are you sure you want to toggle Guest Mode?
 
-          - type: "custom:layout-card"
-            layout_type: "custom:grid-layout"
-            layout:
-              grid-template-columns: >-
-                repeat(auto-fill, [col-start] minmax(112px, 1fr)
-                [col-end])
-              margin: 0
-              card_margin: 1px
-              padding: 0
-            cards:
-              - type: custom:state-switch
-                entity: user
-                default: default
-                view_layout:
-                  grid-column: 1/-1
-                states:
-                  default: &summary-energy-header
-                    type: "custom:button-card"
-                    template: header_card_no_link
-                    variables:
-                      name: ENERGY
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.home_modes_bedtime_mode
+            name: Bedtime
+            icon: mdi:sleep
+            layout: vertical
+            secondary_info: state
+            fill_container: true
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Are you sure you want to toggle Bedtime Mode?
 
-              - type: "custom:decluttering-card"
-                template: mini_graph_tile
-                view_layout:
-                  grid-column: span 3
-                variables:
-                  - aspect_ratio: 2/1
-                  - points_per_hour: 4
-                  - entities:
-                      - entity: sensor.dsmr_reading_electricity_currently_delivered_watt
-                  - title: Total Energy Usage
-                  - icon: "mdi:home-lightning-bolt"
-                  - line_width: 2
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.home_modes_vacation_mode
+            name: Vacation
+            icon: mdi:airplane
+            layout: vertical
+            secondary_info: state
+            fill_container: true
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Are you sure you want to toggle Vacation Mode?
 
-      # [Column] Trash
-      - type: "custom:layout-card"
-        layout_type: "custom:grid-layout"
-        layout:
-          margin: 0
-          card_margin: 1px
+  # Climate / Energy
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include snippets/style-markdown-titles.yaml
+        content: >
+          ### Climate
+
+      - type: custom:mushroom-climate-card
+        name: Thermostat living room
+        entity: climate.living_room
+        hvac_modes: []
+        show_temperature_control: false
+        fill_container: true
+
+      - type: markdown
+        style: !include snippets/style-markdown-titles.yaml
+        content: >
+          ### Energy
+
+      - type: "custom:decluttering-card"
+        template: mini_graph_tile
         view_layout:
-          grid-area: c3
+          grid-column: span 3
+        variables:
+          - aspect_ratio: 2/1
+          - points_per_hour: 4
+          - entities:
+              - entity: sensor.dsmr_reading_electricity_currently_delivered_watt
+          - title: Total Energy Usage
+          - icon: "mdi:home-lightning-bolt"
+          - line_width: 2
+
+  # Trash
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include snippets/style-markdown-titles.yaml
+        content: >
+          ### Trash
+
+      - type: grid
+        columns: 3
+        square: true
         cards:
-          - type: "custom:layout-card"
-            layout_type: "custom:grid-layout"
-            layout:
-              grid-template-columns: >-
-                repeat(auto-fill, [col-start] minmax(112px, 1fr)
-                [col-end])
-              margin: 0
-              card_margin: 1px
-            cards:
-              - type: "custom:button-card"
-                template: header_card_no_link
-                variables:
-                  name: TRASH
-                view_layout:
-                  grid-column: 1/-1
+          - type: custom:mushroom-template-card
+            entity: sensor.afvalwijzer_restafval
+            layout: vertical
+            primary: Restafval
+            secondary: >
+              {{ states(entity) }}
+            fill_container: true
+            tap_action: none
+            icon: mdi:trash-can
+            icon_color: >
+              {% if states('sensor.afvalwijzer_today') == (entity | replace('sensor.afvalwijzer_', '')) %}
+                var(--rgb-error-color)
+              {% elif states('sensor.afvalwijzer_tomorrow') == (entity | replace('sensor.afvalwijzer_', '')) %}
+                var(--rgb-warning-color)
+              {% else %}
+                var(--rgb-disabled-color)
+              {% endif %}
 
-              - type: "custom:button-card"
-                template:
-                  - trash_collection_tile
-                entity: sensor.afvalwijzer_restafval
-                name: Restafval
+          - type: custom:mushroom-template-card
+            entity: sensor.afvalwijzer_gft
+            layout: vertical
+            primary: GFT
+            secondary: >
+              {{ states(entity) }}
+            fill_container: true
+            tap_action: none
+            icon: mdi:food-apple
+            icon_color: >
+              {% if states('sensor.afvalwijzer_today') == (entity | replace('sensor.afvalwijzer_', '')) %}
+                var(--rgb-error-color)
+              {% elif states('sensor.afvalwijzer_tomorrow') == (entity | replace('sensor.afvalwijzer_', '')) %}
+                var(--rgb-warning-color)
+              {% else %}
+                var(--rgb-disabled-color)
+              {% endif %}
 
-              - type: "custom:button-card"
-                template:
-                  - trash_collection_tile
-                entity: sensor.afvalwijzer_gft
-                name: GFT
+          - type: custom:mushroom-template-card
+            entity: sensor.afvalwijzer_pmd
+            layout: vertical
+            primary: PMD
+            secondary: >
+              {{ states(entity) }}
+            fill_container: true
+            tap_action: none
+            icon: mdi:bottle-soda
+            icon_color: >
+              {% if states('sensor.afvalwijzer_today') == (entity | replace('sensor.afvalwijzer_', '')) %}
+                var(--rgb-error-color)
+              {% elif states('sensor.afvalwijzer_tomorrow') == (entity | replace('sensor.afvalwijzer_', '')) %}
+                var(--rgb-warning-color)
+              {% else %}
+                var(--rgb-disabled-color)
+              {% endif %}
 
-              - type: "custom:button-card"
-                template:
-                  - trash_collection_tile
-                entity: sensor.afvalwijzer_pmd
-                name: PMD
+          - type: custom:mushroom-template-card
+            entity: sensor.afvalwijzer_papier
+            layout: vertical
+            primary: Papier
+            secondary: >
+              {{ states(entity) }}
+            fill_container: true
+            tap_action: none
+            icon: mdi:file
+            icon_color: >
+              {% if states('sensor.afvalwijzer_today') == (entity | replace('sensor.afvalwijzer_', '')) %}
+                var(--rgb-error-color)
+              {% elif states('sensor.afvalwijzer_tomorrow') == (entity | replace('sensor.afvalwijzer_', '')) %}
+                var(--rgb-warning-color)
+              {% else %}
+                var(--rgb-disabled-color)
+              {% endif %}
 
-              - type: "custom:button-card"
-                template:
-                  - trash_collection_tile
-                entity: sensor.afvalwijzer_papier
-                name: Papier
+      - type: markdown
+        style: !include snippets/style-markdown-titles.yaml
+        content: >
+          ### Devices
 
-              - type: "custom:button-card"
-                template: header_card
-                variables:
-                  name: DEVICES
-                  label: More
-                  link: /lovelace/devices
-                view_layout:
-                  grid-column: 1/-1
+      - type: grid
+        columns: 3
+        square: true
+        cards:
+          - type: custom:mushroom-template-card
+            entity: vacuum.valetudo_livingroom
+            layout: vertical
+            fill_container: true
+            primary: >
+              {{ state_attr(entity, 'friendly_name') }}
+            secondary: >
+              {{ states(entity) | capitalize }}
+            icon: mdi:robot-vacuum
+            icon_color: >
+              {% if is_state(entity, 'cleaning') %}
+                var(--rgb-warning-color)
+              {% endif %}
 
-              - type: "custom:button-card"
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                  - require_confirmation
-                entity: switch.doorbell_muted
-                show_name: true
-                name: Doorbell
-                icon: mdi:bell
-                state_display: |
-                  [[[
-                    var output = ''
-                    if (entity.state == 'on') {
-                      output = 'Muted'
-                    } else {
-                      output = 'On'
-                    }
-                    return output
-                  ]]]
-                state:
-                  - value: "on"
-                    icon: mdi:bell-cancel
-                    styles:
-                      card:
-                        - background: var(--primary-color)
-                  - value: "off"
-                    styles:
-                      card:
-                        - background: var(--ha-card-background)
-                        - color: var(--primary-text-color)
-                variables:
-                  aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"
-
-              - type: "custom:button-card"
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                entity: vacuum.valetudo_livingroom
-                state:
-                  - value: "cleaning"
-                    styles:
-                      card:
-                        - background: var(--primary-color)
-                  - operator: default
-                    styles:
-                      card:
-                        - background: var(--ha-card-background)
-                        - color: var(--primary-text-color)
-                variables:
-                  aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"
-
-              - type: "custom:button-card"
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                entity: vacuum.valetudo_upstairs
-                state:
-                  - value: "cleaning"
-                    styles:
-                      card:
-                        - background: var(--primary-color)
-                  - operator: default
-                    styles:
-                      card:
-                        - background: var(--ha-card-background)
-                        - color: var(--primary-text-color)
-                variables:
-                  aspect_ratio: "[[[ return Math.round(this.offsetWidth / 112) ]]]"
+          - type: custom:mushroom-template-card
+            entity: vacuum.valetudo_upstairs
+            layout: vertical
+            fill_container: true
+            primary: >
+              {{ state_attr(entity, 'friendly_name') }}
+            secondary: >
+              {{ states(entity) | capitalize }}
+            icon: mdi:robot-vacuum
+            icon_color: >
+              {% if is_state(entity, 'cleaning') %}
+                var(--rgb-warning-color)
+              {% endif %}

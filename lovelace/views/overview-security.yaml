@@ -1,172 +1,163 @@
 title: Security
 path: security
 id: security
-
-type: "custom:grid-layout"
-layout: !include snippets/layout-page-margin.yaml
+type: custom:grid-layout
+layout: !include snippets/layout-3-column.yaml
 
 cards:
-  - type: "custom:layout-card"
-    layout_type: "custom:grid-layout"
-    layout: !include snippets/layout-page-columns.yaml
+  # Header
+  - type: markdown
+    style: !include snippets/style-markdown-titles.yaml
     view_layout:
-      grid-area: cc
+      grid-column: 1/-1
+    content: >
+      ## Security
+
+  # Driveway
+  - type: vertical-stack
     cards:
-      # [Header] Summary
       - type: markdown
-        style: !include snippets/style-markdown-page-title.yaml
-        view_layout:
-          grid-column: 1/-1
+        style: !include snippets/style-markdown-titles.yaml
         content: >
-          # Security
+          ### Driveway
 
-      - type: vertical-stack
-        cards:
-          - type: "custom:button-card"
-            template: header_card_no_link
-            variables:
-              name: DRIVEWAY
-            view_layout:
-              grid-column: 1/-1
+      # - type: picture-entity
+      #   camera_image: camera.doorbell_main
+      #   camera_view: live
+      #   entity: camera.doorbell_main
+      #   name: Doorbell
+      #   show_name: false
+      #   show_state: false
 
-          # - type: picture-entity
-          #   camera_image: camera.doorbell_main
-          #   camera_view: live
-          #   entity: camera.doorbell_main
-          #   name: Doorbell
-          #   show_name: false
-          #   show_state: false
+      # - type: horizontal-stack
+      #   cards:
+      #     - type: "custom:button-card"
+      #       template:
+      #         - live_tile_mini
+      #       show_name: true
+      #       entity: binary_sensor.doorbell_person_occupancy
+      #       name: Person detected
 
-          # - type: horizontal-stack
-          #   cards:
-          #     - type: "custom:button-card"
-          #       template:
-          #         - live_tile_mini
-          #       show_name: true
-          #       entity: binary_sensor.doorbell_person_occupancy
-          #       name: Person detected
+      #     - type: "custom:button-card"
+      #       template:
+      #         - live_tile_with_camera
+      #       entity: camera.doorbell_person
+      #       name: Last person
 
-          #     - type: "custom:button-card"
-          #       template:
-          #         - live_tile_with_camera
-          #       entity: camera.doorbell_person
-          #       name: Last person
+  # Rooms
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include snippets/style-markdown-titles.yaml
+        content: >
+          ### Rooms
 
-      - type: vertical-stack
-        cards:
-          - type: "custom:button-card"
-            template: header_card_no_link
-            variables:
-              name: ROOMS
-            view_layout:
-              grid-column: 1/-1
+      - type: "custom:multiple-entity-row"
+        entity: binary_sensor.downstairs_hallway_front_door_contact
+        name: Hallway
+        icon: mdi:coat-rack
+        show_state: false
+        entities:
+          - entity: binary_sensor.downstairs_hallway_front_door_contact
+            name: Front Door
+            icon: true
+            state_color: true
 
-          - type: "custom:multiple-entity-row"
-            entity: binary_sensor.downstairs_hallway_front_door_contact
-            name: Hallway
-            icon: mdi:coat-rack
-            show_state: false
-            entities:
-              - entity: binary_sensor.downstairs_hallway_front_door_contact
-                name: Front Door
-                icon: true
-                state_color: true
+          - entity: binary_sensor.downstairs_hallway_motion
+            name: Motion
+            icon: true
+            state_color: true
 
-              - entity: binary_sensor.downstairs_hallway_motion
-                name: Motion
-                icon: true
-                state_color: true
+      - type: "custom:multiple-entity-row"
+        entity: binary_sensor.living_room_door_contact
+        name: Living Room
+        icon: mdi:sofa
+        show_state: false
+        entities:
+          - entity: binary_sensor.living_room_door_contact
+            name: Door
+            icon: true
+            state_color: true
+          - entity: binary_sensor.living_room_window_contact
+            name: Window
+            icon: true
+            state_color: true
+          - entity: binary_sensor.living_room_motion_sensor_occupancy
+            name: Motion
+            icon: true
+            state_color: true
 
-          - type: "custom:multiple-entity-row"
-            entity: binary_sensor.living_room_door_contact
-            name: Living Room
-            icon: mdi:sofa
-            show_state: false
-            entities:
-              - entity: binary_sensor.living_room_door_contact
-                name: Door
-                icon: true
-                state_color: true
-              - entity: binary_sensor.living_room_window_contact
-                name: Window
-                icon: true
-                state_color: true
-              - entity: binary_sensor.downstairs_living_room_motion
-                name: Motion
-                icon: true
-                state_color: true
+      - type: "custom:multiple-entity-row"
+        entity: binary_sensor.dining_area_garden_doors_contact
+        name: Dining Area
+        icon: mdi:table-furniture
+        show_state: false
+        entities:
+          - entity: binary_sensor.dining_area_garden_doors_contact
+            name: Garden Doors
+            icon: true
+            state_color: true
+          - entity: binary_sensor.downstairs_dining_area_motion
+            name: Motion
+            icon: true
+            state_color: true
 
-          - type: "custom:multiple-entity-row"
-            entity: binary_sensor.dining_area_garden_doors_contact
-            name: Dining Area
-            icon: mdi:table-furniture
-            show_state: false
-            entities:
-              - entity: binary_sensor.dining_area_garden_doors_contact
-                name: Garden Doors
-                icon: true
-                state_color: true
-              - entity: binary_sensor.downstairs_dining_area_motion
-                name: Motion
-                icon: true
-                state_color: true
+      - type: "custom:multiple-entity-row"
+        entity: binary_sensor.kitchen_motion
+        name: Kitchen
+        icon: mdi:countertop
+        show_state: false
+        entities:
+          - entity: binary_sensor.kitchen_motion
+            name: Motion
+            icon: true
+            state_color: true
 
-          - type: "custom:multiple-entity-row"
-            entity: binary_sensor.kitchen_motion
-            name: Kitchen
-            icon: mdi:countertop
-            show_state: false
-            entities:
-              - entity: binary_sensor.kitchen_motion
-                name: Motion
-                icon: true
-                state_color: true
+      - type: "custom:multiple-entity-row"
+        entity: binary_sensor.utility_room_door_contact
+        name: Utility Room
+        icon: mdi:washing-machine
+        show_state: false
+        entities:
+          - entity: binary_sensor.utility_room_door_contact
+            name: Door
+            icon: true
+            state_color: true
+          - entity: binary_sensor.utility_room_garden_door_contact
+            name: Garden door
+            icon: true
+            state_color: true
 
-          - type: "custom:multiple-entity-row"
-            entity: binary_sensor.utility_room_door_contact
-            name: Utility Room
-            icon: mdi:washing-machine
-            show_state: false
-            entities:
-              - entity: binary_sensor.utility_room_door_contact
-                name: Door
-                icon: true
-                state_color: true
-              - entity: binary_sensor.utility_room_garden_door_contact
-                name: Garden door
-                icon: true
-                state_color: true
+      - type: "custom:multiple-entity-row"
+        entity: binary_sensor.utility_room_garage_entry_door_contact
+        name: Garage
+        icon: mdi:car
+        show_state: false
+        entities:
+          - entity: binary_sensor.utility_room_garage_entry_door_contact
+            name: Entry door
+            icon: true
+            state_color: true
+          - entity: binary_sensor.garage_door_contact
+            name: Garage door
+            icon: true
+            state_color: true
 
-          - type: "custom:multiple-entity-row"
-            entity: binary_sensor.utility_room_garage_entry_door_contact
-            name: Garage
-            icon: mdi:car
-            show_state: false
-            entities:
-              - entity: binary_sensor.utility_room_garage_entry_door_contact
-                name: Entry door
-                icon: true
-                state_color: true
-              - entity: binary_sensor.garage_door_contact
-                name: Garage door
-                icon: true
-                state_color: true
-
-          - type: "custom:multiple-entity-row"
-            entity: binary_sensor.utility_room_garage_entry_door_contact
-            name: Attic office
-            icon: mdi:desk
-            show_state: false
-            entities:
-              - entity: binary_sensor.attic_office_window_contact
-                name: Window
-                icon: true
-                state_color: true
-              - entity: binary_sensor.attic_office_balcony_door_contact
-                name: Balcony door
-                icon: true
-                state_color: true
-              - entity: binary_sensor.attic_office_motion
-                name: Motion
-                icon: true
-                state_color: true
+      - type: "custom:multiple-entity-row"
+        entity: binary_sensor.utility_room_garage_entry_door_contact
+        name: Attic office
+        icon: mdi:desk
+        show_state: false
+        entities:
+          - entity: binary_sensor.attic_office_window_contact
+            name: Window
+            icon: true
+            state_color: true
+          - entity: binary_sensor.attic_office_balcony_door_contact
+            name: Balcony door
+            icon: true
+            state_color: true
+          - entity: binary_sensor.attic_office_motion
+            name: Motion
+            icon: true
+            state_color: true

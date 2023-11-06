@@ -1,4 +1,3 @@
-
 # GRAPH CARDS
 
 # Mini Graph Tile
@@ -6,7 +5,7 @@
 
 mini_graph_tile:
   default:
-    - title: ''
+    - title: ""
     - hours_to_show: 24
     - points_per_hour: 1
     - height: 200
@@ -14,28 +13,28 @@ mini_graph_tile:
     - upper_bound: ~0
     - aspect_ratio: 1/1
     - line_width: 4
-    - icon: ''
+    - icon: ""
     - decimals: 0
-    - unit: ''
+    - unit: ""
   card:
-    type: 'custom:mini-graph-card'
-    entities: '[[entities]]'
-    name: '[[title]]'
-    icon: '[[icon]]'
-    unit: '[[unit]]'
-    hours_to_show: '[[hours_to_show]]'
-    points_per_hour: '[[points_per_hour]]'
+    type: "custom:mini-graph-card"
+    entities: "[[entities]]"
+    name: "[[title]]"
+    icon: "[[icon]]"
+    unit: "[[unit]]"
+    hours_to_show: "[[hours_to_show]]"
+    points_per_hour: "[[points_per_hour]]"
     hour24: true
-    line_width: '[[line_width]]'
+    line_width: "[[line_width]]"
     smoothing: true
     show:
       labels: false
       labels_secondary: false
       points: false
       legend: false
-    decimals: '[[decimals]]'
-    lower_bound: '[[lower_bound]]'
-    upper_bound: '[[upper_bound]]'
+    decimals: "[[decimals]]"
+    lower_bound: "[[lower_bound]]"
+    upper_bound: "[[upper_bound]]"
     card_mod:
       style: >
         ha-card {
@@ -114,12 +113,11 @@ mini_graph_tile:
           --mdc-icon-size: 20px;
         }
 
-
 # Multi Graph Card
 # Uses the mini-graph-card module.
 multi_graph_card:
   default:
-    - title: ''
+    - title: ""
     - hours_to_show: 48
     - points_per_hour: 2
     - height: 200
@@ -128,21 +126,21 @@ multi_graph_card:
     - animate: true
     - show_extrema: false
   card:
-    type: 'custom:mini-graph-card'
-    entities: '[[entities]]'
-    name: '[[title]]'
-    hours_to_show: '[[hours_to_show]]'
-    points_per_hour: '[[points_per_hour]]'
+    type: "custom:mini-graph-card"
+    entities: "[[entities]]"
+    name: "[[title]]"
+    hours_to_show: "[[hours_to_show]]"
+    points_per_hour: "[[points_per_hour]]"
     hour24: true
     line_width: 1.5
-    height: '[[height]]'
-    lower_bound: '[[lower_bound]]'
-    upper_bound: '[[upper_bound]]'
+    height: "[[height]]"
+    lower_bound: "[[lower_bound]]"
+    upper_bound: "[[upper_bound]]"
     smoothing: true
-    animate: '[[animate]]'
+    animate: "[[animate]]"
     show:
       labels_secondary: false
-      extrema: '[[show_extrema]]'
+      extrema: "[[show_extrema]]"
     card_mod:
       style: |
         ha-card { padding-top: 0 !important; }
@@ -212,12 +210,11 @@ multi_graph_card:
           display: none;
         }
 
-
 # History Graph Card
 history_graph_card:
   default:
-    - name: ''
-    - icon: ''
+    - name: ""
+    - icon: ""
     - hours_to_show: 24
     - refresh_interval: 0
   card:
@@ -225,14 +222,14 @@ history_graph_card:
     in_card: true
     cards:
       - type: entity
-        entity: '[[entity]]'
-        name: '[[name]]'
-        icon: '[[icon]]'
+        entity: "[[entity]]"
+        name: "[[name]]"
+        icon: "[[icon]]"
       - type: history-graph
-        hours_to_show: '[[hours_to_show]]'
-        refresh_interval: '[[refresh_interval]]'
+        hours_to_show: "[[hours_to_show]]"
+        refresh_interval: "[[refresh_interval]]"
         entities:
-          - entity: '[[entity]]'
+          - entity: "[[entity]]"
         card_mod:
           style:
             .: |
@@ -254,11 +251,11 @@ history_graph_card:
 
 light_card:
   default:
-    - name: ''
+    - name: ""
   card:
-    type: 'custom:slider-button-card'
-    entity: '[[entity]]'
-    name: '[[name]]'
+    type: "custom:slider-button-card"
+    entity: "[[entity]]"
+    name: "[[name]]"
     slider:
       direction: left-right
       background: solid
@@ -275,10 +272,10 @@ light_card:
       use_state_color: true
       tap_action:
         action: more-info
-      icon: ''
+      icon: ""
     action_button:
       mode: custom
-      icon: 'mdi:power'
+      icon: "mdi:power"
       show: false
       show_spinner: false
       tap_action:
@@ -319,7 +316,6 @@ light_card:
         background: var(--slider-thumb-color) !important;
       }
 
-
 # OTHER CARDS
 
 # Metro Media Player Page
@@ -330,14 +326,14 @@ metro_media_player_page:
       style: |
         ha-card {background: red;}
     cards:
-      - type: 'custom:button-card'
-        entity: '[[entity]]'
+      - type: "custom:button-card"
+        entity: "[[entity]]"
         color_type: card
         size: 20px
         show_state: true
         show_label: true
         show_icon: false
-        state_display: '[[[ return entity.attributes.media_title ]]]'
+        state_display: "[[[ return entity.attributes.media_title ]]]"
         label: |-
           [[[ if (entity.attributes.media_content_type == "music") {
               return entity.attributes.media_album_name + "<br><span style='font-weight: 500;'>" + entity.attributes.media_artist + "</span>"
@@ -346,8 +342,8 @@ metro_media_player_page:
             }
           ]]]
         custom_fields:
-          picture: ' '
-          space: ' '
+          picture: " "
+          space: " "
         color: transparent
         styles:
           card:
@@ -407,7 +403,7 @@ metro_media_player_page:
               - position: relative
               - xwidth: 100%
       - type: media-control
-        entity: '[[entity]]'
+        entity: "[[entity]]"
         card_mod:
           style: >
             ha-card { background: none; }
@@ -420,3 +416,34 @@ metro_media_player_page:
             .player { padding-top: 0 !important; color: rgb(255,255,255)
             !important;} mwc-linear-progress { --mdc-theme-primary:
             inherit !important; }
+
+# Trash buttons
+trash_tile:
+  card:
+    type: custom:mushroom-entity-card
+    entity: "[[entity]]"
+    name: "[[name]]"
+    icon: "[[icon]]"
+    layout: vertical
+    fill_container: true
+    tap_action: none
+    card_mod:
+      style: |
+        ha-card {
+          --primary-text-color:
+            {% if states('sensor.afvalwijzer_today') == ('[[name]]' | lower) %}
+              #FFFFFF
+            {% elif states('sensor.afvalwijzer_tomorrow') == ('[[name]]' | lower) %}
+              #FFFFFF
+            {% else %}
+              var(--text-primary-color)
+            {% endif %};
+          --ha-card-background:
+            {% if states('sensor.afvalwijzer_today') == ('[[name]]' | lower) %}
+              #FF6666
+            {% elif states('sensor.afvalwijzer_tomorrow') == ('[[name]]' | lower) %}
+              #FF9D44
+            {% else %}
+              var(--ha-card-background)
+            {% endif %};
+        }

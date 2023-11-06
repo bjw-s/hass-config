@@ -1,36 +1,32 @@
 title: Schedules
 path: schedules
 id: schedules
-
-type: "custom:grid-layout"
-layout: !include snippets/layout-page-margin.yaml
+type: custom:grid-layout
+layout: !include snippets/layout-2-column.yaml
 
 cards:
-  - type: "custom:layout-card"
-    layout_type: "custom:grid-layout"
-
-    layout:
-      grid-template-columns: >-
-        calc(100% - 24px)
-      grid-column-gap: 32px
-      grid-template-areas: |
-        "h"
-        "c1"
-      margin: 0
-
+  # Header
+  - type: markdown
+    style: !include snippets/style-markdown-titles.yaml
     view_layout:
-      grid-area: cc
+      grid-column: 1/-1
+    content: >
+      ## Schedules
 
+  # Climate
+  - type: vertical-stack
     cards:
-      # [Header] Summary
       - type: markdown
-        style: !include snippets/style-markdown-page-title.yaml
-        view_layout:
-          grid-column: 1/-1
+        style: !include snippets/style-markdown-titles.yaml
         content: >
-          # Schedules
+          ### Climate
 
       - type: custom:scheduler-card
         title: ""
         include:
           - climate
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: transparent;
+            }

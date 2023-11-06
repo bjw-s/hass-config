@@ -4,16 +4,14 @@
 
 # To add your own custom color, see the examples at the end of this file.
 
-
 ############################################
 ############################################
 ############################################
 
 # BASE THEME
 
-________________________________________Common Base (Do Not Use): &common-colors
-
-  # Text Colors
+________________________________________Common Base (Do Not Use):
+  &common-colors # Text Colors
   text-primary-color: var(--primary-text-color)
   accent-text-color: "rgb(255,255,255)"
   text-accent-color: var(--accent-text-color)
@@ -90,7 +88,7 @@ ________________________________________Common Base (Do Not Use): &common-colors
   subtitle-font-weight: 600
   subtitle-line-height: normal
   small-font-size: 0.9rem
-  
+
   h1-font-size: 2.85rem
   h2-font-size: 2.25rem
   h3-font-size: 2rem
@@ -173,7 +171,6 @@ ________________________________________Common Base (Do Not Use): &common-colors
   mush-shape-icon-size: 20px
   #mush-shape-animation:
   mush-slider-height: 16px
-
 
   # Color Reset
   # Map all the colors to the defaults above
@@ -278,7 +275,7 @@ ________________________________________Common Base (Do Not Use): &common-colors
   btn-bg-color-off: var(--primary-background-color)
   mdc-button-disabled-fill-color: var(--disabled-color)
   mdc-button-disabled-ink-color: var(--disabled-text-color)
-  # mdc-button-raised-box-shadow: 
+  # mdc-button-raised-box-shadow:
 
   # Home Assistant override
   ha-card-box-shadow: "none"
@@ -344,7 +341,6 @@ ________________________________________Common Base (Do Not Use): &common-colors
   rgb-state-vacuum-color: var(--rgb-primary-color)
 
 ________________________________________Common Base 2 (Do Not Use):
-
   modes:
     dark: &common-dark
       <<: *common-colors
@@ -400,15 +396,12 @@ ________________________________________Common Base 2 (Do Not Use):
       # Custom
       dark-mode-filter: "invert(0)"
 
-
 ############################################
 ############################################
 ############################################
 
-
-________________________________________Common Base 3 (Do Not Use): &common-card-mods
-
-  # Card Mod
+________________________________________Common Base 3 (Do Not Use):
+  &common-card-mods # Card Mod
   card-mod-row-yaml: &card-mod-row |
     .: |
       hui-generic-entity-row {
@@ -433,12 +426,12 @@ ________________________________________Common Base 3 (Do Not Use): &common-card
       .secondary {
         font-size: var(--small-font-size);
         line-height: 1.4;
-      }                  
+      }
       .state, .entity div {
         font-size: var(--h5-font-size);
         font-weight: 400;
       }
-      
+
   card-mod-card-yaml: &card-mod-card |
     .: |
       ha-card {
@@ -554,7 +547,7 @@ ________________________________________Common Base 3 (Do Not Use): &common-card
       state-info { margin-left: -8px; margin-top: -42px; }
     ha-more-info-info$state-card-display$state-info$: |
       .name { display: none; }
-      .time-ago { margin-top: 42px; 
+      .time-ago { margin-top: 42px;
         font-size: var(--h6-font-size);
         text-transform: uppercase;}
       state-badge {
@@ -583,7 +576,7 @@ ________________________________________Common Base 3 (Do Not Use): &common-card
       }
       .data-entry:last-child .value {
         margin-bottom: 0;
-      }      
+      }
     ha-more-info-history$state-history-charts:
       $:
         state-history-chart-timeline$: |
@@ -620,7 +613,7 @@ ________________________________________Common Base 3 (Do Not Use): &common-card
       }
     ha-app-layout$app-header$app-toolbar$ha-tabs$: |
       .iron-selected paper-tab {
-      
+
       }
 
   card-mod-sidebar: &card-mod-sidebar |
@@ -657,11 +650,9 @@ ________________________________________Common Base 3 (Do Not Use): &common-card
       justify-content: left;
     }
 
-
 # Base Metro Theme
 
 ________________________________________Common Base 4 (Do Not Use):
-
   modes:
     dark: &metro-common-dark
       <<: *common-dark
@@ -707,12 +698,9 @@ ________________________________________Common Base 4 (Do Not Use):
       mdc-theme-surface: var(--primary-background-color)
       rgb-mdc-theme-surface: var(--rgb-primary-background-color)
 
-
-
 # Base Fluent Theme
 
 ________________________________________Common Base 5 (Do Not Use):
-
   modes:
     dark: &fluent-common-dark
       <<: *common-dark
@@ -720,7 +708,7 @@ ________________________________________Common Base 5 (Do Not Use):
       ha-config-card-border-radius: "4px"
       ha-dialog-border-radius: "8px"
       vertical-stack-card-margin: "1px 0px 1px 0px"
-      mush-control-border-radius: 4px      
+      mush-control-border-radius: 4px
       mdc-shape-small: 4px
 
       mdc-theme-surface: var(--primary-background-color)
@@ -741,8 +729,6 @@ ________________________________________Common Base 5 (Do Not Use):
       mdc-theme-surface: var(--card-background-color)
       rgb-mdc-theme-surface: var(--rgb-card-background-color)
 
-
-
 ############################################
 ############################################
 ############################################
@@ -751,7 +737,6 @@ ________________________________________Common Base 5 (Do Not Use):
 
 # So happy that YAML Anchors work so I don't need to duplicate code a billion times.
 # It's relatively easy to create your own theme. You just need to provide the colors.
-
 
 Metro Red:
   <<: *common-card-mods
@@ -802,8 +787,6 @@ Fluent Red:
       card-background-color: "rgb(245,239,242)"
       rgb-card-background-color: "245,239,242"
 
-
-
 Metro Blue:
   <<: *common-card-mods
   card-mod-theme: "Metro Blue"
@@ -837,7 +820,7 @@ Fluent Blue:
   rgb-accent-color: "0,141,253"
 
   modes:
-    dark: 
+    dark:
       <<: *fluent-common-dark
       primary-background-color: "rgb(24,26,27)"
       rgb-primary-background-color: "24,26,27"
@@ -846,14 +829,12 @@ Fluent Blue:
       card-background-color: "rgb(36,38,40)"
       rgb-card-background-color: "36,38,40"
 
-    light: 
+    light:
       <<: *fluent-common-light
       secondary-background-color: "rgb(210,231,249)"
       rgb-secondary-background-color: "210,231,249"
       card-background-color: "rgb(239,243,245)"
       rgb-card-background-color: "239,243,245"
-
-
 
 Metro Green:
   <<: *common-card-mods
@@ -888,7 +869,7 @@ Fluent Green:
   rgb-accent-color: "0, 241, 125"
 
   modes:
-    dark: 
+    dark:
       <<: *fluent-common-dark
       primary-background-color: "rgb(24,27,26)"
       rgb-primary-background-color: "24,27,26"
@@ -897,14 +878,12 @@ Fluent Green:
       card-background-color: "rgb(36,40,38)"
       rgb-card-background-color: "36,40,38"
 
-    light: 
+    light:
       <<: *fluent-common-light
       secondary-background-color: "rgb(210,249,231)"
       rgb-secondary-background-color: "210,249,231"
       card-background-color: "rgb(239,245,243)"
       rgb-card-background-color: "239,245,243"
-
-
 
 Metro Orange:
   <<: *common-card-mods
@@ -939,7 +918,7 @@ Fluent Orange:
   rgb-accent-color: "255, 157, 0"
 
   modes:
-    dark: 
+    dark:
       <<: *fluent-common-dark
       primary-background-color: "rgb(27,26,24)"
       rgb-primary-background-color: "27,26,24"
@@ -948,14 +927,12 @@ Fluent Orange:
       card-background-color: "rgb(40,38,36)"
       rgb-card-background-color: "40,38,36"
 
-    light: 
+    light:
       <<: *fluent-common-light
       secondary-background-color: "rgb(249,231,210)"
       rgb-secondary-background-color: "249,231,210"
       card-background-color: "rgb(245,243,239)"
       rgb-card-background-color: "245,243,239"
-
-
 
 Metro Purple:
   <<: *common-card-mods
@@ -990,7 +967,7 @@ Fluent Purple:
   rgb-accent-color: "169, 77, 255"
 
   modes:
-    dark: 
+    dark:
       <<: *fluent-common-dark
       primary-background-color: "rgb(26,24,27)" # hsl(hue,5,10)
       rgb-primary-background-color: "26,24,27"
@@ -999,14 +976,12 @@ Fluent Purple:
       card-background-color: "rgb(38,36,40)" # hsl(hue,5,15)
       rgb-card-background-color: "38,36,40"
 
-    light: 
+    light:
       <<: *fluent-common-light
       secondary-background-color: "rgb(230,210,249)" # hsl(hue,75,90)
       rgb-secondary-background-color: "230,210,249"
       card-background-color: "rgb(242,239,245)" # hsl(hue,25,95)
       rgb-card-background-color: "242,239,245"
-
-
 
 # Use the following as the template for your custom color theme.
 
@@ -1028,7 +1003,6 @@ Metro Slate:
       <<: *metro-common-dark
     light:
       <<: *metro-common-light
-
 
 Fluent Slate:
   <<: *common-card-mods
@@ -1059,7 +1033,4 @@ Fluent Slate:
       rgb-secondary-background-color: "223,229,236"
       card-background-color: "rgb(240,242,244)"
       rgb-card-background-color: "240,242,244"
-
-  
-
 # Paste your custom color themes here.

@@ -1,5 +1,0 @@
-require_confirmation:
-  confirmation:
-    text: >-
-      [[[ return `Are you sure you want to toggle
-      ${entity.attributes.friendly_name}?` ]]]
