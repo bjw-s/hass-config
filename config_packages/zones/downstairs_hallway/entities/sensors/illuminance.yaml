@@ -4,5 +4,5 @@ name: Downstairs Hallway - Illuminance
 type: mean
 round_digits: 1
 entity_ids:
-  - sensor.downstairs_hallway_1_illuminance
-  - sensor.downstairs_hallway_2_illuminance
+  - sensor.downstairs_hallway_motion_sensor_1_illuminance_lux
+  - sensor.downstairs_hallway_motion_sensor_2_illuminance_lux

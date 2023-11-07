@@ -4,21 +4,21 @@ alias: Downstairs dining area - Lights - Scene controller
 max_exceeded: silent
 
 trigger:
-  - id: downstairs_dining_area_switch_top
+  - id: kitchen_switch_top_right
     platform: device
-    domain: hue
-    device_id: e2c68b8b1646561244951cc00dc50d84
-    type: initial_press
-    subtype: 3
-    unique_id: ca5a3154-403a-46ab-aedb-4218a1960505
+    domain: mqtt
+    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    type: action
+    subtype: press_3
+    discovery_id: 0x0000000001715668 action_press_3
 
-  - id: downstairs_dining_area_switch_bottom
+  - id: kitchen_switch_bottom_right
     platform: device
-    domain: hue
-    device_id: e2c68b8b1646561244951cc00dc50d84
-    type: initial_press
-    subtype: 4
-    unique_id: 2f953c8e-57d8-449b-9d9b-6bd8d040c947
+    domain: mqtt
+    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    type: action
+    subtype: press_4
+    discovery_id: 0x0000000001715668 action_press_4
 
   - id: downstairs_dining_area_is_dark
     platform: state
@@ -27,7 +27,7 @@ trigger:
 
   - id: downstairs_dining_area_motion_detected
     platform: state
-    entity_id: binary_sensor.downstairs_dining_area_motion
+    entity_id: binary_sensor.dining_area_motion_sensor_occupancy
     to: "on"
 
   - id: downstairs_living_room_media_playing
@@ -49,8 +49,8 @@ trigger:
   - id: lights_turned_off
     platform: state
     entity_id: light.dining_area
-    from: 'on'
-    to: 'off'
+    from: "on"
+    to: "off"
 
 variables:
   scene_helper: input_select.downstairs_dining_area_lights_scene
@@ -61,7 +61,7 @@ action:
       # Loop through scenes with button
       - conditions:
           - condition: trigger
-            id: downstairs_dining_area_switch_top
+            id: kitchen_switch_top_right
         sequence:
           - service: script.input_select_next_with_skip
             data:
@@ -139,7 +139,7 @@ action:
           - or:
               # Turned off manually
               - condition: trigger
-                id: downstairs_dining_area_switch_bottom
+                id: kitchen_switch_bottom_right
               - condition: trigger
                 id: lights_turned_off
               # Turn off automatically

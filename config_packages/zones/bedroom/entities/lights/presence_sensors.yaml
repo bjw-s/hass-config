@@ -1,0 +1,6 @@
+---
+platform: group
+name: Bedroom - Nightstands
+entities:
+  - light.bedroom_nightstand_bernd
+  - light.bedroom_nightstand_manyie

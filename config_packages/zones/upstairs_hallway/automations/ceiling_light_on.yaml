@@ -3,20 +3,37 @@ id: upstairs_hallway_ceiling_light_on
 alias: Upstairs Hallway - Ceiling light on
 max_exceeded: silent
 trigger:
-  - id: downstairs_hallway_stairs_switch_button_1_press
+  - id: downstairs_hallway_stairs_switch_top_left
     platform: device
-    domain: hue
-    device_id: 0216651cf23a2289bc306de217391465
-    type: initial_press
-    subtype: 1
-    unique_id: 2b8eb0e3-7aae-43cb-be0b-abaa540df5d9
-  - id: upstairs_hallway_switch_button_3_press
+    domain: mqtt
+    device_id: 66e77759181c96a80d427dd55b3e0d75
+    type: action
+    subtype: press_1
+    discovery_id: 0x0000000001716b6f action_press_1
+
+  - id: downstairs_hallway_stairs_switch_top_right
     platform: device
-    domain: hue
-    device_id: fb2e69655f5862ce3a7c9f4dabc2e086
-    type: initial_press
-    subtype: 3
-    unique_id: 16937cd2-50a9-46b9-bc6f-8285cfea929a
+    domain: mqtt
+    device_id: 66e77759181c96a80d427dd55b3e0d75
+    type: action
+    subtype: press_3
+    discovery_id: 0x0000000001716b6f action_press_3
+
+  - id: downstairs_hallway_stairs_switch_top
+    platform: device
+    domain: mqtt
+    device_id: 66e77759181c96a80d427dd55b3e0d75
+    type: action
+    subtype: press_1_and_3
+    discovery_id: 0x0000000001716b6f action_press_1_and_3
+
+  - id: upstairs_hallway_switch_top_right
+    platform: device
+    domain: mqtt
+    device_id: 4b41fc02c4f375ddbe1c405fe173600d
+    type: action
+    subtype: press_3
+    discovery_id: 0x0000000001716b46 action_press_3
 
 action:
   - scene: scene.upstairs_hallway_lights_on

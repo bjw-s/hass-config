@@ -2,5 +2,5 @@
 name: Downstairs dining area - Lights - Off
 icon: mdi:lightbulb-off
 entities:
-  light.downstairs_dining_area_ceiling:
-    state: 'off'
+  light.dining_area_ceiling:
+    state: "off"

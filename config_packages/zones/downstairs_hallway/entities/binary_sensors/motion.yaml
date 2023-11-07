@@ -3,5 +3,5 @@ platform: group
 name: "Downstairs Hallway - Motion"
 device_class: motion
 entities:
-  - binary_sensor.downstairs_hallway_1_motion
-  - binary_sensor.downstairs_hallway_2_motion
+  - binary_sensor.downstairs_hallway_motion_sensor_1_occupancy
+  - binary_sensor.downstairs_hallway_motion_sensor_2_occupancy

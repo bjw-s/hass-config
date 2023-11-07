@@ -3,35 +3,30 @@ id: bedroom_eva_ceiling_light_on
 alias: Bedroom Eva - Ceiling light on
 max_exceeded: silent
 trigger:
+  - id: bedroom_eva_switch_top_left
+    platform: device
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_1
+    discovery_id: 0x00000000017579ae action_press_1
+
+  - id: bedroom_eva_switch_top_right
+    platform: device
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_3
+    discovery_id: 0x00000000017579ae action_press_3
+
   - id: bedroom_eva_switch_top
     platform: device
-    domain: hue
-    device_id: 91af78cb691a3d71628398d93e9a1405
-    type: initial_press
-    subtype: 1
-    unique_id: 4147c99a-80b4-4d0b-b5f8-006e9c2e845a
+    domain: mqtt
+    device_id: 8cf6a875598638035406a6c34f99ffc6
+    type: action
+    subtype: press_1_and_3
+    discovery_id: 0x00000000017579ae action_press_1_and_3
 action:
-  - choose:
-      - conditions:
-          - alias: "Early morning"
-            condition: state
-            entity_id: sensor.system_time_of_day_detailed
-            state: "early_morning"
-        sequence:
-          - service: scene.turn_on
-            data:
-              entity_id: scene.bedroom_eva_lights_ceiling_on
-              transition: 60
-
-    # - conditions:
-    #     - condition: state
-    #       entity_id: light.bedroom_eva_ceiling
-    #       state: 'on'
-    #   sequence:
-    #     - scene: scene.bedroom_eva_lights_ceiling_off
-
-    # Default
-    default:
-      - service: scene.turn_on
-        data:
-          entity_id: scene.bedroom_eva_lights_ceiling_on
+  - service: scene.turn_on
+    data:
+      entity_id: scene.bedroom_eva_lights_ceiling_on

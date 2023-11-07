@@ -2,7 +2,7 @@
 name: Downstairs dining area - Lights - Full brightness
 icon: mdi:lightbulb-on
 entities:
-  light.downstairs_dining_area_ceiling:
-    state: 'on'
+  light.dining_area_ceiling:
+    state: "on"
     brightness: 254
     color_temp: 285

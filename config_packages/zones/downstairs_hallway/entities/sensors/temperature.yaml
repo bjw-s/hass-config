@@ -4,5 +4,5 @@ name: Downstairs Hallway - Temperature
 type: mean
 round_digits: 1
 entity_ids:
-  - sensor.downstairs_hallway_motion_1_temperature
-  - sensor.downstairs_hallway_motion_2_temperature
+  - sensor.downstairs_hallway_motion_sensor_1_temperature
+  - sensor.downstairs_hallway_motion_sensor_2_temperature

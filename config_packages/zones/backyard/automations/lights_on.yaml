@@ -5,10 +5,26 @@ max_exceeded: silent
 trigger:
   - id: utility_room_switch_top
     platform: device
-    domain: hue
-    device_id: 17b4abf9c9be5049601d8c59995a94c1
-    type: initial_press
-    subtype: 3
-    unique_id: 916b37bf-4936-4acd-a901-82bad7be82ab
+    domain: mqtt
+    device_id: 64f3bc4a9faf96bc47150c1c680d3fa5
+    type: action
+    subtype: press_1
+    discovery_id: 0x00000000017611ab action_press_1
+
+  - id: utility_room_switch_top
+    platform: device
+    domain: mqtt
+    device_id: 64f3bc4a9faf96bc47150c1c680d3fa5
+    type: action
+    subtype: press_3
+    discovery_id: 0x00000000017611ab action_press_3
+
+  - id: utility_room_switch_top
+    platform: device
+    domain: mqtt
+    device_id: 64f3bc4a9faf96bc47150c1c680d3fa5
+    type: action
+    subtype: press_1_and_3
+    discovery_id: 0x00000000017611ab action_press_1_and_3
 action:
   - scene: scene.backyard_lights_on

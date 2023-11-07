@@ -2,17 +2,17 @@
 name: Downstairs living room - Lights - Full brightness
 icon: mdi:lightbulb-on
 entities:
-  light.downstairs_living_room_floor_lamp:
+  light.living_room_floor_lamp:
     state: "on"
     brightness: 254
     color_temp: 285
-  light.downstairs_living_room_hue_go:
+  light.living_room_hue_go:
     state: "on"
     brightness: 254
     color_temp: 285
-  light.downstairs_living_room_speaker_left:
+  light.living_room_speaker_left:
     state: "on"
     brightness: 254
     color_temp: 285
-  light.downstairs_living_room_speaker_right:
+  light.living_room_speaker_right:
     state: "off"

@@ -136,7 +136,7 @@ cards:
             variables:
               - title: Light Level
               - entities:
-                  - entity: sensor.downstairs_living_room_illuminance
+                  - entity: sensor.living_room_motion_sensor_illuminance_lux
                     name: Living room
                   - entity: input_number.downstairs_living_room_is_dark_lux
                     name: Darkness threshold
@@ -144,25 +144,25 @@ cards:
                     show_fill: false
 
           - type: custom:mushroom-light-card
-            entity: light.downstairs_living_room_speaker_left
+            entity: light.living_room_speaker_left
             name: Speaker left
             layout: vertical
             fill_container: true
 
           - type: custom:mushroom-light-card
-            entity: light.downstairs_living_room_speaker_right
+            entity: light.living_room_speaker_right
             name: Speaker right
             layout: vertical
             fill_container: true
 
           - type: custom:mushroom-light-card
-            entity: light.downstairs_living_room_floor_lamp
+            entity: light.living_room_floor_lamp
             name: Floor lamp
             layout: vertical
             fill_container: true
 
           - type: custom:mushroom-light-card
-            entity: light.downstairs_living_room_hue_go
+            entity: light.living_room_hue_go
             name: Hue Go
             layout: vertical
             fill_container: true
@@ -235,7 +235,7 @@ cards:
             template: mini_graph_tile
             variables:
               - entities:
-                  - entity: sensor.downstairs_dining_area_illuminance
+                  - entity: sensor.dining_area_motion_sensor_illuminance_lux
                     name: Dining Area
                   - entity: input_number.downstairs_dining_area_is_dark_lux
                     name: Darkness threshold
@@ -244,7 +244,7 @@ cards:
               - title: Light Level
 
           - type: custom:mushroom-light-card
-            entity: light.downstairs_dining_area_ceiling
+            entity: light.dining_area_ceiling
             name: Ceiling
             layout: vertical
             fill_container: true
@@ -317,7 +317,7 @@ cards:
             template: mini_graph_tile
             variables:
               - entities:
-                  - entity: sensor.kitchen_illuminance
+                  - entity: sensor.kitchen_motion_sensor_illuminance_lux
                     name: Kitchen
                   - entity: input_number.kitchen_is_dark_lux
                     name: Darkness threshold
@@ -521,7 +521,7 @@ cards:
             template: mini_graph_tile
             variables:
               - entities:
-                  - entity: sensor.attic_office_illuminance
+                  - entity: sensor.attic_office_motion_sensor_illuminance_lux
                     name: Attic office
                   - entity: input_number.attic_office_is_dark_lux
                     name: Darkness threshold

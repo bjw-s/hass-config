@@ -2,7 +2,7 @@
 name: Downstairs dining area - Lights - Movie mode
 icon: mdi:filmstrip
 entities:
-  light.downstairs_dining_area_ceiling:
-    state: 'on'
+  light.dining_area_ceiling:
+    state: "on"
     brightness: 77
     color_temp: 443

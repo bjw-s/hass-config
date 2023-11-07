@@ -97,18 +97,18 @@ cards:
             name: Garden Doors
             icon: true
             state_color: true
-          - entity: binary_sensor.downstairs_dining_area_motion
+          - entity: binary_sensor.dining_area_motion_sensor_occupancy
             name: Motion
             icon: true
             state_color: true
 
       - type: "custom:multiple-entity-row"
-        entity: binary_sensor.kitchen_motion
+        entity: binary_sensor.kitchen_motion_sensor_occupancy
         name: Kitchen
         icon: mdi:countertop
         show_state: false
         entities:
-          - entity: binary_sensor.kitchen_motion
+          - entity: binary_sensor.kitchen_motion_sensor_occupancy
             name: Motion
             icon: true
             state_color: true
@@ -157,7 +157,7 @@ cards:
             name: Balcony door
             icon: true
             state_color: true
-          - entity: binary_sensor.attic_office_motion
+          - entity: binary_sensor.attic_office_motion_sensor_occupancy
             name: Motion
             icon: true
             state_color: true

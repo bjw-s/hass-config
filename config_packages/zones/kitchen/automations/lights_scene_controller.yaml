@@ -4,38 +4,38 @@ alias: Kitchen - Lights - Scene controller
 max_exceeded: silent
 
 trigger:
-  - id: kitchen_switch_top
+  - id: kitchen_switch_top_left
     platform: device
-    domain: hue
-    device_id: e2c68b8b1646561244951cc00dc50d84
-    type: initial_press
-    subtype: 1
-    unique_id: 7a1b2a96-6cb8-48d1-8265-7897b676c176
+    domain: mqtt
+    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    type: action
+    subtype: press_1
+    discovery_id: 0x0000000001715668 action_press_1
 
-  - id: kitchen_switch_bottom
+  - id: kitchen_switch_bottom_left
     platform: device
-    domain: hue
-    device_id: e2c68b8b1646561244951cc00dc50d84
-    type: initial_press
-    subtype: 2
-    unique_id: 54f06d73-0bf8-4e2d-93a5-c8a65de6de48
+    domain: mqtt
+    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    type: action
+    subtype: press_2
+    discovery_id: 0x0000000001715668 action_press_2
 
   - id: kitchen_motion_detected
     platform: state
-    entity_id: binary_sensor.kitchen_motion
+    entity_id: binary_sensor.kitchen_motion_sensor_occupancy
     to: "on"
   - id: kitchen_motion_cleared
     platform: state
-    entity_id: binary_sensor.kitchen_motion
-    to: 'off'
+    entity_id: binary_sensor.kitchen_motion_sensor_occupancy
+    to: "off"
     for:
       minutes: 5
 
   - id: lights_turned_off
     platform: state
     entity_id: light.kitchen
-    from: 'on'
-    to: 'off'
+    from: "on"
+    to: "off"
 
 variables:
   scene_helper: input_select.kitchen_lights_scene
@@ -47,7 +47,7 @@ action:
       # Turn on with switch
       - conditions:
           - condition: trigger
-            id: kitchen_switch_top
+            id: kitchen_switch_top_left
         sequence:
           - service: input_select.select_option
             data:
@@ -98,7 +98,7 @@ action:
           - or:
               # Turned off manually
               - condition: trigger
-                id: kitchen_switch_bottom
+                id: kitchen_switch_bottom_left
               - condition: trigger
                 id: lights_turned_off
               # Turn off automatically

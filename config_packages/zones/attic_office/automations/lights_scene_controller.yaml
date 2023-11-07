@@ -6,47 +6,55 @@ max_exceeded: silent
 trigger:
   - id: attic_office_switch_top_left
     platform: device
-    domain: hue
-    device_id: 5fe0720b32b486172c92638045ca1617
-    type: initial_press
-    subtype: 1
-    unique_id: 22296b02-232c-48e3-8513-861d88a9e785
+    domain: mqtt
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
+    type: action
+    subtype: press_1
+    discovery_id: 0x00000000017611a7 action_press_1
   - id: attic_office_switch_bottom_left
     platform: device
-    domain: hue
-    device_id: 5fe0720b32b486172c92638045ca1617
-    type: initial_press
-    subtype: 2
-    unique_id: c1461518-4e7d-43d1-84b1-8c553d7e5f65
+    domain: mqtt
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
+    type: action
+    subtype: press_2
+    discovery_id: 0x00000000017611a7 action_press_2
   - id: attic_office_switch_top_right
     platform: device
-    domain: hue
-    device_id: 5fe0720b32b486172c92638045ca1617
-    type: initial_press
-    subtype: 3
-    unique_id: 8baca6a0-e173-4609-89df-dea50e956fef
+    domain: mqtt
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
+    type: action
+    subtype: press_3
+    discovery_id: 0x00000000017611a7 action_press_3
   - id: attic_office_switch_bottom_right
     platform: device
-    domain: hue
-    device_id: 5fe0720b32b486172c92638045ca1617
-    type: initial_press
-    subtype: 4
-    unique_id: 29af5843-83df-4d03-ad99-cf0e4e3e3bb6
+    domain: mqtt
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
+    type: action
+    subtype: press_4
+    discovery_id: 0x00000000017611a7 action_press_4
+  - id: attic_office_switch_bottom_both
+    platform: device
+    domain: mqtt
+    device_id: 640c7e405eb4fb12ed8c214be0f40bf4
+    type: action
+    subtype: press_2_and_4
+    discovery_id: 0x00000000017611a7 press_2_and_4
 
-  - platform: device
-    domain: hue
-    device_id: 9917ddec2ef16af8b855f70b76332092
-    type: initial_press
-    subtype: 1
-    unique_id: df6ae429-d35b-453e-a11d-7c34109a4000
-    id: remote-on-click
-  - platform: device
-    domain: hue
-    device_id: 9917ddec2ef16af8b855f70b76332092
-    type: initial_press
-    subtype: 4
-    unique_id: 07167d34-d914-4efd-b7c3-3d8a3cc0481c
-    id: remote-off-click
+  - id: attic_office_remote_on
+    platform: device
+    domain: mqtt
+    device_id: df0f3d49be139fa0b32df312af3d9bf8
+    type: action
+    subtype: on-press
+    discovery_id: 0x0017880110493d0c action_on-press
+
+  - id: attic_office_remote_off
+    platform: device
+    domain: mqtt
+    device_id: df0f3d49be139fa0b32df312af3d9bf8
+    type: action
+    subtype: off-press
+    discovery_id: 0x0017880110493d0c action_off-press
 
   - id: lights_turned_off
     platform: state
@@ -64,7 +72,7 @@ action:
                   - condition: trigger
                     id: attic_office_switch_top_left
                   - condition: trigger
-                    id: remote-on-click
+                    id: attic_office_remote_on
               - condition: state
                 entity_id: light.attic_office_rear_ceiling
                 state: "off"
@@ -81,7 +89,7 @@ action:
                   - condition: trigger
                     id: attic_office_switch_top_left
                   - condition: trigger
-                    id: remote-on-click
+                    id: attic_office_remote_on
               - condition: state
                 entity_id: light.attic_office_rear_ceiling
                 state: "on"
@@ -97,9 +105,11 @@ action:
           - or:
               - condition: trigger
                 id: attic_office_switch_bottom_left
+              - condition: trigger
+                id: attic_office_switch_bottom_both
               - alias: "Remote Off button"
                 condition: trigger
-                id: remote-off-click
+                id: attic_office_remote_off
               - alias: "Lights turned off otherwise"
                 condition: trigger
                 id: lights_turned_off

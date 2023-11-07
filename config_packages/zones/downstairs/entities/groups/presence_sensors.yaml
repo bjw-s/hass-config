@@ -1,6 +1,5 @@
 ---
-downstairs_presence_sensors:
+bedroom_nightstands:
   entities:
-  - binary_sensor.downstairs_dining_area_motion
-  - binary_sensor.kitchen_motion
-  - binary_sensor.downstairs_living_room_motion
+    - light.bedroom_nightstand_bernd
+    - light.bedroom_nightstand_manyie

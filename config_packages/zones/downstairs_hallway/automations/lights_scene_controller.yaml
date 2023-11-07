@@ -6,46 +6,78 @@ mode: restart
 trigger:
   - id: downstairs_hallway_switch_top
     platform: device
-    domain: hue
-    device_id: 39cd9a1178e7f8b0a9e454922a40dd18
-    type: initial_press
-    subtype: 3
-    unique_id: 83f67854-5162-4ea2-b611-818f8319f88b
+    domain: mqtt
+    device_id: 5aea8955b04831c7ec33676a993335ed
+    type: action
+    subtype: press_1
+    discovery_id: 0x000000000175799c action_press_1
+
+  - id: downstairs_hallway_switch_top
+    platform: device
+    domain: mqtt
+    device_id: 5aea8955b04831c7ec33676a993335ed
+    type: action
+    subtype: press_3
+    discovery_id: 0x000000000175799c action_press_3
+
+  - id: downstairs_hallway_switch_top
+    platform: device
+    domain: mqtt
+    device_id: 5aea8955b04831c7ec33676a993335ed
+    type: action
+    subtype: press_1_and_3
+    discovery_id: 0x000000000175799c action_press_1_and_3
 
   - id: downstairs_hallway_switch_bottom
     platform: device
-    domain: hue
-    device_id: 39cd9a1178e7f8b0a9e454922a40dd18
-    type: initial_press
-    subtype: 4
-    unique_id: 3c0cbb77-00c4-4b9a-8bb7-4ab4e2b57daa
+    domain: mqtt
+    device_id: 5aea8955b04831c7ec33676a993335ed
+    type: action
+    subtype: press_2
+    discovery_id: 0x000000000175799c action_press_2
+
+  - id: downstairs_hallway_switch_bottom
+    platform: device
+    domain: mqtt
+    device_id: 5aea8955b04831c7ec33676a993335ed
+    type: action
+    subtype: press_4
+    discovery_id: 0x000000000175799c action_press_4
+
+  - id: downstairs_hallway_switch_bottom
+    platform: device
+    domain: mqtt
+    device_id: 5aea8955b04831c7ec33676a993335ed
+    type: action
+    subtype: press_2_and_4
+    discovery_id: 0x000000000175799c action_press_2_and_4
 
   - id: downstairs_hallway_motion_detected
     platform: state
     entity_id: binary_sensor.downstairs_hallway_motion
-    to: 'on'
+    to: "on"
   - id: downstairs_hallway_motion_cleared
     platform: state
     entity_id: binary_sensor.downstairs_hallway_motion
-    to: 'off'
+    to: "off"
     for:
       minutes: 2
 
   - id: front_door_opened
     platform: state
     entity_id: binary_sensor.downstairs_hallway_front_door_contact
-    to: 'on'
+    to: "on"
 
   - id: downstairs_living_room_door_opened
     platform: state
     entity_id: binary_sensor.living_room_door_contact
-    to: 'on'
+    to: "on"
 
   - id: lights_turned_off
     platform: state
     entity_id: light.downstairs_hallway_ceiling
-    from: 'on'
-    to: 'off'
+    from: "on"
+    to: "off"
 
 variables:
   scene_helper: input_select.downstairs_hallway_lights_scene

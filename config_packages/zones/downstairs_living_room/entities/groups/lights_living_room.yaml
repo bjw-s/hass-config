@@ -1,7 +1,7 @@
 ---
 lights_living_room:
   entities:
-  - light.downstairs_living_room_floor_lamp
-  - light.downstairs_living_room_hue_go
-  - light.downstairs_living_room_speaker_left
-  - light.downstairs_living_room_speaker_right
+    - light.living_room_floor_lamp
+    - light.living_room_hue_go
+    - light.living_room_speaker_left
+    - light.living_room_speaker_right
