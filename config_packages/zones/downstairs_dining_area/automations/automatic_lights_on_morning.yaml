@@ -14,11 +14,11 @@ condition:
       state: "on"
     - alias: "Area should be dark"
       condition: state
-      entity_id: binary_sensor.downstairs_dining_area_is_dark
+      entity_id: binary_sensor.dining_area_is_dark
       state: "on"
     - alias: "Lights should be off"
       condition: state
-      entity_id: light.dining_area
+      entity_id: light.dining_area_ceiling
       state: "off"
     - alias: "Early morning"
       condition: state

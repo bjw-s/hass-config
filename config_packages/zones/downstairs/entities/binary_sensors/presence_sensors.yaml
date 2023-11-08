@@ -1,0 +1,7 @@
+---
+platform: group
+name: "Downstairs - Presence sensors"
+device_class: motion
+entities:
+  - binary_sensor.living_room_motion_sensor_occupancy
+  - binary_sensor.dining_area_motion_sensor_occupancy

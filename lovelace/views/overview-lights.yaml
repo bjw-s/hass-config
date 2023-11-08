@@ -237,7 +237,7 @@ cards:
               - entities:
                   - entity: sensor.dining_area_motion_sensor_illuminance_lux
                     name: Dining Area
-                  - entity: input_number.downstairs_dining_area_is_dark_lux
+                  - entity: input_number.dining_area_is_dark_lux
                     name: Darkness threshold
                     color: "#039be5"
                     show_fill: false

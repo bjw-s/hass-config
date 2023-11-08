@@ -20,12 +20,12 @@ trigger:
     subtype: press_4
     discovery_id: 0x0000000001715668 action_press_4
 
-  - id: downstairs_dining_area_is_dark
+  - id: dining_area_is_dark
     platform: state
-    entity_id: binary_sensor.downstairs_dining_area_is_dark
+    entity_id: binary_sensor.dining_area_is_dark
     to: "on"
 
-  - id: downstairs_dining_area_motion_detected
+  - id: dining_area_motion_detected
     platform: state
     entity_id: binary_sensor.dining_area_motion_sensor_occupancy
     to: "on"
@@ -36,7 +36,7 @@ trigger:
 
   - id: downstairs_dining_area_no_longer_dark
     platform: state
-    entity_id: binary_sensor.downstairs_dining_area_is_dark
+    entity_id: binary_sensor.dining_area_is_dark
     to: "off"
     for: "00:02:00"
 
@@ -77,19 +77,19 @@ action:
                 entity_id: binary_sensor.downstairs_dining_area_automatic_lights
                 state: "on"
               - condition: state
-                entity_id: binary_sensor.downstairs_dining_area_is_dark
+                entity_id: binary_sensor.dining_area_is_dark
                 state: "on"
               - or:
                   - and:
                       - condition: trigger
-                        id: downstairs_dining_area_is_dark
+                        id: dining_area_is_dark
                       - condition: state
                         entity_id: binary_sensor.downstairs_presence
                         state: "on"
                   - condition: trigger
                     id: downstairs_living_room_media_playing
                   - condition: trigger
-                    id: downstairs_dining_area_motion_detected
+                    id: dining_area_motion_detected
         sequence:
           - choose:
               # Only set these scenes in the evening

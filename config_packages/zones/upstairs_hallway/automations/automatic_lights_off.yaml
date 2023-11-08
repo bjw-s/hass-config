@@ -3,7 +3,7 @@ id: upstairs_hallway_automatic_lights_off
 alias: Upstairs Hallway - Automatic lights off
 trigger:
   - platform: state
-    entity_id: light.upstairs_hallway
+    entity_id: light.upstairs_hallway_ceiling
     to: "on"
     for:
       minutes: 5
@@ -11,6 +11,6 @@ condition:
   and:
     - condition: state
       entity_id: binary_sensor.upstairs_hallway_automatic_lights
-      state: 'on'
+      state: "on"
 action:
   - scene: scene.upstairs_hallway_lights_off
