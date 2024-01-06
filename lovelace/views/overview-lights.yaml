@@ -7,7 +7,8 @@ layout: !include snippets/layout-4-column.yaml
 cards:
   # Header
   - type: markdown
-    style: !include snippets/style-markdown-titles.yaml
+    card_mod:
+      style: !include snippets/style-markdown-titles.yaml
     view_layout:
       grid-column: 1/-1
     content: >
@@ -26,7 +27,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Daylight
         padding: 0
@@ -74,7 +76,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Living room
         padding: 0
@@ -174,7 +177,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Dining area
         padding: 0
@@ -256,7 +260,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Kitchen
         padding: 0
@@ -341,7 +346,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Bedroom
 
@@ -373,7 +379,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Bedroom Eva
 
@@ -402,7 +409,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Upstairs office
         padding: 0
@@ -469,7 +477,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Attic office
         padding: 0
@@ -548,7 +557,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Downstairs hallway
         padding: 0
@@ -631,7 +641,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Upstairs hallway
         padding: 0
@@ -668,7 +679,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Attic hallway
         padding: 0
@@ -705,7 +717,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Driveway
         padding: 0
@@ -742,7 +755,8 @@ cards:
         clear: true
         title-card:
           type: markdown
-          style: !include snippets/style-markdown-titles.yaml
+          card_mod:
+            style: !include snippets/style-markdown-titles.yaml
           content: >
             ### Backyard
         padding: 0

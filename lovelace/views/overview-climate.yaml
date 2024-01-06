@@ -8,7 +8,8 @@ layout: !include snippets/layout-4-column.yaml
 cards:
   # Header
   - type: markdown
-    style: !include snippets/style-markdown-titles.yaml
+    card_mod:
+      style: !include snippets/style-markdown-titles.yaml
     view_layout:
       grid-column: 1/-1
     content: >
@@ -23,7 +24,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Outside
 
@@ -40,7 +42,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Living room
 
@@ -88,7 +91,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Bedroom
 
@@ -136,7 +140,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Bedroom Eva
 
@@ -184,7 +189,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Upstairs office
 
@@ -232,7 +238,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Attic office
 
@@ -293,7 +300,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Bathroom
 
@@ -325,7 +333,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Garage
 

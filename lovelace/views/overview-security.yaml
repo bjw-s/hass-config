@@ -7,7 +7,8 @@ layout: !include snippets/layout-3-column.yaml
 cards:
   # Header
   - type: markdown
-    style: !include snippets/style-markdown-titles.yaml
+    card_mod:
+      style: !include snippets/style-markdown-titles.yaml
     view_layout:
       grid-column: 1/-1
     content: >
@@ -17,7 +18,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Driveway
 
@@ -47,7 +49,8 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Rooms
 

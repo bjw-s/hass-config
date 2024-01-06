@@ -8,14 +8,16 @@ cards:
   - type: markdown
     view_layout:
       grid-column: 1 / -1
-    style: !include snippets/style-markdown-titles.yaml
+    card_mod:
+      style: !include snippets/style-markdown-titles.yaml
     content: >
       # {{ now().timestamp() | timestamp_custom('%H:%M, %B %-d %Y') }}
 
   - type: vertical-stack
     cards:
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### ‎
 
@@ -97,7 +99,8 @@ cards:
       #     ### Trash
 
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Trash
 
@@ -188,7 +191,8 @@ cards:
       #     ### Devices
 
       - type: markdown
-        style: !include snippets/style-markdown-titles.yaml
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
         content: >
           ### Devices
 
