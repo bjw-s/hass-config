@@ -1,0 +1,7 @@
+---
+name: Ventilation - Medium
+icon: mdi:fan-speed-2
+entities:
+  fan.itho_wifi_nrg_itho_dc8c_nrg_itho_dc8c_fan:
+    state: "on"
+    percentage: 50

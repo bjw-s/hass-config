@@ -21,13 +21,12 @@ cards:
         content: >
           ### Driveway
 
-      # - type: picture-entity
-      #   camera_image: camera.doorbell_main
-      #   camera_view: live
-      #   entity: camera.doorbell_main
-      #   name: Doorbell
-      #   show_name: false
-      #   show_state: false
+      - type: picture-entity
+        camera_view: live
+        entity: camera.driveway_doorbell_scrypted
+        name: Doorbell
+        show_name: false
+        show_state: false
 
       # - type: horizontal-stack
       #   cards:

@@ -51,6 +51,7 @@ PRESET_MODE_LOOKUP: dict[str, dict[str, HVACMode]] = {
     ACMode.ENERGY_SAVER.name: {"preset": PRESET_ECO, "hvac": HVACMode.COOL},
 }
 
+HVAC_MODE_NONE = "--"
 ATTR_SWING_HORIZONTAL = "swing_mode_horizontal"
 ATTR_SWING_VERTICAL = "swing_mode_vertical"
 SWING_PREFIX = ["Vertical", "Horizontal"]
@@ -199,6 +200,9 @@ class LGEACClimate(LGEClimate):
                 for key, mode in HVAC_MODE_LOOKUP.items()
                 if key in self._device.op_modes
             }
+            if not self._hvac_mode_lookup:
+                self._hvac_mode_lookup = {HVAC_MODE_NONE: HVACMode.AUTO}
+
         return self._hvac_mode_lookup
 
     def _available_preset_modes(self) -> dict[str, str]:
@@ -295,7 +299,8 @@ class LGEACClimate(LGEClimate):
 
         if not self._api.state.is_on:
             await self._device.power(True)
-        await self._device.set_op_mode(operation_mode)
+        if operation_mode != HVAC_MODE_NONE:
+            await self._device.set_op_mode(operation_mode)
         self._api.async_set_updated()
 
     @property
@@ -336,16 +341,7 @@ class LGEACClimate(LGEClimate):
     @property
     def current_temperature(self) -> float:
         """Return the current temperature."""
-        curr_temp = None
-        if self._device.is_air_to_water:
-            curr_temp = self._api.state.device_features.get(
-                AirConditionerFeatures.WATER_OUT_TEMP
-            )
-        if curr_temp is None:
-            curr_temp = self._api.state.device_features.get(
-                AirConditionerFeatures.ROOM_TEMP
-            )
-        return curr_temp
+        return self._api.state.current_temp
 
     @property
     def current_humidity(self) -> int | None:
@@ -358,7 +354,7 @@ class LGEACClimate(LGEClimate):
 
     async def async_set_temperature(self, **kwargs) -> None:
         """Set new target temperature."""
-        if new_temp := kwargs.get(ATTR_TEMPERATURE):
+        if (new_temp := kwargs.get(ATTR_TEMPERATURE)) is not None:
             await self._device.set_target_temp(new_temp)
         if hvac_mode := kwargs.get(ATTR_HVAC_MODE):
             await self.async_set_hvac_mode(HVACMode(hvac_mode))
@@ -500,7 +496,7 @@ class LGERefrigeratorClimate(LGEClimate):
 
     async def async_set_temperature(self, **kwargs) -> None:
         """Set new target temperature."""
-        if new_temp := kwargs.get(ATTR_TEMPERATURE):
+        if (new_temp := kwargs.get(ATTR_TEMPERATURE)) is not None:
             await self.entity_description.set_temp_fn(self._wrap_device, new_temp)
             self._api.async_set_updated()
 

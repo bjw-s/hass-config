@@ -310,7 +310,7 @@ cards:
             variables:
               - title: Temperature
               - entities:
-                  - entity: sensor.upstairs_bathroom_multisensor_temperature
+                  - entity: sensor.bathroom_multisensor_temperature
 
           - type: "custom:decluttering-card"
             view_layout:
@@ -319,7 +319,7 @@ cards:
             variables:
               - title: Humidity
               - entities:
-                  - entity: sensor.upstairs_bathroom_multisensor_humidity
+                  - entity: sensor.bathroom_multisensor_humidity
 
   # Garage
   - type: vertical-stack

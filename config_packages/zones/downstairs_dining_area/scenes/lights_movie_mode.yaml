@@ -6,3 +6,5 @@ entities:
     state: "on"
     brightness: 77
     color_temp: 443
+  switch.dining_area_christmas_lights:
+    state: "on"

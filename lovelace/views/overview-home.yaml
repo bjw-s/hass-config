@@ -8,9 +8,9 @@ layout: !include snippets/layout-4-column.yaml
 cards:
   # Header
   - type: markdown
-    style: !include snippets/style-markdown-titles.yaml
     view_layout:
       grid-column: 1/-1
+    style: !include snippets/style-markdown-titles.yaml
     content: >
       {%- set batterySensors = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
       {%- set lowBatterySensors = batterySensors | map(attribute='state') | map('int') | select('<=', 30) | map('string') | list -%}
@@ -139,8 +139,17 @@ cards:
         name: Thermostat living room
         entity: climate.living_room
         hvac_modes: []
-        show_temperature_control: false
+        # show_temperature_control: true
         fill_container: true
+
+      - type: custom:mushroom-fan-card
+        name: Central ventilation
+        entity: fan.itho_wifi_nrg_itho_dc8c_nrg_itho_dc8c_fan
+        # show_percentage_control: true
+        icon_animation: true
+        fill_container: true
+        tap_action:
+          action: more-info
 
       - type: markdown
         style: !include snippets/style-markdown-titles.yaml

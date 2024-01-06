@@ -48,6 +48,18 @@ trigger:
     subtype: on-press
     discovery_id: 0x0017880110493d0c action_on-press
 
+  - id: attic_office_motion_detected
+    platform: state
+    entity_id: binary_sensor.attic_office_motion_sensor_occupancy
+    from: "off"
+    to: "on"
+  - id: attic_office_motion_cleared
+    platform: state
+    entity_id: binary_sensor.attic_office_motion_sensor_occupancy
+    to: "off"
+    for:
+      minutes: 10
+
   - id: attic_office_remote_off
     platform: device
     domain: mqtt
@@ -73,6 +85,12 @@ action:
                     id: attic_office_switch_top_left
                   - condition: trigger
                     id: attic_office_remote_on
+                  - and:
+                      - condition: trigger
+                        id: attic_office_motion_detected
+                      - condition: state
+                        entity_id: binary_sensor.attic_office_is_dark
+                        state: "on"
               - condition: state
                 entity_id: light.attic_office_rear_ceiling
                 state: "off"
@@ -110,6 +128,8 @@ action:
               - alias: "Remote Off button"
                 condition: trigger
                 id: attic_office_remote_off
+              - condition: trigger
+                id: attic_office_motion_cleared
               - alias: "Lights turned off otherwise"
                 condition: trigger
                 id: lights_turned_off

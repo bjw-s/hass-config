@@ -54,7 +54,7 @@ cards:
         template: multi_graph_card
         variables:
           - entities:
-              - entity: sensor.driveway_illuminance
+              - entity: sensor.driveway_motion_sensor_illuminance_lux
                 name: Driveway
               - entity: input_number.driveway_is_dark_lux
                 name: Darkness threshold

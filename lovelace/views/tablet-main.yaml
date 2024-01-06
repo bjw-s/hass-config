@@ -78,8 +78,24 @@ cards:
               confirmation:
                 text: Are you sure you want to toggle Bedtime Mode?
 
+          - type: custom:mushroom-entity-card
+            entity: sensor.home_outdoor_temperature
+            name: Outside temperature
+            icon: mdi:thermometer
+            layout: vertical
+            primary_info: state
+            secondary_info: name
+            fill_container: true
+            tap_action:
+              action: none
+
   - type: vertical-stack
     cards:
+      # - type: markdown
+      #   style: !include snippets/style-markdown-titles.yaml
+      #   content: >
+      #     ### Trash
+
       - type: markdown
         style: !include snippets/style-markdown-titles.yaml
         content: >
@@ -166,6 +182,11 @@ cards:
 
   - type: vertical-stack
     cards:
+      # - type: markdown
+      #   style: !include snippets/style-markdown-titles.yaml
+      #   content: >
+      #     ### Devices
+
       - type: markdown
         style: !include snippets/style-markdown-titles.yaml
         content: >

@@ -8,10 +8,11 @@ from dataclasses import dataclass
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.const import (
     PERCENTAGE,
-    TEMPERATURE,
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
     UnitOfTemperature,
-    TIME_MINUTES
+    UnitOfMass,
+    UnitOfLength,
+    UnitOfTime
 )
 
 from homeassistant.components.sensor import (
@@ -26,7 +27,7 @@ from homeassistant.components.binary_sensor import (
 )
 
 from .const import LOGGER
-from .pybambu.const import SPEED_PROFILE, Features
+from .pybambu.const import SPEED_PROFILE, Features, FansEnum
 
 
 def fan_to_percent(speed):
@@ -74,7 +75,7 @@ PRINTER_BINARY_SENSORS: tuple[BambuLabBinarySensorEntityDescription, ...] = (
         translation_key="hms_errors",
         device_class=BinarySensorDeviceClass.PROBLEM,
         entity_category=EntityCategory.DIAGNOSTIC,
-        is_on_fn=lambda self: len(self.coordinator.get_model().hms.errors) != 0,
+        is_on_fn=lambda self: self.coordinator.get_model().hms.count != 0,
         extra_attributes=lambda self: self.coordinator.get_model().hms.errors
     ),
     BambuLabBinarySensorEntityDescription(
@@ -82,7 +83,7 @@ PRINTER_BINARY_SENSORS: tuple[BambuLabBinarySensorEntityDescription, ...] = (
         translation_key="online",
         device_class=BinarySensorDeviceClass.RUNNING,
         entity_category=EntityCategory.DIAGNOSTIC,
-        is_on_fn=lambda self: self.coordinator.get_model().info.online
+        is_on_fn=lambda self: self.coordinator.get_model().info.online or self.coordinator.client.manual_refresh_mode
     ),
     BambuLabBinarySensorEntityDescription(
         key="firmware_update",
@@ -160,7 +161,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
-        value_fn=lambda self: self.coordinator.get_model().fans.aux_fan_speed
+        value_fn=lambda self: self.coordinator.get_model().fans.get_fan_speed(FansEnum.AUXILIARY)
     ),
     BambuLabSensorEntityDescription(
         key="chamber_fan_speed",
@@ -168,7 +169,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
-        value_fn=lambda self: self.coordinator.get_model().fans.chamber_fan_speed,
+        value_fn=lambda self: self.coordinator.get_model().fans.get_fan_speed(FansEnum.CHAMBER),
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.CHAMBER_FAN)
     ),
     BambuLabSensorEntityDescription(
@@ -177,7 +178,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
-        value_fn=lambda self: self.coordinator.get_model().fans.cooling_fan_speed
+        value_fn=lambda self: self.coordinator.get_model().fans.get_fan_speed(FansEnum.PART_COOLING)
     ),
     BambuLabSensorEntityDescription(
         key="heatbreak_fan_speed",
@@ -185,7 +186,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
-        value_fn=lambda self: self.coordinator.get_model().fans.heatbreak_fan_speed
+        value_fn=lambda self: self.coordinator.get_model().fans.get_fan_speed(FansEnum.HEATBREAK)
     ),
     BambuLabSensorEntityDescription(
         key="speed_profile",
@@ -201,7 +202,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         translation_key="stage",
         icon="mdi:file-tree",
         value_fn=lambda
-            self: "offline" if not self.coordinator.get_model().info.online else self.coordinator.get_model().stage.description,
+            self: "offline" if (not self.coordinator.get_model().info.online and not self.coordinator.client.manual_refresh_mode) else self.coordinator.get_model().stage.description,
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.CURRENT_STAGE),
         device_class=SensorDeviceClass.ENUM,
         options=[
@@ -244,7 +245,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         translation_key="print_status",
         icon="mdi:list-status",
         value_fn=lambda
-            self: "offline" if not self.coordinator.get_model().info.online else self.coordinator.get_model().info.gcode_state.lower(),
+            self: "offline" if (not self.coordinator.get_model().info.online and not self.coordinator.client.manual_refresh_mode) else self.coordinator.get_model().info.gcode_state.lower(),
         device_class=SensorDeviceClass.ENUM,
         options=["failed", "finish", "idle", "init", "offline", "pause","prepare", "running", "slicing", "unknown"],
     ),
@@ -252,7 +253,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         key="start_time",
         translation_key="start_time",
         icon="mdi:clock",
-        available_fn=lambda self: self.coordinator.get_model().info.start_time != "",
+        available_fn=lambda self: self.coordinator.get_model().info.start_time != None,
         value_fn=lambda self: self.coordinator.get_model().info.start_time,
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.START_TIME) or coordinator.get_model().supports_feature(Features.START_TIME_GENERATED),
     ),
@@ -260,7 +261,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         key="remaining_time",
         translation_key="remaining_time",
         icon="mdi:timer-sand",
-        native_unit_of_measurement=TIME_MINUTES,
+        native_unit_of_measurement=UnitOfTime.MINUTES,
         device_class=SensorDeviceClass.DURATION,
         value_fn=lambda self: self.coordinator.get_model().info.remaining_time
     ),
@@ -268,7 +269,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         key="end_time",
         translation_key="end_time",
         icon="mdi:clock",
-        available_fn=lambda self: self.coordinator.get_model().info.end_time != "",
+        available_fn=lambda self: self.coordinator.get_model().info.end_time != None,
         value_fn=lambda self: self.coordinator.get_model().info.end_time,
     ),
     BambuLabSensorEntityDescription(
@@ -277,7 +278,6 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         icon="mdi:printer-3d-nozzle",
         value_fn=lambda self: self.coordinator.get_model().info.current_layer,
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.PRINT_LAYERS),
-        native_unit_of_measurement="layers",
     ),
     BambuLabSensorEntityDescription(
         key="total_layers",
@@ -285,7 +285,6 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         icon="mdi:printer-3d-nozzle",
         value_fn=lambda self: self.coordinator.get_model().info.total_layers,
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.PRINT_LAYERS),
-        native_unit_of_measurement="layers",
     ),
     BambuLabSensorEntityDescription(
         key="tray_now",
@@ -311,6 +310,39 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         value_fn=lambda self: self.coordinator.get_model().info.subtask_name
     ),
     BambuLabSensorEntityDescription(
+        key="name",
+        translation_key="printer_name",
+        value_fn=lambda self: self.coordinator.config_entry.options.get('name', ''),
+        exists_fn=lambda coordinator: coordinator.config_entry.options.get('name', '') != ''
+    ),
+    BambuLabSensorEntityDescription(
+        key="print_length",
+        translation_key="print_length",
+        native_unit_of_measurement=UnitOfLength.METERS,
+        device_class=SensorDeviceClass.DISTANCE,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:file",
+        value_fn=lambda self: self.coordinator.get_model().info.print_length / 100,
+        exists_fn=lambda coordinator: coordinator.get_model().info.has_bambu_cloud_connection
+    ),
+    BambuLabSensorEntityDescription(
+        key="print_bed_type",
+        translation_key="print_bed_type",
+        icon="mdi:file",
+        value_fn=lambda self: self.coordinator.get_model().info.print_bed_type,
+        exists_fn=lambda coordinator: coordinator.get_model().info.has_bambu_cloud_connection
+    ),
+    BambuLabSensorEntityDescription(
+        key="print_weight",
+        translation_key="print_weight",
+        native_unit_of_measurement=UnitOfMass.GRAMS,
+        device_class=SensorDeviceClass.WEIGHT,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:file",
+        value_fn=lambda self: self.coordinator.get_model().info.print_weight,
+        exists_fn=lambda coordinator: coordinator.get_model().info.has_bambu_cloud_connection
+    ),
+    BambuLabSensorEntityDescription(
         key="active_tray",
         translation_key="active_tray",
         icon="mdi:printer-3d-nozzle",
@@ -322,6 +354,8 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().get_active_tray().nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().get_active_tray().nozzle_temp_max,
             "type": self.coordinator.get_model().get_active_tray().type,
+            "remain": self.coordinator.get_model().get_active_tray().remain,
+            "tag_uid": self.coordinator.get_model().get_active_tray().tag_uid,
         },
         available_fn=lambda self: self.coordinator.get_model().get_active_tray() is not None,
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.AMS) and not coordinator.get_model().supports_feature(Features.K_VALUE)
@@ -339,6 +373,8 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().get_active_tray().nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().get_active_tray().nozzle_temp_max,
             "type": self.coordinator.get_model().get_active_tray().type,
+            "remain": self.coordinator.get_model().get_active_tray().remain,
+            "tag_uid": self.coordinator.get_model().get_active_tray().tag_uid,
         },
         available_fn=lambda self: self.coordinator.get_model().get_active_tray() is not None,
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.AMS) and coordinator.get_model().supports_feature(Features.K_VALUE)
@@ -415,6 +451,8 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().ams.data[self.index].tray[0].nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().ams.data[self.index].tray[0].nozzle_temp_max,
             "type": self.coordinator.get_model().ams.data[self.index].tray[0].type,
+            "remain": self.coordinator.get_model().ams.data[self.index].tray[0].remain,
+            "tag_uid": self.coordinator.get_model().ams.data[self.index].tray[0].tag_uid,
         },
         exists_fn=lambda coordinator: not coordinator.get_model().supports_feature(Features.K_VALUE)
     ),
@@ -433,6 +471,8 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().ams.data[self.index].tray[1].nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().ams.data[self.index].tray[1].nozzle_temp_max,
             "type": self.coordinator.get_model().ams.data[self.index].tray[1].type,
+            "remain": self.coordinator.get_model().ams.data[self.index].tray[1].remain,
+            "tag_uid": self.coordinator.get_model().ams.data[self.index].tray[1].tag_uid,
         },
         exists_fn=lambda coordinator: not coordinator.get_model().supports_feature(Features.K_VALUE)
     ),
@@ -451,6 +491,8 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().ams.data[self.index].tray[2].nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().ams.data[self.index].tray[2].nozzle_temp_max,
             "type": self.coordinator.get_model().ams.data[self.index].tray[2].type,
+            "remain": self.coordinator.get_model().ams.data[self.index].tray[2].remain,
+            "tag_uid": self.coordinator.get_model().ams.data[self.index].tray[2].tag_uid,
         },
         exists_fn=lambda coordinator: not coordinator.get_model().supports_feature(Features.K_VALUE)
     ),
@@ -469,6 +511,8 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().ams.data[self.index].tray[3].nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().ams.data[self.index].tray[3].nozzle_temp_max,
             "type": self.coordinator.get_model().ams.data[self.index].tray[3].type,
+            "remain": self.coordinator.get_model().ams.data[self.index].tray[3].remain,
+            "tag_uid": self.coordinator.get_model().ams.data[self.index].tray[3].tag_uid,
         },
         exists_fn=lambda coordinator: not coordinator.get_model().supports_feature(Features.K_VALUE)
     ),
@@ -488,6 +532,8 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().ams.data[self.index].tray[0].nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().ams.data[self.index].tray[0].nozzle_temp_max,
             "type": self.coordinator.get_model().ams.data[self.index].tray[0].type,
+            "remain": self.coordinator.get_model().ams.data[self.index].tray[0].remain,
+            "tag_uid": self.coordinator.get_model().ams.data[self.index].tray[0].tag_uid,
         },
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.K_VALUE)
     ),
@@ -507,6 +553,8 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().ams.data[self.index].tray[1].nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().ams.data[self.index].tray[1].nozzle_temp_max,
             "type": self.coordinator.get_model().ams.data[self.index].tray[1].type,
+            "remain": self.coordinator.get_model().ams.data[self.index].tray[1].remain,
+            "tag_uid": self.coordinator.get_model().ams.data[self.index].tray[1].tag_uid,
         },
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.K_VALUE)
     ),
@@ -526,6 +574,8 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().ams.data[self.index].tray[2].nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().ams.data[self.index].tray[2].nozzle_temp_max,
             "type": self.coordinator.get_model().ams.data[self.index].tray[2].type,
+            "remain": self.coordinator.get_model().ams.data[self.index].tray[2].remain,
+            "tag_uid": self.coordinator.get_model().ams.data[self.index].tray[2].tag_uid,
         },
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.K_VALUE)
     ),
@@ -545,7 +595,23 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
             "nozzle_temp_min": self.coordinator.get_model().ams.data[self.index].tray[3].nozzle_temp_min,
             "nozzle_temp_max": self.coordinator.get_model().ams.data[self.index].tray[3].nozzle_temp_max,
             "type": self.coordinator.get_model().ams.data[self.index].tray[3].type,
+            "remain": self.coordinator.get_model().ams.data[self.index].tray[3].remain,
+            "tag_uid": self.coordinator.get_model().ams.data[self.index].tray[3].tag_uid,
         },
         exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.K_VALUE)
     ),
 )
+
+CHAMBER_IMAGE_SENSOR = BambuLabSensorEntityDescription(
+        key="p1p_camera",
+        translation_key="p1p_camera",
+        value_fn=lambda self: self.coordinator.get_model().get_camera_image(),
+        exists_fn=lambda coordinator: coordinator.get_model().supports_feature(Features.CAMERA_IMAGE),
+    )
+
+COVER_IMAGE_SENSOR = BambuLabSensorEntityDescription(
+        key="cover_image",
+        translation_key="cover_image",
+        value_fn=lambda self: self.coordinator.get_model().info.get_cover_image(),
+        exists_fn=lambda coordinator: coordinator.get_model().info.has_bambu_cloud_connection
+    )

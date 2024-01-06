@@ -1,0 +1,20 @@
+---
+id: downstairs_sonos_automatic_stop
+alias: Downstairs - Sonos - Automatic stop
+max_exceeded: silent
+
+trigger:
+  - id: downstairs_no_presence_for_60_min
+    platform: state
+    entity_id: binary_sensor.downstairs_presence
+    to: "off"
+    for: "01:00:00"
+
+action:
+  - service: media_player.media_stop
+    data: {}
+    target:
+      entity_id:
+        - media_player.kitchen_sonos
+        - media_player.living_room_sonos
+        - media_player.living_room_sonos_move

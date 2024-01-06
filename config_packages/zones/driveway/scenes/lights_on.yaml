@@ -1,5 +1,5 @@
 ---
 name: Driveway - Lights - On
 entities:
-  light.driveway:
-    state: 'on'
+  light.driveway_wall:
+    state: "on"

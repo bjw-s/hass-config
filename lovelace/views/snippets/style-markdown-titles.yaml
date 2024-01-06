@@ -1,10 +1,14 @@
 .: |
   ha-card {
     background: none;
+    box-shadow: none;
+    border: none;
+    padding: 0px 0px 10px 0px;
   }
+
 ha-markdown$: |
   h1 {
-    font-size: var(--title-font-size);
+    # font-size: var(--title-font-size);
     font-weight: 500;
     line-height: 1.1;
     margin-left: -2px;
@@ -12,7 +16,7 @@ ha-markdown$: |
   }
 
   h2 {
-    font-size: var(--title-font-size);
+    # font-size: var(--title-font-size);
     font-weight: 500;
     line-height: 1.1;
     margin-left: -2px;
@@ -20,8 +24,8 @@ ha-markdown$: |
   }
 
   h3 {
-    color: var(--secondary-text-color);
-    font-size: var(--card-title-font-size);
+    # color: var(--secondary-text-color);
+    # font-size: var(--card-title-font-size);
     font-weight: 500;
     line-height: 1.1;
     margin-left: -2px;

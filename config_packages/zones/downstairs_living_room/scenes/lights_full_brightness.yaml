@@ -10,6 +10,8 @@ entities:
     state: "on"
     brightness: 254
     color_temp: 285
+  # switch.living_room_christmas_tree:
+  #   state: "on"
   light.living_room_speaker_left:
     state: "on"
     brightness: 254
