@@ -49,7 +49,8 @@
         "data": {
           "local_mqtt": "Connect locally to the printer:",
           "host": "Local Printer IP Address:",
-          "access_code": "Access Code:"
+          "access_code": "Access Code:",
+          "usage_hours": "Current usage hours (optional):"
         }
       },
       "Lan": {
@@ -58,7 +59,8 @@
         "data": {
           "serial": "Serial Number:",
           "host": "Local Printer IP Address:",
-          "access_code": "Access Code:"
+          "access_code": "Access Code:",
+          "usage_hours": "Current usage hours (optional):"
         }
       }
     }
@@ -95,7 +97,8 @@
           "printer": "Choose Printer To Add:",
           "host": "Local Printer IP Address:",
           "access_code": "Access Code:",
-          "local_mqtt": "Connect directly to printer instead of by Bambu Cloud:"
+          "local_mqtt": "Connect directly to printer instead of by Bambu Cloud:",
+          "usage_hours": "Current usage hours (optional):"
         }
       },
       "Lan": {
@@ -103,13 +106,17 @@
         "description": "Please provide your local printer IP address and access code. The access code can be found on the printer screen in the network settings (WLAN).",
         "data": {
           "host": "Local Printer IP Address:",
-          "access_code": "Access Code:"
+          "access_code": "Access Code:",
+          "usage_hours": "Current usage hours (optional):"
         }
       }
     }
   },
   "entity": {
     "binary_sensor": {
+      "door_open": {
+        "name": "Enclosure door"
+      },
       "timelapse": {
         "name": "Recording timelapse"
       },
@@ -248,6 +255,20 @@
           "calibrating_extrusion_flow": "Calibrating extrusion flow",
           "paused_nozzle_temperature_malfunction": "Paused due to nozzle temperature malfunction",
           "paused_heat_bed_temperature_malfunction": "Paused due to heat bed temperature malfunction",
+          "filament_unloading": "Filament unloading",
+          "paused_skipped_step": "Paused due to skipped steps",
+          "filament_loading": "Filament loading",
+          "calibrating_motor_noise": "Calibrating motor noise",
+          "paused_ams_lost": "Paused due to AMS lost",
+          "paused_low_fan_speed_heat_break": "Paused due to low heat break fan speed",
+          "paused_chamber_temperature_control_error": "Paused due to chamber temperature control error",
+          "cooling_chamber": "Cooling chamber",
+          "paused_user_gcode": "Paused by user added gcode pause instruction",
+          "motor_noise_showoff": "Motor noise show off",
+          "paused_nozzle_filament_covered_detected": "Paused due to nozzle filament covered detected",
+          "paused_cutter_error": "Paused due to cutter error",
+          "paused_first_layer_error": "Paused due to first layer error",
+          "paused_nozzle_clog": "Paused due to nozzle clog",
           "idle": "Idle"
         }
       },
@@ -279,7 +300,13 @@
         "name": "Gcode filename"
       },
       "print_bed_type": {
-        "name": "Print bed type"
+        "name": "Print bed type",
+        "state": {
+          "textured_plate": "Textured plate",
+          "cool_plate": "Cool Plate / PLA Plate",
+          "hot_plate": "Smooth PEI Plate / High Temp Plate",
+          "eng_plate": "Engineering Plate"
+        }
       },
       "print_length": {
         "name": "Print length"
@@ -299,6 +326,9 @@
       "end_time": {
         "name": "End time"
       },
+      "total_usage_hours": {
+        "name": "Total usage"
+      },
       "current_layer": {
         "name": "Current layer"
       },
@@ -310,6 +340,16 @@
       },
       "active_tray_index": {
         "name": "Active tray index"
+      },
+      "nozzle_diameter": {
+        "name": "Nozzle size"
+      },
+      "nozzle_type": {
+        "name": "Nozzle type",
+        "state": {
+          "hardened_steel": "Hardened steel",
+          "stainless_steel": "Stainless steel"
+        }
       },
       "humidity_index": {
         "name": "Humidity index"
@@ -370,14 +410,14 @@
           "nozzle_temp_max": {
             "name": "Nozzle max temperature"
           },
-          "type": {
-            "name": "Type"
-          },
           "remain": {
             "name": "Remaining filament"
           },
           "tag_uid": {
-            "name": "Serial number of filament"
+            "name": "Spool serial number"
+          },
+          "type": {
+            "name": "Type"
           }
         }
       },
