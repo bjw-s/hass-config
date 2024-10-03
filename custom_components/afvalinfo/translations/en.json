@@ -1,0 +1,115 @@
+{
+	"entity": {
+		"sensor": {
+			"afvalinfo_cleanprofsgft": {
+				"name": "Cleanprofs Biodegradable waste"
+			},
+			"afvalinfo_cleanprofspbd": {
+				"name": "Cleanprofs Plastic cans and drink cartons"
+			},
+			"afvalinfo_cleanprofsrestafval": {
+				"name": "Cleanprofs Residual waste"
+			},
+			"afvalinfo_gft": {
+				"name": "Biodegradable waste"
+			},
+			"afvalinfo_grofvuil": {
+				"name": "Bulky waste"
+			},
+			"afvalinfo_kca": {
+				"name": "Small toxic waste"
+			},
+			"afvalinfo_kerstboom": {
+				"name": "Christmas tree"
+			},
+			"afvalinfo_papier": {
+				"name": "Paper"
+			},
+			"afvalinfo_pbd": {
+				"name": "Plastic cans and drink cartons"
+			},
+			"afvalinfo_restafval": {
+				"name": "Residual waste"
+			},
+			"afvalinfo_takken": {
+				"name": "Branches"
+			},
+			"afvalinfo_textiel": {
+				"name": "Textile"
+			},
+			"afvalinfo_trash_type_today": {
+				"name": "Trash type today"
+			},
+			"afvalinfo_trash_type_tomorrow": {
+				"name": "Trash type tomorrow"
+			}
+		}
+	},
+	"config": {
+		"step": {
+			"user": {
+				"title": "Afvalinfo",
+				"description": "Add new location",
+				"data": {
+					"location": "Municipality",
+					"postcode": "Zip code",
+					"streetnumber": "House number",
+					"streetnumbersuffix": "House number suffix",
+					"district": "District",
+					"dateformat": "Date format",
+					"locale": "Locale",
+					"id": "Identifier",
+					"notrashtext": "No trash text",
+					"diftarcode": "Diftar code",
+					"getwholeyear": "Get data for the whole year?",
+					"sensors": "Sensors"
+				}
+			},
+			"reconfigure": {
+				"title": "Afvalinfo",
+				"description": "Update existing location",
+				"data": {
+					"location": "Municipality",
+					"postcode": "Zip code",
+					"streetnumber": "House number",
+					"streetnumbersuffix": "House number suffix",
+					"district": "District",
+					"dateformat": "Date format",
+					"locale": "Locale",
+					"id": "Identifier",
+					"notrashtext": "No trash text",
+					"diftarcode": "Diftar code",
+					"getwholeyear": "Get data for the whole year?",
+					"sensors": "Sensors"
+				}
+			}
+		},
+		"abort": {
+			"already_configured": "[%key:common::config_flow::abort::already_configured_service%]",
+			"reconfigure_successful": "Re-configuration was successful"
+		},
+		"error": {
+			"cannot_connect": "[%key:common::config_flow::error::cannot_connect%]"
+		}
+	},
+	"selector": {
+		"sensorselect": {
+			"options": {
+				"cleanprofsgft": "Cleanprofs Biodegradable waste",
+				"cleanprofspbd": "Cleanprofs Plastic cans and drink cartons",
+				"cleanprofsrestafval": "Cleanprofs Residual waste",
+				"gft": "Biodegradable waste",
+				"grofvuil": "Bulky waste",
+				"kca": "Small toxic waste",
+				"kerstboom": "Christmas tree",
+				"papier": "Paper",
+				"pbd": "Plastic cans and drink cartons",
+				"restafval": "Residual waste",
+				"takken": "Branches",
+				"textiel": "Textile",
+				"trash_type_today": "Trash type today",
+				"trash_type_tomorrow": "Trash type tomorrow"
+			}
+		}
+	}
+}

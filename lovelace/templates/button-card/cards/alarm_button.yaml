@@ -1,0 +1,32 @@
+alarm_button:
+  template: square_card
+  styles:
+    card:
+      - background-color: var(--error-color)
+    icon:
+      - color: var(--primary-background-color)
+    name:
+      - color: var(--primary-background-color)
+    state:
+      - color: var(--primary-background-color)
+  state:
+    - value: "disarmed"
+      styles:
+        card:
+          - background-color: var(--success-color)
+        icon:
+          - color: var(--primary-background-color)
+        name:
+          - color: var(--primary-background-color)
+        state:
+          - color: var(--primary-background-color)
+    - value: "arming"
+      styles:
+        card:
+          - background-color: var(--warning-color)
+        icon:
+          - color: var(--primary-background-color)
+        name:
+          - color: var(--primary-background-color)
+        state:
+          - color: var(--primary-background-color)

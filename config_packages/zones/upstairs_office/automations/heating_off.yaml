@@ -1,0 +1,40 @@
+---
+id: upstairs_office_heating_off
+alias: Upstairs office - Heating - Off
+max_exceeded: silent
+trigger:
+  - alias: Check in the morning
+    id: time
+    platform: time
+    at: "07:45:00"
+
+  - alias: Man-Yie is at the office
+    id: manyie_at_office
+    platform: zone
+    entity_id: device_tracker.iphone_man_yie_ios
+    zone: zone.man_yie_work
+    event: enter
+
+condition:
+  - or:
+      - alias: heating is enabled
+        condition: state
+        entity_id: climate.upstairs_office
+        state: auto
+
+      - alias: heating is enabled
+        condition: state
+        entity_id: climate.upstairs_office
+        state: heat
+
+action:
+  - condition: zone
+    entity_id: device_tracker.iphone_man_yie_ios
+    zone: zone.man_yie_work
+
+  - alias: put heating on frost-protect
+    service: climate.set_temperature
+    data:
+      temperature: 14
+    target:
+      entity_id: climate.upstairs_office

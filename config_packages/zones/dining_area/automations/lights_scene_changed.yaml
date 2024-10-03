@@ -1,0 +1,11 @@
+---
+id: dining_area_lights_scene_changed
+alias: Dining area - Lights scene changed
+max_exceeded: silent
+trigger:
+  - platform: state
+    entity_id: input_select.dining_area_lights_scene
+action:
+  - service: scene.turn_on
+    data:
+      entity_id: scene.dining_area_lights_{{ trigger.to_state.state.replace(" ", "_") | lower }}

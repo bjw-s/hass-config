@@ -1,7 +1,8 @@
 ---
 id: downstairs_hallway_lights_scene_controller
 alias: Downstairs hallway - Lights - Scene controller
-mode: restart
+mode: single
+max_exceeded: silent
 
 trigger:
   - id: downstairs_hallway_switch_top
@@ -104,6 +105,10 @@ action:
                 state: "on"
                 alias: Hallway autmatic lights enabled
               - condition: state
+                entity_id: light.downstairs_hallway
+                state: "off"
+                alias: Lights are off
+              - condition: state
                 entity_id: binary_sensor.downstairs_hallway_is_dark
                 state: "on"
                 alias: Hallway is dark
@@ -148,11 +153,18 @@ action:
                 id: downstairs_hallway_switch_bottom
               - condition: trigger
                 id: lights_turned_off
+
               # Turn off automatically
-              - condition: trigger
-                id: automatic_lights_timer_finished
-              - condition: trigger
-                id: downstairs_hallway_motion_cleared
+              - and:
+                  - condition: state
+                    entity_id: binary_sensor.downstairs_hallway_automatic_lights
+                    state: "on"
+                    alias: Hallway autmatic lights enabled
+                  - or:
+                      - condition: trigger
+                        id: automatic_lights_timer_finished
+                      - condition: trigger
+                        id: downstairs_hallway_motion_cleared
 
         sequence:
           - service: input_select.select_option

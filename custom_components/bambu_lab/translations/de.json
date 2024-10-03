@@ -31,7 +31,7 @@
         "description": "Bitte geben Sie Ihre Bambu Lab-Zugangsdaten an:",
         "data": {
           "region": "Konto-Region:",
-          "email": "E-Mail Adresse",
+          "email": "E-Mail-Adresse oder Telefonnummer",
           "password": "Passwort"
         }
       },
@@ -84,7 +84,7 @@
         "description": "Bitte geben Sie Ihre Bambu Lab-Zugangsdaten an:",
         "data": {
           "region": "Konto-Region:",
-          "email": "E-Mail Adresse",
+          "email": "E-Mail-Adresse oder Telefonnummer",
           "password": "Passwort"
         }
       },
@@ -115,6 +115,9 @@
       },
       "hms_errors": {
         "name": "HMS-Fehler"
+      },
+      "print_error": {
+        "name": "Druckfehler"
       },
       "online": {
         "name": "Online"

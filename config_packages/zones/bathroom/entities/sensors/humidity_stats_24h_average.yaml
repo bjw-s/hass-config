@@ -1,0 +1,7 @@
+---
+platform: statistics
+name: Bathroom - Humidity Stats 24h linear average
+entity_id: sensor.bathroom_multisensor_humidity
+state_characteristic: average_linear
+max_age:
+  hours: 24

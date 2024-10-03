@@ -1,0 +1,196 @@
+---
+id: dining_area_lights_scene_controller
+alias: Dining area - Lights - Scene controller
+mode: single
+max_exceeded: silent
+
+trigger:
+  - alias: &alias_trigger_kitchen_switch_top_right Lights turned on with switch
+    id: kitchen_switch_top_right
+    platform: device
+    domain: mqtt
+    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    type: action
+    subtype: press_3
+    discovery_id: 0x0000000001715668 action_press_3
+
+  - alias: &alias_trigger_kitchen_switch_bottom_right Lights turned off with switch
+    id: kitchen_switch_bottom_right
+    platform: device
+    domain: mqtt
+    device_id: cd02dc4dd7d89d84f13b6d1bc9a91efe
+    type: action
+    subtype: press_4
+    discovery_id: 0x0000000001715668 action_press_4
+
+  - alias: &alias_trigger_dining_area_is_dark Area became dark
+    id: dining_area_is_dark
+    platform: state
+    entity_id: binary_sensor.dining_area_is_dark
+    to: "on"
+
+  - alias: &alias_trigger_dining_area_motion_detected Motion was detected in area
+    id: dining_area_motion_detected
+    platform: state
+    entity_id: binary_sensor.dining_area_motion_sensor_occupancy
+    to: "on"
+
+  - alias: &alias_trigger_downstairs_living_room_media_playing Living Room media playback status changed
+    id: downstairs_living_room_media_playing
+    platform: state
+    entity_id: binary_sensor.living_room_media_playing
+    to: null
+
+  - alias: &alias_trigger_dining_area_no_longer_dark Area is no longer considered dark
+    id: dining_area_no_longer_dark
+    platform: state
+    entity_id: binary_sensor.dining_area_is_dark
+    to: "off"
+    for: "00:02:00"
+
+  - alias: &alias_trigger_downstairs_no_presence_for_60_min No presence detected downstairs for 60 minutes
+    id: downstairs_no_presence_for_60_min
+    platform: state
+    entity_id: binary_sensor.downstairs_presence
+    to: "off"
+    for: "01:00:00"
+
+  - alias: &alias_trigger_lights_turned_off Lights turned off elsewhere
+    id: lights_turned_off
+    platform: state
+    entity_id: light.dining_area
+    from: "on"
+    to: "off"
+
+  - alias: &alias_trigger_living_room_door_opened Living room door was opened
+    id: living_room_door_opened
+    platform: state
+    entity_id: binary_sensor.living_room_door_contact
+    to: "on"
+
+variables:
+  scene_helper: input_select.dining_area_lights_scene
+  automatic_lights: >-
+    {{ states('binary_sensor.dining_area_automatic_lights') | default('off') }}
+  presence_detected: >-
+    {{ states('binary_sensor.binary_sensor.downstairs_presence') | default('off') }}
+  area_is_dark: >-
+    {{ states('binary_sensor.dining_area_is_dark') | default('off') }}
+  living_room_media_playing: >-
+    {{ states('binary_sensor.living_room_media_playing') | default('off') }}
+
+action:
+  - alias: Choose scene based on trigger
+    choose:
+      - alias: Loop through scenes with button
+        conditions:
+          - alias: *alias_trigger_kitchen_switch_top_right
+            condition: trigger
+            id: kitchen_switch_top_right
+        sequence:
+          - service: script.input_select_next_with_skip
+            data:
+              entity_id: "{{ scene_helper }}"
+              skip_options:
+                - "Off"
+                - "Movie mode"
+
+      - alias: Select specific scene automatically
+        conditions:
+          - alias: Validate light controller conditions
+            and:
+              - alias: Base conditions
+                and:
+                - alias: Automatic lights are enabled
+                  condition: template
+                  value_template: "{{ automatic_lights == 'on' }}"
+                - alias: Area is dark
+                  condition: template
+                  value_template: "{{ area_is_dark == 'on' }}"
+
+              - alias: Specific triggers
+                or:
+                  - alias: Area became dark while presence detected
+                    and:
+                      - alias: Presence is detected in area
+                        condition: template
+                        value_template: "{{ presence_detected == 'on' }}"
+                      - alias: *alias_trigger_dining_area_is_dark
+                        condition: trigger
+                        id: dining_area_is_dark
+                  - alias: *alias_trigger_downstairs_living_room_media_playing
+                    condition: trigger
+                    id: downstairs_living_room_media_playing
+                  - alias: *alias_trigger_dining_area_motion_detected
+                    condition: trigger
+                    id: dining_area_motion_detected
+                  - alias: *alias_trigger_living_room_door_opened
+                    condition: trigger
+                    id: living_room_door_opened
+        sequence:
+          - choose:
+              - alias: Set evening scenes
+                conditions:
+                  - condition: state
+                    entity_id: sensor.system_time_of_day_detailed
+                    state:
+                      - late_evening
+                      - night
+                sequence:
+                  - alias: Check if media is playing
+                    choose:
+                      - alias: Media is playing
+                        conditions:
+                          - condition: template
+                            value_template: "{{ living_room_media_playing == 'on' }}"
+                        sequence:
+                          - alias: Select "Movie mode"
+                            service: input_select.select_option
+                            data:
+                              entity_id: "{{ scene_helper }}"
+                              option: "Movie mode"
+
+                      - alias: Media is not playing
+                        conditions:
+                          - condition: template
+                            value_template: "{{ living_room_media_playing == 'off' }}"
+                        sequence:
+                          - alias: Select "Relaxed"
+                            service: input_select.select_option
+                            data:
+                              entity_id: "{{ scene_helper }}"
+                              option: "Relaxed"
+
+            default:
+              - alias: Select "Full brightness"
+                service: input_select.select_option
+                data:
+                  entity_id: "{{ scene_helper }}"
+                  option: "Full brightness"
+
+      - alias: Select "off" scene
+        conditions:
+          - alias: Validate light controller conditions
+            or:
+              - alias: Manual triggers
+                or:
+                  - alias: *alias_trigger_kitchen_switch_bottom_right
+                    condition: trigger
+                    id: kitchen_switch_bottom_right
+                  - alias: *alias_trigger_lights_turned_off
+                    condition: trigger
+                    id: lights_turned_off
+              - alias: Automated triggers
+                or:
+                  - alias: *alias_trigger_downstairs_no_presence_for_60_min
+                    condition: trigger
+                    id: downstairs_no_presence_for_60_min
+                  - alias: *alias_trigger_dining_area_no_longer_dark
+                    condition: trigger
+                    id: dining_area_no_longer_dark
+        sequence:
+          - alias: Select "Off"
+            service: input_select.select_option
+            data:
+              entity_id: "{{ scene_helper }}"
+              option: "Off"

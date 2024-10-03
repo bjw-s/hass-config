@@ -1,0 +1,20 @@
+---
+id: home_alarm_armed_night
+alias: Home - Alarm Armed Night
+trigger:
+  - platform: state
+    entity_id: alarm_control_panel.house
+    attribute: arm_mode
+    to: armed_night
+
+action:
+  - alias: "Close alarm popup on tablets"
+    service: browser_mod.close_popup
+    data:
+      browser_id:
+        - tablet-hallway-fullykiosk
+        - tablet-garage-fullykiosk
+
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.home_modes_bedtime_mode

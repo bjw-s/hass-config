@@ -8,21 +8,26 @@ trigger:
 
 variables:
   # Notification target
-  notify_device: adults
+  notify_devices:
+    - mobile_app_iphone_bernd
+    - mobile_app_iphone_man_yie
 
 action:
-  # Send notification
-  - service: "notify.{{ notify_device }}"
-    data:
-      title: Alarm
-      message: |
-        Alarm has been triggered by: 
-        {%- for open_sensor in state_attr("alarm_control_panel.house", "open_sensors").keys() |list %}
-        - {{ state_attr(open_sensor, 'friendly_name') }}
-        {%- endfor %}
-      data:
-        push:
-          sound:
-            name: "SOSFallDetection_Haptic-Newton.caf"
-            critical: 1
-            volume: 0.7
+  - alias: Send a notification to each device
+    repeat:
+        for_each: "{{ notify_devices }}"
+        sequence:
+          - service: "notify.{{ repeat.item }}"
+            data:
+              title: Alarm
+              message: |
+                Alarm has been triggered by:
+                {%- for open_sensor in state_attr("alarm_control_panel.house", "open_sensors").keys() |list %}
+                - {{ state_attr(open_sensor, 'friendly_name') }}
+                {%- endfor %}
+              data:
+                push:
+                  sound:
+                    name: "SOSFallDetection_Haptic-Newton.caf"
+                    critical: 1
+                    volume: 0.7

@@ -4,15 +4,15 @@ alias: Home - Alarm disarmed
 trigger:
   - platform: state
     entity_id: alarm_control_panel.house
-    to: 'disarmed'
+    to: "disarmed"
 
 action:
   - alias: "Close alarm popup on tablets"
     service: browser_mod.close_popup
     data:
       browser_id:
-        - hallway-fullykiosk
-        - garage-fullykiosk
+        - tablet-hallway-fullykiosk
+        - tablet-garage-fullykiosk
 
   - service: siren.turn_off
     data:
@@ -20,17 +20,18 @@ action:
 
   # OK beep
   - choose:
-    # Only beep if bedtime mode is off
-    - conditions:
-        - condition: state
-          entity_id: input_boolean.home_modes_bedtime_mode
-          state:  'off'
-      sequence:
-        - alias: "OK beep on tablets"
-          service: media_player.play_media
-          entity_id:
-            - media_player.downstairs_garage_tablet
-            - media_player.downstairs_hallway_tablet
-          data:
-            media_content_id: "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-ok.mp3"
-            media_content_type: music
+      # Only beep if bedtime mode is off
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.home_modes_bedtime_mode
+            state: "off"
+        sequence:
+          - alias: "OK beep on tablets"
+            service: media_player.play_media
+            target:
+              device_id:
+                - 11355f46d7934d151cb35527a01b7e74 # Tablet Hallway
+                - 7be8a11efbbb6f8bb932185edcd533a6 # Tablet Garage
+            data:
+              media_content_id: "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-ok.mp3"
+              media_content_type: music

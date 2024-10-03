@@ -1,0 +1,41 @@
+{
+    "title": "Simulation de présence",
+    "config": {
+		"error": {
+			"not_unique_name": "Le nom choisi est déjà utilisé par une autre entité. Merci de modifier le nom du switch"
+		},
+        "step": {
+            "user":{
+                "description": "Configuration",
+                "data": {
+                    "switch": "Le nom du switch de simulation de présence",
+                    "entities": "Entité ou groupe d'entités",
+                    "delta": "Delta (nombre de jours)",
+                    "interval": "Intervalle de mise à jour (en secondes)",
+                    "restore": "Restaurer l'état des entités à la fin de la simulation",
+                    "random": "Ajout d'un délai (s) aléatoire pour les changements d'entités",
+                    "unavailable_as_off": "Considérer le statut Indisponible comme éteint"
+                }
+            }
+        }
+    },
+    "options": {
+		"error": {
+			"cannot_change_name": "Le nom du switch ne peut être changé"
+		},
+        "step": {
+            "init":{
+                "description": "Configuration",
+                "data": {
+                    "switch": "Le nom du switch (ne DOIT PAS être changé)",
+                    "entities": "Entité ou groupe d'entités",
+                    "delta": "Delta (nombre de jours)",
+                    "interval": "Intervalle de mise à jour (en secondes)",
+                    "restore": "Restaurer l'état des entités à la fin de la simulation",
+                    "random": "Ajout d'un délai (s) aléatoire pour les changements d'entités",
+                    "unavailable_as_off": "Considérer le statut Indisponible comme éteint"
+                }
+            }
+        }
+    }
+}

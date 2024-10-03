@@ -1,7 +1,0 @@
----
-platform: group
-name: Doorbell muted
-all: true
-entities:
-  - switch.upstairs_office_speaker_muted
-  - switch.attic_office_speaker_muted

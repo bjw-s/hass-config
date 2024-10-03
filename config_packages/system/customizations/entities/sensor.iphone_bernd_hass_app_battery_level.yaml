@@ -1,0 +1,2 @@
+sensor.iphone_bernd_hass_app_battery_level:
+  battery_report: false

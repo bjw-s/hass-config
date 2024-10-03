@@ -1,0 +1,41 @@
+{
+    "title": "Симуляція присутності",
+    "config": {
+		"error": {
+			"not_unique_name": "The chosen switch name is already taken by another entity, please choose a new name"
+		},
+        "step": {
+            "user":{
+                "description": "Конфігурація",
+                "data": {
+                    "switch": "The name of the presence simulation switch",
+                    "entities": "Сутність або група сутностей",
+                    "delta": "Проміжок (у днях)",
+                    "interval": "Інтервал оновлення (в секундах)",
+                    "restore": "Відновити стан після симуляції",
+                    "random": "Додавати випадковий час до перемикання сутностей. Цей параметр визначає максимальний час у секундах.",
+                    "unavailable_as_off": "Consider Unavailable status as Off"
+                }
+            }
+        }
+    },
+    "options": {
+		"error": {
+			"cannot_change_name": "The name of the swtich can't be changed"
+		},
+        "step": {
+            "init":{
+                "description": "Конфігурація",
+                "data": {
+                    "switch": "The name of the presence simulation switch",
+                    "entities": "Сутність або група сутностей",
+                    "delta": "Проміжок (у днях)",
+                    "interval": "Інтервал оновлення (в секундах)",
+                    "restore": "Відновити стан після симуляції",
+                    "random": "Додавати випадковий час до перемикання сутностей. Цей параметр визначає максимальний час у секундах.",
+                    "unavailable_as_off": "Consider Unavailable status as Off"
+                }
+            }
+        }
+    }
+}

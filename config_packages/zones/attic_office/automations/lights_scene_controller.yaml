@@ -91,6 +91,10 @@ action:
                       - condition: state
                         entity_id: binary_sensor.attic_office_is_dark
                         state: "on"
+                      - condition: state
+                        entity_id: binary_sensor.attic_office_automatic_lights
+                        state: "on"
+                        alias: Attic office autmatic lights enabled
               - condition: state
                 entity_id: light.attic_office_rear_ceiling
                 state: "off"
@@ -128,8 +132,13 @@ action:
               - alias: "Remote Off button"
                 condition: trigger
                 id: attic_office_remote_off
-              - condition: trigger
-                id: attic_office_motion_cleared
+              - and:
+                  - condition: state
+                    entity_id: binary_sensor.attic_office_automatic_lights
+                    state: "on"
+                    alias: Attic office autmatic lights enabled
+                  - condition: trigger
+                    id: attic_office_motion_cleared
               - alias: "Lights turned off otherwise"
                 condition: trigger
                 id: lights_turned_off

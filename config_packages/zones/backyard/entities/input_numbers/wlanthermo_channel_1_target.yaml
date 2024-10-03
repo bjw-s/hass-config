@@ -1,6 +1,0 @@
----
-wlanthermo_channel_1_target:
-  min: 80
-  max: 250
-  step: 5
-  unit_of_measurement: "°C"

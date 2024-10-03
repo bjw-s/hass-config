@@ -1,0 +1,18 @@
+---
+binary_sensor:
+  - name: Living Room - Is dark
+    unique_id: living_room_is_dark
+    state: >
+      {% set is_dark_lux = (states('input_number.downstairs_living_room_is_dark_lux') | float(0)) %}
+      {%- if states('light.living_room_floor_lamp') == "on" -%}
+        {% set is_dark_lux = is_dark_lux + 10 %}
+      {%- endif -%}
+      {{
+        (states('sensor.living_room_motion_sensor_illuminance_lux') | float(0)) < is_dark_lux
+      }}
+    icon: >
+      {% if (this.state | default("off")) == "on" %}
+        mdi:brightness-4
+      {%- else -%}
+        mdi:brightness-5
+      {%- endif -%}

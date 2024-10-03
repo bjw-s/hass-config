@@ -1,0 +1,10 @@
+---
+name: Dining area - Lights - Full brightness
+icon: mdi:lightbulb-on
+entities:
+  light.dining_area_ceiling:
+    state: "on"
+    brightness: 254
+    color_temp: 285
+  switch.dining_area_christmas_lights:
+    state: "on"

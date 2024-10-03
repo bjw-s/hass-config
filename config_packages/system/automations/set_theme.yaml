@@ -3,28 +3,18 @@ id: system_set_theme
 alias: System - Set theme
 max_exceeded: silent
 trigger:
+  - platform: homeassistant
+    event: start
+  - platform: event
+    event_type: automation_reload
   - platform: state
     entity_id: binary_sensor.driveway_is_dark
 action:
   - service: frontend.set_theme
     data:
-      name: Fluent Orange
-      mode: |
+      name: |
         {%- if is_state("binary_sensor.driveway_is_dark", "on") -%}
-          dark
+          minimalist-dark
         {%- else -%}
-          light
+          minimalist-light
         {%- endif -%}
-
-  - service: browser_mod.set_theme
-    data:
-      dark: |
-        {%- if is_state("binary_sensor.driveway_is_dark", "on") -%}
-          dark
-        {%- else -%}
-          light
-        {%- endif -%}
-    target:
-      device_id:
-        - a9b108458722d36184c61fbc91b650ff
-        - c3295fe15acc7e0192ef86cd2f6b7221

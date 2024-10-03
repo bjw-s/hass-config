@@ -1,0 +1,7 @@
+---
+platform: integration
+source: sensor.living_room_media_cupboard_power_wattage
+name: Living Room - Media Cupboard Energy Consumption
+unit_prefix: k
+round: 2
+method: left

@@ -23,7 +23,7 @@
         "description": "Veuillez fournir vos informations d’identification Bambu Lab :",
         "data": {
           "region": "Région du compte :",
-          "email": "Adresse e-mail",
+          "email": "Adresse e-mail ou numéro de téléphone",
           "password": "Mot de passe"
         }
       },
@@ -75,7 +75,7 @@
         "description": "Veuillez fournir vos informations d’identification Bambu Lab :",
         "data": {
           "region": "Région du compte :",
-          "email": "Adresse e-mail",
+          "email": "Adresse e-mail ou numéro de téléphone",
           "password": "Mot de passe"
         }
       },
@@ -105,6 +105,9 @@
       },
       "hms_errors": {
         "name": "Erreurs HMS"
+      },
+      "print_error": {
+        "name": "Erreur d'impression"
       },
       "online": {
         "name": "État"

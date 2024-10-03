@@ -1,18 +1,13 @@
 ---
 id: downstairs_living_room_harmony_activity_stops_sonos
-alias: Downstairs living room - Harmony activity stops sonos
+alias: Downstairs living room - Harmony activity stops Sonos
 max_exceeded: silent
 trigger:
   - platform: state
-    entity_id: sensor.downstairs_living_room_current_harmony_activity
-condition:
-  not:
-    - condition: state
-      entity_id: sensor.downstairs_living_room_current_harmony_activity
-      state: Listen to Sonos
-    - condition: state
-      entity_id: sensor.downstairs_living_room_current_harmony_activity
-      state: PowerOff
+    entity_id: sensor.living_room_current_harmony_activity
+    not_to:
+      - Listen to Sonos
+      - PowerOff
 action:
   - service: media_player.media_stop
     data:

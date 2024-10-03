@@ -1,0 +1,17 @@
+{
+  "domain": "afvalinfo",
+  "name": "Afvalinfo",
+  "version": "2.1.4",
+  "config_flow": true,
+  "iot_class": "cloud_polling",
+  "documentation": "https://github.com/heyajohnny/afvalinfo",
+  "issue_tracker": "https://github.com/heyajohnny/afvalinfo/issues",
+  "dependencies": [],
+  "codeowners": [
+    "@heyajohnny"
+  ],
+  "requirements": [
+    "Babel==2.8.0",
+    "python-dateutil==2.8.1"
+  ]
+}

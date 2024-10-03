@@ -1,6 +1,0 @@
----
-platform: afvalwijzer # Required
-provider: mijnafvalwijzer # Optional - mijnafvalwijzer (default) or afvalstoffendienstkalender
-postal_code: !env_var SECRET_ZONE_HOME_POSTAL_CODE
-street_number: !env_var SECRET_ZONE_HOME_HOUSE_NUMBER
-exclude_pickup_today: true

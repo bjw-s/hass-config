@@ -1,0 +1,33 @@
+---
+id: attic_office_3d_printer_notify_print_complete
+alias: Attic office - 3D Printer notify print complete
+trigger:
+  - platform: state
+    entity_id:
+      - sensor.p1p_current_stage
+    from: printing
+    to: idle
+    for:
+      seconds: 7
+
+variables:
+  camera: camera.attic_office_3d_printer
+  snapshot_create_file_path: "/config/www/tmp/snapshot_{{ states[camera].object_id }}.jpg"
+  snapshot_access_file_path: "{{ snapshot_create_file_path | replace('/config/www','/local') }}"
+
+action:
+  - service: camera.snapshot
+    entity_id: camera.attic_office_3d_printer
+    data:
+      filename: "{{ snapshot_create_file_path }}"
+
+  - action: notify.mobile_app_iphone_bernd
+    data:
+      message: Print complete
+      title: Bambu P1S
+      data:
+        image: "{{ snapshot_access_file_path }}"
+        actions:
+          - action: "URI"
+            title: "Open dashboard"
+            uri: "/3d-printer"

@@ -4,14 +4,15 @@ alias: Home - Alarm arming
 trigger:
   - platform: state
     entity_id: alarm_control_panel.house
-    to: 'arming'
+    to: "arming"
 
 action:
   - alias: "Warning beep on tablets"
     service: media_player.play_media
-    entity_id:
-      - media_player.downstairs_garage_tablet
-      - media_player.downstairs_hallway_tablet
+    target:
+      device_id:
+        - 11355f46d7934d151cb35527a01b7e74 # Tablet Hallway
+        - 7be8a11efbbb6f8bb932185edcd533a6 # Tablet Garage
     data:
       media_content_id: "{{ states('sensor.system_url_internal_direct') }}/local/audio/beep-warning.mp3"
       media_content_type: music

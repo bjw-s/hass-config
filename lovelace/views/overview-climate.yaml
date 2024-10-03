@@ -34,8 +34,10 @@ cards:
         variables:
           - title: Temperature
           - entities:
-              - entity: sensor.home_outdoor_temperature
-                name: Driveway
+              - entity: weather.tomorrow_io_home_daily
+                attribute: temperature
+                unit: °C
+                name: Outside
           - line_width: 1
 
   # Living room
@@ -351,7 +353,7 @@ cards:
             variables:
               - title: Temperature
               - entities:
-                  - entity: sensor.downstairs_garage_multisensor_temperature
+                  - entity: sensor.garage_multisensor_temperature
 
           - type: "custom:decluttering-card"
             view_layout:
@@ -360,4 +362,4 @@ cards:
             variables:
               - title: Humidity
               - entities:
-                  - entity: sensor.downstairs_garage_multisensor_humidity
+                  - entity: sensor.garage_multisensor_humidity

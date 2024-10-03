@@ -1,0 +1,5 @@
+---
+sensor:
+  - name: Living Room - Current Harmony activity
+    state: >
+      {{ state_attr('remote.downstairs_living_room', 'current_activity') }}

@@ -1,0 +1,12 @@
+---
+sensor:
+  - name: bathroom_humidity_factor
+    unique_id: bathroom_humidity_factor
+    state_class: measurement
+    state: >
+      {% set current_humidity = states("sensor.bathroom_multisensor_humidity") | float(0) %}
+      {% set normal_humidity = states("sensor.bathroom_humidity_stats_24h_linear_average") | float(0) %}
+
+      {{ (current_humidity / normal_humidity) | round(2) }}
+    availability: >
+      {{ states('sensor.bathroom_multisensor_humidity') | is_number and states('sensor.bathroom_humidity_stats_24h_linear_average') | is_number }}

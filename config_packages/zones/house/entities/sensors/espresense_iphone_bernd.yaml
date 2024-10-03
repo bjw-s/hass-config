@@ -1,0 +1,7 @@
+---
+platform: mqtt_room
+device_id: iphone_bernd
+name: iPhone Bernd (ESPresense)
+state_topic: 'espresense/devices/iphone_bernd'
+timeout: 10
+away_timeout: 120

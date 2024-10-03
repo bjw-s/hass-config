@@ -1,0 +1,73 @@
+---
+sonos_controller_eva_play_music_assistant:
+  alias: "Sonos Controller Eva - Play Music Assistant"
+  description: "Play audio on selected Sonos speakers"
+  fields:
+    media_id:
+      required: true
+      selector:
+        text:
+    media_type:
+      required: false
+      selector:
+        text:
+    volume:
+      name: Volume
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
+  sequence:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_select.sonos_controller_eva_active_speaker
+              state: "Slaapkamer"
+          sequence:
+            - service: media_player.volume_set
+              target:
+                entity_id: media_player.bedroom_eva_sonos
+              data:
+                volume_level: "{{ (volume | default (10) / 100) }}"
+
+            - service: mass.play_media
+              target:
+                entity_id: media_player.bedroom_eva
+              data:
+                media_id: |-
+                  {{ media_id }}
+                media_type: |-
+                  {{ media_type | default("artist") }}
+                enqueue: replace
+
+        - conditions:
+            - condition: state
+              entity_id: input_select.sonos_controller_eva_active_speaker
+              state: "Woonkamer"
+          sequence:
+            - service: media_player.join
+              target:
+                entity_id: media_player.kitchen_sonos
+              data:
+                group_members:
+                  - media_player.living_room_sonos
+                  - media_player.living_room_sonos_move
+
+            - service: media_player.volume_set
+              data:
+                entity_id:
+                  - media_player.living_room_sonos
+                  - media_player.living_room_sonos_move
+                  - media_player.kitchen_sonos
+                volume_level: "{{ (volume | default (7) / 100) }}"
+
+            - service: mass.play_media
+              target:
+                entity_id: media_player.kitchen
+              data:
+                media_id: |-
+                  {{ media_id }}
+                media_type: |-
+                  {{ media_type | default("artist") }}
+                enqueue: replace

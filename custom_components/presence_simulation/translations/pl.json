@@ -1,0 +1,41 @@
+{
+    "title": "Symulacja obecności",
+    "config": {
+		"error": {
+			"not_unique_name": "The chosen switch name is already taken by another entity, please choose a new name"
+		},
+        "step": {
+            "user":{
+                "description": "Konfiguracja",
+                "data": {
+                    "switch": "The name of the presence simulation switch",
+                    "entities": "Encja lub grup encji",
+                    "delta": "Delta (w dniach)",
+                    "interval": "Częstotliwość odświeżania (w sekundach)",
+                    "restore": "Przywróć stan po symulacji",
+                    "random": "Dodaj losowy czas przełączania encji. Ten parametr określa maksymalny czas w sekundach",
+                    "unavailable_as_off": "Consider Unavailable status as Off"
+                }
+            }
+        }
+    },
+    "options": {
+		"error": {
+			"cannot_change_name": "The name of the swtich can't be changed"
+		},
+        "step": {
+            "init":{
+                "description": "Konfiguracja",
+                "data": {
+                    "switch": "The name of the presence simulation switch",
+                    "entities": "Encja lub grup encji",
+                    "delta": "Delta (w dniach)",
+                    "interval": "Częstotliwość odświeżania (w sekundach)",
+                    "restore": "Przywróć stan po symulacji",
+                    "random": "Dodaj losowy czas przełączania encji. Ten parametr określa maksymalny czas w sekundach",
+                    "unavailable_as_off": "Consider Unavailable status as Off"
+                }
+            }
+        }
+    }
+}

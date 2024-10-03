@@ -5,5 +5,30 @@ max_exceeded: silent
 trigger:
   - platform: event
     event_type: dummy_event
+
+  - id: downstairs_hallway_driveway_switch_top
+    platform: device
+    domain: mqtt
+    device_id: ee792d7f69fc95b7155d7c3d516184a3
+    type: action
+    subtype: press_1
+    discovery_id: 0x000000000177036d action_press_1
+
+  - id: downstairs_hallway_driveway_switch_top
+    platform: device
+    domain: mqtt
+    device_id: ee792d7f69fc95b7155d7c3d516184a3
+    type: action
+    subtype: press_3
+    discovery_id: 0x000000000177036d action_press_3
+
+  - id: downstairs_hallway_driveway_switch_top
+    platform: device
+    domain: mqtt
+    device_id: ee792d7f69fc95b7155d7c3d516184a3
+    type: action
+    subtype: press_1_and_3
+    discovery_id: 0x000000000177036d action_press_1_and_3
+
 action:
   - scene: scene.driveway_lights_on

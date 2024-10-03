@@ -23,12 +23,10 @@ cards:
         content: >
           ### Driveway
 
-      - type: picture-entity
-        camera_view: live
+      - type: custom:webrtc-camera
+        url: doorbell
         entity: camera.driveway_doorbell_scrypted
-        name: Doorbell
-        show_name: false
-        show_state: false
+        style: '.mode {display: none}'
 
       # - type: horizontal-stack
       #   cards:

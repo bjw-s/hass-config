@@ -27,7 +27,7 @@ from homeassistant.components.binary_sensor import (
 )
 
 from .const import LOGGER
-from .pybambu.const import SPEED_PROFILE, Features, FansEnum, CURRENT_STAGE_OPTIONS, GCODE_STATE_OPTIONS
+from .pybambu.const import PRINT_TYPE_OPTIONS, SPEED_PROFILE, Features, FansEnum, CURRENT_STAGE_OPTIONS, GCODE_STATE_OPTIONS
 
 
 def fan_to_percent(speed):
@@ -47,6 +47,7 @@ class BambuLabSensorEntityDescription(SensorEntityDescription, BambuLabSensorEnt
     available_fn: Callable[..., bool] = lambda _: True
     exists_fn: Callable[..., bool] = lambda _: True
     extra_attributes: Callable[..., dict] = lambda _: {}
+    icon_fn: Callable[..., str] = lambda _: None
 
 
 @dataclass
@@ -76,8 +77,16 @@ PRINTER_BINARY_SENSORS: tuple[BambuLabBinarySensorEntityDescription, ...] = (
         translation_key="hms_errors",
         device_class=BinarySensorDeviceClass.PROBLEM,
         entity_category=EntityCategory.DIAGNOSTIC,
-        is_on_fn=lambda self: self.coordinator.get_model().hms.count != 0,
+        is_on_fn=lambda self: self.coordinator.get_model().hms.error_count != 0,
         extra_attributes=lambda self: self.coordinator.get_model().hms.errors
+    ),
+    BambuLabBinarySensorEntityDescription(
+        key="print_error",
+        translation_key="print_error",
+        device_class=BinarySensorDeviceClass.PROBLEM,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        is_on_fn=lambda self: self.coordinator.get_model().print_error.on != 0,
+        extra_attributes=lambda self: self.coordinator.get_model().print_error.error
     ),
     BambuLabBinarySensorEntityDescription(
         key="online",
@@ -293,16 +302,25 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
     BambuLabSensorEntityDescription(
         key="gcode_file",
         translation_key="gcode_file",
-        icon="mdi:file",
         available_fn=lambda self: self.coordinator.get_model().print_job.gcode_file != "",
-        value_fn=lambda self: self.coordinator.get_model().print_job.gcode_file
+        value_fn=lambda self: self.coordinator.get_model().print_job.gcode_file,
+        icon_fn=lambda self: self.coordinator.get_model().print_job.file_type_icon
     ),
     BambuLabSensorEntityDescription(
         key="subtask_name",
         translation_key="subtask_name",
-        icon="mdi:file",
         available_fn=lambda self: self.coordinator.get_model().print_job.subtask_name != "",
-        value_fn=lambda self: self.coordinator.get_model().print_job.subtask_name
+        value_fn=lambda self: self.coordinator.get_model().print_job.subtask_name,
+        icon_fn=lambda self: self.coordinator.get_model().print_job.file_type_icon
+    ),
+    BambuLabSensorEntityDescription(
+        key="print_type",
+        translation_key="print_type",
+        available_fn=lambda self: self.coordinator.get_model().print_job.print_type != "",
+        value_fn=lambda self: self.coordinator.get_model().print_job.print_type,
+        icon_fn=lambda self: self.coordinator.get_model().print_job.file_type_icon,
+        options=PRINT_TYPE_OPTIONS,
+        device_class=SensorDeviceClass.ENUM,
     ),
     BambuLabSensorEntityDescription(
         key="name",
@@ -317,7 +335,8 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.DISTANCE,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:file",
-        value_fn=lambda self: self.coordinator.get_model().print_job.print_length / 100,
+        value_fn=lambda self: self.coordinator.get_model().print_job.print_length,
+        extra_attributes=lambda self: self.coordinator.get_model().print_job.get_ams_print_lengths,
         exists_fn=lambda coordinator: coordinator.get_model().info.has_bambu_cloud_connection
     ),
     BambuLabSensorEntityDescription(
@@ -335,6 +354,7 @@ PRINTER_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:file",
         value_fn=lambda self: self.coordinator.get_model().print_job.print_weight,
+        extra_attributes=lambda self: self.coordinator.get_model().print_job.get_ams_print_weights,
         exists_fn=lambda coordinator: coordinator.get_model().info.has_bambu_cloud_connection
     ),
     BambuLabSensorEntityDescription(
@@ -434,7 +454,8 @@ AMS_SENSORS: tuple[BambuLabSensorEntityDescription, ...] = (
         translation_key="humidity_index",
         icon="mdi:water-percent",
         state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda self: self.coordinator.get_model().ams.data[self.index].humidity_index
+        value_fn=lambda self: 6 - self.coordinator.get_model().ams.data[self.index].humidity_index
+        # We subtract from 6 to match the new Bambu Handy/Studio presentation of 1 = dry, 5 = wet while the printer sends 1 = wet, 5 = dry
     ),
     BambuLabSensorEntityDescription(
         key="temperature",

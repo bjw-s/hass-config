@@ -1,0 +1,10 @@
+---
+binary_sensor:
+  - name: Living Room - Automatic Lights
+    unique_id: living_room_automatic_lights
+    state: >
+      {{
+        states('input_boolean.downstairs_living_room_lights_manual_mode')  == 'off'
+        and
+        states('input_boolean.home_modes_bedtime_mode')  == 'off'
+      }}

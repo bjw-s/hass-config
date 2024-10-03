@@ -1,5 +1,0 @@
----
-hass_recently_started:
-  name: Home Assistant recently started
-  initial: on
-  icon: mdi:clock-start

@@ -118,6 +118,7 @@ mini_graph_tile:
 multi_graph_card:
   default:
     - title: ""
+    - unit: ""
     - hours_to_show: 48
     - points_per_hour: 2
     - height: 200
@@ -129,6 +130,7 @@ multi_graph_card:
     type: "custom:mini-graph-card"
     entities: "[[entities]]"
     name: "[[title]]"
+    unit: "[[unit]]"
     hours_to_show: "[[hours_to_show]]"
     points_per_hour: "[[points_per_hour]]"
     hour24: true

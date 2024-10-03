@@ -65,6 +65,7 @@ from .sensors import (
     ATTR_TIMEOUT,
     ATTR_EVENT_COUNT,
     ATTR_ENTITIES,
+    ATTR_NEW_ENTITY_ID,
     SENSOR_TYPES,
 )
 
@@ -229,7 +230,8 @@ class AlarmoSensorView(HomeAssistantView):
                 vol.Optional(ATTR_GROUP): vol.Any(
                     cv.string,
                     None
-                )
+                ),
+                vol.Optional(ATTR_NEW_ENTITY_ID): cv.string
             }
         )
     )
@@ -465,6 +467,20 @@ def websocket_get_countdown(hass, connection, msg):
     connection.send_result(msg["id"], data)
 
 
+@callback
+def websocket_get_ready_to_arm_modes(hass, connection, msg):
+    """Publish ready_to_arm_modes for alarm entity."""
+    entity_id = msg["entity_id"]
+    item = next((entity for entity in hass.data[const.DOMAIN]["areas"].values() if entity.entity_id == entity_id), None)
+    if hass.data[const.DOMAIN]["master"] and not item and hass.data[const.DOMAIN]["master"].entity_id == entity_id:
+        item = hass.data[const.DOMAIN]["master"]
+
+    data = {
+        "modes": item._ready_to_arm_modes if item else None
+    }
+    connection.send_result(msg["id"], data)
+
+
 async def async_register_websockets(hass):
 
     hass.http.register_view(AlarmoConfigView)
@@ -546,3 +562,15 @@ async def async_register_websockets(hass):
             }
         ),
     )
+    async_register_command(
+        hass,
+        "alarmo/ready_to_arm_modes",
+        websocket_get_ready_to_arm_modes,
+        websocket_api.BASE_COMMAND_MESSAGE_SCHEMA.extend(
+            {
+                vol.Required("type"): "alarmo/ready_to_arm_modes",
+                vol.Required("entity_id"): cv.entity_id
+            }
+        ),
+    )
+

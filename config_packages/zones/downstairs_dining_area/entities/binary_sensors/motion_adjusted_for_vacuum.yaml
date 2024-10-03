@@ -1,8 +1,0 @@
----
-platform: template
-sensors:
-  downstairs_dining_area_motion_adjusted_for_vacuum:
-    friendly_name: "Downstairs dining area - Motion adjusted for Vacuum"
-    value_template: >-
-      {{ false if is_state('binary_sensor.downstairs_vacuum_moving', 'on') else states('binary_sensor.dining_area_motion_sensor_occupancy') }}
-    device_class: motion

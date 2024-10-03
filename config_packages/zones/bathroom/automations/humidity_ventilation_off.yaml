@@ -1,0 +1,65 @@
+---
+id: bathroom_humidity_ventilation_control
+alias: Bathroom - Humidity ventilation control
+mode: single
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id:
+      - sensor.bathroom_humidity_factor
+      - sensor.bathroom_humidity_stats_24h_linear_average
+    to: null
+
+  - id: bathroom_humidity_up
+    platform: numeric_state
+    entity_id: sensor.bathroom_humidity_stats_3min_change
+    above: 5
+
+variables:
+  sensor: &sensor sensor.bathroom_humidity_factor
+  high_treshold: &high_treshold 1.1
+  medium_treshold: &medium_treshold 1.04
+
+action:
+  - choose:
+      - alias: Set the ventilation to Low preset
+        conditions:
+          - alias: Bathroom humidity returns to normal
+            condition: numeric_state
+            entity_id: *sensor
+            below: *medium_treshold
+        sequence:
+          - service: fan.set_preset_mode
+            data:
+              entity_id: fan.attic_ventilation_esp_fan
+              preset_mode: Low
+
+      - alias: Set the ventilation to Medium preset
+        conditions:
+          - alias: Bathroom humidity passed medium threshold
+            condition: numeric_state
+            entity_id: *sensor
+            above: *medium_treshold
+            below: *high_treshold
+        sequence:
+          - service: fan.set_preset_mode
+            data:
+              entity_id: fan.attic_ventilation_esp_fan
+              preset_mode: Medium
+
+      - alias: Set the ventilation to High preset
+        conditions:
+          - or:
+              - alias: Bathroom humidity rising quickly
+                condition: trigger
+                id: bathroom_humidity_up
+              - alias: Bathroom humidity passed medium threshold
+                condition: numeric_state
+                entity_id: *sensor
+                above: *high_treshold
+        sequence:
+          - service: fan.set_preset_mode
+            data:
+              entity_id: fan.attic_ventilation_esp_fan
+              preset_mode: High

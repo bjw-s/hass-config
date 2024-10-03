@@ -39,7 +39,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 SERVICE_RUN_ACTION = "run_action"
-RUN_ACTION_SCHEMA = vol.Schema(
+RUN_ACTION_SCHEMA = cv.make_entity_service_schema(
     {vol.Required(ATTR_ENTITY_ID): cv.entity_ids, vol.Optional(ATTR_TIME): cv.time, vol.Optional(const.ATTR_SKIP_CONDITIONS): cv.boolean}
 )
 
@@ -206,7 +206,7 @@ class ScheduleEntity(ToggleEntity):
                             self.schedule_id
                         )
                     )
-                    await self.coordinator.async_delete_schedule(self.schedule_id)
+                    self.coordinator.async_delete_schedule(self.schedule_id)
 
         self._current_slot = self._timer_handler.current_slot
 
@@ -455,14 +455,14 @@ class ScheduleEntity(ToggleEntity):
         """turn off a schedule"""
         if self.schedule[const.ATTR_ENABLED]:
             await self._action_handler.async_empty_queue()
-            await self.coordinator.async_edit_schedule(
+            self.coordinator.async_edit_schedule(
                 self.schedule_id, {const.ATTR_ENABLED: False}
             )
 
     async def async_turn_on(self):
         """turn on a schedule"""
         if not self.schedule[const.ATTR_ENABLED]:
-            await self.coordinator.async_edit_schedule(
+            self.coordinator.async_edit_schedule(
                 self.schedule_id, {const.ATTR_ENABLED: True}
             )
 

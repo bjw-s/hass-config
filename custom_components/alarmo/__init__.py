@@ -14,7 +14,7 @@ from homeassistant.const import (
     ATTR_NAME,
 )
 from homeassistant.core import HomeAssistant, asyncio
-from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.helpers.dispatcher import (
@@ -35,7 +35,8 @@ from .websockets import async_register_websockets
 from .sensors import (
     SensorHandler,
     ATTR_GROUP,
-    ATTR_ENTITIES
+    ATTR_ENTITIES,
+    ATTR_NEW_ENTITY_ID,
 )
 from .automations import AutomationHandler
 from .mqtt import MqttHandler
@@ -76,9 +77,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     if entry.unique_id is None:
         hass.config_entries.async_update_entry(entry, unique_id=coordinator.id, data={})
 
-    hass.async_create_task(
-        hass.config_entries.async_forward_entry_setup(entry, PLATFORM)
-    )
+    await hass.config_entries.async_forward_entry_setups(entry, [PLATFORM])
 
     # Register the panel (frontend)
     await async_register_panel(hass)
@@ -219,6 +218,16 @@ class AlarmoCoordinator(DataUpdateCoordinator):
         if ATTR_GROUP in data:
             group = data[ATTR_GROUP]
             del data[ATTR_GROUP]
+
+        if ATTR_NEW_ENTITY_ID in data:
+            # delete old sensor entry when changing the entity_id
+            new_entity_id = data[ATTR_NEW_ENTITY_ID]
+            del data[ATTR_NEW_ENTITY_ID]
+            self.store.async_delete_sensor(entity_id)
+            self.assign_sensor_to_group(new_entity_id, group)
+            self.assign_sensor_to_group(entity_id, None)
+            entity_id = new_entity_id
+
         if const.ATTR_REMOVE in data:
             self.store.async_delete_sensor(entity_id)
             self.assign_sensor_to_group(entity_id, None)
@@ -309,7 +318,7 @@ class AlarmoCoordinator(DataUpdateCoordinator):
                 _LOGGER.info("Cannot process the push action, since there are multiple areas.")
                 return
 
-            arm_mode = alarm_entity._arm_mode
+            arm_mode = alarm_entity._revert_state if alarm_entity._revert_state in const.ARM_MODES else alarm_entity._arm_mode
             res = re.search(r"^ALARMO_ARM_", action)
             if res:
                 arm_mode = action.replace("ALARMO_", "").lower().replace("arm", "armed")
@@ -319,23 +328,23 @@ class AlarmoCoordinator(DataUpdateCoordinator):
 
             if action == const.EVENT_ACTION_FORCE_ARM:
                 _LOGGER.info("Received request for force arming")
-                await alarm_entity.async_handle_arm_request(arm_mode, skip_code=True, bypass_open_sensors=True)
+                alarm_entity.async_handle_arm_request(arm_mode, skip_code=True, bypass_open_sensors=True)
             elif action == const.EVENT_ACTION_RETRY_ARM:
                 _LOGGER.info("Received request for retry arming")
-                await alarm_entity.async_handle_arm_request(arm_mode, skip_code=True)
+                alarm_entity.async_handle_arm_request(arm_mode, skip_code=True)
             elif action == const.EVENT_ACTION_DISARM:
                 _LOGGER.info("Received request for disarming")
-                await alarm_entity.async_alarm_disarm(code=None, skip_code=True)
+                alarm_entity.alarm_disarm(None, skip_code=True)
             else:
                 _LOGGER.info("Received request for arming with mode {}".format(arm_mode))
-                await alarm_entity.async_handle_arm_request(arm_mode, skip_code=True)
+                alarm_entity.async_handle_arm_request(arm_mode, skip_code=True)
 
         self._subscriptions.append(
             self.hass.bus.async_listen(const.PUSH_EVENT, async_handle_push_event)
         )
 
     async def async_remove_entity(self, area_id: str):
-        entity_registry = self.hass.helpers.entity_registry.async_get(self.hass)
+        entity_registry = er.async_get(self.hass)
         if area_id == "master":
             entity = self.hass.data[const.DOMAIN]["master"]
             entity_registry.async_remove(entity.entity_id)
@@ -356,6 +365,7 @@ class AlarmoCoordinator(DataUpdateCoordinator):
         return result["group_id"] if result else None
 
     def assign_sensor_to_group(self, entity_id: str, group_id: str):
+        updated = False
         old_group = self.async_get_group_for_sensor(entity_id)
         if old_group and group_id != old_group:
             # remove sensor from group
@@ -366,17 +376,19 @@ class AlarmoCoordinator(DataUpdateCoordinator):
                 })
             else:
                 self.store.async_delete_sensor_group(old_group)
+            updated = True
         if group_id:
             # add sensor to group
-            el = self.store.async_get_sensor_group(group_id)
-            if not el:
+            group = self.store.async_get_sensor_group(group_id)
+            if not group:
                 _LOGGER.error("Failed to assign entity {} to group {}".format(entity_id, group_id))
-                return
-            self.store.async_update_sensor_group(group_id, {
-                ATTR_ENTITIES: el[ATTR_ENTITIES] + [entity_id]
-            })
-
-        async_dispatcher_send(self.hass, "alarmo_sensors_updated")
+            elif entity_id not in group[ATTR_ENTITIES]:
+                self.store.async_update_sensor_group(group_id, {
+                    ATTR_ENTITIES: group[ATTR_ENTITIES] + [entity_id]
+                })
+                updated = True
+        if updated:
+            async_dispatcher_send(self.hass, "alarmo_sensors_updated")
 
     def async_update_sensor_group_config(self, group_id: str = None, data: dict = {}):
         if const.ATTR_REMOVE in data:

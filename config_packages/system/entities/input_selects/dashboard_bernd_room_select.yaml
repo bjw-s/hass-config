@@ -1,0 +1,11 @@
+---
+dashboard_bernd_room_select:
+  name: Dashboard Bernd - Room select
+  options:
+    - Auto
+    - Living Room
+    - Dining Area / Kitchen
+    - Bedroom
+    - Upstairs Office
+    - Attic Office
+  icon: mdi:home-city-outline

@@ -14,3 +14,9 @@ lovelace:
       title: Tablet
       show_in_sidebar: false
       require_admin: false
+    eva-ui: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: ui-lovelace-eva.yaml
+      title: Eva
+      show_in_sidebar: false
+      require_admin: false

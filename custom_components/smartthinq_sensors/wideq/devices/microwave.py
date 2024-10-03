@@ -1,4 +1,5 @@
 """------------------for Microwave"""
+
 from __future__ import annotations
 
 from copy import deepcopy
@@ -136,13 +137,13 @@ class MicroWaveDevice(Device):
         if not self._status:
             return {}
 
-        status_data = self._status.data
+        status_data = self._status.as_dict
         vent_level = status_data.get(STATE_VENTLEVEL, "0")
         lamp_level = status_data.get(STATE_LAMPLEVEL, "0")
         return {
-            CMD_VENTMODE: MODE_ENABLE if vent_level != "0" else MODE_DISABLE,
+            CMD_VENTMODE: MODE_ENABLE if int(vent_level) != 0 else MODE_DISABLE,
             CMD_VENTLEVEL: int(vent_level),
-            CMD_LAMPMODE: MODE_ENABLE if lamp_level != "0" else MODE_DISABLE,
+            CMD_LAMPMODE: MODE_ENABLE if int(lamp_level) != 0 else MODE_DISABLE,
             CMD_LAMPLEVEL: int(lamp_level),
         }
 
@@ -151,6 +152,9 @@ class MicroWaveDevice(Device):
         Prepare command for specific device.
         Overwrite for specific device settings.
         """
+        if self._should_poll:
+            raise ValueError("Control not supported for this device")
+
         if (cmd_key := MW_CMD.get(ctrl_key)) is None:
             return None
 
@@ -170,7 +174,7 @@ class MicroWaveDevice(Device):
         """Set display clock on/off."""
         state = MODE_CLKON if turn_on else MODE_CLKOFF
         cmd = {CMD_CLOCKDISPLAY: state}
-        await self.set(CMD_SET_PREFERENCE, cmd, key=STATE_CLOCKDISPLAY, value=state)
+        await self.set_val(CMD_SET_PREFERENCE, cmd, key=STATE_CLOCKDISPLAY, value=state)
 
     async def set_time(self, time_wanted: time | None = None):
         """Set time on microwave."""
@@ -182,14 +186,14 @@ class MicroWaveDevice(Device):
             CMD_TIMEMIN: time_wanted.minute,
             CMD_TIMESEC: time_wanted.second,
         }
-        await self.set(CMD_SET_PREFERENCE, cmd)
+        await self.set_val(CMD_SET_PREFERENCE, cmd)
 
     # Sound
     async def set_sound(self, turn_on: bool):
         """Set sound on/off."""
         state = MODE_VOLON if turn_on else MODE_VOLOFF
         cmd = {CMD_SOUND: state}
-        await self.set(CMD_SET_PREFERENCE, cmd, key=STATE_SOUND, value=state)
+        await self.set_val(CMD_SET_PREFERENCE, cmd, key=STATE_SOUND, value=state)
 
     # Unit
     @cached_property
@@ -202,7 +206,7 @@ class MicroWaveDevice(Device):
         if unit not in self.defrost_weight_units:
             raise ValueError(f"Invalid display unit: {unit}")
         cmd = {CMD_DEFROSTWMODE: unit}
-        await self.set(CMD_SET_PREFERENCE, cmd, key=STATE_DEFROSTWMODE, value=unit)
+        await self.set_val(CMD_SET_PREFERENCE, cmd, key=STATE_DEFROSTWMODE, value=unit)
 
     # Display
     @cached_property
@@ -216,7 +220,9 @@ class MicroWaveDevice(Device):
             raise ValueError(f"Invalid display scroll speed: {speed}")
 
         cmd = {CMD_DISPLAYSCROLL: speed}
-        await self.set(CMD_SET_PREFERENCE, cmd, key=STATE_DISPLAYSCROLL, value=speed)
+        await self.set_val(
+            CMD_SET_PREFERENCE, cmd, key=STATE_DISPLAYSCROLL, value=speed
+        )
 
     # Light
     @cached_property
@@ -242,7 +248,7 @@ class MicroWaveDevice(Device):
         status = MODE_ENABLE if level != "0" else MODE_DISABLE
         cmd = {CMD_LAMPMODE: status, CMD_LAMPLEVEL: int(level)}
 
-        await self.set(CMD_SET_VENTLAMP, cmd, key=STATE_LAMPLEVEL, value=level)
+        await self.set_val(CMD_SET_VENTLAMP, cmd, key=STATE_LAMPLEVEL, value=level)
 
     # Vent
     @cached_property
@@ -268,15 +274,11 @@ class MicroWaveDevice(Device):
         mode = MODE_ENABLE if level != "0" else MODE_DISABLE
         cmd = {CMD_VENTMODE: mode, CMD_VENTLEVEL: int(level)}
 
-        await self.set(CMD_SET_VENTLAMP, cmd, key=STATE_VENTLEVEL, value=level)
+        await self.set_val(CMD_SET_VENTLAMP, cmd, key=STATE_VENTLEVEL, value=level)
 
-    async def set(
-        self, ctrl_key, command, *, key=None, value=None, data=None, ctrl_path=None
-    ):
-        """Set a device's control for `key` to `value`."""
-        await super().set(
-            ctrl_key, command, key=key, value=value, data=data, ctrl_path=ctrl_path
-        )
+    async def set_val(self, ctrl_key, command, key=None, value=None):
+        """Set a device's control for microwave and update status."""
+        await self.set(ctrl_key, command)
         if self._status and key is not None:
             self._status.update_status(key, value)
 
@@ -344,7 +346,7 @@ class MicroWaveStatus(DeviceStatus):
     @property
     def is_clock_display_on(self):
         """Get display clock on/off."""
-        if (status := self.data.get(STATE_CLOCKDISPLAY)) is None:
+        if (status := self._data.get(STATE_CLOCKDISPLAY)) is None:
             return None
         return self._update_feature(
             MicroWaveFeatures.CLOCK_DISPLAY, status == MODE_CLKON, False
@@ -353,7 +355,7 @@ class MicroWaveStatus(DeviceStatus):
     @property
     def is_sound_on(self):
         """Get sound on/off."""
-        if (status := self.data.get(STATE_SOUND)) is None:
+        if (status := self._data.get(STATE_SOUND)) is None:
             return None
         return self._update_feature(
             MicroWaveFeatures.SOUND, status == MODE_VOLON, False

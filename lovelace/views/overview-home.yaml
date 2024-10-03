@@ -14,7 +14,7 @@ cards:
       style: !include snippets/style-markdown-titles.yaml
     content: >
       {%- set batterySensors = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
-      {%- set lowBatterySensors = batterySensors | map(attribute='state') | map('int') | select('<=', 30) | map('string') | list -%}
+      {%- set lowBatterySensors = batterySensors | map(attribute='state') | map('float') | select('>=', 0) | select('<=', 30) | map('string') | list -%}
 
       {%- set batteryBinarySensors = states.binary_sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'equalto', 'battery') | rejectattr('state', 'in', ['unavailable', 'unknown', 'None']) | list -%}
       {%- set lowBatteryBinarySensors = batteryBinarySensors | selectattr('state', 'equalto', 'on') | list -%}
@@ -23,7 +23,7 @@ cards:
       # Good {{ states.sensor.system_time_of_day.state }}, {{ user }}.
 
       {% if lowBatteryDevicesCount > 0 -%}
-      🚨 There {{ iif((lowBatteryDevicesCount == 1), 'is', 'are') }} {{ lowBatteryDevicesCount }} devices reporting low battery. Check the [Devices](/lovelace/devices) tab for more details! 🚨
+      🚨 There {{ iif((lowBatteryDevicesCount == 1), 'is', 'are') }} {{ lowBatteryDevicesCount }} devices reporting low battery. Check the [Devices](/lovelace/devices?anchor=devices_low_battery) tab for more details! 🚨
       {%- endif %}
 
   # Security / Modes
@@ -148,7 +148,7 @@ cards:
 
       - type: custom:mushroom-fan-card
         name: Central ventilation
-        entity: fan.itho_wifi_nrg_itho_dc8c_nrg_itho_dc8c_fan
+        entity: fan.attic_ventilation_esp_fan
         # show_percentage_control: true
         icon_animation: true
         fill_container: true
@@ -161,18 +161,48 @@ cards:
         content: >
           ### Energy
 
-      - type: "custom:decluttering-card"
-        template: mini_graph_tile
-        view_layout:
-          grid-column: span 3
-        variables:
-          - aspect_ratio: 2/1
-          - points_per_hour: 4
-          - entities:
-              - entity: sensor.dsmr_reading_electricity_currently_delivered_watt
-          - title: Total Energy Usage
-          - icon: "mdi:home-lightning-bolt"
-          - line_width: 2
+      - type: custom:power-flow-card-plus
+        entities:
+          battery:
+            entity: ''
+          grid:
+            entity:
+              consumption: sensor.dsmr_reading_electricity_currently_delivered_watt
+              production: sensor.dsmr_reading_electricity_currently_returned_watt
+          solar:
+            entity: sensor.garage_solaredge_inverter_dc_power
+            display_zero_state: true
+          home:
+            entity: sensor.electricity_currently_used
+          individual:
+            - color_icon: true
+              color_value: 'true'
+              inverted_animation: true
+              display_zero: true
+              display_zero_state: true
+              entity: sensor.dsmr_consumption_gas_currently_delivered
+              icon: mdi:fire
+              color:
+                - 97
+                - 23
+                - 124
+              name: Gas
+              unit_of_measurement: m³
+              show_direction: false
+              use_metadata: false
+              unit_white_space: true
+        clickable_entities: false
+        display_zero_lines: true
+        use_new_flow_rate_model: true
+        w_decimals: 0
+        kw_decimals: 1
+        min_flow_rate: 0.75
+        max_flow_rate: 6
+        max_expected_power: 2000
+        min_expected_power: 0.01
+        watt_threshold: 1000
+        transparency_zero_lines: 0
+        dashboard_link: /energy
 
   # Trash
   - type: vertical-stack
@@ -184,80 +214,80 @@ cards:
           ### Trash
 
       - type: grid
-        columns: 3
-        square: true
+        columns: 2
+        square: false
         cards:
           - type: custom:mushroom-template-card
-            entity: sensor.afvalwijzer_restafval
+            entity: sensor.afvalinfo_home_restafval
             layout: vertical
             primary: Restafval
             secondary: >
               {{ states(entity) }}
-            fill_container: true
             tap_action: none
-            icon: mdi:trash-can
+            icon: >
+              {{ state_attr(entity, 'icon') }}
             icon_color: >
-              {% if states('sensor.afvalwijzer_today') == (entity | replace('sensor.afvalwijzer_', '')) %}
-                var(--rgb-error-color)
-              {% elif states('sensor.afvalwijzer_tomorrow') == (entity | replace('sensor.afvalwijzer_', '')) %}
-                var(--rgb-warning-color)
+              {% if state_attr(entity, 'days_until_collection_date') == 0 %}
+                ); --icon-color: var(--error-color);
+              {% elif state_attr(entity, 'days_until_collection_date') == 1 %}
+                ); --icon-color: var(--warning-color);
               {% else %}
-                var(--rgb-disabled-color)
-              {% endif %}
+                var(--disabled-color)
+              {% endif %} --shape-color: rgb(from var(--icon-color) r g b / 0.2);
 
           - type: custom:mushroom-template-card
-            entity: sensor.afvalwijzer_gft
+            entity: sensor.afvalinfo_home_gft
             layout: vertical
             primary: GFT
             secondary: >
               {{ states(entity) }}
-            fill_container: true
             tap_action: none
-            icon: mdi:food-apple
+            icon: >
+              {{ state_attr(entity, 'icon') }}
             icon_color: >
-              {% if states('sensor.afvalwijzer_today') == (entity | replace('sensor.afvalwijzer_', '')) %}
-                var(--rgb-error-color)
-              {% elif states('sensor.afvalwijzer_tomorrow') == (entity | replace('sensor.afvalwijzer_', '')) %}
-                var(--rgb-warning-color)
+              {% if state_attr(entity, 'days_until_collection_date') == 0 %}
+                ); --icon-color: var(--error-color);
+              {% elif state_attr(entity, 'days_until_collection_date') == 1 %}
+                ); --icon-color: var(--warning-color);
               {% else %}
-                var(--rgb-disabled-color)
-              {% endif %}
+                var(--disabled-color)
+              {% endif %} --shape-color: rgb(from var(--icon-color) r g b / 0.2);
 
           - type: custom:mushroom-template-card
-            entity: sensor.afvalwijzer_pmd
+            entity: sensor.afvalinfo_home_pbd
             layout: vertical
             primary: PMD
             secondary: >
               {{ states(entity) }}
-            fill_container: true
             tap_action: none
-            icon: mdi:bottle-soda
+            icon: >
+              {{ state_attr(entity, 'icon') }}
             icon_color: >
-              {% if states('sensor.afvalwijzer_today') == (entity | replace('sensor.afvalwijzer_', '')) %}
-                var(--rgb-error-color)
-              {% elif states('sensor.afvalwijzer_tomorrow') == (entity | replace('sensor.afvalwijzer_', '')) %}
-                var(--rgb-warning-color)
+              {% if state_attr(entity, 'days_until_collection_date') == 0 %}
+                ); --icon-color: var(--error-color);
+              {% elif state_attr(entity, 'days_until_collection_date') == 1 %}
+                ); --icon-color: var(--warning-color);
               {% else %}
-                var(--rgb-disabled-color)
-              {% endif %}
+                var(--disabled-color)
+              {% endif %} --shape-color: rgb(from var(--icon-color) r g b / 0.2);
 
           - type: custom:mushroom-template-card
-            entity: sensor.afvalwijzer_papier
+            entity: sensor.afvalinfo_home_papier
             layout: vertical
             primary: Papier
             secondary: >
               {{ states(entity) }}
-            fill_container: true
             tap_action: none
-            icon: mdi:file
+            icon: >
+              {{ state_attr(entity, 'icon') }}
             icon_color: >
-              {% if states('sensor.afvalwijzer_today') == (entity | replace('sensor.afvalwijzer_', '')) %}
-                var(--rgb-error-color)
-              {% elif states('sensor.afvalwijzer_tomorrow') == (entity | replace('sensor.afvalwijzer_', '')) %}
-                var(--rgb-warning-color)
+              {% if state_attr(entity, 'days_until_collection_date') == 0 %}
+                ); --icon-color: var(--error-color);
+              {% elif state_attr(entity, 'days_until_collection_date') == 1 %}
+                ); --icon-color: var(--warning-color);
               {% else %}
-                var(--rgb-disabled-color)
-              {% endif %}
+                var(--disabled-color)
+              {% endif %} --shape-color: rgb(from var(--icon-color) r g b / 0.2);
 
       - type: markdown
         card_mod:
@@ -271,20 +301,6 @@ cards:
         cards:
           - type: custom:mushroom-template-card
             entity: vacuum.valetudo_livingroom
-            layout: vertical
-            fill_container: true
-            primary: >
-              {{ state_attr(entity, 'friendly_name') }}
-            secondary: >
-              {{ states(entity) | capitalize }}
-            icon: mdi:robot-vacuum
-            icon_color: >
-              {% if is_state(entity, 'cleaning') %}
-                var(--rgb-warning-color)
-              {% endif %}
-
-          - type: custom:mushroom-template-card
-            entity: vacuum.valetudo_upstairs
             layout: vertical
             fill_container: true
             primary: >

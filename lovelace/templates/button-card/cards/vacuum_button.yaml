@@ -1,0 +1,27 @@
+vacuum_button:
+  template: square_card
+  state:
+    - value: "docked"
+      spin: false
+    - value: "cleaning"
+      spin: true
+      styles:
+        card:
+          - background-color: var(--warning-color)
+        icon:
+          - color: var(--warning-contrast-color)
+        name:
+          - color: var(--warning-contrast-color)
+        state:
+          - color: var(--warning-contrast-color)
+    - value: "returning"
+      spin: false
+      styles:
+        card:
+          - background-color: var(--warning-color)
+        icon:
+          - color: var(--warning-contrast-color)
+        name:
+          - color: var(--warning-contrast-color)
+        state:
+          - color: var(--warning-contrast-color)

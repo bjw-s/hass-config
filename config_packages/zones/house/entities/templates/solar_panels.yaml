@@ -1,0 +1,21 @@
+---
+sensor:
+  - name: electricity_currently_used
+    unit_of_measurement: W
+    state_class: measurement
+    device_class: power
+    state: >
+      {% set current_solar_generation = states("sensor.garage_solaredge_inverter_ac_power") | float(0) %}
+      {% set current_power_consumption = states("sensor.dsmr_reading_electricity_currently_delivered_watt") | float(0) %}
+
+      {% if (current_solar_generation - current_power_consumption <= 0) %}
+        0
+      {% else %}
+        {{ (current_solar_generation - current_power_consumption) }}
+      {% endif %}
+    availability: >
+      {{
+        states('sensor.garage_solaredge_inverter_ac_power') | is_number
+        and
+        states('sensor.dsmr_reading_electricity_currently_delivered_watt') | is_number
+      }}

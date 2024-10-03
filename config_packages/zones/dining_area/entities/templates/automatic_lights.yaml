@@ -1,0 +1,10 @@
+---
+binary_sensor:
+  - name: Dining area - Automatic Lights
+    unique_id: dining_area_automatic_lights
+    state: >
+      {{
+        states('input_boolean.dining_area_lights_manual_mode')  == 'off'
+        and
+        states('input_boolean.home_modes_bedtime_mode')  == 'off'
+      }}

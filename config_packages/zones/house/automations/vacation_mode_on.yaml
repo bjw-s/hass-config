@@ -1,0 +1,13 @@
+---
+id: home_vacation_mode_on
+alias: Home - Vacation mode on
+
+trigger:
+  - platform: state
+    entity_id: input_boolean.home_modes_vacation_mode
+    to: "on"
+
+action:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.vacation_presence_simulator

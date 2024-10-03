@@ -1,0 +1,8 @@
+---
+name: Dining area - Lights - Off
+icon: mdi:lightbulb-off
+entities:
+  light.dining_area_ceiling:
+    state: "off"
+  switch.dining_area_christmas_lights:
+    state: "off"

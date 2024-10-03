@@ -32,7 +32,7 @@
         "description": "Please provide your Bambu Lab credentials:",
         "data": {
           "region": "Account region:",
-          "email": "Email Address",
+          "email": "Email Address or Phone Number",
           "password": "Password"
         }
       },
@@ -86,7 +86,7 @@
         "description": "Please provide your Bambu Lab credentials:",
         "data": {
           "region": "Account region:",
-          "email": "Email Address",
+          "email": "Email Address or Phone Number",
           "password": "Password"
         }
       },
@@ -122,6 +122,9 @@
       },
       "hms_errors": {
         "name": "HMS errors"
+      },
+      "print_error": {
+        "name": "Print error"
       },
       "online": {
         "name": "Online"
@@ -316,6 +319,14 @@
       },
       "subtask_name": {
         "name": "Task name"
+      },
+      "print_type": {
+        "name": "Print type",
+        "state": {
+          "local": "Local",
+          "cloud": "Cloud",
+          "idle": "Idle"
+        }
       },
       "start_time": {
         "name": "Start time"

@@ -1,0 +1,20 @@
+---
+id: garage_tablet_turn_on
+alias: Garage - Tablet turn on
+max_exceeded: silent
+trigger:
+  - id: garage_presence
+    platform: state
+    entity_id:
+      - binary_sensor.garage_door_contact
+      - binary_sensor.utility_room_garage_entry_door_contact
+    to: "on"
+  - id: returned_home
+    platform: state
+    entity_id: input_boolean.home_modes_away_mode
+    from: "on"
+    to: "off"
+action:
+  - alias: "Wake up garage tablet"
+    service: switch.turn_off
+    entity_id: switch.garage_tablet_screen

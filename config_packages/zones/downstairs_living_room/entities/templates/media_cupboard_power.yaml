@@ -1,0 +1,14 @@
+---
+sensor:
+  - name: "Living room - Media cupboard power wattage"
+    unit_of_measurement: W
+    state_class: measurement
+    device_class: power
+    state: >
+      {{
+        (states("sensor.living_room_media_power_1_power") | float(0))
+        +
+        (states("sensor.living_room_media_power_2_power") | float(0))
+      }}
+    availability: >
+      {{ states("sensor.living_room_media_power_1_power") | is_number and states("sensor.living_room_media_power_2_power") | is_number }}

@@ -11,6 +11,14 @@ condition:
     - condition: state
       entity_id: input_boolean.home_modes_bedtime_mode
       state: 'off'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.system_time_of_day
+          state: 'evening'
+        - condition: state
+          entity_id: sensor.system_time_of_day
+          state: 'night'
 action:
   - service: input_boolean.turn_on
     entity_id: input_boolean.home_modes_bedtime_mode

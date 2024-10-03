@@ -1,4 +1,0 @@
----
-attic_office_3d_printer_power_off:
-    url: http://10.1.3.56:7125/machine/device_power/off?printer
-    method: post

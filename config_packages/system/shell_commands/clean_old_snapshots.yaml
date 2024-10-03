@@ -1,3 +1,0 @@
----
-clean_old_snapshots: |
-  find /config/www/images/snapshots -mtime +14 -exec rm {} \;

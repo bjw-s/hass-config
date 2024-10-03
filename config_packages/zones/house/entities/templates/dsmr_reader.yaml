@@ -1,0 +1,22 @@
+---
+sensor:
+  - name: dsmr_reading_electricity_currently_delivered_watt
+    unit_of_measurement: W
+    state_class: measurement
+    device_class: power
+    state: >
+      {{ (states('sensor.dsmr_reading_electricity_currently_delivered') | float(0)) * 1000 }}
+    availability: >
+      {{
+        states('sensor.dsmr_reading_electricity_currently_delivered') | is_number
+      }}
+  - name: dsmr_reading_electricity_currently_returned_watt
+    unit_of_measurement: W
+    state_class: measurement
+    device_class: power
+    state: >
+      {{ (states('sensor.dsmr_reading_electricity_currently_returned') | float(0)) * 1000 }}
+    availability: >
+      {{
+        states('sensor.dsmr_reading_electricity_currently_returned') | is_number
+      }}

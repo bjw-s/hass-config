@@ -1,0 +1,10 @@
+---
+name: Dining area - Lights - Relaxed
+icon: mdi:lightbulb-on-50
+entities:
+  light.dining_area_ceiling:
+    state: "on"
+    brightness: 254
+    color_temp: 366
+  switch.dining_area_christmas_lights:
+    state: "on"

@@ -1,0 +1,7 @@
+---
+platform: mqtt_room
+device_id: iphone_manyie
+name: iPhone Man-Yie (ESPresense)
+state_topic: 'espresense/devices/iphone_manyie'
+timeout: 10
+away_timeout: 120

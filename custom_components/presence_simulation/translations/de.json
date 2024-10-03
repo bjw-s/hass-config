@@ -1,0 +1,41 @@
+{
+    "title": "Simulation der Anwesenheit",
+    "config": {
+		"error": {
+			"not_unique_name": "Der gewählte Name für den Schalter ist bereits in Verwendung durch eine andere Entität, bitte wähle einen neuen Namen."
+		},
+        "step": {
+            "user":{
+                "description": "Konfiguration",
+                "data": {
+                    "switch": "The name of the presence simulation switch",
+                    "entities": "Entität oder Gruppe von Entitäten",
+                    "delta": "Unterschied (in Tagen)",
+                    "interval": "Aktualisierungs-Intervall (in Sekunden)",
+                    "restore": "Zustand nach Simulation wiederherstellen",
+                    "random": "Zufallszeit für das Umschalten von Entitäten hinzufügen. Dieser Parameter definiert die maximale Zeit in Sekunden",
+                    "unavailable_as_off": "Consider Unavailable status as Off"
+                }
+            }
+        }
+    },
+    "options": {
+		"error": {
+			"cannot_change_name": "Der Name des Schalters kann nicht geändert werden"
+		},
+        "step": {
+            "init":{
+                "description": "Konfiguration",
+                "data": {
+                    "switch": "The name of the presence simulation switch",
+                    "entities": "Entität oder Gruppe von Entitäten",
+                    "delta": "Unterschied (in Tagen)",
+                    "interval": "Aktualisierungs-Intervall (in Sekunden)",
+                    "restore": "Zustand nach Simulation wiederherstellen",
+                    "random": "Zufallszeit für das Umschalten von Entitäten hinzufügen. Dieser Parameter definiert die maximale Zeit in Sekunden",
+                    "unavailable_as_off": "Consider Unavailable status as Off"
+                }
+            }
+        }
+    }
+}

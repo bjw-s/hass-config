@@ -1,0 +1,115 @@
+{
+	"entity": {
+		"sensor": {
+			"afvalinfo_cleanprofsgft": {
+				"name": "Cleanprofs GFT"
+			},
+			"afvalinfo_cleanprofspbd": {
+				"name": "Cleanprofs PBD"
+			},
+			"afvalinfo_cleanprofsrestafval": {
+				"name": "Cleanprofs Restafval"
+			},
+			"afvalinfo_gft": {
+				"name": "GFT"
+			},
+			"afvalinfo_grofvuil": {
+				"name": "Grofvuil"
+			},
+			"afvalinfo_kca": {
+				"name": "KCA"
+			},
+			"afvalinfo_kerstboom": {
+				"name": "Kerstboom"
+			},
+			"afvalinfo_papier": {
+				"name": "Papier"
+			},
+			"afvalinfo_pbd": {
+				"name": "PBD"
+			},
+			"afvalinfo_restafval": {
+				"name": "Restafval"
+			},
+			"afvalinfo_takken": {
+				"name": "Takken"
+			},
+			"afvalinfo_textiel": {
+				"name": "Textiel"
+			},
+			"afvalinfo_trash_type_today": {
+				"name": "Afvaltype vandaag"
+			},
+			"afvalinfo_trash_type_tomorrow": {
+				"name": "Afvaltype morgen"
+			}
+		}
+	},
+	"config": {
+		"step": {
+			"user": {
+				"title": "Afvalinfo",
+				"description": "Voeg nieuwe locatie toe",
+				"data": {
+					"location": "Gemeente",
+					"postcode": "Postcode",
+					"streetnumber": "Huisnummer",
+					"streetnumbersuffix": "Huisnummer toevoeging",
+					"district": "Buurt",
+					"dateformat": "Datum format",
+					"locale": "Taal (landcode)",
+					"id": "Locatie identificatie",
+					"notrashtext": "Geen afval tekst",
+					"diftarcode": "Diftar code",
+					"getwholeyear": "Data voor het gehele jaar?",
+					"sensors": "Sensoren"
+				}
+			},
+			"reconfigure": {
+				"title": "Afvalinfo",
+				"description": "Update bestaande locatie",
+				"data": {
+					"location": "Gemeente",
+					"postcode": "Postcode",
+					"streetnumber": "Huisnummer",
+					"streetnumbersuffix": "Huisnummer toevoeging",
+					"district": "Buurt",
+					"dateformat": "Datum format",
+					"locale": "Taal (landcode)",
+					"id": "Locatie identificatie",
+					"notrashtext": "Geen afval tekst",
+					"diftarcode": "Diftar code",
+					"getwholeyear": "Data voor het gehele jaar?",
+					"sensors": "Sensoren"
+				}
+			}
+		},
+		"abort": {
+			"already_configured": "[%key:common::config_flow::abort::already_configured_service%]",
+			"reconfigure_successful": "Re-configuratie gelukt"
+		},
+		"error": {
+			"cannot_connect": "[%key:common::config_flow::error::cannot_connect%]"
+		}
+	},
+	"selector": {
+		"sensorselect": {
+			"options": {
+				"cleanprofsgft": "Cleanprofs GFT",
+				"cleanprofspbd": "Cleanprofs PBD",
+				"cleanprofsrestafval": "Cleanprofs Restafval",
+				"gft": "GFT",
+				"grofvuil": "Grofvuil",
+				"kca": "KCA",
+				"kerstboom": "Kerstboom",
+				"papier": "Papier",
+				"pbd": "PBD",
+				"restafval": "Restafval",
+				"takken": "Takken",
+				"textiel": "Textiel",
+				"trash_type_today": "Afvaltype vandaag",
+				"trash_type_tomorrow": "Afvaltype morgen"
+			}
+		}
+	}
+}

@@ -1,0 +1,9 @@
+view_title:
+  template: card_title
+  styles:
+    name:
+      - font-weight: bold
+      - font-size: 3rem
+    label:
+      - font-weight: bold
+      - font-size: 1.8rem

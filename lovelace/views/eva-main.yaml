@@ -1,0 +1,341 @@
+title: Main
+path: main
+id: main
+type: custom:grid-layout
+layout: !include snippets/layout-3-column.yaml
+
+cards:
+  - type: markdown
+    view_layout:
+      grid-column: 1 / -1
+    card_mod:
+      style: !include snippets/style-markdown-titles.yaml
+    content: >
+      # Hoi Eva!
+
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        card_mod:
+          style: !include snippets/style-markdown-titles.yaml
+        content: >
+          ###
+
+      - type: grid
+        columns: 3
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: input_select.sonos_controller_eva_active_speaker
+            name: Slaapkamer
+            layout: vertical
+            icon: mdi:speaker
+            secondary_info: none
+            fill_container: true
+            icon_color: >
+              {% if is_state(entity, 'Woonkamer') %}
+                var(--primary-text-color)
+              {% else %}
+                var(--disabled-text-color)
+              {% endif %}
+            tap_action:
+              action: call-service
+              service: input_select.select_option
+              service_data:
+                entity_id: input_select.sonos_controller_eva_active_speaker
+                option: Slaapkamer
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color:
+                    {% if is_state(config.entity, 'Slaapkamer') %}
+                      var(--primary-text-color)
+                    {% else %}
+                      var(--disabled-text-color)
+                    {% endif %};
+                  --ha-card-background:
+                    {% if is_state(config.entity, 'Slaapkamer') %}
+                      var(--warning-color)
+                    {% else %}
+                      var(--ha-card-background)
+                    {% endif %};
+                }
+
+          - type: custom:mushroom-entity-card
+            entity: input_select.sonos_controller_eva_active_speaker
+            name: Woonkamer
+            layout: vertical
+            icon: mdi:speaker
+            secondary_info: none
+            fill_container: true
+            icon_color: >
+              {% if is_state(entity, 'Woonkamer') %}
+                var(--primary-text-color)
+              {% else %}
+                var(--disabled-text-color)
+              {% endif %}
+            tap_action:
+              action: call-service
+              service: input_select.select_option
+              service_data:
+                entity_id: input_select.sonos_controller_eva_active_speaker
+                option: Woonkamer
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color:
+                    {% if is_state(config.entity, 'Woonkamer') %}
+                      var(--primary-text-color)
+                    {% else %}
+                      var(--disabled-text-color)
+                    {% endif %};
+                  --ha-card-background:
+                    {% if is_state(config.entity, 'Woonkamer') %}
+                      var(--warning-color)
+                    {% else %}
+                      var(--ha-card-background)
+                    {% endif %};
+                }
+
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_select.sonos_controller_eva_active_speaker
+            state: Slaapkamer
+        card:
+          type: custom:mini-media-player
+          entity: media_player.bedroom_eva_sonos
+          name: Slaapkamer
+          hide:
+            name: true
+            power: true
+          max_volume: 20
+          tap_action: false
+
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_select.sonos_controller_eva_active_speaker
+            state: Woonkamer
+        card:
+          type: custom:mini-media-player
+          entity: media_player.kitchen_sonos
+          name: Woonkamer
+          hide:
+            name: true
+            power: true
+            group_button: true
+          max_volume: 10
+          speaker_group:
+            platform: sonos
+            sync_volume: true
+            show_group_count: false
+            entities:
+              - entity: media_player.kitchen_sonos
+                name: Keuken
+              - entity: media_player.living_room_sonos
+                name: Woonkamer
+              - entity: media_player.living_room_sonos_move
+                name: Woonkamer (Move)
+          tap_action: false
+
+  - type: custom:tabbed-card
+    view_layout:
+      grid-column: 2 / -1
+    tabs:
+      - attributes:
+          label: Verhaaltjes
+        card:
+          type: entities
+          entities:
+            - icon: mdi:play
+              name: Minoes
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play
+                service_data:
+                  media_content_id: x-sonos-http:book%3a569413.mp3?sid=226&flags=16392&sn=14
+            - icon: mdi:play
+              name: Otje
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play
+                service_data:
+                  media_content_id: x-sonos-http:book%3a569427.mp3?sid=226&flags=16392&sn=14
+            - type: section
+              label: Mees Kees
+            - icon: mdi:play
+              name: In de gloria
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Mees Kees - In de Gloria
+                  media_type: album
+            - icon: mdi:play
+              name: De sponsorloop
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Mees Kees - Sponsorloop
+                  media_type: album
+            - icon: mdi:play
+              name: Gaat verhuizen
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Mees Kees - Gaat verhuizen
+                  media_type: album
+            - icon: mdi:play
+              name: Op de planken
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Mees Kees - Op de planken
+                  media_type: album
+            - icon: mdi:play
+              name: Op kamp
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Mees Kees - Op kamp
+                  media_type: album
+            - icon: mdi:play
+              name: De rekenrap
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Mees Kees - De rekenrap
+                  media_type: album
+            - icon: mdi:play
+              name: Een pittig klasje
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Mees Kees - Een pittig klasje
+                  media_type: album
+            - type: section
+              label: Juf Braaksel
+            - icon: mdi:play
+              name: "1: De magische ring"
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Juf Braaksel en de magische ring
+                  media_type: album
+            - icon: mdi:play
+              name: "2: Het meesterbrein"
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Juf Braaksel en het meesterbrein
+                  media_type: album
+            - icon: mdi:play
+              name: "3: De geniale ontsnapping"
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: Juf Braaksel en de geniale ontsnapping
+                  media_type: album
+            - icon: mdi:play
+              name: "4: De mysterieuze verdwijning"
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play
+                service_data:
+                  media_content_id: x-sonos-http:book%3a2463076.mp3?sid=226&flags=16392&sn=14
+            - icon: mdi:play
+              name: "5: De woeste achtervolging"
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play
+                service_data:
+                  media_content_id: x-sonos-http:book%3a3220583.mp3?sid=226&flags=16392&sn=14
+            - icon: mdi:play
+              name: "6: De gigantische ontploffing"
+              entity: script.sonos_controller_eva_play
+              action_name: Speel
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play
+                service_data:
+                  media_content_id: x-sonos-http:book%3a4372950.mp3?sid=226&flags=16392&sn=14
+
+      - attributes:
+          label: Muziek
+        card:
+          type: grid
+          columns: 4
+          cards:
+            # Kinderen voor Kinderen
+            - type: picture-glance
+              title: Kinderen voor Kinderen
+              entities: []
+              image: >-
+                https://images.weserv.nl/?url=https://lh3.googleusercontent.com/c9isQjKIKTWBIzmG-Eoag0mLK0fLJVB2jiSpYt6-csmP8BAUhyfdzZs3yHn_997rC-azKMk-jZZNhIkN=w2880-h1200-p-l90-rj&w=230&h=230&fit=cover&a=attention
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: kinderen voor kinderen
+                  media_type: artist
+            # Taylor Swift
+            - type: picture-glance
+              title: Taylor Swift
+              entities: []
+              image: >-
+                https://images.weserv.nl/?url=https://lh3.googleusercontent.com/yjSBybGLwZIXsQSKo66IBdeObxQENOtmjLsl5BvJC7qYHOJqpOKcV1dcc8GPZKhBHWrSCBAxZyml4g=w600-h600-p&w=256&h=256&fit=cover&a=attention
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: taylor swift
+                  media_type: artist
+            # Flemming
+            - type: picture-glance
+              title: Flemming
+              entities: []
+              image: >-
+                https://images.weserv.nl/?url=https://lh3.googleusercontent.com/a-/ALV-UjXBpDNVirJG-2BpB5anxGJOaYJHATTNeQ7TsO3fau9j-so-64YY=w600-h600-p&w=256&h=256&fit=cover&a=attention
+              tap_action:
+                action: call-service
+                service: script.sonos_controller_eva_play_music_assistant
+                data:
+                  media_id: flemming
+                  media_type: artist

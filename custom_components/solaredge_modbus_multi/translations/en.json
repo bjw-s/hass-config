@@ -1,0 +1,101 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "SolarEdge Modbus Configuration",
+        "data": {
+          "name": "Sensor Prefix",
+          "host": "Inverter IP Address",
+          "port": "Modbus/TCP Port",
+          "device_list": "Inverter Device ID List"
+        }
+      },
+      "reconfigure": {
+        "title": "SolarEdge Modbus Configuration",
+        "data": {
+          "host": "Inverter IP Address",
+          "port": "Modbus/TCP Port",
+          "device_list": "Inverter Device ID List"
+        }
+      }
+    },
+    "error": {
+      "already_configured": "Device is already configured!",
+      "invalid_device_id": "Device ID must be between 1 to 247.",
+      "invalid_inverter_count": "Must be between 1 to 32 inverters.",
+      "invalid_host": "Invalid IP address.",
+      "invalid_tcp_port": "Valid port range is 1 to 65535.",
+      "invalid_range_format": "Entry looks like a range but only one '-' per range is allowed.",
+      "invalid_range_lte": "Starting ID in a range must be less than or equal to the end ID.",
+      "empty_device_id": "The ID list contains an empty or undefined value."
+    },
+    "abort": {
+      "already_configured": "Device is already configured",
+      "reconfigure_successful": "Re-configuration was successful"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "SolarEdge Modbus Options",
+        "data": {
+          "scan_interval": "Polling Frequency (seconds)",
+          "keep_modbus_open": "Keep Modbus Connection Open",
+          "detect_meters": "Auto-Detect Meters",
+          "detect_batteries": "Auto-Detect Batteries",
+          "detect_extras": "Auto-Detect Additional Entities",
+          "advanced_power_control": "Power Control Options",
+          "sleep_after_write": "Inverter Command Delay (seconds)"
+        }
+      },
+      "adv_pwr_ctl": {
+        "title": "Power Control Options",
+        "data": {
+          "adv_storage_control": "Enable Storage Control",
+          "adv_site_limit_control": "Enable Site Limit Control"
+        },
+        "description": "Warning: These options can violate utility agreements, alter your utility billing, may require special equipment, and overwrite provisioning by SolarEdge or your installer. Use at your own risk!"
+      },
+      "battery_options": {
+        "title": "Battery Options",
+        "data": {
+          "allow_battery_energy_reset": "Allow Battery Energy to Reset",
+          "battery_energy_reset_cycles": "Update Cycles to Reset Battery Energy",
+          "battery_rating_adjust": "Battery Rating Adjustment (percent)"
+        }
+      }
+    },
+    "error": {
+      "invalid_scan_interval": "Valid interval is 1 to 86400 seconds.",
+      "invalid_sleep_interval": "Valid interval is 0 to 60 seconds.",
+      "invalid_percent": "Valid range is 0 to 100 percent."
+    }
+  },
+  "issues": {
+    "check_configuration": {
+      "title": "Check Modbus Configuration",
+      "fix_flow": {
+        "step": {
+          "confirm": {
+            "title": "Check Modbus Configuration",
+            "description": "An error occurred while trying to open a Modbus/TCP connection.\n\nPlease confirm your configuration.",
+            "data": {
+              "host": "Inverter IP Address",
+              "port": "Modbus/TCP Port",
+              "device_list": "Inverter Device ID List"
+            }
+          }
+        },
+        "error": {
+          "invalid_device_id": "Device ID must be between 1 to 247.",
+          "invalid_inverter_count": "Must be between 1 to 32 inverters.",    
+          "invalid_host": "Invalid IP address.",
+          "invalid_tcp_port": "Valid port range is 1 to 65535.",
+          "invalid_range_format": "Entry looks like a range but only one '-' per range is allowed.",
+          "invalid_range_lte": "Starting ID in a range must be less than or equal to the end ID.",
+          "empty_device_id": "The ID list contains an empty or undefined value."
+        }
+      }
+    }
+  }
+}

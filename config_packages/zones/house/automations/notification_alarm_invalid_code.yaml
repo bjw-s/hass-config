@@ -9,12 +9,18 @@ trigger:
 
 variables:
   # Notification target
-  notify_device: adults
+  notify_devices:
+    - mobile_app_iphone_bernd
+    - mobile_app_iphone_man_yie
 
 action:
-  - service: "notify.{{ notify_device }}"
-    data:
-      message: Invalid code entered for alarm
-      data:
-        group: 'alarm'
-        sound: none
+  - alias: Send a notification to each device
+    repeat:
+        for_each: "{{ notify_devices }}"
+        sequence:
+          - service: "notify.{{ repeat.item }}"
+            data:
+              message: Invalid code entered for alarm
+              data:
+                group: 'alarm'
+                sound: none

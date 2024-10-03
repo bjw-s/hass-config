@@ -1,0 +1,22 @@
+---
+id: attic_office_3d_printer_fan_light_automatic_off
+alias: Attic office - 3D Printer fan & light automatic off
+trigger:
+  - platform: state
+    entity_id: sensor.p1p_current_stage
+    not_from:
+      - 'idle'
+      - 'offline'
+    to: 'idle'
+    for:
+      minutes: 30
+action:
+  - action: fan.turn_off
+    data:
+      entity_id: fan.p1p_chamber_fan
+  - action: light.turn_off
+    data:
+      entity_id: light.p1p_chamber_light
+  - action: switch.turn_off
+    data:
+      entity_id: switch.attic_office_3d_printer_bento_box

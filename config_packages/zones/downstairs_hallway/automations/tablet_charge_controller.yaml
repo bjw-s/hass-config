@@ -1,0 +1,34 @@
+---
+id: downstairs_hallway_tablet_charge_controller
+alias: Downstairs Hallway - Tablet charge controller
+
+trigger:
+  - platform: state
+    entity_id: sensor.downstairs_hallway_tablet_battery
+    to: null
+
+variables:
+  battery_level: "{{ states('sensor.downstairs_hallway_tablet_battery') | float(0) }}"
+  low_treshold: 50
+  high_treshold: 80
+
+action:
+  - choose:
+      - alias: Turn on charging
+        conditions:
+          - alias: Battery level dropped below low_treshold
+            condition: template
+            value_template: "{{ battery_level < low_treshold }}"
+        sequence:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.downstairs_hallway_tablet_power
+      - alias: Turn off charging
+        conditions:
+          - alias: Battery level rose above high_treshold
+            condition: template
+            value_template: "{{ battery_level > high_treshold }}"
+        sequence:
+          - service: switch.turn_off
+            data:
+              entity_id: switch.downstairs_hallway_tablet_power

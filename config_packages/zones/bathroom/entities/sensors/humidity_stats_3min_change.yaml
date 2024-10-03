@@ -1,0 +1,8 @@
+---
+platform: statistics
+name: Bathroom - Humidity Stats 3min Change
+entity_id: sensor.bathroom_multisensor_humidity
+state_characteristic: change
+max_age:
+  minutes: 3
+sampling_size: 30

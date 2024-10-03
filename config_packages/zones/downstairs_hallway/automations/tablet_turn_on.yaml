@@ -5,15 +5,10 @@ max_exceeded: silent
 trigger:
   - id: hallway_presence
     platform: state
-    entity_id: binary_sensor.living_room_door_contact
-    to: 'on'
-  - id: hallway_presence
-    platform: state
-    entity_id: binary_sensor.downstairs_hallway_front_door_contact
-    to: 'on'
-  - id: hallway_presence
-    platform: state
-    entity_id: binary_sensor.downstairs_hallway_motion
+    entity_id:
+      - binary_sensor.living_room_door_contact
+      - binary_sensor.downstairs_hallway_front_door_contact
+      - binary_sensor.downstairs_hallway_motion
     to: 'on'
   - id: returned_home
     platform: state

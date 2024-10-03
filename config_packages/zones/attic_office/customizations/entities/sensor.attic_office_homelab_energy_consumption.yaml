@@ -1,0 +1,3 @@
+---
+sensor.attic_office_homelab_energy_consumption:
+  device_class: energy

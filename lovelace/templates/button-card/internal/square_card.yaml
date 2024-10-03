@@ -1,0 +1,8 @@
+square_card:
+  aspect_ratio: 1/1
+  show_state: true
+  styles:
+    card:
+      - padding: 25px
+    name:
+      - opacity: "0.6"

@@ -1,0 +1,29 @@
+---
+api:
+  listen: ":1984"
+
+ffmpeg:
+  bin: "ffmpeg"
+
+log:
+  format: "color"
+  level: "info"
+  output: "stdout"
+  time: "UNIXMS"
+
+rtsp:
+  listen: ":8554"
+  default_query: "video&audio"
+
+srtp:
+  listen: ":8443"
+
+webrtc:
+  listen: ":8555/tcp"
+  ice_servers:
+    - urls:
+        - "stun:stun.l.google.com:19302"
+
+streams:
+  attic_3d_printer: rtsp://scrypted.home-automation.svc.cluster.local:34136/ffcde3df7d5eb662
+  doorbell: rtsp://scrypted.home-automation.svc.cluster.local:34135/e9c2e0de26ac909e

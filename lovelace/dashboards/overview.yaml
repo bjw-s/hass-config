@@ -1,5 +1,5 @@
 background: var(--background-image)
-button_card_templates: !include_dir_merge_named ../templates/button-card/
+# button_card_templates: !include_dir_merge_named ../templates/button-card/
 decluttering_templates: !include ../templates/decluttering-card.yaml
 
 views:

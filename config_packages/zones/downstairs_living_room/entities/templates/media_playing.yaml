@@ -13,21 +13,21 @@ trigger:
 
   - id: media_playing
     platform: state
-    entity_id: sensor.downstairs_living_room_current_harmony_activity
+    entity_id: sensor.living_room_current_harmony_activity
     to: Play Switch
 
   - id: media_playing
     platform: state
-    entity_id: sensor.downstairs_living_room_current_harmony_activity
+    entity_id: sensor.living_room_current_harmony_activity
     to: Play Xbox
 
   - id: media_not_playing
     platform: state
-    entity_id: sensor.downstairs_living_room_current_harmony_activity
+    entity_id: sensor.living_room_current_harmony_activity
     to: PowerOff
 
 binary_sensor:
-  - name: "Downstairs - Living room - Media playing"
+  - name: "Living room - Media playing"
     state: >
       {{ trigger.id == 'media_playing' }}
     icon: >

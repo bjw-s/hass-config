@@ -1,5 +1,2 @@
-automation: !include_dir_list automations
-input_boolean: !include_dir_merge_named input_booleans
-input_text: !include_dir_merge_named input_texts
 script: !include_dir_merge_named scripts
 sensor: !include_dir_list sensors

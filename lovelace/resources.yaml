@@ -1,3 +1,6 @@
+- url: /hacsfiles/button-card/button-card.js
+  type: module
+
 - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
   type: module
 
@@ -33,3 +36,21 @@
 
 - url: https://unpkg.com/moment@2.29.3/min/moment.min.js
   type: js
+
+- url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+  type: module
+
+- url: /hacsfiles/tabbed-card/tabbed-card.js
+  type: module
+
+- url: /hacsfiles/power-flow-card-plus/power-flow-card-plus.js
+  type: module
+
+- url: /hacsfiles/custom-brand-icons/custom-brand-icons.js
+  type: module
+
+- url: /hacsfiles/anchor-card/anchor-card.js
+  type: module
+
+- url: /hacsfiles/webrtc/webrtc-camera.js
+  type: module

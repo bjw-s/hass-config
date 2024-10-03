@@ -1,9 +1,0 @@
-# ---
-# platform: template
-# switches:
-#   attic_office_3d_printer_power_switch:
-#     value_template: "{{ is_state_attr('sensor.attic_office_3d_printer_api_power', 'status', 'on') }}"
-#     turn_on:
-#       service: rest_command.attic_office_3d_printer_power_on
-#     turn_off:
-#       service: rest_command.attic_office_3d_printer_power_off

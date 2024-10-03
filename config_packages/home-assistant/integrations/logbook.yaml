@@ -15,5 +15,9 @@ logbook:
     - sensor.date_time
     - sensor.living_area_vacuum_map
 
+    entity_globs:
+    - sensor.bedroom_bed_occupancy_*_raw_reading
+
     domains:
     - group
+    - image

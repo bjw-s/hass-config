@@ -1,0 +1,4 @@
+toggle_button:
+  template: square_card
+  tap_action:
+    action: toggle

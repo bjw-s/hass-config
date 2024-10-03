@@ -1,0 +1,69 @@
+trash_pickup_list_item:
+  tap_action: none
+  show_state: false
+  show_label: true
+  show_icon: true
+  variables:
+    days_before_warning: 1
+    days_before_error: 0
+    days_left: >
+      [[[
+        return entity.attributes.days_until_collection_date;
+      ]]]
+  label: >
+    [[[
+      if (variables.days_left == 0) {
+        return 'Today'
+      } else if (variables.days_left <= 7) {
+        return (variables.days_left + ' days');
+      }
+      return entity.state;
+    ]]]
+  styles:
+    card:
+      - background-color: rgba(0,0,0,0)
+      - box-shadow: none
+      - height: auto
+      - padding: 6px
+    name:
+      - justify-self: "start"
+      - margin-left: 10px
+    state:
+      - justify-self: "end"
+    label:
+      - justify-self: "end"
+    grid:
+      - grid-template-areas: "'i n l'"
+      - grid-template-columns: 5% auto auto
+    icon:
+      - width: 100%
+      - height: 100%
+  state:
+    - operator: template
+      value: >
+        [[[
+          return (variables.days_left <= variables.days_before_error) || entity.attributes.is_collection_date_today;
+        ]]]
+      styles:
+        card:
+          - font-weight: "bold"
+        icon:
+          - color: var(--error-color)
+        name:
+          - color: var(--error-color)
+        label:
+          - color: var(--error-color)
+    - operator: template
+      value: >
+        [[[
+          return (variables.days_left <= variables.days_before_warning) || entity.attributes.is_collection_date_tomorrow;
+        ]]]
+      styles:
+        card:
+          - font-weight: "bold"
+        icon:
+          - color: var(--warning-color)
+        name:
+          - color: var(--warning-color)
+        label:
+          - color: var(--warning-color)

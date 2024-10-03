@@ -1,0 +1,7 @@
+---
+platform: integration
+source: sensor.attic_office_air_conditioner_energy_current
+name: Attic Office - Air Conditioner Energy Consumption
+unit_prefix: k
+round: 2
+method: left

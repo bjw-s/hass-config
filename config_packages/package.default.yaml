@@ -3,6 +3,7 @@ binary_sensor: !include_dir_list entities/binary_sensors
 camera: !include_dir_list entities/cameras
 counter: !include_dir_merge_named entities/counters
 cover: !include_dir_list entities/covers
+fan: !include_dir_merge_named entities/fans
 group: !include_dir_merge_named entities/groups
 homeassistant:
   # Customize individual entities
@@ -19,6 +20,7 @@ light: !include_dir_list entities/lights
 media_player: !include_dir_list entities/media_players
 mqtt:
   binary_sensor: !include_dir_list entities/mqtt/binary_sensors
+  fan: !include_dir_list entities/mqtt/fans
   sensor: !include_dir_list entities/mqtt/sensors
   siren: !include_dir_list entities/mqtt/sirens
 rest_command: !include_dir_merge_named rest_commands

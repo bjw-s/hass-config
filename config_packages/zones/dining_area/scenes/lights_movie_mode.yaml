@@ -1,0 +1,10 @@
+---
+name: Dining area - Lights - Movie mode
+icon: mdi:filmstrip
+entities:
+  light.dining_area_ceiling:
+    state: "on"
+    brightness: 77
+    color_temp: 443
+  switch.dining_area_christmas_lights:
+    state: "on"

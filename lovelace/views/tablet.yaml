@@ -1,0 +1,125 @@
+title: Tablet
+path: tablet
+type: custom:grid-layout
+layout: !include snippets/layout-3-column.yaml
+
+cards:
+  - type: custom:button-card
+    view_layout:
+      grid-column: 1 / -1
+    template: view_title
+    entity: sensor.time
+    name: >-
+      [[[
+        let time = entity.state;
+        return time;
+      ]]]
+    label: >-
+      [[[
+        let time = entity.state;
+        let welcome = '';
+
+        if (time > '18:00'){
+          welcome = "Good evening";
+        } else if (time > '12:00'){
+          welcome = "Good afternoon";
+        } else if (time > '05:00'){
+          welcome = "Good morning";
+        } else {
+          welcome = "Hello";
+        }
+        return welcome + '!';
+      ]]]
+
+  - type: vertical-stack
+    cards:
+      - type: custom:button-card
+        template: card_title
+        name: House
+      - type: grid
+        columns: 2
+        cards:
+          - type: "custom:button-card"
+            template: alarm_button
+            entity: alarm_control_panel.house
+            name: Alarm
+            tap_action: !include popups/alarm.yaml
+          # - type: "custom:button-card"
+          #   template: toggle_button
+          #   entity: input_boolean.home_modes_bedtime_mode
+          #   name: Bedtime
+          #   tap_action:
+          #     confirmation:
+          #       text: Are you sure you want to toggle Bedtime mode?
+          - type: "custom:button-card"
+            template: temperature_button
+            entity: weather.tomorrow_io_home_daily
+            state_display: |
+              [[[ return `${entity.attributes.temperature} ${entity.attributes.temperature_unit}` ]]]
+            name: Temperature
+
+  - type: vertical-stack
+    cards:
+      - type: custom:button-card
+        template: card_title
+        name: Devices
+      - type: grid
+        columns: 2
+        cards:
+          - type: "custom:button-card"
+            template: vacuum_button
+            entity: "vacuum.valetudo_livingroom"
+            name: Downstairs
+
+  - type: vertical-stack
+    cards:
+      - type: custom:button-card
+        template: card_title
+        name: Trash
+      - type: "custom:button-card"
+        template: trash_pickup_list
+        styles:
+          grid:
+            - grid-template-areas: |
+                'restafval'
+                'gft'
+                'pmd'
+                'papier'
+                'snoeiafval'
+        custom_fields:
+          restafval:
+            card:
+              type: "custom:button-card"
+              template: trash_pickup_list_item
+              entity: sensor.afvalinfo_home_restafval
+              name: Restafval
+
+          gft:
+            card:
+              type: "custom:button-card"
+              template: trash_pickup_list_item
+              entity: sensor.afvalinfo_home_gft
+              name: GFT
+
+          pmd:
+            card:
+              type: "custom:button-card"
+              template: trash_pickup_list_item
+              entity: sensor.afvalinfo_home_pbd
+              name: PMD
+
+          papier:
+            card:
+              type: "custom:button-card"
+              template: trash_pickup_list_item
+              entity: sensor.afvalinfo_home_papier
+              name: Papier
+
+          snoeiafval:
+            card:
+              type: "custom:button-card"
+              template: trash_pickup_list_item
+              entity: sensor.afvalinfo_home_takken
+              name: Snoeiafval
+              variables:
+                days_before_warning: 14

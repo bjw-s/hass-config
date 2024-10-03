@@ -1,0 +1,7 @@
+temperature_button:
+  template: square_card
+  tap_action: none
+  show_icon: true
+  show_label: false
+  show_state: true
+  show_name: true

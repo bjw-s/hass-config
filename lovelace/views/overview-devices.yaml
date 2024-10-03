@@ -64,7 +64,7 @@ cards:
           ### Other media
 
       - type: tile
-        entity: sensor.downstairs_living_room_current_harmony_activity
+        entity: sensor.living_room_current_harmony_activity
         name: Harmony activity
         icon: mdi:remote
         vertical: false
@@ -81,13 +81,13 @@ cards:
             }
 
       - type: tile
-        entity: binary_sensor.downstairs_living_room_media_playing
+        entity: binary_sensor.living_room_media_playing
         name: Media playback
         vertical: false
         show_entity_picture: true
 
       - type: tile
-        entity: media_player.downstairs_living_room_denon_avr_x1500h
+        entity: media_player.living_room_denon_avr_x1800h
         name: Receiver
         vertical: false
         show_entity_picture: true
@@ -162,3 +162,10 @@ cards:
                     mdi:battery-10
                   {% endif %}
                 icon_color: red
+
+      - type: "custom:anchor-card"
+        anchor_id: devices_low_battery
+        negative_margin: 13
+        timeout: 200
+        offset: 0
+        backout: true

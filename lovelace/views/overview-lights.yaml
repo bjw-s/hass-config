@@ -15,8 +15,8 @@ cards:
       ## Lights
 
       {% set daylight = ( state_attr('sun.sun', 'next_rising') | as_timestamp(0) - state_attr('sun.sun', 'next_setting') | as_timestamp(0) ) | abs / 60 / 60 %}
-      {% set all_lights = states.light|rejectattr('attributes.is_hue_group', 'defined') | list %}
-      {% set on_lights = all_lights|selectattr('state', 'equalto', 'on') | list %}
+      {% set all_lights = states.light | selectattr('attributes.supported_features', 'gt', 0) | list %}
+      {% set on_lights = all_lights | selectattr('state', 'equalto', 'on') | list %}
       You have {{ all_lights|count }} lights and {{ on_lights|count }} of them {{ iif((on_lights|count == 1), 'is', 'are') }} turned on.
       There are {{ daylight | round(1) }} hours of daylight and {{ 24 - daylight | round(1) }} hours of nighttime today.
 
@@ -190,7 +190,7 @@ cards:
               square: true
             card_param: cards
             entities:
-              - entity: input_boolean.downstairs_dining_area_lights_manual_mode
+              - entity: input_boolean.dining_area_lights_manual_mode
                 type: custom:mushroom-entity-card
                 name: Manual mode
                 layout: vertical
@@ -201,9 +201,9 @@ cards:
             filter:
               template: |
                 {% for state in states.scene -%}
-                  {%- if state.entity_id | regex_match('scene.downstairs_dining_area_lights_',ignorecase=False) -%}
-                    {%- set CONTROLLER = 'input_select.downstairs_dining_area_lights_scene' -%}
-                    {%- set NAME = state_attr(state.entity_id,"friendly_name") | regex_replace(find='Downstairs dining area - Lights - ', replace='') -%}
+                  {%- if state.entity_id | regex_match('scene.dining_area_lights_',ignorecase=False) -%}
+                    {%- set CONTROLLER = 'input_select.dining_area_lights_scene' -%}
+                    {%- set NAME = state_attr(state.entity_id,"friendly_name") | regex_replace(find='Dining area - Lights - ', replace='') -%}
                     {%- set ICON = iif(state_attr(state.entity_id, "icon") == none, 'mdi:play', state_attr(state.entity_id, "icon")) -%}
                     {%- set ICON_COLOR = iif(is_state(CONTROLLER, NAME), 'var(--rgb-state-light)', none) -%}
                     {{
@@ -489,6 +489,15 @@ cards:
               columns: 3
               square: true
             card_param: cards
+            entities:
+              - entity: input_boolean.attic_office_lights_manual_mode
+                type: custom:mushroom-entity-card
+                name: Manual mode
+                layout: vertical
+                secondary_info: none
+                fill_container: true
+                tap_action:
+                  action: toggle
             filter:
               template: |
                 {% for state in states.scene -%}

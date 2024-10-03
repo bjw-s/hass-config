@@ -1,0 +1,41 @@
+{
+    "title": "Presence Simulation",
+    "config": {
+		"error": {
+			"not_unique_name": "The chosen switch name is already taken by another entity, please choose a new name"
+		},
+        "step": {
+            "user":{
+                "description": "Konfiguration",
+                "data": {
+                    "switch": "The name of the presence simulation switch",
+                    "entities": "Entitet eller grupp av entitieter",
+                    "delta": "Historik (i dagar)",
+                    "interval": "Uppdateringsintervall  (i sekunder)",
+                    "restore": "Återställ tillstånd efter simulering",
+                    "random": "Add a random time for switching entities. This parameter define the max time in seconds",
+                    "unavailable_as_off": "Consider Unavailable status as Off"
+                }
+            }
+        }
+    },
+    "options": {
+		"error": {
+			"cannot_change_name": "The name of the swtich can't be changed"
+		},
+        "step": {
+            "init":{
+                "description": "Configuration",
+                "data": {
+                    "switch": "The name of the presence simulation switch",
+                    "entities": "Entitet eller grupp av entitieter",
+                    "delta": "Historik (i dagar)",
+                    "interval": "Uppdateringsintervall (i sekunder)",
+                    "restore": "Återställ tillstånd efter simulering",
+                    "random": "Add a random time for switching entities. This parameter define the max time in seconds",
+                    "unavailable_as_off": "Consider Unavailable status as Off"
+                }
+            }
+        }
+    }
+}

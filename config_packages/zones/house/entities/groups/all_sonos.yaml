@@ -5,6 +5,5 @@ all_sonos:
     - media_player.upstairs_office_sonos
     - media_player.living_room_sonos
     - media_player.living_room_sonos_move
-    - media_player.living_room_sonos_receiver
     - media_player.attic_office_sonos
     - media_player.bedroom_eva_sonos

@@ -12,34 +12,45 @@ trigger:
 
 variables:
   # Notification target
-  notify_device: adults
+  notify_devices:
+    - mobile_app_iphone_bernd
+    - mobile_app_iphone_man_yie
 
 action:
-  - service: "notify.{{ notify_device }}"
-    data:
-      title: Failed to arm alarm
-      message: |
-        {%- if trigger.event.data.reason == "open_sensors" %}
-        Open sensors:
-        {% for sensor in trigger.event.data.sensors -%}
-        - {{state_attr(sensor, "friendly_name")}}
-        {% endfor %}
-        {% else %}
-          {{- trigger.event.data.reason }}
-        {% endif %}
-      data:
-        group: 'alarm'
-        push:
-          sound:
-            name: "RingerChanged.caf"
-            critical: 1
-            volume: 0.3
-        actions:
-          - action: ALARMO_FORCE_ARM
-            title: Force arm
-            destructive: true
-          - action: ALARMO_IGNORE
-            title: Ignore
+  - alias: Send a notification to each device
+    repeat:
+        for_each: "{{ notify_devices }}"
+        sequence:
+          - service: "notify.{{ repeat.item }}"
+            data:
+              title: Failed to arm alarm
+              message: |
+                {% set trigger_reason = "No reason" %}
+
+                {% if trigger.event %}
+                  {% set trigger_reason = trigger.event.data.reason %}
+                {% endif %}
+                {%- if trigger_reason == "open_sensors" %}
+                Open sensors:
+                {% for sensor in trigger.event.data.sensors -%}
+                - {{state_attr(sensor, "friendly_name")}}
+                {% endfor %}
+                {% else %}
+                  {{- trigger_reason }}
+                {% endif %}
+              data:
+                group: 'alarm'
+                push:
+                  sound:
+                    name: "RingerChanged.caf"
+                    critical: 1
+                    volume: 0.3
+                actions:
+                  - action: ALARMO_FORCE_ARM
+                    title: Force arm
+                    destructive: true
+                  - action: ALARMO_IGNORE
+                    title: Ignore
 
   - wait_for_trigger:
       - platform: event

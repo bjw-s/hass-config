@@ -9,7 +9,7 @@ from homeassistant.core import (
 )
 
 from homeassistant.helpers.event import (
-    async_track_state_change,
+    async_track_state_change_event,
     async_track_point_in_time,
 )
 
@@ -50,6 +50,7 @@ ATTR_GROUP_ID = "group_id"
 ATTR_TIMEOUT = "timeout"
 ATTR_EVENT_COUNT = "event_count"
 ATTR_ENTITIES = "entities"
+ATTR_NEW_ENTITY_ID = "new_entity_id"
 
 SENSOR_STATES_OPEN = [STATE_ON, STATE_OPEN, STATE_UNLOCKED]
 SENSOR_STATES_CLOSED = [STATE_OFF, STATE_CLOSED, STATE_LOCKED]
@@ -128,6 +129,7 @@ class SensorHandler:
         self._group_events = {}
         self._startup_complete = False
 
+        @callback
         def async_update_sensor_config():
             """sensor config updated, reload the configuration."""
             self._config = self.hass.data[const.DOMAIN]["coordinator"].store.async_get_sensors()
@@ -162,9 +164,6 @@ class SensorHandler:
     def async_watch_sensor_states(self, area_id: str = None, old_state: str = None, state: str = None):
         """watch sensors based on the state of the alarm entities."""
 
-        if not state:
-            return
-
         sensors_list = []
         for area in self.hass.data[const.DOMAIN]["areas"].keys():
             sensors_list.extend(self.active_sensors_for_alarm_state(area))
@@ -173,7 +172,7 @@ class SensorHandler:
             self._state_listener()
 
         if len(sensors_list):
-            self._state_listener = async_track_state_change(
+            self._state_listener = async_track_state_change_event(
                 self.hass, sensors_list, self.async_sensor_state_changed
             )
         else:
@@ -267,11 +266,12 @@ class SensorHandler:
         return (open_sensors, bypassed_sensors)
 
     @callback
-    async def async_sensor_state_changed(self, entity, old_state, new_state):
+    def async_sensor_state_changed(self, event):
         """Callback fired when a sensor state has changed."""
 
-        old_state = parse_sensor_state(old_state)
-        new_state = parse_sensor_state(new_state)
+        entity = event.data["entity_id"]
+        old_state = parse_sensor_state(event.data["old_state"])
+        new_state = parse_sensor_state(event.data["new_state"])
         sensor_config = self._config[entity]
         if old_state == STATE_UNKNOWN:
             # sensor is unknown at startup, state which comes after is considered as initial state
@@ -319,7 +319,7 @@ class SensorHandler:
         if sensor_config[ATTR_ALWAYS_ON]:
             # immediate trigger due to always on sensor
             _LOGGER.info("Alarm is triggered due to an always-on sensor: {}".format(entity))
-            await alarm_entity.async_trigger(
+            alarm_entity.async_trigger(
                 skip_delay=True,
                 open_sensors=open_sensors
             )
@@ -327,12 +327,12 @@ class SensorHandler:
         elif alarm_state == STATE_ALARM_ARMING:
             # sensor triggered while arming, abort arming
             _LOGGER.debug("Arming was aborted due to a sensor being active: {}".format(entity))
-            await alarm_entity.async_arm_failure(open_sensors)
+            alarm_entity.async_arm_failure(open_sensors)
 
         elif alarm_state in const.ARM_MODES:
             # standard alarm trigger
             _LOGGER.info("Alarm is triggered due to sensor: {}".format(entity))
-            await alarm_entity.async_trigger(
+            alarm_entity.async_trigger(
                 skip_delay=(not sensor_config[ATTR_USE_ENTRY_DELAY]),
                 open_sensors=open_sensors
             )
@@ -340,7 +340,7 @@ class SensorHandler:
         elif alarm_state == STATE_ALARM_PENDING:
             # immediate trigger while in pending state
             _LOGGER.info("Alarm is triggered due to sensor: {}".format(entity))
-            await alarm_entity.async_trigger(
+            alarm_entity.async_trigger(
                 skip_delay=True,
                 open_sensors=open_sensors
             )
@@ -351,12 +351,12 @@ class SensorHandler:
         """start timer for automatical arming"""
 
         @callback
-        async def timer_finished(now):
+        def timer_finished(now):
             _LOGGER.debug("timer finished")
             sensor_config = self._config[entity]
             alarm_entity = self.hass.data[const.DOMAIN]["areas"][sensor_config["area"]]
             if alarm_entity.state == STATE_ALARM_ARMING:
-                await alarm_entity.async_arm(alarm_entity.arm_mode, skip_delay=True)
+                alarm_entity.async_arm(alarm_entity.arm_mode, skip_delay=True)
         now = dt_util.utcnow()
 
         if entity in self._arm_timers:
@@ -433,4 +433,4 @@ class SensorHandler:
         prev_arm_modes = alarm_entity._ready_to_arm_modes
 
         if arm_modes != prev_arm_modes:
-            alarm_entity.ready_to_arm_modes = arm_modes
+            alarm_entity.update_ready_to_arm_modes(arm_modes)

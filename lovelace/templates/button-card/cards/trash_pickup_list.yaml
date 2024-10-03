@@ -1,0 +1,6 @@
+trash_pickup_list:
+  styles:
+    card:
+      - padding: 16px
+    grid:
+      - grid-template-columns: "1fr"
