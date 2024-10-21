@@ -1,6 +1,6 @@
 ---
 platform: integration
-source: sensor.attic_office_desk_plug_wattage
+source: sensor.attic_office_plug_desk_wattage
 name: Attic Office - Desk Energy Consumption
 unit_prefix: k
 round: 2

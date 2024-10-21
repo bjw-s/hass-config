@@ -6,27 +6,42 @@ layout: !include snippets/layout-2-column.yaml
 
 cards:
   # Header
-  - type: markdown
-    card_mod:
-      style: !include snippets/style-markdown-titles.yaml
+  - type: heading
+    heading_style: title
+    heading: Schedules
     view_layout:
       grid-column: 1/-1
-    content: >
-      ## Schedules
 
   # Climate
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Climate
+      - type: heading
+        heading_style: subtitle
+        heading: Climate
 
       - type: custom:scheduler-card
         title: ""
         include:
           - climate
+        discover_existing: false
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: transparent;
+            }
+
+  # Other
+  - type: vertical-stack
+    cards:
+      - type: heading
+        heading_style: subtitle
+        heading: Other
+
+      - type: custom:scheduler-card
+        title: ""
+        include:
+          - button
+        discover_existing: false
         card_mod:
           style: |
             ha-card {

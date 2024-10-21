@@ -1,0 +1,10 @@
+---
+sensor:
+  - name: thermostats_heating
+    attributes:
+      friendly_name: Thermostats heating
+      icon: mdi:radiator
+    state: >-
+      {% set all_thermostats = integration_entities('tado') | expand | selectattr('domain', 'eq', 'climate') | list %}
+      {% set heating_thermostats = all_thermostats | selectattr('attributes.hvac_action', 'equalto', 'heating') | list %}
+      {{ heating_thermostats|count }}

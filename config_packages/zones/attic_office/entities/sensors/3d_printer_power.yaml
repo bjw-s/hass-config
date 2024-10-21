@@ -1,6 +1,6 @@
 ---
 platform: integration
-source: sensor.attic_office_3dprinter_plug_wattage
+source: sensor.attic_office_plug_3dprinter_wattage
 name: Attic Office - 3D Printer Energy Consumption
 unit_prefix: k
 round: 2

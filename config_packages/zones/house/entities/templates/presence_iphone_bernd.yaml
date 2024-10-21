@@ -1,0 +1,12 @@
+---
+sensor:
+  - name: bernd_location
+    attributes:
+      friendly_name: Bernd's Location
+      entity_picture: "/api/image/serve/68251ed4a4df06902ebd074c49ebd82b/512x512"
+    state: >-
+      {% if states('sensor.iphone_bernd_ble_area') != 'unknown' and states('sensor.iphone_bernd_ble_area') != 'unavailable'%}
+        {{ states('sensor.iphone_bernd_ble_area') }}
+      {% else %}
+        {{ states('person.bernd').replace('not_home', 'Away').title() }}
+      {% endif %}

@@ -15,3 +15,8 @@ recorder:
       - sensor.time
       - sensor.time_utc
       - sensor.system_time_of_day_detailed
+
+    entity_globs:
+      - sensor.*_distance_to_*
+      - sensor.*_area
+      - sensor.*_distance

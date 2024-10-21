@@ -13,21 +13,22 @@ __pycache__
 /tmp
 
 # Directory (contents) ignores
+/backups
 /*.conf
 /deps
 /.storage
 /tts
 /.vscode
+/.cloud
+/lost+found
 
 # Specific file ignores
 /.uuid
 /ip_bans.yaml
-/known_devices.yaml
 /secrets.yaml
-/google_service_account.json
-
-# Ignore snapshot images
+/go2rtc-*
 /www/images/snapshots
+/www/tmp
 
 # Specific keeps
 !.gitkeep

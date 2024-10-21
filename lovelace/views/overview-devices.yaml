@@ -7,22 +7,18 @@ layout: !include snippets/layout-3-column.yaml
 
 cards:
   # Header
-  - type: markdown
-    card_mod:
-      style: !include snippets/style-markdown-titles.yaml
+  - type: heading
+    heading_style: title
+    heading: Devices
     view_layout:
       grid-column: 1/-1
-    content: >
-      ## Devices
 
   # Sonos
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Sonos
+      - type: heading
+        heading_style: subtitle
+        heading: Sonos
 
       - type: tile
         entity: media_player.living_room_sonos
@@ -57,11 +53,9 @@ cards:
   # Other media
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Other media
+      - type: heading
+        heading_style: subtitle
+        heading: Other media
 
       - type: tile
         entity: sensor.living_room_current_harmony_activity
@@ -101,11 +95,9 @@ cards:
   # Low battery
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Low battery
+      - type: heading
+        heading_style: subtitle
+        heading: Low battery
 
       - type: custom:auto-entities
         show_empty: true

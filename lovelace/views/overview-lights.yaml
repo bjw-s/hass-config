@@ -6,19 +6,14 @@ layout: !include snippets/layout-4-column.yaml
 
 cards:
   # Header
-  - type: markdown
-    card_mod:
-      style: !include snippets/style-markdown-titles.yaml
+  - type: heading
+    heading_style: title
+    heading: Lights
     view_layout:
       grid-column: 1/-1
-    content: >
-      ## Lights
-
-      {% set daylight = ( state_attr('sun.sun', 'next_rising') | as_timestamp(0) - state_attr('sun.sun', 'next_setting') | as_timestamp(0) ) | abs / 60 / 60 %}
-      {% set all_lights = states.light | selectattr('attributes.supported_features', 'gt', 0) | list %}
-      {% set on_lights = all_lights | selectattr('state', 'equalto', 'on') | list %}
-      You have {{ all_lights|count }} lights and {{ on_lights|count }} of them {{ iif((on_lights|count == 1), 'is', 'are') }} turned on.
-      There are {{ daylight | round(1) }} hours of daylight and {{ 24 - daylight | round(1) }} hours of nighttime today.
+    badges:
+      - type: entity
+        entity: sensor.lights_on
 
   # Daylight
   - type: vertical-stack
@@ -345,11 +340,9 @@ cards:
   # Bedroom
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Bedroom
+      - type: heading
+        heading_style: subtitle
+        heading: Bedroom
 
       - type: "custom:layout-card"
         layout_type: "custom:grid-layout"
@@ -378,11 +371,9 @@ cards:
   # Bedroom Eva
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Bedroom Eva
+      - type: heading
+        heading_style: subtitle
+        heading: Bedroom Eva
 
       - type: "custom:layout-card"
         layout_type: "custom:grid-layout"

@@ -6,22 +6,18 @@ layout: !include snippets/layout-3-column.yaml
 
 cards:
   # Header
-  - type: markdown
-    card_mod:
-      style: !include snippets/style-markdown-titles.yaml
+  - type: heading
+    heading_style: title
+    heading: Security
     view_layout:
       grid-column: 1/-1
-    content: >
-      ## Security
 
   # Driveway
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Driveway
+      - type: heading
+        heading_style: subtitle
+        heading: Driveway
 
       - type: custom:webrtc-camera
         url: doorbell
@@ -46,11 +42,9 @@ cards:
   # Rooms
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Rooms
+      - type: heading
+        heading_style: subtitle
+        heading: Rooms
 
       - type: "custom:multiple-entity-row"
         entity: binary_sensor.downstairs_hallway_front_door_contact

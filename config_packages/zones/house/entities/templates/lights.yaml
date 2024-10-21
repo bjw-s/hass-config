@@ -1,0 +1,10 @@
+---
+sensor:
+  - name: lights_on
+    attributes:
+      friendly_name: Lights on
+      icon: mdi:lightbulb-on
+    state: >-
+      {% set all_lights = states.light | selectattr('attributes.supported_features', 'gt', 0) | list %}
+      {% set on_lights = all_lights | selectattr('state', 'equalto', 'on') | list %}
+      {{ on_lights|count }}

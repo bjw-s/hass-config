@@ -29,11 +29,9 @@ cards:
   # Security / Modes
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Security
+      - type: heading
+        heading_style: subtitle
+        heading: Security
 
       - type: grid
         columns: 3
@@ -61,7 +59,8 @@ cards:
             #   action: more-info
 
           - type: "custom:mushroom-person-card"
-            entity: person.bernd
+            name: Bernd
+            entity: sensor.bernd_location
             layout: vertical
             fill_container: true
             use_entity_picture: true
@@ -72,11 +71,9 @@ cards:
             fill_container: true
             use_entity_picture: true
 
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Modes
+      - type: heading
+        heading_style: subtitle
+        heading: Modes
 
       - type: grid
         columns: 3
@@ -133,11 +130,9 @@ cards:
   # Climate / Energy
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Climate
+      - type: heading
+        heading_style: subtitle
+        heading: Climate
 
       - type: custom:mushroom-climate-card
         name: Thermostat living room
@@ -155,11 +150,9 @@ cards:
         tap_action:
           action: more-info
 
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Energy
+      - type: heading
+        heading_style: subtitle
+        heading: Energy
 
       - type: custom:power-flow-card-plus
         entities:
@@ -167,20 +160,21 @@ cards:
             entity: ''
           grid:
             entity:
-              consumption: sensor.dsmr_reading_electricity_currently_delivered_watt
-              production: sensor.dsmr_reading_electricity_currently_returned_watt
+              consumption: sensor.downstairs_hallway_water_p1_meter_power_consumed_w
+              production: sensor.downstairs_hallway_water_p1_meter_power_produced_w
           solar:
             entity: sensor.garage_solaredge_inverter_dc_power
             display_zero_state: true
           home:
-            entity: sensor.electricity_currently_used
+            # entity: sensor.electricity_currently_used
+            entity: ''
           individual:
             - color_icon: true
               color_value: 'true'
               inverted_animation: true
               display_zero: true
               display_zero_state: true
-              entity: sensor.dsmr_consumption_gas_currently_delivered
+              entity: sensor.downstairs_hallway_water_p1_meter_gas_consumed
               icon: mdi:fire
               color:
                 - 97
@@ -207,11 +201,9 @@ cards:
   # Trash
   - type: vertical-stack
     cards:
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Trash
+      - type: heading
+        heading_style: subtitle
+        heading: Trash
 
       - type: grid
         columns: 2
@@ -289,11 +281,9 @@ cards:
                 var(--disabled-color)
               {% endif %} --shape-color: rgb(from var(--icon-color) r g b / 0.2);
 
-      - type: markdown
-        card_mod:
-          style: !include snippets/style-markdown-titles.yaml
-        content: >
-          ### Devices
+      - type: heading
+        heading_style: subtitle
+        heading: Devices
 
       - type: grid
         columns: 3
